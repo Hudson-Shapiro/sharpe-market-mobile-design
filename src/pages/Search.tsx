@@ -1,15 +1,21 @@
 
 import React, { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { X, Search as SearchIcon, Users, BarChart3, Filter, TrendingUp, ArrowUp } from 'lucide-react';
+import { X, Search as SearchIcon, Users, BarChart3, Filter, TrendingUp, ArrowUp, SlidersHorizontal, ArrowDownAZ, TrendingDown, Award } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useNavigate } from 'react-router-dom';
 import PortfolioCard from '../components/portfolio/PortfolioCard';
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("all");
+  const [sortMethod, setSortMethod] = useState("performance");
+  const [filterVisible, setFilterVisible] = useState(false);
   const navigate = useNavigate();
 
   const recentSearches = ["Tech stocks", "AI Revolution", "Green Energy", "John Smith"];
@@ -29,6 +35,10 @@ const Search = () => {
     { id: '002', name: 'Lisa Su', followers: '95K', avatar: '👩‍💼' },
     { id: '003', name: 'Warren Buffet', followers: '210K', avatar: '👴' },
   ];
+
+  const toggleFilter = () => {
+    setFilterVisible(!filterVisible);
+  };
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
@@ -122,10 +132,70 @@ const Search = () => {
                       Users
                     </TabsTrigger>
                   </TabsList>
-                  <button className="p-2 bg-gray-800/50 rounded-full flex items-center justify-center ml-2">
-                    <Filter size={18} className="text-gray-400" />
+                  <button 
+                    className={`p-2 ${filterVisible ? 'bg-emerald-500 text-white' : 'bg-gray-800/50 text-gray-400'} rounded-full flex items-center justify-center ml-2`}
+                    onClick={toggleFilter}
+                  >
+                    <SlidersHorizontal size={18} />
                   </button>
                 </div>
+
+                {filterVisible && (
+                  <Card className="p-4 mb-4 bg-gray-900 border-gray-800">
+                    <h3 className="font-medium mb-2">Sort by</h3>
+                    <ToggleGroup type="single" value={sortMethod} onValueChange={(value) => setSortMethod(value || sortMethod)} className="mb-4 justify-start">
+                      <ToggleGroupItem value="performance" className="bg-gray-800 data-[state=on]:bg-emerald-500">
+                        <TrendingUp size={14} className="mr-1" />
+                        Performance
+                      </ToggleGroupItem>
+                      <ToggleGroupItem value="alphabetical" className="bg-gray-800 data-[state=on]:bg-emerald-500">
+                        <ArrowDownAZ size={14} className="mr-1" />
+                        A-Z
+                      </ToggleGroupItem>
+                      <ToggleGroupItem value="sharpe" className="bg-gray-800 data-[state=on]:bg-emerald-500">
+                        <Award size={14} className="mr-1" />
+                        Sharpe
+                      </ToggleGroupItem>
+                    </ToggleGroup>
+                    
+                    <h3 className="font-medium mb-2">Performance</h3>
+                    <RadioGroup defaultValue="all" className="mb-4">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="all" id="all" />
+                        <label htmlFor="all" className="text-sm">All returns</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="positive" id="positive" />
+                        <label htmlFor="positive" className="text-sm">Positive only</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="negative" id="negative" />
+                        <label htmlFor="negative" className="text-sm">Negative only</label>
+                      </div>
+                    </RadioGroup>
+                    
+                    <h3 className="font-medium mb-2">Sharpe Ratio</h3>
+                    <RadioGroup defaultValue="all" className="mb-4">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="all" id="sharpe-all" />
+                        <label htmlFor="sharpe-all" className="text-sm">Any</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="above1" id="sharpe-above1" />
+                        <label htmlFor="sharpe-above1" className="text-sm">Above 1.0</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="above2" id="sharpe-above2" />
+                        <label htmlFor="sharpe-above2" className="text-sm">Above 2.0</label>
+                      </div>
+                    </RadioGroup>
+                    
+                    <div className="flex gap-2">
+                      <Button variant="outline" className="flex-1 border-gray-700 text-gray-300">Reset</Button>
+                      <Button className="flex-1 bg-emerald-500 hover:bg-emerald-600">Apply</Button>
+                    </div>
+                  </Card>
+                )}
                 
                 <TabsContent value="all" className="mt-0 space-y-4">
                   <div>
@@ -140,7 +210,6 @@ const Search = () => {
                           author={portfolio.author}
                           sharpeRatio={portfolio.sharpeRatio}
                           rank={portfolio.rank}
-                          recentPurchases={["AAPL", "MSFT", "GOOG"]}
                         />
                       ))}
                     </div>
@@ -181,7 +250,6 @@ const Search = () => {
                         author={["Ryan Masters", "Emma Clark", "Dr. Liu Wei", "Sarah Williams", "Robert Johnson"][i]}
                         sharpeRatio={[2.14, 1.89, 1.65, 1.77, 1.92][i]}
                         rank={i + 1}
-                        recentPurchases={["AAPL", "MSFT", "GOOG"]}
                       />
                     ))}
                   </div>
