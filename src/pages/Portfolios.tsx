@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, Filter, PlusCircle, ChevronRight, ArrowUp, ArrowDown } from 'lucide-react';
 import PortfolioCard from '../components/portfolio/PortfolioCard';
@@ -62,79 +61,13 @@ const Portfolios = () => {
     }
   };
   
-  const totalValue = 84250;
   const todayChange = 1.24;
   const weekChange = 3.67;
 
   return (
     <ScrollArea className="h-full">
       <div className="min-h-screen bg-gray-950 pt-2">
-        {/* Portfolio Summary */}
-        <div className="px-4 mb-4">
-          <Card className="bg-gray-900 border-gray-800">
-            <div className="p-4 border-b border-gray-800">
-              <div className="flex items-center justify-between">
-                <h2 className="text-white text-xl font-bold">Portfolio Value</h2>
-                <button className="bg-gray-800/50 text-sm text-gray-300 px-3 py-1 rounded-full">
-                  All Assets
-                </button>
-              </div>
-              <div className="mt-3">
-                <div className="text-3xl font-bold text-white">${totalValue.toLocaleString()}</div>
-                <div className="flex items-center mt-1 space-x-3">
-                  <div className="flex items-center text-emerald-400">
-                    <ArrowUp size={14} className="mr-1" />
-                    <span className="text-sm font-medium">{todayChange}% Today</span>
-                  </div>
-                  <div className="flex items-center text-emerald-400">
-                    <ArrowUp size={14} className="mr-1" />
-                    <span className="text-sm font-medium">{weekChange}% This Week</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="p-4">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-white font-medium">Asset Allocation</h3>
-              </div>
-              <div className="flex justify-between">
-                <div className="h-[140px] w-[140px]">
-                  <ResponsiveContainer>
-                    <PieChart>
-                      <Pie
-                        data={allocationData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={40}
-                        outerRadius={70}
-                        paddingAngle={2}
-                        dataKey="value"
-                      >
-                        {allocationData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-                <div className="flex flex-col justify-center space-y-1.5">
-                  {allocationData.map((item, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div 
-                        className="w-3 h-3 rounded"
-                        style={{ backgroundColor: item.color }}
-                      ></div>
-                      <span className="text-gray-300 text-xs">{item.name}</span>
-                      <span className="text-white text-xs font-medium">{item.value}%</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* Main Content */}
+        {/* Main Content - Portfolio Value section removed */}
         <div className="px-4">
           <Tabs defaultValue="my-portfolios" className="w-full">
             <TabsList className="grid w-full grid-cols-2 bg-gray-900 mb-4">
@@ -164,7 +97,7 @@ const Portfolios = () => {
                         className={`px-2.5 py-0.5 ${timeRange === "1D" ? "bg-white text-gray-900" : "text-gray-300"} rounded`}>1D</button>
                     </div>
                   </div>
-                  <div className="h-[200px] w-full">
+                  <div className="h-[180px] w-full">
                     <ChartContainer config={chartConfig}>
                       <LineChart data={performanceData}>
                         <XAxis dataKey="name" tick={{ fill: '#9ca3af', fontSize: 10 }} />
@@ -189,7 +122,7 @@ const Portfolios = () => {
                       </LineChart>
                     </ChartContainer>
                   </div>
-                  <div className="flex justify-between items-center mt-4">
+                  <div className="flex justify-between items-center mt-2">
                     <div className="text-xs text-emerald-400 font-semibold">
                       Overall: +28.5% YTD
                     </div>

@@ -36,11 +36,11 @@ const PortfolioCard = ({
       rank === 3 && "border-l-4 border-l-amber-700",
     )}>
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1">
           <span className="text-2xs text-emerald-400 font-mono bg-emerald-500/20 rounded-full px-1.5 py-0.5">#{id}</span>
           {isSubscribed && (
             <span className="text-2xs bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded-full">
-              Subscribed
+              Sub
             </span>
           )}
           {rank && (
@@ -55,12 +55,12 @@ const PortfolioCard = ({
         <div className="text-right">
           <div className="flex items-center gap-0.5 justify-end">
             {isPositive ? (
-              <TrendingUp size={14} className="text-emerald-400" />
+              <TrendingUp size={12} className="text-emerald-400" />
             ) : (
-              <TrendingDown size={14} className="text-red-400" />
+              <TrendingDown size={12} className="text-red-400" />
             )}
             <span className={cn(
-              "font-semibold",
+              "font-semibold text-sm",
               isPositive ? "text-emerald-400" : "text-red-400"
             )}>
               {isPositive ? '+' : ''}{portfolioReturn.toFixed(2)}%
@@ -69,12 +69,12 @@ const PortfolioCard = ({
         </div>
       </div>
       
-      <div className="flex items-center justify-between mt-1">
+      <div className="flex items-center justify-between mt-0.5">
         <div>
           <div className="flex items-center">
-            <h3 className="text-white font-semibold leading-tight">{name}</h3>
+            <h3 className="text-white font-semibold text-sm leading-tight">{name}</h3>
             {rank && rank <= 3 && (
-              <Star size={14} className="ml-1 text-amber-400 fill-amber-400" />
+              <Star size={12} className="ml-1 text-amber-400 fill-amber-400" />
             )}
           </div>
           {author && !isOwned && (
@@ -88,8 +88,6 @@ const PortfolioCard = ({
           </div>
         )}
       </div>
-      
-      {/* Removed stock tickers section */}
     </div>
   );
 };

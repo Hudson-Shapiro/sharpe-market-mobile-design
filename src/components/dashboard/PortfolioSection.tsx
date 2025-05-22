@@ -20,7 +20,7 @@ interface PortfolioSectionProps {
 const PortfolioSection = ({ title, portfolios, showViewAll = true }: PortfolioSectionProps) => {
   return (
     <div className="px-4 mb-6">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-3">
         <h2 className="text-xl font-bold text-white">{title}</h2>
         {showViewAll && (
           <a 
@@ -33,7 +33,7 @@ const PortfolioSection = ({ title, portfolios, showViewAll = true }: PortfolioSe
         )}
       </div>
       
-      <div className="grid gap-4">
+      <div className="grid gap-3">
         {portfolios.map((portfolio) => (
           <PortfolioCard
             key={portfolio.id}
