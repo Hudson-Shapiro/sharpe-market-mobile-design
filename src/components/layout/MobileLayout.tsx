@@ -13,6 +13,8 @@ interface MobileLayoutProps {
 const MobileLayout = ({ children }: MobileLayoutProps) => {
   const location = useLocation();
   const isSearchPage = location.pathname === '/search';
+  const isDiscoverPage = location.pathname === '/discover';
+  const hideHeader = isSearchPage;
 
   const navItems = [
     { path: '/', icon: Home, label: 'Home' },
@@ -25,7 +27,7 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
   return (
     <div className="h-screen flex flex-col bg-gray-950 text-white">
       {/* Global Header */}
-      <GlobalHeader hideSearch={isSearchPage} />
+      {!hideHeader && <GlobalHeader />}
       
       {/* Main Content */}
       <div className="flex-1 overflow-hidden">

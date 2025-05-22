@@ -7,11 +7,16 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/components/ui/use-toast";
 import { Area, AreaChart } from 'recharts';
+import { Input } from '@/components/ui/input';
+import { useNavigate } from 'react-router-dom';
 
 const Discover = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState("all");
   const categories = ["All", "Trending", "Top Returns", "New", "Following"];
   const [activeCategory, setActiveCategory] = useState("All");
   const [timeRange, setTimeRange] = useState("LTD");
+  const navigate = useNavigate();
   
   const trendingPortfolios = [
     { id: '101', name: 'AI Revolution', author: 'Ryan Masters', return: 34.52, sharpeRatio: 2.14 },
@@ -53,8 +58,44 @@ const Discover = () => {
   return (
     <ScrollArea className="h-full">
       <div className="min-h-screen bg-gray-950 pb-6">
+        {/* Expansive Search Bar */}
+        <div className="p-4 pb-0">
+          <div className="relative">
+            <div className="flex items-center bg-gray-800/70 rounded-xl py-3 px-4">
+              <Search size={20} className="text-gray-400 mr-2" />
+              <Input 
+                type="text" 
+                placeholder="Search for assets, portfolios, users..." 
+                className="bg-transparent border-none text-white focus:outline-none w-full h-auto p-0"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+        
+        {/* Filter Pills */}
+        <div className="px-4 py-3 flex space-x-2 overflow-x-auto no-scrollbar">
+          {["All", "Crypto", "Stocks", "ETFs"].map((filter) => (
+            <button
+              key={filter}
+              className={`py-1.5 px-4 rounded-full text-sm font-medium whitespace-nowrap ${
+                activeFilter === filter.toLowerCase() 
+                  ? 'bg-white text-gray-900' 
+                  : 'bg-gray-800/50 text-gray-300'
+              }`}
+              onClick={() => setActiveFilter(filter.toLowerCase())}
+            >
+              {filter}
+              {filter === "Stocks" && (
+                <span className="ml-1.5 text-2xs bg-indigo-600 px-1 py-0.5 rounded text-white">New</span>
+              )}
+            </button>
+          ))}
+        </div>
+        
         {/* Tabs Navigation */}
-        <div className="px-4 mb-6 pt-2">
+        <div className="px-4 mb-6 pt-3">
           <Tabs defaultValue="leaderboard" className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-gray-800/50 rounded-lg mb-4">
               <TabsTrigger value="leaderboard" className="data-[state=active]:bg-emerald-500 data-[state=active]:text-white">
