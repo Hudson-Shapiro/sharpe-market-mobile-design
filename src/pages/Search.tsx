@@ -57,12 +57,6 @@ const Search = () => {
     navigate(-1);
   };
 
-  const popularUsers = [
-    { id: '001', name: 'Mark Cuban', followers: '125K', avatar: '🤵' },
-    { id: '002', name: 'Lisa Su', followers: '95K', avatar: '👩‍💼' },
-    { id: '003', name: 'Warren Buffet', followers: '210K', avatar: '👴' },
-  ];
-
   const toggleFilter = () => {
     setFilterVisible(!filterVisible);
   };
@@ -85,45 +79,48 @@ const Search = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               autoFocus
             />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery("")} className="text-gray-400">
+                <X size={18} />
+              </button>
+            )}
           </div>
         </div>
-        <button className="text-emerald-400 font-medium">
+        <button className="text-emerald-400 font-medium" onClick={handleClose}>
           Cancel
         </button>
       </div>
 
       {/* Search Filter Options */}
-      {searchQuery && (
-        <div className="flex p-3 gap-2 border-b border-gray-800/40">
-          <button 
-            className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'all' ? 'bg-emerald-500 text-white' : 'bg-gray-800/50 text-gray-300'}`}
-            onClick={() => setSearchFilter('all')}
-          >
-            All
-          </button>
-          <button 
-            className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'portfolios' ? 'bg-emerald-500 text-white' : 'bg-gray-800/50 text-gray-300'}`}
-            onClick={() => setSearchFilter('portfolios')}
-          >
-            <BarChart3 size={14} className="mr-1.5" />
-            Portfolios
-          </button>
-          <button 
-            className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'users' ? 'bg-emerald-500 text-white' : 'bg-gray-800/50 text-gray-300'}`}
-            onClick={() => setSearchFilter('users')}
-          >
-            <Users size={14} className="mr-1.5" />
-            Users
-          </button>
-          <button 
-            className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'stocks' ? 'bg-emerald-500 text-white' : 'bg-gray-800/50 text-gray-300'}`}
-            onClick={() => setSearchFilter('stocks')}
-          >
-            <LineChart size={14} className="mr-1.5" />
-            Stocks
-          </button>
-        </div>
-      )}
+      <div className="flex p-3 gap-2 border-b border-gray-800/40">
+        <button 
+          className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'all' ? 'bg-white text-gray-900' : 'bg-gray-800/50 text-gray-300'}`}
+          onClick={() => setSearchFilter('all')}
+        >
+          All
+        </button>
+        <button 
+          className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'portfolios' ? 'bg-white text-gray-900' : 'bg-gray-800/50 text-gray-300'}`}
+          onClick={() => setSearchFilter('portfolios')}
+        >
+          <BarChart3 size={14} className="mr-1.5" />
+          Portfolios
+        </button>
+        <button 
+          className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'users' ? 'bg-white text-gray-900' : 'bg-gray-800/50 text-gray-300'}`}
+          onClick={() => setSearchFilter('users')}
+        >
+          <Users size={14} className="mr-1.5" />
+          Users
+        </button>
+        <button 
+          className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'stocks' ? 'bg-white text-gray-900' : 'bg-gray-800/50 text-gray-300'}`}
+          onClick={() => setSearchFilter('stocks')}
+        >
+          <LineChart size={14} className="mr-1.5" />
+          Stocks
+        </button>
+      </div>
 
       <ScrollArea className="h-[calc(100vh-72px)]">
         <div className="p-4">

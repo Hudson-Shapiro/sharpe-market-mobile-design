@@ -14,6 +14,7 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
   const location = useLocation();
   const isSearchPage = location.pathname === '/search';
   const isDiscoverPage = location.pathname === '/discover';
+  // Hide header on search page
   const hideHeader = isSearchPage;
 
   const navItems = [
@@ -26,7 +27,7 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
 
   return (
     <div className="h-screen flex flex-col bg-gray-950 text-white">
-      {/* Global Header */}
+      {/* Global Header - show on all pages except search */}
       {!hideHeader && <GlobalHeader />}
       
       {/* Main Content */}
