@@ -6,14 +6,14 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/components/ui/use-toast";
-import { Area, AreaChart } from 'recharts';
+import { AreaChart, Area } from 'recharts';
 import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
+import { Badge } from "@/components/ui/badge";
 
 const Discover = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState("all");
-  const categories = ["All", "Trending", "Top Returns", "New", "Following"];
+  const [selectedFilter, setSelectedFilter] = useState("all");
   const [activeCategory, setActiveCategory] = useState("All");
   const [timeRange, setTimeRange] = useState("LTD");
   const navigate = useNavigate();
@@ -58,14 +58,14 @@ const Discover = () => {
   return (
     <ScrollArea className="h-full">
       <div className="min-h-screen bg-gray-950 pb-6">
-        {/* Expansive Search Bar */}
+        {/* Search Bar */}
         <div className="p-4 pb-0">
           <div className="relative">
             <div className="flex items-center bg-gray-800/70 rounded-xl py-3 px-4">
               <Search size={20} className="text-gray-400 mr-2" />
               <Input 
                 type="text" 
-                placeholder="Search for assets, portfolios, users..." 
+                placeholder="Search portfolios, users, stocks..." 
                 className="bg-transparent border-none text-white focus:outline-none w-full h-auto p-0"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -74,17 +74,17 @@ const Discover = () => {
           </div>
         </div>
         
-        {/* Filter Pills */}
+        {/* Search Filter Options */}
         <div className="px-4 py-3 flex space-x-2 overflow-x-auto no-scrollbar">
-          {["All", "Crypto", "Stocks", "ETFs"].map((filter) => (
+          {["All", "Portfolios", "Users", "Stocks"].map((filter) => (
             <button
               key={filter}
               className={`py-1.5 px-4 rounded-full text-sm font-medium whitespace-nowrap ${
-                activeFilter === filter.toLowerCase() 
+                selectedFilter === filter.toLowerCase() 
                   ? 'bg-white text-gray-900' 
                   : 'bg-gray-800/50 text-gray-300'
               }`}
-              onClick={() => setActiveFilter(filter.toLowerCase())}
+              onClick={() => setSelectedFilter(filter.toLowerCase())}
             >
               {filter}
               {filter === "Stocks" && (
@@ -238,7 +238,7 @@ const Discover = () => {
             <TabsContent value="discover" className="mt-0 space-y-6">
               {/* Category Pills */}
               <div className="flex space-x-2 overflow-x-auto no-scrollbar pb-1">
-                {categories.map((category) => (
+                {["All", "Portfolios", "Users", "Stocks"].map((category) => (
                   <button
                     key={category}
                     className={`py-1.5 px-3.5 rounded-full text-sm font-medium whitespace-nowrap ${

@@ -15,7 +15,7 @@ const DashboardHeader = () => {
           <h1 className="text-2xl font-bold text-white">Home</h1>
         </div>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           <button className="w-10 h-10 bg-gray-800/50 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-colors relative">
             <Bell size={20} />
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full" />
