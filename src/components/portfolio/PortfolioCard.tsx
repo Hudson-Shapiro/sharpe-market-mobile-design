@@ -46,13 +46,13 @@ const PortfolioCard = ({
   
   return (
     <div className={cn(
-      "bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-2 hover:bg-gray-900/70 transition-all duration-200",
+      "bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-1.5 hover:bg-gray-900/70 transition-all duration-200",
       rank === 1 && "border-l-4 border-l-amber-500",
       rank === 2 && "border-l-4 border-l-gray-400",
       rank === 3 && "border-l-4 border-l-amber-700",
     )}>
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1">
           {rank && (
             <span className="text-xs bg-gray-800 text-gray-300 w-5 h-5 rounded-full flex items-center justify-center">
               {rank}
@@ -84,7 +84,7 @@ const PortfolioCard = ({
         </div>
       </div>
       
-      <div className="flex items-center justify-between mt-1">
+      <div className="flex items-center justify-between mt-0.5">
         <div>
           {author && !isOwned && (
             <p className="text-gray-400 text-xs">by {author}</p>
