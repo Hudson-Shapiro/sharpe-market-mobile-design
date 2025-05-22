@@ -1,10 +1,11 @@
-
-import React from 'react';
-import { Settings, Share, TrendingUp, Users, BarChart3, DollarSign, Bell, Lock, Smartphone, FileText, HelpCircle, MessageSquare, Info, LogOut, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Settings, Share, TrendingUp, Users, BarChart3, DollarSign, Bell, Lock, Smartphone, FileText, HelpCircle, MessageSquare, Info, LogOut, ChevronRight, Moon, Sun } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import { useToast } from '@/components/ui/use-toast';
 
 const Profile = () => {
   const userStats = {
@@ -12,6 +13,28 @@ const Profile = () => {
     portfolios: 5,
     followers: 1247,
     following: 89
+  };
+
+  const [darkMode, setDarkMode] = useState(true);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    // Apply dark/light mode class to the document
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+  const toggleTheme = () => {
+    setDarkMode(!darkMode);
+    toast({
+      title: darkMode ? "Light mode activated" : "Dark mode activated",
+      description: "Your theme preference has been updated.",
+    });
   };
 
   return (
@@ -70,6 +93,26 @@ const Profile = () => {
         </div>
         
         <Separator className="bg-gray-800 mb-4" />
+
+        {/* Theme Toggle */}
+        <div className="px-4 mb-4">
+          <div className="flex items-center justify-between p-3.5 bg-gray-900/30 rounded-lg">
+            <div className="flex items-center">
+              <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                {darkMode ? 
+                  <Moon size={20} className="text-blue-400" /> : 
+                  <Sun size={20} className="text-amber-400" />
+                }
+              </div>
+              <span className="text-white font-medium">Dark Mode</span>
+            </div>
+            <Switch 
+              checked={darkMode} 
+              onCheckedChange={toggleTheme} 
+              className={darkMode ? "bg-emerald-500" : "bg-gray-400"}
+            />
+          </div>
+        </div>
 
         {/* Subscribe to Sharpe+ */}
         <div className="px-4 mb-6">
@@ -207,7 +250,7 @@ const Profile = () => {
             </Link>
           </div>
           
-          <button className="w-full mt-8 mb-10 flex items-center justify-center space-x-2 py-4 px-4 bg-gray-800 hover:bg-gray-700 rounded-lg text-white transition-colors">
+          <button className="w-full mt-8 mb-10 flex items-center justify-center space-x-2 py-4 px-4 bg-gray-800 hover:bg-gray-700 rounded-lg text-white transition-colors mx-4">
             <LogOut size={18} className="mr-2" />
             <span className="font-medium">Sign Out</span>
           </button>
