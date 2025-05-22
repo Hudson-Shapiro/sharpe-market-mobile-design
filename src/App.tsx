@@ -7,8 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MobileLayout from "./components/layout/MobileLayout";
 import Home from "./pages/Home";
 import Portfolios from "./pages/Portfolios";
+import Discover from "./pages/Discover";
 import Activity from "./pages/Activity";
-import Leaderboard from "./pages/Leaderboard";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
@@ -24,8 +24,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/portfolios" element={<Portfolios />} />
+            <Route path="/discover" element={<Discover />} />
             <Route path="/activity" element={<Activity />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Home, User, Activity, BarChart3, Users } from 'lucide-react';
+import { Home, BarChart3, Activity, Compass, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface MobileLayoutProps {
@@ -14,8 +14,8 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
   const navItems = [
     { path: '/', icon: Home, label: 'Home' },
     { path: '/portfolios', icon: BarChart3, label: 'Portfolios' },
+    { path: '/discover', icon: Compass, label: 'Discover' },
     { path: '/activity', icon: Activity, label: 'Activity' },
-    { path: '/leaderboard', icon: Users, label: 'Leaderboard' },
     { path: '/profile', icon: User, label: 'Profile' },
   ];
 
