@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, TrendingUp, Flame, ArrowUp, ArrowDown, Trophy, Users, ChevronRight, Star } from 'lucide-react';
+import { TrendingUp, Flame, ArrowUp, ArrowDown, Trophy, Users, ChevronRight, Star } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import PortfolioCard from '../components/portfolio/PortfolioCard';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -7,12 +7,10 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/components/ui/use-toast";
 import { AreaChart, Area } from 'recharts';
-import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
 import { Badge } from "@/components/ui/badge";
 
 const Discover = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [activeCategory, setActiveCategory] = useState("All");
   const [timeRange, setTimeRange] = useState("LTD");
@@ -47,10 +45,6 @@ const Discover = () => {
     { rank: 8, name: 'Crypto Guru', author: 'Alex Mayer', return: 25.3, vsSP: 16.9, sharpe: 6.5, tag: 'Top 15%' },
   ];
 
-  const handleSearchFocus = () => {
-    navigate('/search');
-  };
-
   const handleSubscribePlus = () => {
     toast({
       title: "Sharpe+ Subscription",
@@ -62,62 +56,10 @@ const Discover = () => {
   return (
     <ScrollArea className="h-full">
       <div className="min-h-screen bg-gray-950 pb-6">
-        {/* Enhanced Search Bar */}
-        <div className="p-4 pb-2">
-          <div className="relative">
-            <div className="flex items-center bg-gray-800/70 rounded-xl py-3 px-4">
-              <Search size={20} className="text-gray-400 mr-2" />
-              <Input 
-                type="text" 
-                placeholder="Search portfolios, users, stocks..." 
-                className="bg-transparent border-none text-white focus:outline-none w-full h-auto p-0"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onFocus={handleSearchFocus}
-              />
-            </div>
-          </div>
-        </div>
-        
-        {/* Search Filter Options */}
-        <div className="px-4 pb-3 flex space-x-2 overflow-x-auto no-scrollbar">
-          <button
-            className={`py-1.5 px-4 rounded-full text-sm font-medium whitespace-nowrap ${
-              selectedFilter === 'all' ? 'bg-white text-gray-900' : 'bg-gray-800/50 text-gray-300'
-            }`}
-            onClick={() => setSelectedFilter('all')}
-          >
-            All
-          </button>
-          <button
-            className={`py-1.5 px-4 rounded-full text-sm font-medium whitespace-nowrap ${
-              selectedFilter === 'portfolios' ? 'bg-white text-gray-900' : 'bg-gray-800/50 text-gray-300'
-            }`}
-            onClick={() => setSelectedFilter('portfolios')}
-          >
-            Portfolios
-          </button>
-          <button
-            className={`py-1.5 px-4 rounded-full text-sm font-medium whitespace-nowrap ${
-              selectedFilter === 'users' ? 'bg-white text-gray-900' : 'bg-gray-800/50 text-gray-300'
-            }`}
-            onClick={() => setSelectedFilter('users')}
-          >
-            Users
-          </button>
-          <button
-            className={`py-1.5 px-4 rounded-full text-sm font-medium whitespace-nowrap flex items-center ${
-              selectedFilter === 'stocks' ? 'bg-white text-gray-900' : 'bg-gray-800/50 text-gray-300'
-            }`}
-            onClick={() => setSelectedFilter('stocks')}
-          >
-            Stocks
-            <span className="ml-1.5 text-xs bg-indigo-600 px-1 py-0.5 rounded text-white">New</span>
-          </button>
-        </div>
+        {/* Removed the search bar and filter buttons from here since they're now in the DiscoverHeader */}
         
         {/* Tabs Navigation */}
-        <div className="px-4 mb-6">
+        <div className="px-4 mb-6 mt-2">
           <Tabs defaultValue="leaderboard" className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-gray-800/50 rounded-lg mb-4">
               <TabsTrigger value="leaderboard" className="data-[state=active]:bg-emerald-500 data-[state=active]:text-white">
@@ -258,22 +200,7 @@ const Discover = () => {
             
             {/* Discover Tab Content */}
             <TabsContent value="discover" className="mt-0 space-y-6">
-              {/* Category Pills */}
-              <div className="flex space-x-2 overflow-x-auto no-scrollbar pb-1">
-                {["All", "Portfolios", "Users", "Stocks"].map((category) => (
-                  <button
-                    key={category}
-                    className={`py-1.5 px-3.5 rounded-full text-sm font-medium whitespace-nowrap ${
-                      activeCategory === category 
-                        ? 'bg-white text-gray-900' 
-                        : 'bg-gray-800/50 text-gray-300'
-                    }`}
-                    onClick={() => setActiveCategory(category)}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
+              {/* Removed the category pills here as requested */}
               
               {/* Featured Portfolios */}
               <div>

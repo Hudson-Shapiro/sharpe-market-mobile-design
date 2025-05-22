@@ -5,6 +5,7 @@ import { Home, BarChart3, Activity, Search, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import GlobalHeader from './GlobalHeader';
+import DiscoverHeader from './DiscoverHeader';
 
 interface MobileLayoutProps {
   children: React.ReactNode;
@@ -27,8 +28,10 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
 
   return (
     <div className="h-screen flex flex-col bg-gray-950 text-white">
-      {/* Global Header - show on all pages except search */}
-      {!hideHeader && <GlobalHeader />}
+      {/* Use DiscoverHeader for Discover page, GlobalHeader for others, and hide on search page */}
+      {!hideHeader && (
+        isDiscoverPage ? <DiscoverHeader /> : <GlobalHeader />
+      )}
       
       {/* Main Content */}
       <div className="flex-1 overflow-hidden">
