@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Settings, Share, TrendingUp, Users, BarChart3, DollarSign } from 'lucide-react';
+import { Settings, Share, TrendingUp, Users, BarChart3, DollarSign, Bell, Lock, Smartphone, FileText, HelpCircle, MessageSquare, Info, LogOut, ChevronRight } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ const Profile = () => {
       <div className="min-h-screen bg-gray-950">
         {/* Header */}
         <div className="flex items-center justify-between p-4">
-          <h1 className="text-2xl font-bold text-white">Profile</h1>
+          <h1 className="text-2xl font-bold text-white">Account</h1>
           <div className="flex gap-2">
             <button className="p-2 text-gray-400 hover:text-white transition-colors">
               <Share size={24} />
@@ -92,88 +92,127 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="px-4 mb-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 text-center">
-              <TrendingUp size={24} className="text-emerald-400 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-emerald-400">+{userStats.totalReturn}%</p>
-              <p className="text-gray-400 text-sm">Total Return</p>
-            </div>
-            
-            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 text-center">
-              <BarChart3 size={24} className="text-blue-400 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-white">{userStats.portfolios}</p>
-              <p className="text-gray-400 text-sm">Portfolios</p>
-            </div>
-            
-            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 text-center">
-              <Users size={24} className="text-purple-400 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-white">{userStats.followers}</p>
-              <p className="text-gray-400 text-sm">Followers</p>
-            </div>
-            
-            <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 text-center">
-              <Users size={24} className="text-orange-400 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-white">{userStats.following}</p>
-              <p className="text-gray-400 text-sm">Following</p>
-            </div>
-          </div>
-        </div>
-
         {/* Settings Menu */}
-        <div className="px-4 space-y-4">
-          <Link to="/settings/earnings" className="flex items-center justify-between p-3 bg-gray-900/30 rounded-lg">
-            <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
-                <DollarSign size={20} className="text-emerald-400" />
+        <div className="px-4">
+          <h2 className="text-lg font-bold text-white mb-3">Settings</h2>
+          <div className="space-y-2">
+            <Link to="/settings/payment" className="flex items-center justify-between p-3.5 bg-gray-900/30 rounded-lg">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                  <DollarSign size={20} className="text-emerald-400" />
+                </div>
+                <span className="text-white font-medium">Payment methods</span>
               </div>
-              <span className="text-white font-medium">Earnings</span>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-gray-400">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </Link>
-          
-          <Link to="/settings/subscription" className="flex items-center justify-between p-3 bg-gray-900/30 rounded-lg">
-            <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-blue-400">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                  <line x1="16" y1="2" x2="16" y2="6"></line>
-                  <line x1="8" y1="2" x2="8" y2="6"></line>
-                  <line x1="3" y1="10" x2="21" y2="10"></line>
-                </svg>
+              <ChevronRight className="h-5 w-5 text-gray-400" />
+            </Link>
+            
+            <Link to="/settings/deposit" className="flex items-center justify-between p-3.5 bg-gray-900/30 rounded-lg">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-blue-400">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                </div>
+                <span className="text-white font-medium">Deposit methods</span>
               </div>
-              <span className="text-white font-medium">Subscription Settings</span>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-gray-400">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </Link>
-          
-          <Link to="/settings" className="flex items-center justify-between p-3 bg-gray-900/30 rounded-lg">
-            <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
-                <Settings size={20} className="text-gray-400" />
+              <ChevronRight className="h-5 w-5 text-gray-400" />
+            </Link>
+
+            <Link to="/settings/security" className="flex items-center justify-between p-3.5 bg-gray-900/30 rounded-lg">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                  <Lock size={20} className="text-purple-400" />
+                </div>
+                <span className="text-white font-medium">Security</span>
               </div>
-              <span className="text-white font-medium">Settings</span>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-gray-400">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </Link>
+              <div className="flex items-center">
+                <span className="text-gray-400 mr-2 text-sm">Setup 2FA</span>
+                <ChevronRight className="h-5 w-5 text-gray-400" />
+              </div>
+            </Link>
+            
+            <Link to="/settings/preferences" className="flex items-center justify-between p-3.5 bg-gray-900/30 rounded-lg">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                  <Settings size={20} className="text-gray-400" />
+                </div>
+                <span className="text-white font-medium">Preferences</span>
+              </div>
+              <ChevronRight className="h-5 w-5 text-gray-400" />
+            </Link>
+            
+            <Link to="/settings/notifications" className="flex items-center justify-between p-3.5 bg-gray-900/30 rounded-lg">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                  <Bell size={20} className="text-amber-400" />
+                </div>
+                <span className="text-white font-medium">Notifications</span>
+              </div>
+              <ChevronRight className="h-5 w-5 text-gray-400" />
+            </Link>
+            
+            <Link to="/settings/devices" className="flex items-center justify-between p-3.5 bg-gray-900/30 rounded-lg">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                  <Smartphone size={20} className="text-green-400" />
+                </div>
+                <span className="text-white font-medium">Device management</span>
+              </div>
+              <ChevronRight className="h-5 w-5 text-gray-400" />
+            </Link>
+          </div>
           
-          <button className="w-full mt-4 flex items-center justify-center space-x-2 py-3 px-4 bg-gray-800 hover:bg-gray-700 rounded-lg text-white transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-              <polyline points="16 17 21 12 16 7"></polyline>
-              <line x1="21" y1="12" x2="9" y2="12"></line>
-            </svg>
-            <span>Log Out</span>
+          <h2 className="text-lg font-bold text-white mt-8 mb-3">More</h2>
+          <div className="space-y-2">
+            <Link to="/documents" className="flex items-center justify-between p-3.5 bg-gray-900/30 rounded-lg">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                  <FileText size={20} className="text-gray-400" />
+                </div>
+                <span className="text-white font-medium">Documents</span>
+              </div>
+              <ChevronRight className="h-5 w-5 text-gray-400" />
+            </Link>
+            
+            <Link to="/support" className="flex items-center justify-between p-3.5 bg-gray-900/30 rounded-lg">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                  <HelpCircle size={20} className="text-blue-400" />
+                </div>
+                <span className="text-white font-medium">Support</span>
+              </div>
+              <ChevronRight className="h-5 w-5 text-gray-400" />
+            </Link>
+            
+            <Link to="/feedback" className="flex items-center justify-between p-3.5 bg-gray-900/30 rounded-lg">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                  <MessageSquare size={20} className="text-purple-400" />
+                </div>
+                <span className="text-white font-medium">Send Feedback</span>
+              </div>
+              <ChevronRight className="h-5 w-5 text-gray-400" />
+            </Link>
+            
+            <Link to="/about" className="flex items-center justify-between p-3.5 bg-gray-900/30 rounded-lg">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center mr-3">
+                  <Info size={20} className="text-gray-400" />
+                </div>
+                <span className="text-white font-medium">About</span>
+              </div>
+              <ChevronRight className="h-5 w-5 text-gray-400" />
+            </Link>
+          </div>
+          
+          <button className="w-full mt-8 mb-10 flex items-center justify-center space-x-2 py-4 px-4 bg-gray-800 hover:bg-gray-700 rounded-lg text-white transition-colors">
+            <LogOut size={18} className="mr-2" />
+            <span className="font-medium">Sign Out</span>
           </button>
           
-          <div className="pt-4 pb-8 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
+          <div className="pt-2 pb-8 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
             <a href="#" className="hover:text-gray-300 transition-colors">Terms of Use</a>
             <a href="#" className="hover:text-gray-300 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-gray-300 transition-colors">Disclaimer</a>
