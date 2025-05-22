@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, TrendingUp, Flame, ArrowUp, ArrowDown, Trophy, Users, ChevronRight, Star } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -53,34 +52,8 @@ const Discover = () => {
   return (
     <ScrollArea className="h-full">
       <div className="min-h-screen bg-gray-950 pb-6">
-        {/* Header with Search */}
-        <div className="p-4 pb-2 flex items-center justify-between space-x-3">
-          <div className="w-10 h-10 bg-gray-800/50 rounded-full flex items-center justify-center">
-            <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-emerald-400 text-transparent bg-clip-text">HS</span>
-          </div>
-          
-          <div className="flex-1 relative">
-            <div className="flex items-center bg-gray-800/50 rounded-full py-2 px-4">
-              <Search size={20} className="text-gray-400 mr-2" />
-              <input 
-                type="text" 
-                placeholder="Find portfolios or creators" 
-                className="bg-transparent border-none text-white focus:outline-none w-full"
-              />
-            </div>
-          </div>
-          
-          <button className="w-10 h-10 bg-gray-800/50 rounded-full flex items-center justify-center relative">
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-            </svg>
-          </button>
-        </div>
-        
         {/* Tabs Navigation */}
-        <div className="px-4 mb-6">
+        <div className="px-4 mb-6 pt-2">
           <Tabs defaultValue="leaderboard" className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-gray-800/50 rounded-lg mb-4">
               <TabsTrigger value="leaderboard" className="data-[state=active]:bg-emerald-500 data-[state=active]:text-white">
