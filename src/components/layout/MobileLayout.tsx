@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, BarChart3, Activity, Compass, User } from 'lucide-react';
+import { Home, BarChart3, Activity, Search, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -15,7 +15,7 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
   const navItems = [
     { path: '/', icon: Home, label: 'Home' },
     { path: '/portfolios', icon: BarChart3, label: 'Portfolios' },
-    { path: '/discover', icon: Compass, label: 'Discover' },
+    { path: '/discover', icon: Search, label: 'Explore' },
     { path: '/activity', icon: Activity, label: 'Activity' },
     { path: '/profile', icon: User, label: 'Profile' },
   ];

@@ -1,15 +1,17 @@
 
 import React, { useState } from 'react';
-import { Search, TrendingUp, Flame, ArrowUp, ArrowDown, Trophy, Users } from 'lucide-react';
+import { Search, TrendingUp, Flame, ArrowUp, ArrowDown, Trophy, Users, ChevronRight, Star } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import PortfolioCard from '../components/portfolio/PortfolioCard';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { toast } from "@/components/ui/use-toast";
 
 const Discover = () => {
   const categories = ["All", "Trending", "Top Returns", "New", "Following"];
   const [activeCategory, setActiveCategory] = useState("All");
+  const [timeRange, setTimeRange] = useState("LTD");
   
   const trendingPortfolios = [
     { id: '101', name: 'AI Revolution', author: 'Ryan Masters', return: 34.52, sharpeRatio: 2.14 },
@@ -37,6 +39,14 @@ const Discover = () => {
     { rank: 5, name: 'Tech Bull', author: 'Hudson Shapiro', return: 28.6, vsSP: 20.2, sharpe: 7.5, tag: 'Top 10%' },
     { rank: 6, name: 'DEFUND THE GOV', author: 'Hudson Shapiro', return: 27.8, vsSP: 19.4, sharpe: 8.7, tag: 'Top 10%' },
   ];
+
+  const handleSubscribePlus = () => {
+    toast({
+      title: "Sharpe+ Subscription",
+      description: "You're being redirected to the Sharpe+ subscription page.",
+      variant: "default",
+    });
+  };
 
   return (
     <ScrollArea className="h-full">
@@ -69,27 +79,105 @@ const Discover = () => {
         
         {/* Tabs Navigation */}
         <div className="px-4 mb-6">
-          <Tabs defaultValue="discover" className="w-full">
+          <Tabs defaultValue="leaderboard" className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-gray-800/50 rounded-lg mb-4">
-              <TabsTrigger value="discover" className="data-[state=active]:bg-emerald-500 data-[state=active]:text-white">
-                Discover
-              </TabsTrigger>
               <TabsTrigger value="leaderboard" className="data-[state=active]:bg-emerald-500 data-[state=active]:text-white">
                 Leaderboard
+              </TabsTrigger>
+              <TabsTrigger value="discover" className="data-[state=active]:bg-emerald-500 data-[state=active]:text-white">
+                Discover
               </TabsTrigger>
               <TabsTrigger value="market" className="data-[state=active]:bg-emerald-500 data-[state=active]:text-white">
                 Market
               </TabsTrigger>
             </TabsList>
             
-            {/* Discover Tab Content */}
+            {/* Leaderboard Tab Content - This is now the first tab */}
+            <TabsContent value="leaderboard" className="mt-0 space-y-6">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold text-white">Top Performers</h2>
+                <div className="flex bg-gray-800/50 rounded-lg p-1 text-xs">
+                  <button 
+                    onClick={() => setTimeRange("LTD")}
+                    className={`px-3 py-1 ${timeRange === "LTD" ? "bg-white text-gray-900" : "text-gray-300"} rounded`}>LTD</button>
+                  <button 
+                    onClick={() => setTimeRange("YTD")}
+                    className={`px-3 py-1 ${timeRange === "YTD" ? "bg-white text-gray-900" : "text-gray-300"} rounded`}>YTD</button>
+                  <button 
+                    onClick={() => setTimeRange("3M")}
+                    className={`px-3 py-1 ${timeRange === "3M" ? "bg-white text-gray-900" : "text-gray-300"} rounded`}>3M</button>
+                  <button 
+                    onClick={() => setTimeRange("1D")}
+                    className={`px-3 py-1 ${timeRange === "1D" ? "bg-white text-gray-900" : "text-gray-300"} rounded`}>1D</button>
+                </div>
+              </div>
+              
+              <div className="space-y-2.5">
+                {leaderboardItems.map((item) => (
+                  <div key={item.rank} className="bg-gray-900/70 border border-gray-800 rounded-lg p-3.5">
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <div className={`w-6 h-6 rounded-full ${item.rank <= 3 ? 'bg-amber-500/20 text-amber-400' : 'bg-gray-800'} flex items-center justify-center text-sm font-bold`}>
+                        {item.rank}
+                      </div>
+                      <h3 className="text-white font-semibold">{item.name}</h3>
+                      <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full">
+                        {item.tag}
+                      </span>
+                      {item.rank <= 3 && (
+                        <Star size={14} className="text-amber-400 fill-amber-400" />
+                      )}
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-gray-400 text-xs mb-1">by {item.author}</p>
+                        <div className="flex items-center text-emerald-400">
+                          <ArrowUp size={16} className="mr-1" />
+                          <span className="font-bold text-lg">+{item.return}%</span>
+                        </div>
+                        <p className="text-gray-400 text-xs">+{item.vsSP}% vs S&P</p>
+                      </div>
+                      
+                      <div className="text-right">
+                        <p className="text-white font-semibold mb-1">Sharpe {item.sharpe}</p>
+                        <button className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1 rounded-full transition-colors">
+                          Subscribe
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-2.5 w-full bg-gray-800/70 h-1 rounded-full overflow-hidden">
+                      <div 
+                        className="bg-gradient-to-r from-emerald-500 to-emerald-300 h-full rounded-full" 
+                        style={{ width: `${Math.min(100, item.return)}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="space-y-3">
+                <button className="w-full py-2.5 text-emerald-400 font-medium bg-gray-900/50 border border-gray-800 rounded-lg hover:bg-gray-800/70 transition-colors">
+                  View Full Leaderboard
+                </button>
+                
+                <button 
+                  onClick={handleSubscribePlus}
+                  className="w-full py-2.5 bg-gradient-to-r from-purple-500 to-emerald-500 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+                >
+                  Subscribe to Sharpe+ for Premium Insights
+                </button>
+              </div>
+            </TabsContent>
+            
+            {/* Discover Tab Content - Now the second tab */}
             <TabsContent value="discover" className="mt-0 space-y-6">
               {/* Category Pills */}
-              <div className="flex space-x-2 overflow-x-auto no-scrollbar">
+              <div className="flex space-x-2 overflow-x-auto no-scrollbar pb-1">
                 {categories.map((category) => (
                   <button
                     key={category}
-                    className={`py-2 px-4 rounded-full text-sm font-medium whitespace-nowrap ${
+                    className={`py-1.5 px-3.5 rounded-full text-sm font-medium whitespace-nowrap ${
                       activeCategory === category 
                         ? 'bg-white text-gray-900' 
                         : 'bg-gray-800/50 text-gray-300'
@@ -105,35 +193,33 @@ const Discover = () => {
               <div>
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center">
-                    <h2 className="text-xl font-bold text-white">Featured</h2>
-                    <Flame size={20} className="ml-2 text-orange-500" />
+                    <h2 className="text-lg font-bold text-white">Featured</h2>
+                    <Flame size={18} className="ml-1.5 text-orange-500" />
                   </div>
-                  <a href="#" className="text-emerald-400 text-sm">See all</a>
+                  <a href="#" className="text-emerald-400 text-xs">See all</a>
                 </div>
-                <p className="text-sm text-gray-400 mb-4">Hand-picked portfolios by our team</p>
+                <p className="text-xs text-gray-400 mb-3">Hand-picked portfolios by our team</p>
                 
-                <div className="bg-gradient-to-r from-purple-600/20 to-indigo-600/20 rounded-xl p-4 mb-4">
-                  <div className="relative z-10">
-                    <PortfolioCard 
-                      id="7263"
-                      name="Tech Unicorns"
-                      return={48.92}
-                      author="Sharpe Team"
-                      sharpeRatio={2.84}
-                    />
-                  </div>
+                <div className="bg-gradient-to-r from-purple-600/20 to-indigo-600/20 rounded-xl p-3.5">
+                  <PortfolioCard 
+                    id="7263"
+                    name="Tech Unicorns"
+                    return={48.92}
+                    author="Sharpe Team"
+                    sharpeRatio={2.84}
+                  />
                 </div>
               </div>
               
               {/* Trending Portfolios */}
               <div>
                 <div className="flex items-center mb-1">
-                  <h2 className="text-xl font-bold text-white">Trending Portfolios</h2>
-                  <TrendingUp size={20} className="ml-2 text-emerald-400" />
+                  <h2 className="text-lg font-bold text-white">Trending Portfolios</h2>
+                  <TrendingUp size={18} className="ml-1.5 text-emerald-400" />
                 </div>
-                <p className="text-sm text-gray-400 mb-4">Most followed this week</p>
+                <p className="text-xs text-gray-400 mb-3">Most followed this week</p>
                 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {trendingPortfolios.map(portfolio => (
                     <PortfolioCard 
                       key={portfolio.id}
@@ -150,19 +236,19 @@ const Discover = () => {
               {/* Top Creators/Portfolios Section */}
               <div>
                 <Tabs defaultValue="portfolios" className="w-full">
-                  <TabsList className="grid w-full grid-cols-2 bg-gray-800/50 rounded-lg mb-4">
+                  <TabsList className="grid w-full grid-cols-2 bg-gray-800/50 rounded-lg mb-3">
                     <TabsTrigger value="portfolios" className="data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-400">
-                      <Trophy size={16} className="mr-2" />
+                      <Trophy size={14} className="mr-1.5" />
                       Top Portfolios
                     </TabsTrigger>
                     <TabsTrigger value="creators" className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400">
-                      <Users size={16} className="mr-2" />
+                      <Users size={14} className="mr-1.5" />
                       Top Creators
                     </TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="portfolios" className="mt-0">
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       {topPortfolios.map(portfolio => (
                         <PortfolioCard 
                           key={portfolio.id}
@@ -177,32 +263,32 @@ const Discover = () => {
                   </TabsContent>
                   
                   <TabsContent value="creators" className="mt-0">
-                    <div className="space-y-3">
+                    <div className="space-y-2.5">
                       {topCreators.map((creator) => (
-                        <div key={creator.id} className="bg-gray-800/30 border border-gray-800/50 rounded-lg p-4 flex items-center">
-                          <div className="w-12 h-12 bg-gray-700/70 rounded-full flex items-center justify-center mr-3 text-2xl">
+                        <div key={creator.id} className="bg-gray-800/30 border border-gray-800/50 rounded-lg p-3 flex items-center">
+                          <div className="w-10 h-10 bg-gray-700/70 rounded-full flex items-center justify-center mr-3 text-xl">
                             {creator.avatar}
                           </div>
                           <div className="flex-1">
                             <h4 className="text-white font-medium flex items-center">
                               {creator.name}
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 ml-1 text-emerald-400">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5 ml-1 text-emerald-400">
                                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
                               </svg>
                             </h4>
-                            <div className="flex text-sm text-gray-400 mt-1">
+                            <div className="flex text-xs text-gray-400 mt-0.5">
                               <span>{creator.portfolios} portfolios</span>
-                              <span className="mx-2">•</span>
+                              <span className="mx-1.5">•</span>
                               <span>{creator.followers} followers</span>
                             </div>
                           </div>
                           <div className="text-right">
                             <div className="flex items-center text-emerald-400 justify-end">
-                              <ArrowUp size={14} className="mr-1" />
+                              <ArrowUp size={12} className="mr-0.5" />
                               <span className="font-medium">{creator.avgReturn}%</span>
                             </div>
-                            <button className="mt-2 text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full">
+                            <button className="mt-1.5 text-2xs bg-emerald-500/20 text-emerald-400 px-2.5 py-0.5 rounded-full">
                               Follow
                             </button>
                           </div>
@@ -214,127 +300,76 @@ const Discover = () => {
               </div>
             </TabsContent>
             
-            {/* Leaderboard Tab Content */}
-            <TabsContent value="leaderboard" className="mt-0 space-y-6">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-white">Top Performers</h2>
-                <div className="flex bg-gray-800/50 rounded-lg p-1 text-xs">
-                  <button className="px-3 py-1 bg-white text-gray-900 rounded">LTD</button>
-                  <button className="px-3 py-1 text-gray-300">YTD</button>
-                  <button className="px-3 py-1 text-gray-300">3M</button>
-                </div>
-              </div>
-              
-              <div className="space-y-3">
-                {leaderboardItems.map((item) => (
-                  <div key={item.rank} className="bg-gray-900/70 border border-gray-800 rounded-lg p-4">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-7 h-7 rounded-full bg-gray-800 flex items-center justify-center text-sm font-bold text-white">
-                        {item.rank}
-                      </div>
-                      <h3 className="text-white font-semibold text-lg">{item.name}</h3>
-                      <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full">
-                        {item.tag}
-                      </span>
-                    </div>
-                    
-                    <p className="text-gray-400 text-sm mb-2">by {item.author}</p>
-                    
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="flex items-center text-emerald-400">
-                          <ArrowUp size={16} className="mr-1" />
-                          <span className="font-bold text-lg">+{item.return}%</span>
-                        </div>
-                        <p className="text-gray-400 text-xs">+{item.vsSP}% vs S&P</p>
-                      </div>
-                      
-                      <div className="text-right">
-                        <p className="text-white text-lg font-semibold">Sharpe {item.sharpe}</p>
-                        {item.rank <= 3 && (
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-amber-400 inline">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                          </svg>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <div className="mt-3 w-full bg-gray-800/70 h-1 rounded-full overflow-hidden">
-                      <div 
-                        className="bg-gradient-to-r from-emerald-500 to-emerald-300 h-full rounded-full" 
-                        style={{ width: `${Math.min(100, item.return)}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              <button className="w-full py-3 text-emerald-400 font-medium bg-gray-900/50 border border-gray-800 rounded-lg">
-                View Full Leaderboard
-              </button>
-            </TabsContent>
-            
-            {/* Market Tab Content */}
-            <TabsContent value="market" className="mt-0 space-y-6">
-              <div className="bg-gray-900/50 border border-gray-800 p-4 rounded-xl">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-white font-bold text-lg">Market Overview</h3>
-                  <span className="text-emerald-400 text-sm">May 22, 2025</span>
+            {/* Market Tab Content - Now the third tab */}
+            <TabsContent value="market" className="mt-0 space-y-5">
+              <div className="bg-gray-900/50 border border-gray-800 p-3.5 rounded-xl">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-white font-bold">Market Overview</h3>
+                  <span className="text-emerald-400 text-xs">May 22, 2025</span>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div className="bg-gray-800/50 p-3 rounded-lg">
-                    <p className="text-gray-400 text-xs mb-1">S&P 500</p>
-                    <p className="text-white font-bold text-lg">5,296.64</p>
-                    <div className="flex items-center text-emerald-400 text-sm">
-                      <ArrowUp size={14} className="mr-1" />
+                <div className="grid grid-cols-2 gap-3 mb-3">
+                  <div className="bg-gray-800/50 p-2.5 rounded-lg">
+                    <p className="text-gray-400 text-xs mb-0.5">S&P 500</p>
+                    <p className="text-white font-bold">5,296.64</p>
+                    <div className="flex items-center text-emerald-400 text-xs">
+                      <ArrowUp size={12} className="mr-0.5" />
                       <span>0.98%</span>
                     </div>
                   </div>
                   
-                  <div className="bg-gray-800/50 p-3 rounded-lg">
-                    <p className="text-gray-400 text-xs mb-1">NASDAQ</p>
-                    <p className="text-white font-bold text-lg">16,742.35</p>
-                    <div className="flex items-center text-emerald-400 text-sm">
-                      <ArrowUp size={14} className="mr-1" />
+                  <div className="bg-gray-800/50 p-2.5 rounded-lg">
+                    <p className="text-gray-400 text-xs mb-0.5">NASDAQ</p>
+                    <p className="text-white font-bold">16,742.35</p>
+                    <div className="flex items-center text-emerald-400 text-xs">
+                      <ArrowUp size={12} className="mr-0.5" />
                       <span>1.28%</span>
                     </div>
                   </div>
                   
-                  <div className="bg-gray-800/50 p-3 rounded-lg">
-                    <p className="text-gray-400 text-xs mb-1">DOW</p>
-                    <p className="text-white font-bold text-lg">39,012.75</p>
-                    <div className="flex items-center text-red-400 text-sm">
-                      <ArrowDown size={14} className="mr-1" />
+                  <div className="bg-gray-800/50 p-2.5 rounded-lg">
+                    <p className="text-gray-400 text-xs mb-0.5">DOW</p>
+                    <p className="text-white font-bold">39,012.75</p>
+                    <div className="flex items-center text-red-400 text-xs">
+                      <ArrowDown size={12} className="mr-0.5" />
                       <span>0.21%</span>
                     </div>
                   </div>
                   
-                  <div className="bg-gray-800/50 p-3 rounded-lg">
-                    <p className="text-gray-400 text-xs mb-1">RUSSELL 2000</p>
-                    <p className="text-white font-bold text-lg">2,092.38</p>
-                    <div className="flex items-center text-emerald-400 text-sm">
-                      <ArrowUp size={14} className="mr-1" />
+                  <div className="bg-gray-800/50 p-2.5 rounded-lg">
+                    <p className="text-gray-400 text-xs mb-0.5">RUSSELL 2000</p>
+                    <p className="text-white font-bold">2,092.38</p>
+                    <div className="flex items-center text-emerald-400 text-xs">
+                      <ArrowUp size={12} className="mr-0.5" />
                       <span>1.12%</span>
                     </div>
                   </div>
                 </div>
+                
+                <button 
+                  onClick={handleSubscribePlus}
+                  className="w-full py-2 bg-gradient-to-r from-purple-500 to-emerald-500 text-white text-sm font-medium rounded-lg flex items-center justify-center gap-1.5"
+                >
+                  <Star size={14} className="fill-white" />
+                  Get Sharpe+ for In-Depth Analysis
+                  <ChevronRight size={14} />
+                </button>
               </div>
               
               <div>
-                <h3 className="text-white font-bold text-lg mb-3">Top Gaining Sectors</h3>
-                <div className="space-y-3">
+                <h3 className="text-white font-bold mb-2.5">Top Gaining Sectors</h3>
+                <div className="space-y-2.5">
                   {[
                     { name: 'Technology', change: 2.14, color: 'from-emerald-500 to-emerald-300' },
                     { name: 'Healthcare', change: 1.86, color: 'from-blue-500 to-blue-300' },
                     { name: 'Consumer Cyclical', change: 1.52, color: 'from-purple-500 to-purple-300' },
                   ].map((sector, i) => (
-                    <div key={i} className="bg-gray-900/70 border border-gray-800 p-3 rounded-lg flex items-center">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-800 mr-3 text-lg">
+                    <div key={i} className="bg-gray-900/70 border border-gray-800 p-2.5 rounded-lg flex items-center">
+                      <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-800 mr-2.5 text-base">
                         {i + 1}
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-white font-medium">{sector.name}</h4>
+                        <h4 className="text-white text-sm font-medium">{sector.name}</h4>
                         <div className="w-full mt-1 bg-gray-800/70 h-1.5 rounded-full overflow-hidden">
                           <div 
                             className={`bg-gradient-to-r ${sector.color} h-full rounded-full`}
@@ -344,7 +379,7 @@ const Discover = () => {
                       </div>
                       <div className="text-right">
                         <div className="flex items-center text-emerald-400">
-                          <ArrowUp size={14} className="mr-1" />
+                          <ArrowUp size={12} className="mr-0.5" />
                           <span className="font-semibold">{sector.change}%</span>
                         </div>
                       </div>
@@ -354,19 +389,19 @@ const Discover = () => {
               </div>
               
               <div>
-                <h3 className="text-white font-bold text-lg mb-3">Top Declining Sectors</h3>
-                <div className="space-y-3">
+                <h3 className="text-white font-bold mb-2.5">Top Declining Sectors</h3>
+                <div className="space-y-2.5">
                   {[
                     { name: 'Energy', change: 0.78, color: 'from-red-500 to-red-300' },
                     { name: 'Utilities', change: 0.52, color: 'from-red-500 to-red-300' },
                     { name: 'Real Estate', change: 0.32, color: 'from-orange-500 to-orange-300' },
                   ].map((sector, i) => (
-                    <div key={i} className="bg-gray-900/70 border border-gray-800 p-3 rounded-lg flex items-center">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-800 mr-3 text-lg">
+                    <div key={i} className="bg-gray-900/70 border border-gray-800 p-2.5 rounded-lg flex items-center">
+                      <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-800 mr-2.5 text-base">
                         {i + 1}
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-white font-medium">{sector.name}</h4>
+                        <h4 className="text-white text-sm font-medium">{sector.name}</h4>
                         <div className="w-full mt-1 bg-gray-800/70 h-1.5 rounded-full overflow-hidden">
                           <div 
                             className={`bg-gradient-to-r ${sector.color} h-full rounded-full`}
@@ -376,7 +411,7 @@ const Discover = () => {
                       </div>
                       <div className="text-right">
                         <div className="flex items-center text-red-400">
-                          <ArrowDown size={14} className="mr-1" />
+                          <ArrowDown size={12} className="mr-0.5" />
                           <span className="font-semibold">{sector.change}%</span>
                         </div>
                       </div>
