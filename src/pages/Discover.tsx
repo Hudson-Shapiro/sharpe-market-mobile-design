@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, TrendingUp, Flame, ArrowUp, ArrowDown, Trophy, Users, ChevronRight, Star } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -7,6 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/components/ui/use-toast";
+import { Area, AreaChart } from 'recharts';
 
 const Discover = () => {
   const categories = ["All", "Trending", "Top Returns", "New", "Following"];
