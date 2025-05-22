@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
@@ -51,6 +52,15 @@ const Search = () => {
     { id: '101', name: 'AI Revolution', author: 'Ryan Masters', return: 34.52, sharpeRatio: 2.14, rank: 1 },
     { id: '256', name: 'Green Energy Future', author: 'Emma Clark', return: 28.71, sharpeRatio: 1.89, rank: 5 },
     { id: '189', name: 'Biotech Winners', author: 'Dr. Liu Wei', return: 22.35, sharpeRatio: 1.65, rank: 8 },
+  ];
+
+  // Define the missing popularUsers array
+  const popularUsers = [
+    { id: '1', name: 'Mark Cuban', followers: '125K', avatar: '🤵' },
+    { id: '2', name: 'Lisa Su', followers: '95K', avatar: '👩‍💼' },
+    { id: '3', name: 'Warren Buffet', followers: '210K', avatar: '👴' },
+    { id: '4', name: 'Catherine Wood', followers: '78K', avatar: '👩‍🔬' },
+    { id: '5', name: 'Elon Musk', followers: '300K', avatar: '👨‍💻' },
   ];
 
   const handleClose = () => {
