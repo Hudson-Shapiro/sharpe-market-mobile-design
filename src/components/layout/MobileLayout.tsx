@@ -39,7 +39,7 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
       </div>
       
       {/* Bottom Navigation */}
-      <div className="bg-card/95 backdrop-blur-lg border-t border-border">
+      <div className="bg-background border-t border-border">
         <div className="flex items-center justify-around py-2">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;

@@ -15,7 +15,7 @@ const DiscoverHeader = () => {
   };
 
   return (
-    <div className="p-4 pb-2 flex items-center justify-between space-x-3">
+    <div className="p-4 pb-2 flex items-center justify-between space-x-3 bg-background">
       <Link to="/profile">
         <Avatar className="h-10 w-10 bg-secondary hover:bg-secondary/80 transition-all">
           <AvatarFallback className="text-base font-bold bg-gradient-to-r from-purple-400 to-emerald-400 text-transparent bg-clip-text">
@@ -26,7 +26,7 @@ const DiscoverHeader = () => {
       
       {/* Search Bar positioned in the middle */}
       <div className="flex-1 relative">
-        <div className="flex items-center bg-secondary rounded-xl py-2.5 px-4">
+        <div className="flex items-center bg-card rounded-xl py-2.5 px-4">
           <Search size={20} className="text-muted-foreground mr-2" />
           <Input 
             type="text" 
@@ -40,7 +40,7 @@ const DiscoverHeader = () => {
       </div>
       
       <div className="flex items-center">
-        <button className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors relative">
+        <button className="w-10 h-10 bg-card rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors relative">
           <Bell size={20} />
           <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
         </button>
