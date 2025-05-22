@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
@@ -13,7 +12,8 @@ import {
   ArrowDownAZ, 
   TrendingDown, 
   Award,
-  ChevronDown
+  ChevronDown,
+  LineChart
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -42,6 +42,7 @@ const Search = () => {
   const [timeRange, setTimeRange] = useState("1m");
   const [minSharpeRatio, setMinSharpeRatio] = useState(0);
   const [riskTolerance, setRiskTolerance] = useState("all");
+  const [searchFilter, setSearchFilter] = useState("all");
   const navigate = useNavigate();
 
   const recentSearches = ["Tech stocks", "AI Revolution", "Green Energy", "John Smith"];
@@ -91,9 +92,43 @@ const Search = () => {
         </button>
       </div>
 
+      {/* Search Filter Options */}
+      {searchQuery && (
+        <div className="flex p-3 gap-2 border-b border-gray-800/40">
+          <button 
+            className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'all' ? 'bg-emerald-500 text-white' : 'bg-gray-800/50 text-gray-300'}`}
+            onClick={() => setSearchFilter('all')}
+          >
+            All
+          </button>
+          <button 
+            className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'portfolios' ? 'bg-emerald-500 text-white' : 'bg-gray-800/50 text-gray-300'}`}
+            onClick={() => setSearchFilter('portfolios')}
+          >
+            <BarChart3 size={14} className="mr-1.5" />
+            Portfolios
+          </button>
+          <button 
+            className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'users' ? 'bg-emerald-500 text-white' : 'bg-gray-800/50 text-gray-300'}`}
+            onClick={() => setSearchFilter('users')}
+          >
+            <Users size={14} className="mr-1.5" />
+            Users
+          </button>
+          <button 
+            className={`flex items-center justify-center px-3 py-1.5 rounded-full text-sm ${searchFilter === 'stocks' ? 'bg-emerald-500 text-white' : 'bg-gray-800/50 text-gray-300'}`}
+            onClick={() => setSearchFilter('stocks')}
+          >
+            <LineChart size={14} className="mr-1.5" />
+            Stocks
+          </button>
+        </div>
+      )}
+
       <ScrollArea className="h-[calc(100vh-72px)]">
         <div className="p-4">
           {!searchQuery ? (
+            // ... keep existing code (Recent Searches and Trending Searches sections)
             <>
               {/* Recent Searches */}
               <div className="mb-6">
