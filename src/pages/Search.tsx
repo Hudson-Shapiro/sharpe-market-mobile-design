@@ -1,7 +1,20 @@
 
 import React, { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { X, Search as SearchIcon, Users, BarChart3, Filter, TrendingUp, ArrowUp, SlidersHorizontal, ArrowDownAZ, TrendingDown, Award } from 'lucide-react';
+import { 
+  X, 
+  Search as SearchIcon, 
+  Users, 
+  BarChart3, 
+  Filter, 
+  TrendingUp, 
+  ArrowUp, 
+  SlidersHorizontal, 
+  ArrowDownAZ, 
+  TrendingDown, 
+  Award,
+  ChevronDown
+} from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useNavigate } from 'react-router-dom';
@@ -10,12 +23,25 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { 
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("all");
   const [sortMethod, setSortMethod] = useState("performance");
   const [filterVisible, setFilterVisible] = useState(false);
+  const [timeRange, setTimeRange] = useState("1m");
+  const [minSharpeRatio, setMinSharpeRatio] = useState(0);
+  const [riskTolerance, setRiskTolerance] = useState("all");
   const navigate = useNavigate();
 
   const recentSearches = ["Tech stocks", "AI Revolution", "Green Energy", "John Smith"];
@@ -118,7 +144,7 @@ const Search = () => {
             <>
               {/* Search Results */}
               <Tabs defaultValue="all" className="w-full">
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-2">
                   <TabsList className="grid w-full grid-cols-3 bg-gray-800/50 rounded-lg">
                     <TabsTrigger value="all" className="data-[state=active]:bg-emerald-500 data-[state=active]:text-white">
                       All
@@ -132,6 +158,7 @@ const Search = () => {
                       Users
                     </TabsTrigger>
                   </TabsList>
+                  
                   <button 
                     className={`p-2 ${filterVisible ? 'bg-emerald-500 text-white' : 'bg-gray-800/50 text-gray-400'} rounded-full flex items-center justify-center ml-2`}
                     onClick={toggleFilter}
@@ -140,23 +167,78 @@ const Search = () => {
                   </button>
                 </div>
 
+                {/* Enhanced Filter Section */}
                 {filterVisible && (
                   <Card className="p-4 mb-4 bg-gray-900 border-gray-800">
-                    <h3 className="font-medium mb-2">Sort by</h3>
-                    <ToggleGroup type="single" value={sortMethod} onValueChange={(value) => setSortMethod(value || sortMethod)} className="mb-4 justify-start">
-                      <ToggleGroupItem value="performance" className="bg-gray-800 data-[state=on]:bg-emerald-500">
-                        <TrendingUp size={14} className="mr-1" />
-                        Performance
-                      </ToggleGroupItem>
-                      <ToggleGroupItem value="alphabetical" className="bg-gray-800 data-[state=on]:bg-emerald-500">
-                        <ArrowDownAZ size={14} className="mr-1" />
-                        A-Z
-                      </ToggleGroupItem>
-                      <ToggleGroupItem value="sharpe" className="bg-gray-800 data-[state=on]:bg-emerald-500">
-                        <Award size={14} className="mr-1" />
-                        Sharpe
-                      </ToggleGroupItem>
-                    </ToggleGroup>
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className="text-sm text-gray-400 mb-1 block">Time Range</label>
+                        <Select value={timeRange} onValueChange={setTimeRange}>
+                          <SelectTrigger className="w-full bg-gray-800 border-gray-700">
+                            <SelectValue placeholder="Select range" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-gray-800 border-gray-700">
+                            <SelectItem value="1w">1 Week</SelectItem>
+                            <SelectItem value="1m">1 Month</SelectItem>
+                            <SelectItem value="3m">3 Months</SelectItem>
+                            <SelectItem value="6m">6 Months</SelectItem>
+                            <SelectItem value="1y">1 Year</SelectItem>
+                            <SelectItem value="all">All Time</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div>
+                        <label className="text-sm text-gray-400 mb-1 block">Sort By</label>
+                        <Select value={sortMethod} onValueChange={setSortMethod}>
+                          <SelectTrigger className="w-full bg-gray-800 border-gray-700">
+                            <SelectValue placeholder="Sort by" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-gray-800 border-gray-700">
+                            <SelectItem value="performance">Performance</SelectItem>
+                            <SelectItem value="sharpe">Sharpe Ratio</SelectItem>
+                            <SelectItem value="alphabetical">Alphabetical</SelectItem>
+                            <SelectItem value="followers">Followers</SelectItem>
+                            <SelectItem value="newest">Newest</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                    
+                    <div className="mb-4">
+                      <label className="text-sm text-gray-400 mb-1 block">Minimum Sharpe Ratio: {minSharpeRatio.toFixed(1)}</label>
+                      <Slider 
+                        value={[minSharpeRatio]} 
+                        min={0} 
+                        max={3.0} 
+                        step={0.1}
+                        onValueChange={(values) => setMinSharpeRatio(values[0])}
+                        className="my-2"
+                      />
+                    </div>
+                    
+                    <div className="mb-4">
+                      <label className="text-sm text-gray-400 mb-2 block">Risk Tolerance</label>
+                      <ToggleGroup 
+                        type="single" 
+                        value={riskTolerance} 
+                        onValueChange={(value) => setRiskTolerance(value || riskTolerance)} 
+                        className="justify-between"
+                      >
+                        <ToggleGroupItem value="low" className="flex-1 text-xs bg-gray-800 data-[state=on]:bg-blue-600">
+                          Conservative
+                        </ToggleGroupItem>
+                        <ToggleGroupItem value="medium" className="flex-1 text-xs bg-gray-800 data-[state=on]:bg-emerald-600">
+                          Moderate
+                        </ToggleGroupItem>
+                        <ToggleGroupItem value="high" className="flex-1 text-xs bg-gray-800 data-[state=on]:bg-amber-600">
+                          Aggressive
+                        </ToggleGroupItem>
+                        <ToggleGroupItem value="all" className="flex-1 text-xs bg-gray-800 data-[state=on]:bg-purple-600">
+                          All
+                        </ToggleGroupItem>
+                      </ToggleGroup>
+                    </div>
                     
                     <h3 className="font-medium mb-2">Performance</h3>
                     <RadioGroup defaultValue="all" className="mb-4">
@@ -171,22 +253,6 @@ const Search = () => {
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="negative" id="negative" />
                         <label htmlFor="negative" className="text-sm">Negative only</label>
-                      </div>
-                    </RadioGroup>
-                    
-                    <h3 className="font-medium mb-2">Sharpe Ratio</h3>
-                    <RadioGroup defaultValue="all" className="mb-4">
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="all" id="sharpe-all" />
-                        <label htmlFor="sharpe-all" className="text-sm">Any</label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="above1" id="sharpe-above1" />
-                        <label htmlFor="sharpe-above1" className="text-sm">Above 1.0</label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="above2" id="sharpe-above2" />
-                        <label htmlFor="sharpe-above2" className="text-sm">Above 2.0</label>
                       </div>
                     </RadioGroup>
                     
