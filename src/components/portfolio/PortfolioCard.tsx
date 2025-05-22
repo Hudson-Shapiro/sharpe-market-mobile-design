@@ -89,20 +89,7 @@ const PortfolioCard = ({
         )}
       </div>
       
-      {recentPurchases && recentPurchases.length > 0 && (
-        <div className="flex flex-wrap gap-1 mt-1.5">
-          {recentPurchases.slice(0, 3).map((ticker, idx) => (
-            <div key={idx} className="text-2xs bg-gray-800 text-gray-300 px-1.5 py-0.5 rounded-full whitespace-nowrap">
-              ${ticker}
-            </div>
-          ))}
-          {recentPurchases.length > 3 && (
-            <div className="text-2xs bg-gray-800 text-gray-300 px-1.5 py-0.5 rounded-full whitespace-nowrap">
-              +{recentPurchases.length - 3}
-            </div>
-          )}
-        </div>
-      )}
+      {/* Removed stock tickers section */}
     </div>
   );
 };

@@ -1,6 +1,5 @@
 
 import React from 'react';
-import DashboardHeader from '../components/dashboard/DashboardHeader';
 import PortfolioSection from '../components/dashboard/PortfolioSection';
 import TopMovers from '../components/dashboard/TopMovers';
 import { PlusCircle, Search } from 'lucide-react';
@@ -23,9 +22,9 @@ const Home = () => {
   return (
     <ScrollArea className="h-full">
       <div className="min-h-screen bg-gray-950">
-        <DashboardHeader />
+        {/* Removed DashboardHeader */}
         
-        <div className="px-4 mb-4 flex items-center justify-between">
+        <div className="px-4 mb-4 flex items-center justify-between mt-2">
           <h2 className="text-xl font-bold text-white">My Portfolios</h2>
           <Link to="/portfolios" className="flex items-center bg-gradient-to-r from-emerald-600 to-emerald-500 text-white py-2 px-4 rounded-full text-sm font-medium transition-all hover:opacity-90">
             <PlusCircle size={16} className="mr-1" />
