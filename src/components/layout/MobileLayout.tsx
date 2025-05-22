@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Home, BarChart3, Activity, Search, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import GlobalHeader from './GlobalHeader';
 
 interface MobileLayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ interface MobileLayoutProps {
 
 const MobileLayout = ({ children }: MobileLayoutProps) => {
   const location = useLocation();
+  const isSearchPage = location.pathname === '/search';
 
   const navItems = [
     { path: '/', icon: Home, label: 'Home' },
@@ -22,6 +24,9 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
 
   return (
     <div className="h-screen flex flex-col bg-gray-950 text-white">
+      {/* Global Header */}
+      <GlobalHeader hideSearch={isSearchPage} />
+      
       {/* Main Content */}
       <div className="flex-1 overflow-hidden">
         {children}

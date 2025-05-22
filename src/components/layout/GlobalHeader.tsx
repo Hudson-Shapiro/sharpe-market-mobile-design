@@ -2,6 +2,7 @@
 import React from 'react';
 import { Search, Bell } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 interface GlobalHeaderProps {
   hideSearch?: boolean;
@@ -16,9 +17,13 @@ const GlobalHeader = ({ hideSearch = false }: GlobalHeaderProps) => {
 
   return (
     <div className="p-4 pb-2 flex items-center justify-between space-x-3">
-      <div className="w-10 h-10 bg-gray-800/50 rounded-full flex items-center justify-center">
-        <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-emerald-400 text-transparent bg-clip-text">HS</span>
-      </div>
+      <Link to="/profile">
+        <Avatar className="h-10 w-10 bg-gray-800/50 hover:bg-gray-800/80 transition-all">
+          <AvatarFallback className="text-base font-bold bg-gradient-to-r from-purple-400 to-emerald-400 text-transparent bg-clip-text">
+            HS
+          </AvatarFallback>
+        </Avatar>
+      </Link>
       
       <div className="flex items-center gap-3">
         {!hideSearch && (
