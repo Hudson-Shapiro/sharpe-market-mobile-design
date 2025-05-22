@@ -5,7 +5,7 @@
  
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 98%;
     --foreground: 0 0% 3.9%;
 
     --card: 0 0% 100%;
@@ -17,20 +17,20 @@
     --primary: 0 0% 9%;
     --primary-foreground: 0 0% 98%;
  
-    --secondary: 0 0% 96.1%;
+    --secondary: 0 0% 92%;
     --secondary-foreground: 0 0% 9%;
  
-    --muted: 0 0% 96.1%;
+    --muted: 0 0% 92%;
     --muted-foreground: 0 0% 45.1%;
  
-    --accent: 0 0% 96.1%;
+    --accent: 0 0% 92%;
     --accent-foreground: 0 0% 9%;
  
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
     --ring: 0 0% 3.9%;
 
     --sidebar-background: 0 0% 100%;
@@ -49,10 +49,10 @@
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
  
-    --card: 0 0% 3.9%;
+    --card: 0 0% 7%;
     --card-foreground: 0 0% 98%;
  
-    --popover: 0 0% 3.9%;
+    --popover: 0 0% 7%;
     --popover-foreground: 0 0% 98%;
  
     --primary: 0 0% 98%;
@@ -92,6 +92,11 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Add proper base styling for commonly used elements */
+  input, select, textarea {
+    @apply bg-background text-foreground;
+  }
 }
 
 @layer utilities {
@@ -103,4 +108,18 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+/* Common card styles that respond to theme */
+.theme-card {
+  @apply bg-card text-card-foreground border-border;
+}
+
+/* Theme-aware buttons */
+.theme-button-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+.theme-button-secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
 }
