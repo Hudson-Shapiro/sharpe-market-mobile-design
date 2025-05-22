@@ -29,7 +29,7 @@ const PortfolioCard = ({
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs text-gray-400 font-mono">#{id}</span>
+            <span className="text-xs text-emerald-400 font-mono bg-emerald-500/20 rounded-full px-2 py-0.5">#{id}</span>
             {isSubscribed && (
               <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full">
                 Subscribed
@@ -43,7 +43,7 @@ const PortfolioCard = ({
         </div>
         
         <div className="text-right">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 justify-end">
             {isPositive ? (
               <TrendingUp size={16} className="text-emerald-400" />
             ) : (
@@ -67,10 +67,10 @@ const PortfolioCard = ({
       {!isOwned && (
         <div className="flex gap-2 mt-4">
           <button className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg font-medium transition-colors">
-            Follow
+            Subscribe
           </button>
           <button className="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-lg font-medium transition-colors">
-            Subscribe
+            View Details
           </button>
         </div>
       )}

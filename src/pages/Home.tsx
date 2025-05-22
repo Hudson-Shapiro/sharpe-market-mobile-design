@@ -3,49 +3,99 @@ import React from 'react';
 import DashboardHeader from '../components/dashboard/DashboardHeader';
 import PortfolioSection from '../components/dashboard/PortfolioSection';
 import TopMovers from '../components/dashboard/TopMovers';
+import { PlusCircle, Search } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const myPortfolios = [
-    { id: '124358', name: 'Healthcare Portfolio', return: 14.05, sharpeRatio: 1.25, isOwned: true },
-    { id: '124359', name: 'FMCG Portfolio', return: 13, sharpeRatio: 1.32, isOwned: true },
-    { id: '124360', name: 'Auto Portfolio', return: 12.8, sharpeRatio: 1.18, isOwned: true },
+    { id: '5', name: 'Tech Bull', return: 28.58, sharpeRatio: 7.48, isOwned: true },
+    { id: '6', name: 'DEFUND THE GOVT', return: 27.76, sharpeRatio: 8.74, isOwned: true },
+    { id: '14', name: 'Mixed Bag', return: 14.16, sharpeRatio: 6.23, isOwned: true },
   ];
 
   const subscribedPortfolios = [
-    { id: '124361', name: 'Dividend Portfolio', return: 14.05, author: 'Sarah Chen', isSubscribed: true },
-    { id: '124362', name: 'IT Companies Portfolio', return: -7.09, author: 'Mike Johnson', isSubscribed: true },
-    { id: '124363', name: 'Healthcare Portfolio', return: -10.20, author: 'Alex Rivera', isSubscribed: true },
+    { id: '16', name: 'Money Making Machine', return: 11.23, author: 'Sarah Chen', isSubscribed: true },
+    { id: '18', name: 'Gained Stocks', return: 9.30, author: 'Mike Johnson', isSubscribed: true },
+    { id: '27', name: 'XLU', return: 7.61, author: 'Alex Rivera', isSubscribed: true },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-950">
-      <DashboardHeader />
-      
-      <div className="pb-4">
-        <PortfolioSection 
-          title="My Portfolios" 
-          portfolios={myPortfolios}
-        />
+    <ScrollArea className="h-full">
+      <div className="min-h-screen bg-gray-950">
+        <DashboardHeader />
         
-        <PortfolioSection 
-          title="Subscribed Portfolios" 
-          portfolios={subscribedPortfolios}
-        />
+        <div className="px-4 mb-4 flex items-center justify-between">
+          <h2 className="text-xl font-bold text-white">My Portfolios</h2>
+          <Link to="/portfolios" className="flex items-center bg-gradient-to-r from-emerald-600 to-emerald-500 text-white py-2 px-4 rounded-full text-sm font-medium transition-all hover:opacity-90">
+            <PlusCircle size={16} className="mr-1" />
+            Create Portfolio
+          </Link>
+        </div>
+        
+        <div className="px-4 mb-6 grid grid-cols-1 gap-4">
+          {myPortfolios.map(portfolio => (
+            <div key={portfolio.id} className="bg-gray-900/70 border border-gray-800 rounded-xl p-4 hover:bg-gray-900/90 transition-all">
+              <div className="flex justify-between items-start mb-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="inline-block bg-emerald-500/20 text-emerald-400 text-xs font-mono rounded-full px-2 py-1">#{portfolio.id}</span>
+                    <span className="text-lg">😀</span>
+                  </div>
+                  <h3 className="text-white text-lg font-bold mt-2">{portfolio.name}</h3>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div>
+                  <p className="text-gray-400 text-sm">Return</p>
+                  <p className="text-emerald-400 text-xl font-bold">+{portfolio.return}%</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-sm">Sharpe Ratio</p>
+                  <p className="text-white text-xl font-bold">{portfolio.sharpeRatio}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="mb-2 px-4 flex justify-between items-center">
+          <h2 className="text-xl font-bold text-white">Subscribed Portfolios</h2>
+          <Link to="/discover" className="text-emerald-400 text-sm font-medium bg-emerald-500/20 rounded-full px-4 py-2 flex items-center">
+            <Search size={14} className="mr-1" />
+            Find a Portfolio
+          </Link>
+        </div>
+        
+        <div className="px-4 mb-6">
+          {subscribedPortfolios.map(portfolio => (
+            <div key={portfolio.id} className="border-b border-gray-800 py-4">
+              <div className="flex items-center gap-2">
+                <span className="text-lg">😀</span>
+                <span className="inline-block bg-gray-800 text-gray-300 text-xs font-mono rounded-full px-2 py-1">#{portfolio.id}</span>
+              </div>
+              <div className="flex justify-between items-center mt-2">
+                <h3 className="text-white text-lg font-medium">{portfolio.name}</h3>
+                <div className="text-right">
+                  <p className="text-gray-400 text-xs">Return:</p>
+                  <p className="text-emerald-400 text-lg font-bold">+{portfolio.return}%</p>
+                </div>
+              </div>
+            </div>
+          ))}
+          
+          <Link to="/discover" className="w-full flex items-center justify-center text-emerald-400 py-4 font-medium">
+            View all
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </Link>
+        </div>
         
         <TopMovers />
-        
-        {/* Subscribe CTA */}
-        <div className="px-4 mb-6">
-          <div className="bg-gradient-to-r from-emerald-500/20 to-emerald-600/20 border border-emerald-500/30 rounded-xl p-6 text-center">
-            <h3 className="text-white font-bold text-lg mb-2">Join Sharpe+</h3>
-            <p className="text-gray-300 text-sm mb-4">Get access to premium portfolios and exclusive insights</p>
-            <button className="bg-emerald-500 hover:bg-emerald-600 text-white py-3 px-8 rounded-lg font-semibold transition-colors">
-              Subscribe to Sharpe+
-            </button>
-          </div>
-        </div>
       </div>
-    </div>
+    </ScrollArea>
   );
 };
 

@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Home, BarChart3, Activity, Compass, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface MobileLayoutProps {
   children: React.ReactNode;
@@ -20,21 +21,21 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white relative">
+    <div className="h-screen flex flex-col bg-gray-950 text-white">
       {/* Main Content */}
-      <div className="pb-20">
+      <div className="flex-1 overflow-hidden">
         {children}
       </div>
       
       {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-t border-gray-800">
+      <div className="bg-gray-900/95 backdrop-blur-lg border-t border-gray-800">
         <div className="flex items-center justify-around py-2">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
-              <a
+              <Link
                 key={item.path}
-                href={item.path}
+                to={item.path}
                 className={cn(
                   "flex flex-col items-center py-2 px-3 rounded-lg transition-all duration-200",
                   isActive 
@@ -47,7 +48,7 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
                 {isActive && (
                   <div className="w-1 h-1 bg-emerald-400 rounded-full mt-1" />
                 )}
-              </a>
+              </Link>
             );
           })}
         </div>
