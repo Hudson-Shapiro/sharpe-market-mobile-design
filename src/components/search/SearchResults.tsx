@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { SlidersHorizontal, BarChart3, Users } from 'lucide-react';
+import { SlidersHorizontal, BarChart3, Users, X } from 'lucide-react';
 import PortfolioCard from '@/components/portfolio/PortfolioCard';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Slider } from '@/components/ui/slider';
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Input } from '@/components/ui/input';
+import { Drawer, DrawerContent } from '@/components/ui/drawer';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface SearchResultsProps {
   searchQuery: string;
@@ -20,10 +23,223 @@ const SearchResults = ({ searchQuery }: SearchResultsProps) => {
   const [minSharpeRatio, setMinSharpeRatio] = useState(0);
   const [riskTolerance, setRiskTolerance] = useState("all");
   const [sortMethod, setSortMethod] = useState("performance");
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+
+  // Filter state
+  const [filterTimeOption, setFilterTimeOption] = useState("daily");
+  const [createdByMe, setCreatedByMe] = useState(false);
+  const [subscribedByMe, setSubscribedByMe] = useState(true);
+  const [benchmark, setBenchmark] = useState(false);
+  const [securitySearch, setSecuritySearch] = useState("");
+  const [securityConcentration, setSecurityConcentration] = useState(false);
+  const [securityConcentrationType, setSecurityConcentrationType] = useState("");
+  const [securityConcentrationValue, setSecurityConcentrationValue] = useState("");
+  const [sectorConcentration, setSectorConcentration] = useState(false);
+  const [sectorConcentrationType, setSectorConcentrationType] = useState("");
+  const [sectorConcentrationValue, setSectorConcentrationValue] = useState("");
 
   const toggleFilter = () => {
     setFilterVisible(!filterVisible);
   };
+
+  // Clear all filters
+  const clearAllFilters = () => {
+    setFilterTimeOption("daily");
+    setCreatedByMe(false);
+    setSubscribedByMe(false);
+    setBenchmark(false);
+    setSecuritySearch("");
+    setSecurityConcentration(false);
+    setSecurityConcentrationType("");
+    setSecurityConcentrationValue("");
+    setSectorConcentration(false);
+    setSectorConcentrationType("");
+    setSectorConcentrationValue("");
+    setActiveFilters([]);
+  };
+
+  // Apply filters
+  const applyFilters = () => {
+    const newActiveFilters = [];
+    
+    // Add active filters to the array based on selected options
+    if (filterTimeOption) {
+      newActiveFilters.push(`${filterTimeOption} return`);
+    }
+    
+    setActiveFilters(newActiveFilters);
+    setFilterVisible(false);
+  };
+  
+  // Remove a specific filter
+  const removeFilter = (filter: string) => {
+    setActiveFilters(activeFilters.filter(f => f !== filter));
+  };
+
+  // Filter component
+  const FilterComponent = () => (
+    <div className="bg-background text-foreground">
+      <div className="flex justify-between items-center p-4 border-b border-border">
+        <h3 className="text-lg font-medium">Filter</h3>
+        <button 
+          className="text-red-500 text-sm font-medium" 
+          onClick={clearAllFilters}
+        >
+          Clear all
+        </button>
+      </div>
+      
+      <div className="p-4 space-y-6">
+        <div>
+          <p className="text-muted-foreground mb-2">Time Period</p>
+          <Select value={filterTimeOption} onValueChange={setFilterTimeOption}>
+            <SelectTrigger className="w-full bg-secondary border-border">
+              <SelectValue placeholder="Select time period" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="daily">Daily Return</SelectItem>
+              <SelectItem value="weekly">Weekly Return</SelectItem>
+              <SelectItem value="monthly">Monthly Return</SelectItem>
+              <SelectItem value="yearly">Yearly Return</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        
+        <div>
+          <label className="flex items-center gap-2 mb-3">
+            <input 
+              type="checkbox" 
+              className="w-5 h-5 rounded bg-secondary border-border" 
+              checked={createdByMe} 
+              onChange={() => setCreatedByMe(!createdByMe)} 
+            />
+            Created by me
+          </label>
+          
+          <label className="flex items-center gap-2 mb-3">
+            <input 
+              type="checkbox" 
+              className="w-5 h-5 rounded bg-secondary border-border" 
+              checked={subscribedByMe} 
+              onChange={() => setSubscribedByMe(!subscribedByMe)} 
+            />
+            Subscribed by me
+          </label>
+          
+          <label className="flex items-center gap-2">
+            <input 
+              type="checkbox" 
+              className="w-5 h-5 rounded bg-secondary border-border" 
+              checked={benchmark} 
+              onChange={() => setBenchmark(!benchmark)} 
+            />
+            Benchmark
+          </label>
+        </div>
+        
+        <div className="border-t border-border pt-4">
+          <div className="relative">
+            <Input 
+              placeholder="Search security" 
+              className="pl-9 bg-secondary border-border" 
+              value={securitySearch}
+              onChange={(e) => setSecuritySearch(e.target.value)}
+            />
+          </div>
+        </div>
+        
+        <div>
+          <label className="flex items-center gap-2 mb-3">
+            <input 
+              type="checkbox" 
+              className="w-5 h-5 rounded bg-secondary border-border" 
+              checked={securityConcentration} 
+              onChange={() => setSecurityConcentration(!securityConcentration)} 
+            />
+            Security Concentration
+          </label>
+          
+          <div className="flex gap-2 mb-4">
+            <Select 
+              value={securityConcentrationType} 
+              onValueChange={setSecurityConcentrationType}
+              disabled={!securityConcentration}
+            >
+              <SelectTrigger className="bg-secondary border-border">
+                <SelectValue placeholder="Select" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="greater">Greater than</SelectItem>
+                <SelectItem value="less">Less than</SelectItem>
+                <SelectItem value="equal">Equal to</SelectItem>
+              </SelectContent>
+            </Select>
+            
+            <Input 
+              placeholder="Enter value" 
+              className="bg-secondary border-border" 
+              value={securityConcentrationValue}
+              onChange={(e) => setSecurityConcentrationValue(e.target.value)}
+              disabled={!securityConcentration}
+            />
+          </div>
+        </div>
+        
+        <div>
+          <label className="flex items-center gap-2 mb-3">
+            <input 
+              type="checkbox" 
+              className="w-5 h-5 rounded bg-secondary border-border" 
+              checked={sectorConcentration} 
+              onChange={() => setSectorConcentration(!sectorConcentration)} 
+            />
+            Sector Concentration
+          </label>
+          
+          <div className="flex gap-2 mb-4">
+            <Select 
+              value={sectorConcentrationType} 
+              onValueChange={setSectorConcentrationType}
+              disabled={!sectorConcentration}
+            >
+              <SelectTrigger className="bg-secondary border-border">
+                <SelectValue placeholder="Select" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="greater">Greater than</SelectItem>
+                <SelectItem value="less">Less than</SelectItem>
+                <SelectItem value="equal">Equal to</SelectItem>
+              </SelectContent>
+            </Select>
+            
+            <Input 
+              placeholder="Enter value" 
+              className="bg-secondary border-border" 
+              value={sectorConcentrationValue}
+              onChange={(e) => setSectorConcentrationValue(e.target.value)}
+              disabled={!sectorConcentration}
+            />
+          </div>
+        </div>
+      </div>
+      
+      <div className="p-4 grid grid-cols-2 gap-3">
+        <Button 
+          variant="outline" 
+          onClick={() => setFilterVisible(false)}
+          className="border-border"
+        >
+          Cancel
+        </Button>
+        <Button 
+          onClick={applyFilters}
+          className="bg-emerald-500 text-white hover:bg-emerald-600"
+        >
+          Apply Filter
+        </Button>
+      </div>
+    </div>
+  );
 
   return (
     <Tabs defaultValue="portfolios" className="w-full">
@@ -45,6 +261,30 @@ const SearchResults = ({ searchQuery }: SearchResultsProps) => {
         >
           <SlidersHorizontal size={18} />
         </button>
+      </div>
+
+      {/* Interactive Filter Button and Active Filters */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        <Button 
+          variant="outline" 
+          className="flex items-center gap-2 bg-secondary border-border hover:bg-secondary/80"
+          onClick={() => setFilterVisible(true)}
+        >
+          <SlidersHorizontal size={16} />
+          Interactive Filter
+        </Button>
+        
+        {activeFilters.map((filter) => (
+          <Button 
+            key={filter} 
+            variant="outline" 
+            className="flex items-center gap-1.5 bg-secondary border-border hover:bg-secondary/80" 
+            onClick={() => removeFilter(filter)}
+          >
+            {filter}
+            <X size={14} />
+          </Button>
+        ))}
       </div>
 
       {/* Enhanced Filter Section */}
@@ -181,6 +421,15 @@ const SearchResults = ({ searchQuery }: SearchResultsProps) => {
           ))}
         </div>
       </TabsContent>
+
+      {/* Filter Drawer */}
+      <Drawer open={filterVisible} onOpenChange={setFilterVisible}>
+        <DrawerContent className="max-h-[90vh]">
+          <ScrollArea className="h-full max-h-[80vh]">
+            <FilterComponent />
+          </ScrollArea>
+        </DrawerContent>
+      </Drawer>
     </Tabs>
   );
 };
