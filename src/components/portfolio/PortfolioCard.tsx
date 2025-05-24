@@ -53,16 +53,16 @@ const PortfolioCard = ({
   
   return (
     <div className={cn(
-      "bg-card border border-border rounded-xl p-3 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]",
+      "bg-card border border-border p-3 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]",
       rank === 1 && "border-l-4 border-l-amber-500 shadow-amber-500/10",
       rank === 2 && "border-l-4 border-l-gray-400 shadow-gray-400/10",
       rank === 3 && "border-l-4 border-l-amber-700 shadow-amber-700/10"
-    )}>
+    )} style={{ borderRadius: '12px' }}>
       <div className="flex items-center gap-3">
         {/* LEFT SECTION - Rank and Portfolio Info */}
         <div className="flex items-center gap-2 flex-1 min-w-0">
           {rank && (
-            <div className={`w-7 h-7 rounded-xl flex items-center justify-center text-xs font-bold ${getRankBadgeColor(rank)}`}>
+            <div className={`w-7 h-7 flex items-center justify-center text-xs font-bold ${getRankBadgeColor(rank)}`} style={{ borderRadius: '12px' }}>
               {rank <= 3 ? (
                 <Crown size={12} />
               ) : (
@@ -78,7 +78,7 @@ const PortfolioCard = ({
                 <Star size={12} className="text-amber-400 fill-amber-400 flex-shrink-0" />
               )}
               {isSubscribed && (
-                <span className="text-xs bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded-xl border border-emerald-500/30 font-medium flex-shrink-0">
+                <span className="text-xs bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 border border-emerald-500/30 font-medium flex-shrink-0" style={{ borderRadius: '12px' }}>
                   Sub
                 </span>
               )}
@@ -97,7 +97,7 @@ const PortfolioCard = ({
         </div>
 
         {/* CENTER SECTION - Mini Chart */}
-        <div className="flex-shrink-0 bg-secondary/30 rounded-xl p-2">
+        <div className="flex-shrink-0 bg-secondary/30 p-2" style={{ borderRadius: '12px' }}>
           <MiniChart data={chartData} width={50} height={20} />
         </div>
 

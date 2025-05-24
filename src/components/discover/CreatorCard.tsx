@@ -36,8 +36,9 @@ const CreatorCard = ({ creator }: CreatorCardProps) => {
 
   return (
     <Card 
-      className="hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105 group cursor-pointer rounded-lg"
+      className="hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105 group cursor-pointer"
       onClick={handleClick}
+      style={{ borderRadius: '8px' }}
     >
       <CardContent className="p-4 text-center">
         <div className="relative mb-3">
@@ -47,14 +48,14 @@ const CreatorCard = ({ creator }: CreatorCardProps) => {
             </AvatarFallback>
           </Avatar>
           {creator.rank <= 3 && (
-            <div className={`absolute -top-1 -right-1 w-6 h-6 rounded-lg bg-gradient-to-r ${getRankColor(creator.rank)} flex items-center justify-center shadow-lg`}>
+            <div className={`absolute -top-1 -right-1 w-6 h-6 bg-gradient-to-r ${getRankColor(creator.rank)} flex items-center justify-center shadow-lg`} style={{ borderRadius: '8px' }}>
               <Crown size={10} className="text-white" />
             </div>
           )}
         </div>
         
         <h4 className="font-bold text-foreground mb-1">{creator.name}</h4>
-        <Badge variant="secondary" className="text-xs mb-3 rounded-xl">
+        <Badge variant="secondary" className="text-xs mb-3" style={{ borderRadius: '12px' }}>
           Rank #{creator.rank}
         </Badge>
         

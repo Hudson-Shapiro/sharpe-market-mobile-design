@@ -28,11 +28,12 @@ const GlobalIndices = () => {
         {indices.map((index) => (
           <Card 
             key={index.symbol}
-            className={`min-w-[140px] hover:scale-[1.02] transition-all duration-200 rounded-lg ${
+            className={`min-w-[140px] hover:scale-[1.02] transition-all duration-200 ${
               index.change >= 0 
                 ? 'border-emerald-500/30 shadow-emerald-500/10' 
                 : 'border-red-500/30 shadow-red-500/10'
             }`}
+            style={{ borderRadius: '8px' }}
           >
             <CardContent className="p-3">
               <div className="text-center space-y-1">

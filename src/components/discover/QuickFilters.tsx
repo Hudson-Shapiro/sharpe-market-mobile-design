@@ -31,12 +31,13 @@ const QuickFilters = ({ activeFilter, onFilterChange }: QuickFiltersProps) => {
           <Badge
             key={filter.value}
             variant={activeFilter === filter.value ? "default" : "outline"}
-            className={`cursor-pointer whitespace-nowrap transition-all duration-200 hover:scale-105 rounded-lg ${
+            className={`cursor-pointer whitespace-nowrap transition-all duration-200 hover:scale-105 ${
               activeFilter === filter.value 
                 ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/25' 
                 : 'hover:bg-emerald-500/10 hover:border-emerald-500/30'
             }`}
             onClick={() => onFilterChange(filter.value)}
+            style={{ borderRadius: '8px' }}
           >
             <span className="mr-1">{filter.icon}</span>
             {filter.label}

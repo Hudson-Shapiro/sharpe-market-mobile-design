@@ -30,12 +30,13 @@ const IndustryHeatmap = ({ onSectorFilter }: IndustryHeatmapProps) => {
         {sectors.map((sector) => (
           <Card 
             key={sector.name}
-            className={`cursor-pointer hover:scale-[1.02] transition-all duration-200 rounded-lg ${
+            className={`cursor-pointer hover:scale-[1.02] transition-all duration-200 ${
               sector.trend === 'up' 
                 ? 'bg-emerald-500/10 border-emerald-500/30 hover:bg-emerald-500/20' 
                 : 'bg-red-500/10 border-red-500/30 hover:bg-red-500/20'
             }`}
             onClick={() => onSectorFilter?.(sector.name)}
+            style={{ borderRadius: '8px' }}
           >
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
@@ -49,12 +50,15 @@ const IndustryHeatmap = ({ onSectorFilter }: IndustryHeatmapProps) => {
                   {sector.change >= 0 ? '+' : ''}{sector.change.toFixed(2)}%
                 </div>
               </div>
-              <div className="mt-2 h-1 bg-gray-800 rounded-full overflow-hidden">
+              <div className="mt-2 h-1 bg-gray-800 overflow-hidden" style={{ borderRadius: '999px' }}>
                 <div 
-                  className={`h-full rounded-full transition-all duration-300 ${
+                  className={`h-full transition-all duration-300 ${
                     sector.trend === 'up' ? 'bg-emerald-400' : 'bg-red-400'
                   }`}
-                  style={{ width: `${Math.min(Math.abs(sector.change) * 20, 100)}%` }}
+                  style={{ 
+                    width: `${Math.min(Math.abs(sector.change) * 20, 100)}%`,
+                    borderRadius: '999px'
+                  }}
                 />
               </div>
             </CardContent>
