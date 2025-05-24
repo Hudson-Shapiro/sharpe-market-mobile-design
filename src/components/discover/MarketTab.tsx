@@ -79,7 +79,7 @@ const MarketTab = () => {
 
         <div className="space-y-3">
           {marketData.map((stock, index) => (
-            <div key={index} className="bg-card border border-border rounded-xl p-4 hover:bg-card/80 transition-all duration-300 hover:scale-[1.01]">
+            <div key={index} className="bg-card border border-border rounded-2xl p-4 hover:bg-card/80 transition-all duration-300 hover:scale-[1.01]">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
@@ -113,7 +113,7 @@ const MarketTab = () => {
           ))}
         </div>
 
-        <button className="w-full mt-6 py-3 text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors border border-emerald-400/30 rounded-xl hover:bg-emerald-400/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
+        <button className="w-full mt-6 py-3 text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors border border-emerald-400/30 rounded-2xl hover:bg-emerald-400/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
           View All Markets
         </button>
       </div>

@@ -1,8 +1,7 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { TrendingUp, Activity, Trophy, DollarSign, ChevronRight, Eye } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { TrendingUp, Activity, Trophy, DollarSign } from 'lucide-react';
 
 const ActivitySummary = () => {
   const [expandedStat, setExpandedStat] = useState<string | null>(null);
@@ -30,7 +29,7 @@ const ActivitySummary = () => {
   };
 
   return (
-    <Card className="mb-4 bg-gradient-to-br from-emerald-500/10 via-green-500/5 to-emerald-600/10 border-emerald-500/20 backdrop-blur-sm shadow-2xl shadow-emerald-500/5">
+    <Card className="mb-4 bg-gradient-to-br from-emerald-500/10 via-green-500/5 to-emerald-600/10 border-emerald-500/20 backdrop-blur-sm shadow-2xl shadow-emerald-500/5 rounded-2xl">
       <CardContent className="p-3">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
@@ -39,12 +38,6 @@ const ActivitySummary = () => {
             </div>
             <h3 className="text-base font-bold text-foreground">Activity Summary</h3>
           </div>
-          
-          <Button variant="ghost" size="sm" className="text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 transition-all duration-300 h-7 px-2">
-            <Eye size={12} className="mr-1" />
-            <span className="text-xs">Full Report</span>
-            <ChevronRight size={10} className="ml-1" />
-          </Button>
         </div>
         
         {/* 2x2 Grid Layout */}

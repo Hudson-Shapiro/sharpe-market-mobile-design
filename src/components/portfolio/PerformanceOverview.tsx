@@ -20,15 +20,15 @@ const PerformanceOverview = ({ timeRange, setTimeRange, performanceData, chartCo
     <Card className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-4 shadow-xl shadow-emerald-500/5 rounded-2xl">
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-semibold text-lg text-white">Performance Overview</h3>
-        <div className="flex bg-gray-900/60 backdrop-blur-sm rounded-xl p-1.5 text-xs border border-gray-800/40">
+        <div className="flex bg-secondary/30 backdrop-blur-sm rounded-full p-1 text-xs border-0">
           {["LTD", "YTD", "3M", "1D"].map((period) => (
             <button 
               key={period}
               onClick={() => setTimeRange(period)}
-              className={`px-3 py-1.5 rounded-lg transition-all duration-300 ${
+              className={`px-3 py-1.5 rounded-full transition-all duration-300 font-medium ${
                 timeRange === period 
-                  ? "bg-emerald-500/30 text-emerald-400 shadow-lg shadow-emerald-500/20 backdrop-blur-sm" 
-                  : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/40"
+                  ? "bg-white text-black shadow-lg font-bold" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
               }`}
             >
               {period}

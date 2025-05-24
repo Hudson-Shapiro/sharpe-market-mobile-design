@@ -258,18 +258,18 @@ const LeaderboardTab = () => {
 
   return (
     <div className="space-y-2">
-      {/* Combined Header and Time Range Filter - Now Inline */}
+      {/* Combined Header and Time Range Filter - Now Pill Style */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold text-foreground">Top Performers</h2>
-        <div className="flex bg-secondary/50 backdrop-blur-sm rounded-lg p-1 text-xs border border-border/40 gap-0.5">
+        <div className="flex bg-secondary/30 backdrop-blur-sm rounded-full p-1 text-xs border-0 gap-0">
           {timeRanges.map((period) => (
             <button 
               key={period}
               onClick={() => setTimeRange(period)}
-              className={`px-2.5 py-1.5 rounded-md transition-all duration-300 font-medium text-xs ${
+              className={`px-3 py-1.5 rounded-full transition-all duration-300 font-medium text-xs ${
                 timeRange === period 
-                  ? "bg-emerald-500/30 text-emerald-400 shadow-md shadow-emerald-500/20 backdrop-blur-sm" 
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/40"
+                  ? "bg-white text-black shadow-lg font-bold" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
               }`}
             >
               {period}
@@ -281,7 +281,7 @@ const LeaderboardTab = () => {
       {topPerformers.map((performer) => (
         <div 
           key={performer.rank}
-          className="bg-card border border-border rounded-xl p-3 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
+          className="bg-card border border-border rounded-2xl p-3 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
         >
           <div className="flex items-center gap-3">
             {/* LEFT SECTION - User Info */}
@@ -332,7 +332,7 @@ const LeaderboardTab = () => {
         </div>
       ))}
 
-      <button className="w-full mt-6 py-3 text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors border border-emerald-400/30 rounded-xl hover:bg-emerald-400/10">
+      <button className="w-full mt-6 py-3 text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors border border-emerald-400/30 rounded-2xl hover:bg-emerald-400/10">
         View Full Leaderboard
       </button>
     </div>
