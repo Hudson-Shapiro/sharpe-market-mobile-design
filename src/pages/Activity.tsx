@@ -91,21 +91,21 @@ const Activity = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Activity Summary */}
-      <div className="px-4 pt-4">
+      {/* Activity Summary - reduced padding */}
+      <div className="px-4 pt-2">
         <ActivitySummary />
       </div>
 
-      {/* Filters */}
-      <div className="px-4">
+      {/* Filters - reduced margin */}
+      <div className="px-4 mb-2">
         <ActivityFilters 
           activeFilter={activeFilter} 
           onFilterChange={setActiveFilter} 
         />
       </div>
 
-      {/* Activity List */}
-      <div className="px-4 space-y-3 pb-6">
+      {/* Activity List - reduced spacing */}
+      <div className="px-4 space-y-2 pb-4">
         {filteredActivities.map((activity, index) => (
           <div 
             key={index} 
@@ -121,7 +121,7 @@ const Activity = () => {
         ))}
         
         {filteredActivities.length === 0 && (
-          <div className="text-center py-12">
+          <div className="text-center py-8">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-500/20 to-green-500/20 flex items-center justify-center">
               <TrendingUp className="text-emerald-400" size={24} />
             </div>

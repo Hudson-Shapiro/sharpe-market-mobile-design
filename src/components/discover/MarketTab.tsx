@@ -79,12 +79,12 @@ const MarketTab = () => {
 
         <div className="space-y-3">
           {marketData.map((stock, index) => (
-            <div key={index} className="bg-card border border-border rounded-lg p-4 hover:bg-card/80 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg">
+            <div key={index} className="bg-card border border-border p-4 hover:bg-card/80 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg" style={{ borderRadius: '12px' }}>
               <div className="flex items-center justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <h3 className="font-bold text-foreground">{stock.symbol}</h3>
-                    <Badge variant="secondary" className="text-xs rounded-lg">
+                    <Badge variant="secondary" className="text-xs" style={{ borderRadius: '12px' }}>
                       Vol: {stock.volume}
                     </Badge>
                   </div>
@@ -113,7 +113,7 @@ const MarketTab = () => {
           ))}
         </div>
 
-        <button className="w-full mt-6 py-3 text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors border border-emerald-400/30 rounded-lg hover:bg-emerald-400/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
+        <button className="w-full mt-6 py-3 text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors border border-emerald-400/30 hover:bg-emerald-400/10 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200" style={{ borderRadius: '12px' }}>
           View All Markets
         </button>
       </div>
