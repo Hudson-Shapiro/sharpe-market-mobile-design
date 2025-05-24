@@ -18,7 +18,7 @@ const PortfolioStats = ({ timeRange, setTimeRange }: PortfolioStatsProps) => {
             <button 
               key={period}
               onClick={() => setTimeRange(period)}
-              className={`px-3 py-1.5 rounded-xl transition-all duration-300 font-medium ${
+              className={`px-3 py-1.5 rounded-2xl transition-all duration-300 font-medium ${
                 timeRange === period 
                   ? "bg-white text-black shadow-lg font-bold" 
                   : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"

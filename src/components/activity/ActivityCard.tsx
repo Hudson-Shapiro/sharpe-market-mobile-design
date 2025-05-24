@@ -49,15 +49,15 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
         activity.type === 'BUY' ? 'group-hover:shadow-emerald-500/30' : 'group-hover:shadow-red-500/30'
       }`} />
       
-      <CardContent className="p-3 pl-4">
-        {/* Main Content - Streamlined Layout */}
-        <div className="space-y-2">
-          {/* Top Row: Portfolio Name + Action Chip */}
+      <CardContent className="p-4 pl-5">
+        {/* Main Content Layout */}
+        <div className="space-y-3">
+          {/* Top Row: Portfolio Name + Action Badge */}
           <div className="flex items-center justify-between">
             <h3 className="font-semibold text-foreground text-sm truncate flex-1 mr-3">
               {activity.portfolio}
             </h3>
-            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-xl text-xs font-bold transition-all duration-300 ${
+            <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-xl text-xs font-bold transition-all duration-300 ${
               activity.type === 'BUY' 
                 ? 'bg-gradient-to-r from-emerald-500/30 to-green-500/40 text-emerald-400 shadow-md shadow-emerald-500/20' 
                 : 'bg-gradient-to-r from-red-500/30 to-red-600/40 text-red-400 shadow-md shadow-red-500/20'
@@ -67,7 +67,7 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
             </span>
           </div>
           
-          {/* Bottom Row: Ticker + Qty x Price + Date | PnL (right-aligned) */}
+          {/* Bottom Row: Stock Info + PnL */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 text-sm">
               <span className="font-bold text-foreground">{activity.stock}</span>
@@ -80,7 +80,7 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
             </div>
             
             <div 
-              className={`font-bold text-base font-mono transition-all duration-300 ${
+              className={`font-bold text-lg font-mono transition-all duration-300 ${
                 activity.type === 'BUY' ? 'text-emerald-400' : 'text-red-400'
               } ${isAnimating ? 'scale-110 drop-shadow-lg' : ''}`}
               onClick={(e) => {
@@ -95,7 +95,7 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
 
         {/* Expanded Details */}
         {isExpanded && (
-          <div className="mt-3 pt-3 border-t border-border/50 animate-fade-in">
+          <div className="mt-4 pt-3 border-t border-border/50 animate-fade-in">
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div className="space-y-1">
                 <p className="text-muted-foreground">Execution Time:</p>

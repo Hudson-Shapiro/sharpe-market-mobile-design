@@ -29,8 +29,8 @@ const ActivitySummary = () => {
   };
 
   return (
-    <Card className="mb-4 bg-gradient-to-br from-emerald-500/10 via-green-500/5 to-emerald-600/10 border-emerald-500/20 backdrop-blur-sm shadow-2xl shadow-emerald-500/5 rounded-lg">
-      <CardContent className="p-3">
+    <Card className="mb-6 bg-gradient-to-br from-emerald-500/10 via-green-500/5 to-emerald-600/10 border-emerald-500/20 backdrop-blur-sm shadow-2xl shadow-emerald-500/5 rounded-lg">
+      <CardContent className="p-4">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <div className="p-1.5 rounded-lg bg-gradient-to-br from-emerald-400/20 to-green-500/20 shadow-lg">
@@ -41,7 +41,7 @@ const ActivitySummary = () => {
         </div>
         
         {/* 2x2 Grid Layout */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           {/* Top Row: Net Gain | Best Trade */}
           <div 
             className="text-center cursor-pointer group relative"

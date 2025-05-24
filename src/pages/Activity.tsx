@@ -70,14 +70,12 @@ const Activity = () => {
   const filteredActivities = activities.filter(activity => {
     switch (activeFilter) {
       case 'week':
-        // Mock logic for past week
         return ['05-20-2024', '05-19-2024'].includes(activity.date);
       case 'buy':
         return activity.type === 'BUY';
       case 'sell':
         return activity.type === 'SELL';
       case 'portfolio':
-        // Could implement portfolio-specific filtering
         return true;
       default:
         return true;
@@ -107,7 +105,7 @@ const Activity = () => {
       </div>
 
       {/* Activity List */}
-      <div className="px-4 space-y-2 pb-6">
+      <div className="px-4 space-y-3 pb-6">
         {filteredActivities.map((activity, index) => (
           <div 
             key={index} 

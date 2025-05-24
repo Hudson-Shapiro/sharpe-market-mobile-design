@@ -80,6 +80,15 @@
       opacity: .8;
     }
   }
+
+  /* Add hover animation for Add New Portfolio button */
+  .add-portfolio-hover {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-emerald-500/20 hover:border-emerald-500/50;
+  }
+
+  .add-portfolio-hover:hover .add-portfolio-icon {
+    @apply animate-pulse text-emerald-400;
+  }
 }
 
 /* Force dark mode by default */
