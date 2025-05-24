@@ -57,7 +57,7 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
             <h3 className="font-semibold text-foreground text-sm truncate flex-1 mr-3">
               {activity.portfolio}
             </h3>
-            <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-xl text-xs font-bold transition-all duration-300 ${
+            <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold transition-all duration-300 ${
               activity.type === 'BUY' 
                 ? 'bg-gradient-to-r from-emerald-500/30 to-green-500/40 text-emerald-400 shadow-md shadow-emerald-500/20' 
                 : 'bg-gradient-to-r from-red-500/30 to-red-600/40 text-red-400 shadow-md shadow-red-500/20'

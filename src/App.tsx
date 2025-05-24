@@ -12,6 +12,7 @@ import Activity from "./pages/Activity";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import StockDetail from "./pages/StockDetail";
+import CreatorProfile from "./pages/CreatorProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/profile" element={<Profile />} />
             <Route path="/search" element={<Search />} />
             <Route path="/stock/:symbol" element={<StockDetail />} />
+            <Route path="/creator/:creatorId" element={<CreatorProfile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </MobileLayout>
