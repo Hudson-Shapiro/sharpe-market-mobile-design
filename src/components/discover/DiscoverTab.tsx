@@ -115,7 +115,8 @@ const DiscoverTab = () => {
           {hotTags.map((tag, index) => (
             <button
               key={index}
-              className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg text-sm font-medium whitespace-nowrap hover:bg-card/80 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 group"
+              className="flex items-center gap-2 px-4 py-2 bg-card border border-border text-sm font-medium whitespace-nowrap hover:bg-card/80 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 group"
+              style={{ borderRadius: '12px' }}
             >
               <span className="text-base">{tag.icon}</span>
               {tag.label}
@@ -160,7 +161,7 @@ const DiscoverTab = () => {
       <MiniPoll />
 
       {/* Portfolio of the Day */}
-      <Card className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-500/30">
+      <Card className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-500/30" style={{ borderRadius: '12px' }}>
         <CardContent className="p-4">
           <div className="flex items-center gap-2 mb-2">
             <Star className="text-yellow-400 fill-yellow-400" size={16} />
@@ -171,7 +172,7 @@ const DiscoverTab = () => {
           </div>
           <h4 className="font-bold text-foreground mb-1">ESG Growth Leaders</h4>
           <p className="text-sm text-muted-foreground mb-3">Sustainable companies driving the future</p>
-          <Button size="sm" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+          <Button size="sm" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600" style={{ borderRadius: '12px' }}>
             View Portfolio
           </Button>
         </CardContent>

@@ -25,7 +25,7 @@ const MiniPoll = () => {
   };
 
   return (
-    <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-500/30">
+    <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-500/30" style={{ borderRadius: '12px' }}>
       <CardHeader className="pb-3">
         <CardTitle className="text-lg flex items-center gap-2">
           <BarChart3 className="text-blue-400" size={20} />
@@ -47,11 +47,12 @@ const MiniPoll = () => {
                 key={option.id}
                 onClick={() => !hasVoted && setSelectedOption(option.id)}
                 disabled={hasVoted}
-                className={`w-full p-3 rounded-lg border transition-all duration-300 relative overflow-hidden ${
+                className={`w-full p-3 border transition-all duration-300 relative overflow-hidden ${
                   isSelected 
                     ? 'border-blue-500 bg-blue-500/20' 
                     : 'border-border hover:border-blue-500/50 bg-card'
                 } ${hasVoted ? 'cursor-default' : 'cursor-pointer hover:scale-[1.02]'}`}
+                style={{ borderRadius: '12px' }}
               >
                 {hasVoted && (
                   <div 
@@ -81,6 +82,7 @@ const MiniPoll = () => {
             onClick={handleVote}
             disabled={!selectedOption}
             className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 disabled:opacity-50"
+            style={{ borderRadius: '12px' }}
           >
             Vote Now
           </Button>

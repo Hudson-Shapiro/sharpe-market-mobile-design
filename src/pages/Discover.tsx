@@ -15,24 +15,27 @@ const Discover = () => {
       <ScrollArea className="h-[calc(100vh-72px)]">
         <div className="p-4">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-secondary/30 backdrop-blur-sm border-0 mb-6 shadow-lg rounded-2xl p-1">
+            <TabsList className="grid w-full grid-cols-3 bg-secondary/30 backdrop-blur-sm border-0 mb-6 shadow-lg p-1" style={{ borderRadius: '12px' }}>
               <TabsTrigger 
                 value="leaderboard" 
-                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg rounded-2xl flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                style={{ borderRadius: '12px' }}
               >
                 <Trophy size={16} />
                 Leaderboard
               </TabsTrigger>
               <TabsTrigger 
                 value="discover" 
-                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg rounded-2xl flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                style={{ borderRadius: '12px' }}
               >
                 <Search size={16} />
                 Discover
               </TabsTrigger>
               <TabsTrigger 
                 value="market" 
-                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg rounded-2xl flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                style={{ borderRadius: '12px' }}
               >
                 <TrendingUp size={16} />
                 Market

@@ -56,17 +56,19 @@ const Portfolios = () => {
         {/* Main Content */}
         <div className="px-4">
           <Tabs defaultValue="my-portfolios" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-secondary/30 backdrop-blur-sm border-0 mb-4 shadow-lg rounded-2xl p-1">
+            <TabsList className="grid w-full grid-cols-2 bg-secondary/30 backdrop-blur-sm border-0 mb-4 shadow-lg p-1" style={{ borderRadius: '12px' }}>
               <TabsTrigger 
                 value="my-portfolios" 
-                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg rounded-2xl flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                style={{ borderRadius: '12px' }}
               >
                 <BarChart3 size={16} />
                 My Portfolios
               </TabsTrigger>
               <TabsTrigger 
                 value="subscribed" 
-                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg rounded-2xl flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                style={{ borderRadius: '12px' }}
               >
                 <Users size={16} />
                 Subscribed

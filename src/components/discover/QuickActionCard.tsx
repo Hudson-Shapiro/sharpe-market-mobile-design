@@ -18,10 +18,10 @@ const QuickActionCard = ({ action }: QuickActionCardProps) => {
   const Icon = action.icon;
 
   return (
-    <Card className="hover:shadow-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer animate-pulse-slow">
+    <Card className="hover:shadow-lg transition-all duration-300 hover:scale-[1.02] group cursor-pointer animate-pulse-slow" style={{ borderRadius: '12px' }}>
       <CardContent className="p-4">
         <div className="flex items-center gap-3">
-          <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${action.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+          <div className={`w-10 h-10 bg-gradient-to-r ${action.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300`} style={{ borderRadius: '12px' }}>
             <Icon size={20} className="text-white" />
           </div>
           <div className="flex-1">
