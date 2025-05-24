@@ -4,8 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Home, BarChart3, Activity, Search, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import GlobalHeader from './GlobalHeader';
-import DiscoverHeader from './DiscoverHeader';
 
 interface MobileLayoutProps {
   children: React.ReactNode;
@@ -28,12 +26,7 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
 
   return (
     <div className="h-screen flex flex-col bg-background text-foreground">
-      {/* Use DiscoverHeader for Discover page, GlobalHeader for others, and hide on search page */}
-      {!hideHeader && (
-        isDiscoverPage ? <DiscoverHeader /> : <GlobalHeader />
-      )}
-      
-      {/* Main Content */}
+      {/* Main Content - headers are now inside the scrollable content */}
       <div className="flex-1 overflow-hidden">
         {children}
       </div>
