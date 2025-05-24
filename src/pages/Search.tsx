@@ -11,18 +11,22 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFilter, setSearchFilter] = useState("portfolios");
   const [isSearching, setIsSearching] = useState(false);
+  const [filterVisible, setFilterVisible] = useState(false);
 
   const recentSearches = ["Tech stocks", "AI Revolution", "Green Energy", "John Smith"];
   const trendingSearches = ["Nvidia", "Tesla Stock", "S&P 500 ETF", "Dividend Kings", "Green Energy"];
   
   const clearRecentSearches = () => {
-    // In real app, would clear stored searches
     console.log("Clear recent searches");
   };
 
   const handleSearchQueryChange = (query: string) => {
     setSearchQuery(query);
     setIsSearching(query.length > 0);
+  };
+
+  const handleInteractiveFilter = () => {
+    setFilterVisible(true);
   };
 
   return (
@@ -37,6 +41,7 @@ const Search = () => {
       <SearchFilters 
         searchFilter={searchFilter} 
         setSearchFilter={setSearchFilter}
+        onInteractiveFilter={handleInteractiveFilter}
       />
 
       <ScrollArea className="h-[calc(100vh-72px)]">
@@ -71,7 +76,12 @@ const Search = () => {
             </div>
           ) : (
             <div className="animate-fade-in">
-              <SearchResults searchQuery={searchQuery} />
+              <SearchResults 
+                searchQuery={searchQuery} 
+                searchFilter={searchFilter}
+                filterVisible={filterVisible}
+                setFilterVisible={setFilterVisible}
+              />
             </div>
           )}
         </div>
