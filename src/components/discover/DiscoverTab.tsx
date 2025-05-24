@@ -115,7 +115,7 @@ const DiscoverTab = () => {
           {hotTags.map((tag, index) => (
             <button
               key={index}
-              className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full text-sm font-medium whitespace-nowrap hover:bg-card/80 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 group"
+              className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg text-sm font-medium whitespace-nowrap hover:bg-card/80 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 group"
             >
               <span className="text-base">{tag.icon}</span>
               {tag.label}
