@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { TrendingUp } from 'lucide-react';
 import ActivitySummary from '@/components/activity/ActivitySummary';
 import ActivityFilters from '@/components/activity/ActivityFilters';
 import ActivityCard from '@/components/activity/ActivityCard';
