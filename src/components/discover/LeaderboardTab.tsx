@@ -77,7 +77,7 @@ const LeaderboardTab = () => {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold text-foreground">Top Performers</h2>
         <Badge variant="outline" className="text-muted-foreground">
@@ -88,29 +88,29 @@ const LeaderboardTab = () => {
       {topPerformers.map((performer) => (
         <div 
           key={performer.rank}
-          className="bg-card border border-border rounded-xl p-4 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
+          className="bg-card border border-border rounded-xl p-3 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {/* LEFT SECTION - User Info */}
-            <div className="flex items-center gap-3 flex-1">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${getRankBadgeColor(performer.rank)}`}>
+            <div className="flex items-center gap-2 flex-1 min-w-0">
+              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${getRankBadgeColor(performer.rank)}`}>
                 {performer.rank <= 3 ? (
-                  <Crown size={14} />
+                  <Crown size={12} />
                 ) : (
                   performer.rank
                 )}
               </div>
               
-              <div className="flex-1">
-                <div className="flex items-center gap-2">
-                  <h3 className="font-bold text-foreground text-lg">{performer.username}</h3>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1">
+                  <h3 className="font-bold text-foreground text-base truncate">{performer.username}</h3>
                   {performer.isFeatured && (
-                    <Star size={14} className="text-yellow-400 fill-yellow-400" />
+                    <Star size={12} className="text-yellow-400 fill-yellow-400 flex-shrink-0" />
                   )}
                 </div>
-                <p className="text-sm text-muted-foreground">{performer.author}</p>
+                <p className="text-xs text-muted-foreground truncate">{performer.author}</p>
                 <Badge 
-                  className={`text-xs mt-1 ${getTopPercentBadgeColor(performer.topPercent)}`}
+                  className={`text-xs mt-0.5 ${getTopPercentBadgeColor(performer.topPercent)}`}
                 >
                   {performer.topPercent}
                 </Badge>
@@ -118,20 +118,20 @@ const LeaderboardTab = () => {
             </div>
 
             {/* CENTER SECTION - Mini Graph */}
-            <div className="flex-shrink-0 bg-secondary/30 rounded-lg p-3">
-              <MiniChart data={performer.chartData} />
+            <div className="flex-shrink-0 bg-secondary/30 rounded-lg p-2">
+              <MiniChart data={performer.chartData} width={50} height={20} />
             </div>
 
             {/* RIGHT SECTION - Performance Stats */}
-            <div className="text-right flex-shrink-0 min-w-[120px]">
-              <div className="text-sm text-muted-foreground font-medium">
+            <div className="text-right flex-shrink-0 min-w-[100px]">
+              <div className="text-xs text-muted-foreground font-medium">
                 Sharpe {performer.sharpe}
               </div>
-              <div className="text-2xl font-bold text-emerald-400 flex items-center justify-end gap-1">
-                <TrendingUp size={16} />
+              <div className="text-lg font-bold text-emerald-400 flex items-center justify-end gap-1">
+                <TrendingUp size={14} />
                 +{performer.return}%
               </div>
-              <div className="text-sm text-muted-foreground">
+              <div className="text-xs text-muted-foreground">
                 +{performer.vsSpReturn}% vs S&P
               </div>
             </div>
