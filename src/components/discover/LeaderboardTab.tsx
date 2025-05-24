@@ -1,67 +1,361 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { TrendingUp, Crown, Star } from 'lucide-react';
 import MiniChart from './MiniChart';
 
 const LeaderboardTab = () => {
-  const topPerformers = [
-    {
-      rank: 1,
-      username: "Josh",
-      author: "by Joshua Kroll",
-      topPercent: "Top 1%",
-      sharpe: 9.2,
-      return: 59.6,
-      vsSpReturn: 51.2,
-      chartData: [45, 52, 48, 61, 59, 65, 59],
-      isFeatured: true
-    },
-    {
-      rank: 2,
-      username: "Sarah Chen",
-      author: "by Sarah C.",
-      topPercent: "Top 1%",
-      sharpe: 8.7,
-      return: 45.3,
-      vsSpReturn: 37.8,
-      chartData: [30, 35, 42, 38, 45, 48, 45],
-      isFeatured: true
-    },
-    {
-      rank: 3,
-      username: "Mike Johnson",
-      author: "by Mike J.",
-      topPercent: "Top 3%",
-      sharpe: 7.4,
-      return: 38.2,
-      vsSpReturn: 30.7,
-      chartData: [25, 28, 32, 35, 38, 36, 38],
-      isFeatured: false
-    },
-    {
-      rank: 4,
-      username: "Test",
-      author: "by Test User",
-      topPercent: "Top 5%",
-      sharpe: 6.8,
-      return: 32.1,
-      vsSpReturn: 24.6,
-      chartData: [20, 25, 28, 30, 32, 31, 32],
-      isFeatured: false
-    },
-    {
-      rank: 5,
-      username: "Alex Rivera",
-      author: "by Alex R.",
-      topPercent: "Top 5%",
-      sharpe: 6.2,
-      return: 28.9,
-      vsSpReturn: 21.4,
-      chartData: [18, 22, 25, 27, 29, 28, 29],
-      isFeatured: false
-    }
-  ];
+  const [timeRange, setTimeRange] = useState("1M");
+
+  const timeRanges = ["1D", "7D", "1M", "3M", "YTD", "1Y"];
+
+  // Enhanced data structure with different time periods
+  const performersData = {
+    "1D": [
+      {
+        rank: 1,
+        username: "Josh",
+        author: "by Joshua Kroll",
+        topPercent: "Top 1%",
+        sharpe: 9.2,
+        return: 2.4,
+        vsSpReturn: 1.8,
+        chartData: [58, 59, 60, 59, 61, 60, 62],
+        isFeatured: true
+      },
+      {
+        rank: 2,
+        username: "Sarah Chen",
+        author: "by Sarah C.",
+        topPercent: "Top 1%",
+        sharpe: 8.7,
+        return: 1.9,
+        vsSpReturn: 1.3,
+        chartData: [44, 45, 46, 45, 47, 46, 48],
+        isFeatured: true
+      },
+      {
+        rank: 3,
+        username: "Mike Johnson",
+        author: "by Mike J.",
+        topPercent: "Top 3%",
+        sharpe: 7.4,
+        return: 1.5,
+        vsSpReturn: 0.9,
+        chartData: [37, 38, 39, 38, 40, 39, 41],
+        isFeatured: false
+      },
+      {
+        rank: 4,
+        username: "Test",
+        author: "by Test User",
+        topPercent: "Top 5%",
+        sharpe: 6.8,
+        return: 1.2,
+        vsSpReturn: 0.6,
+        chartData: [31, 32, 33, 32, 34, 33, 35],
+        isFeatured: false
+      },
+      {
+        rank: 5,
+        username: "Alex Rivera",
+        author: "by Alex R.",
+        topPercent: "Top 5%",
+        sharpe: 6.2,
+        return: 0.9,
+        vsSpReturn: 0.3,
+        chartData: [28, 29, 30, 29, 31, 30, 32],
+        isFeatured: false
+      }
+    ],
+    "7D": [
+      {
+        rank: 1,
+        username: "Josh",
+        author: "by Joshua Kroll",
+        topPercent: "Top 1%",
+        sharpe: 9.2,
+        return: 12.1,
+        vsSpReturn: 9.8,
+        chartData: [50, 54, 52, 58, 55, 61, 59],
+        isFeatured: true
+      },
+      {
+        rank: 2,
+        username: "Sarah Chen",
+        author: "by Sarah C.",
+        topPercent: "Top 1%",
+        sharpe: 8.7,
+        return: 9.7,
+        vsSpReturn: 7.4,
+        chartData: [38, 41, 39, 44, 42, 47, 45],
+        isFeatured: true
+      },
+      {
+        rank: 3,
+        username: "Mike Johnson",
+        author: "by Mike J.",
+        topPercent: "Top 3%",
+        sharpe: 7.4,
+        return: 7.8,
+        vsSpReturn: 5.5,
+        chartData: [32, 35, 33, 37, 35, 39, 38],
+        isFeatured: false
+      },
+      {
+        rank: 4,
+        username: "Test",
+        author: "by Test User",
+        topPercent: "Top 5%",
+        sharpe: 6.8,
+        return: 6.2,
+        vsSpReturn: 3.9,
+        chartData: [27, 30, 28, 31, 29, 33, 32],
+        isFeatured: false
+      },
+      {
+        rank: 5,
+        username: "Alex Rivera",
+        author: "by Alex R.",
+        topPercent: "Top 5%",
+        sharpe: 6.2,
+        return: 5.1,
+        vsSpReturn: 2.8,
+        chartData: [24, 27, 25, 28, 26, 30, 29],
+        isFeatured: false
+      }
+    ],
+    "1M": [
+      {
+        rank: 1,
+        username: "Josh",
+        author: "by Joshua Kroll",
+        topPercent: "Top 1%",
+        sharpe: 9.2,
+        return: 59.6,
+        vsSpReturn: 51.2,
+        chartData: [45, 52, 48, 61, 59, 65, 59],
+        isFeatured: true
+      },
+      {
+        rank: 2,
+        username: "Sarah Chen",
+        author: "by Sarah C.",
+        topPercent: "Top 1%",
+        sharpe: 8.7,
+        return: 45.3,
+        vsSpReturn: 37.8,
+        chartData: [30, 35, 42, 38, 45, 48, 45],
+        isFeatured: true
+      },
+      {
+        rank: 3,
+        username: "Mike Johnson",
+        author: "by Mike J.",
+        topPercent: "Top 3%",
+        sharpe: 7.4,
+        return: 38.2,
+        vsSpReturn: 30.7,
+        chartData: [25, 28, 32, 35, 38, 36, 38],
+        isFeatured: false
+      },
+      {
+        rank: 4,
+        username: "Test",
+        author: "by Test User",
+        topPercent: "Top 5%",
+        sharpe: 6.8,
+        return: 32.1,
+        vsSpReturn: 24.6,
+        chartData: [20, 25, 28, 30, 32, 31, 32],
+        isFeatured: false
+      },
+      {
+        rank: 5,
+        username: "Alex Rivera",
+        author: "by Alex R.",
+        topPercent: "Top 5%",
+        sharpe: 6.2,
+        return: 28.9,
+        vsSpReturn: 21.4,
+        chartData: [18, 22, 25, 27, 29, 28, 29],
+        isFeatured: false
+      }
+    ],
+    "3M": [
+      {
+        rank: 1,
+        username: "Josh",
+        author: "by Joshua Kroll",
+        topPercent: "Top 1%",
+        sharpe: 9.2,
+        return: 78.4,
+        vsSpReturn: 68.1,
+        chartData: [35, 45, 42, 58, 55, 70, 65],
+        isFeatured: true
+      },
+      {
+        rank: 2,
+        username: "Sarah Chen",
+        author: "by Sarah C.",
+        topPercent: "Top 1%",
+        sharpe: 8.7,
+        return: 62.1,
+        vsSpReturn: 52.8,
+        chartData: [25, 32, 38, 45, 48, 58, 55],
+        isFeatured: true
+      },
+      {
+        rank: 3,
+        username: "Mike Johnson",
+        author: "by Mike J.",
+        topPercent: "Top 3%",
+        sharpe: 7.4,
+        return: 51.7,
+        vsSpReturn: 42.4,
+        chartData: [20, 25, 30, 38, 42, 48, 45],
+        isFeatured: false
+      },
+      {
+        rank: 4,
+        username: "Test",
+        author: "by Test User",
+        topPercent: "Top 5%",
+        sharpe: 6.8,
+        return: 44.3,
+        vsSpReturn: 35.0,
+        chartData: [15, 22, 28, 32, 38, 42, 40],
+        isFeatured: false
+      },
+      {
+        rank: 5,
+        username: "Alex Rivera",
+        author: "by Alex R.",
+        topPercent: "Top 5%",
+        sharpe: 6.2,
+        return: 39.8,
+        vsSpReturn: 30.5,
+        chartData: [12, 18, 25, 30, 35, 38, 37],
+        isFeatured: false
+      }
+    ],
+    "YTD": [
+      {
+        rank: 1,
+        username: "Josh",
+        author: "by Joshua Kroll",
+        topPercent: "Top 1%",
+        sharpe: 9.2,
+        return: 89.2,
+        vsSpReturn: 76.8,
+        chartData: [30, 42, 38, 55, 62, 78, 72],
+        isFeatured: true
+      },
+      {
+        rank: 2,
+        username: "Sarah Chen",
+        author: "by Sarah C.",
+        topPercent: "Top 1%",
+        sharpe: 8.7,
+        return: 71.5,
+        vsSpReturn: 59.2,
+        chartData: [20, 28, 35, 42, 55, 68, 62],
+        isFeatured: true
+      },
+      {
+        rank: 3,
+        username: "Mike Johnson",
+        author: "by Mike J.",
+        topPercent: "Top 3%",
+        sharpe: 7.4,
+        return: 59.8,
+        vsSpReturn: 47.5,
+        chartData: [15, 22, 30, 38, 48, 58, 52],
+        isFeatured: false
+      },
+      {
+        rank: 4,
+        username: "Test",
+        author: "by Test User",
+        topPercent: "Top 5%",
+        sharpe: 6.8,
+        return: 52.1,
+        vsSpReturn: 39.8,
+        chartData: [12, 18, 25, 35, 42, 50, 47],
+        isFeatured: false
+      },
+      {
+        rank: 5,
+        username: "Alex Rivera",
+        author: "by Alex R.",
+        topPercent: "Top 5%",
+        sharpe: 6.2,
+        return: 46.7,
+        vsSpReturn: 34.4,
+        chartData: [10, 15, 22, 30, 38, 45, 42],
+        isFeatured: false
+      }
+    ],
+    "1Y": [
+      {
+        rank: 1,
+        username: "Josh",
+        author: "by Joshua Kroll",
+        topPercent: "Top 1%",
+        sharpe: 9.2,
+        return: 124.7,
+        vsSpReturn: 102.3,
+        chartData: [25, 38, 45, 62, 78, 95, 89],
+        isFeatured: true
+      },
+      {
+        rank: 2,
+        username: "Sarah Chen",
+        author: "by Sarah C.",
+        topPercent: "Top 1%",
+        sharpe: 8.7,
+        return: 98.2,
+        vsSpReturn: 76.8,
+        chartData: [18, 25, 35, 48, 65, 82, 75],
+        isFeatured: true
+      },
+      {
+        rank: 3,
+        username: "Mike Johnson",
+        author: "by Mike J.",
+        topPercent: "Top 3%",
+        sharpe: 7.4,
+        return: 81.5,
+        vsSpReturn: 60.1,
+        chartData: [12, 20, 28, 42, 55, 70, 65],
+        isFeatured: false
+      },
+      {
+        rank: 4,
+        username: "Test",
+        author: "by Test User",
+        topPercent: "Top 5%",
+        sharpe: 6.8,
+        return: 69.8,
+        vsSpReturn: 48.4,
+        chartData: [10, 15, 25, 35, 48, 62, 58],
+        isFeatured: false
+      },
+      {
+        rank: 5,
+        username: "Alex Rivera",
+        author: "by Alex R.",
+        topPercent: "Top 5%",
+        sharpe: 6.2,
+        return: 61.2,
+        vsSpReturn: 39.8,
+        chartData: [8, 12, 20, 30, 42, 55, 52],
+        isFeatured: false
+      }
+    ]
+  };
+
+  const topPerformers = performersData[timeRange] || performersData["1M"];
 
   const getRankBadgeColor = (rank: number) => {
     if (rank === 1) return "bg-gradient-to-r from-yellow-400 to-yellow-600 text-white shadow-lg shadow-yellow-400/30";
@@ -80,9 +374,25 @@ const LeaderboardTab = () => {
     <div className="space-y-2">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold text-foreground">Top Performers</h2>
-        <Badge variant="outline" className="text-muted-foreground">
-          This Month
-        </Badge>
+      </div>
+
+      {/* Time Range Filter */}
+      <div className="flex justify-center mb-6">
+        <div className="flex bg-secondary/50 backdrop-blur-sm rounded-xl p-1.5 text-xs border border-border/40">
+          {timeRanges.map((period) => (
+            <button 
+              key={period}
+              onClick={() => setTimeRange(period)}
+              className={`px-3 py-1.5 rounded-lg transition-all duration-300 ${
+                timeRange === period 
+                  ? "bg-emerald-500/30 text-emerald-400 shadow-lg shadow-emerald-500/20 backdrop-blur-sm" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/40"
+              }`}
+            >
+              {period}
+            </button>
+          ))}
+        </div>
       </div>
 
       {topPerformers.map((performer) => (

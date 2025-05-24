@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { TrendingUp, TrendingDown, Flame } from 'lucide-react';
 
@@ -13,6 +14,8 @@ interface Stock {
 }
 
 const TopMoversCarousel = () => {
+  const navigate = useNavigate();
+
   const topMovers: Stock[] = [
     { symbol: "NVDA", name: "NVIDIA Corp", price: 875.32, change: 45.67, changePercent: 5.51, isGainer: true },
     { symbol: "AMD", name: "Advanced Micro", price: 178.90, change: 12.45, changePercent: 7.48, isGainer: true },
@@ -25,6 +28,10 @@ const TopMoversCarousel = () => {
   const gainers = topMovers.filter(stock => stock.isGainer).slice(0, 3);
   const losers = topMovers.filter(stock => !stock.isGainer).slice(0, 3);
 
+  const handleStockClick = (symbol: string) => {
+    navigate(`/stock/${symbol}`);
+  };
+
   const MoversCard = ({ stocks, title, type }: { stocks: Stock[], title: string, type: 'gainers' | 'losers' }) => (
     <div className="min-w-[280px] space-y-3">
       <h4 className={`font-semibold text-sm ${type === 'gainers' ? 'text-emerald-400' : 'text-red-400'}`}>
@@ -34,7 +41,8 @@ const TopMoversCarousel = () => {
         {stocks.map((stock, index) => (
           <Card 
             key={stock.symbol} 
-            className={`${type === 'gainers' ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'} hover:scale-[1.02] transition-all duration-200`}
+            className={`${type === 'gainers' ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'} hover:scale-[1.02] transition-all duration-200 cursor-pointer hover:shadow-lg`}
+            onClick={() => handleStockClick(stock.symbol)}
           >
             <CardContent className="p-3">
               <div className="flex items-center justify-between">
