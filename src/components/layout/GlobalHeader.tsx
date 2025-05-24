@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const GlobalHeader = () => {
   return (
-    <div className="p-4 pb-2 flex items-center justify-between space-x-3">
+    <div className="p-4 pb-2 flex items-center justify-between space-x-3 bg-background/95 backdrop-blur-sm border-b border-border/20">
       <Link to="/profile">
         <img 
           src="/lovable-uploads/d0d2a007-8b8d-40cf-a33e-0d80b7c030db.png" 
