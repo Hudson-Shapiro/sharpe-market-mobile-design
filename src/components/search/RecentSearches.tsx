@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { X } from 'lucide-react';
+import { X, Clock } from 'lucide-react';
 
 interface RecentSearchesProps {
   recentSearches: string[];
@@ -10,28 +10,38 @@ interface RecentSearchesProps {
 
 const RecentSearches = ({ recentSearches, setSearchQuery, clearRecentSearches }: RecentSearchesProps) => {
   return (
-    <div className="mb-6">
-      <div className="flex justify-between items-center mb-2">
-        <h2 className="text-lg font-bold">Recent Searches</h2>
+    <div className="space-y-3">
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <Clock size={16} className="text-muted-foreground" />
+          <h2 className="text-lg font-semibold text-foreground">Recent</h2>
+        </div>
         <button 
-          className="text-emerald-400 text-sm"
+          className="text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors"
           onClick={clearRecentSearches}
         >
           Clear All
         </button>
       </div>
+      
       <div className="flex flex-wrap gap-2">
         {recentSearches.map((search, idx) => (
           <button 
             key={idx}
-            className="flex items-center gap-1 bg-secondary text-secondary-foreground py-1.5 px-3 rounded-full text-sm"
+            className="group flex items-center gap-2 bg-secondary/70 hover:bg-secondary text-secondary-foreground py-2 px-3 rounded-full text-sm transition-all duration-200 hover:scale-105"
             onClick={() => setSearchQuery(search)}
           >
-            <span>{search}</span>
-            <X size={14} className="text-muted-foreground" />
+            <span className="font-medium">{search}</span>
+            <X size={14} className="text-muted-foreground group-hover:text-foreground transition-colors" />
           </button>
         ))}
       </div>
+      
+      {recentSearches.length >= 4 && (
+        <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+          Show more recent searches...
+        </button>
+      )}
     </div>
   );
 };
