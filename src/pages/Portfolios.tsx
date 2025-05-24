@@ -68,90 +68,106 @@ const Portfolios = () => {
 
   return (
     <ScrollArea className="h-full">
-      <div className="min-h-screen bg-background pt-2">
-        {/* Main Content - Portfolio Value section removed */}
+      <div className="min-h-screen bg-background pt-2 relative">
+        {/* Main Content */}
         <div className="px-4">
           <Tabs defaultValue="my-portfolios" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-secondary mb-4">
-              <TabsTrigger value="my-portfolios" className="text-sm">My Portfolios</TabsTrigger>
-              <TabsTrigger value="subscribed" className="text-sm">Subscribed</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-gray-900/60 backdrop-blur-sm border border-gray-800/40 mb-6 shadow-lg shadow-emerald-500/5">
+              <TabsTrigger 
+                value="my-portfolios" 
+                className="text-sm transition-all duration-300 data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-400 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25"
+              >
+                My Portfolios
+              </TabsTrigger>
+              <TabsTrigger 
+                value="subscribed" 
+                className="text-sm transition-all duration-300 data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-400 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25"
+              >
+                Subscribed
+              </TabsTrigger>
             </TabsList>
             
             {/* My Portfolios Tab */}
-            <TabsContent value="my-portfolios" className="space-y-4">
+            <TabsContent value="my-portfolios" className="space-y-6">
               {/* Performance Overview */}
               {myPortfolios.length > 0 && (
-                <Card className="bg-card border-border p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold">Performance Overview</h3>
-                    <div className="flex bg-secondary/50 rounded-lg p-1 text-xs">
-                      <button 
-                        onClick={() => setTimeRange("LTD")}
-                        className={`px-2.5 py-0.5 ${timeRange === "LTD" ? "bg-white text-primary-foreground" : "text-muted-foreground"} rounded`}>LTD</button>
-                      <button 
-                        onClick={() => setTimeRange("YTD")}
-                        className={`px-2.5 py-0.5 ${timeRange === "YTD" ? "bg-white text-primary-foreground" : "text-muted-foreground"} rounded`}>YTD</button>
-                      <button 
-                        onClick={() => setTimeRange("3M")}
-                        className={`px-2.5 py-0.5 ${timeRange === "3M" ? "bg-white text-primary-foreground" : "text-muted-foreground"} rounded`}>3M</button>
-                      <button 
-                        onClick={() => setTimeRange("1D")}
-                        className={`px-2.5 py-0.5 ${timeRange === "1D" ? "bg-white text-primary-foreground" : "text-muted-foreground"} rounded`}>1D</button>
+                <Card className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-6 shadow-xl shadow-emerald-500/5 rounded-2xl">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-semibold text-lg text-white">Performance Overview</h3>
+                    <div className="flex bg-gray-900/60 backdrop-blur-sm rounded-xl p-1.5 text-xs border border-gray-800/40">
+                      {["LTD", "YTD", "3M", "1D"].map((period) => (
+                        <button 
+                          key={period}
+                          onClick={() => setTimeRange(period)}
+                          className={`px-3 py-1.5 rounded-lg transition-all duration-300 ${
+                            timeRange === period 
+                              ? "bg-emerald-500/30 text-emerald-400 shadow-lg shadow-emerald-500/20 backdrop-blur-sm" 
+                              : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/40"
+                          }`}
+                        >
+                          {period}
+                        </button>
+                      ))}
                     </div>
                   </div>
-                  <div className="h-[180px] w-full">
+                  <div className="h-[200px] w-full">
                     <ChartContainer config={chartConfig}>
                       <LineChart data={performanceData}>
-                        <XAxis dataKey="name" tick={{ fill: '#9ca3af', fontSize: 10 }} />
-                        <YAxis tick={{ fill: '#9ca3af', fontSize: 10 }} />
+                        <XAxis dataKey="name" tick={{ fill: '#9ca3af', fontSize: 11 }} />
+                        <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} />
                         <Line
                           type="monotone"
                           dataKey="Dividend"
-                          stroke="var(--color-Dividend, #10b981)"
-                          strokeWidth={2}
+                          stroke="#10b981"
+                          strokeWidth={3}
                           dot={false}
-                          activeDot={{ r: 4 }}
+                          activeDot={{ r: 6, stroke: '#10b981', strokeWidth: 2, fill: '#10b981', filter: 'drop-shadow(0 0 8px rgba(16, 185, 129, 0.6))' }}
                         />
                         <Line
                           type="monotone"
                           dataKey="Tech"
-                          stroke="var(--color-Tech, #3b82f6)"
-                          strokeWidth={2}
+                          stroke="#3b82f6"
+                          strokeWidth={3}
                           dot={false}
-                          activeDot={{ r: 4 }}
+                          activeDot={{ r: 6, stroke: '#3b82f6', strokeWidth: 2, fill: '#3b82f6', filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.6))' }}
                         />
                         <ChartTooltip content={<ChartTooltipContent />} />
                       </LineChart>
                     </ChartContainer>
                   </div>
-                  <div className="flex justify-between items-center mt-2">
-                    <div className="text-xs text-emerald-400 font-semibold">
+                  <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-800/40">
+                    <div className="text-sm font-semibold text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20 shadow-lg shadow-emerald-500/10">
                       Overall: +28.5% YTD
                     </div>
-                    <div className="text-xs text-muted-foreground">
+                    <div className="text-xs text-gray-400">
                       Last updated: May 22, 2025
                     </div>
                   </div>
                 </Card>
               )}
               
-              {/* Add Portfolio */}
-              <div className="flex justify-between items-center mb-2">
-                <h3 className="font-medium">My Portfolios</h3>
-                <button className="bg-emerald-500 hover:bg-emerald-600 text-white text-sm py-1 px-3 rounded-lg font-medium transition-colors flex items-center">
-                  <PlusCircle size={14} className="mr-1" />
-                  Create
-                </button>
+              {/* Section Header with Divider */}
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-800/40"></div>
+                </div>
+                <div className="relative flex justify-between items-center bg-background px-2">
+                  <h3 className="font-semibold text-lg text-white bg-background pr-4">My Portfolios</h3>
+                  <button className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white text-sm py-2.5 px-5 rounded-xl font-semibold transition-all duration-300 flex items-center shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-105 active:scale-95 backdrop-blur-sm border border-emerald-400/20">
+                    <PlusCircle size={16} className="mr-2" />
+                    Create
+                  </button>
+                </div>
               </div>
               
               {/* My Portfolio Cards */}
-              <div className="grid gap-3 pb-6">
+              <div className="grid gap-4 pb-6">
                 {myPortfolios.length === 0 ? (
-                  <div className="bg-card/50 border border-border rounded-xl p-6 text-center">
-                    <h3 className="font-medium mb-2">No portfolios yet</h3>
-                    <p className="text-muted-foreground text-sm mb-4">Create your first portfolio to track your investments</p>
-                    <button className="bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-4 rounded-lg font-medium transition-colors flex items-center gap-2 mx-auto">
-                      <PlusCircle size={16} />
+                  <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800/60 rounded-2xl p-8 text-center shadow-xl">
+                    <h3 className="font-semibold text-lg mb-3 text-white">No portfolios yet</h3>
+                    <p className="text-gray-400 text-sm mb-6">Create your first portfolio to track your investments</p>
+                    <button className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center gap-3 mx-auto shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-105 active:scale-95">
+                      <PlusCircle size={18} />
                       Create Portfolio
                     </button>
                   </div>
@@ -164,48 +180,49 @@ const Portfolios = () => {
             </TabsContent>
             
             {/* Subscribed Portfolios Tab */}
-            <TabsContent value="subscribed" className="space-y-4">
-              {/* Simplified Filter Bar */}
-              <div className="mb-4 flex justify-between items-center">
-                <h3 className="font-semibold">Performance</h3>
-                <div className="flex bg-secondary/50 rounded-lg p-1 text-xs">
-                  <button 
-                    onClick={() => setTimeRange("LTD")}
-                    className={`px-2.5 py-0.5 ${timeRange === "LTD" ? "bg-white text-primary-foreground" : "text-muted-foreground"} rounded`}>LTD</button>
-                  <button 
-                    onClick={() => setTimeRange("YTD")}
-                    className={`px-2.5 py-0.5 ${timeRange === "YTD" ? "bg-white text-primary-foreground" : "text-muted-foreground"} rounded`}>YTD</button>
-                  <button 
-                    onClick={() => setTimeRange("3M")}
-                    className={`px-2.5 py-0.5 ${timeRange === "3M" ? "bg-white text-primary-foreground" : "text-muted-foreground"} rounded`}>3M</button>
-                  <button 
-                    onClick={() => setTimeRange("1D")}
-                    className={`px-2.5 py-0.5 ${timeRange === "1D" ? "bg-white text-primary-foreground" : "text-muted-foreground"} rounded`}>1D</button>
+            <TabsContent value="subscribed" className="space-y-6">
+              {/* Time Range Filter */}
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="font-semibold text-lg text-white">Performance</h3>
+                <div className="flex bg-gray-900/60 backdrop-blur-sm rounded-xl p-1.5 text-xs border border-gray-800/40">
+                  {["LTD", "YTD", "3M", "1D"].map((period) => (
+                    <button 
+                      key={period}
+                      onClick={() => setTimeRange(period)}
+                      className={`px-3 py-1.5 rounded-lg transition-all duration-300 ${
+                        timeRange === period 
+                          ? "bg-emerald-500/30 text-emerald-400 shadow-lg shadow-emerald-500/20 backdrop-blur-sm" 
+                          : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/40"
+                      }`}
+                    >
+                      {period}
+                    </button>
+                  ))}
                 </div>
               </div>
               
               {/* Portfolio Rankings Overview */}
-              <div className="grid grid-cols-2 gap-3 mb-2">
-                <div className="bg-card/70 border border-border p-3 rounded-lg">
-                  <div className="text-xs text-muted-foreground mb-1">Top Performer</div>
-                  <div className="font-bold">IT Portfolio</div>
-                  <div className="flex items-center text-emerald-400 text-sm">
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-4 rounded-xl shadow-lg shadow-blue-500/5">
+                  <div className="text-xs text-gray-400 mb-2">Top Performer</div>
+                  <div className="font-bold text-white text-lg">IT Portfolio</div>
+                  <div className="flex items-center text-emerald-400 text-sm font-semibold bg-emerald-500/10 w-fit px-2 py-1 rounded-lg border border-emerald-500/20 shadow-lg shadow-emerald-500/10">
                     <ArrowUp size={14} className="mr-1" />
                     <span>22.67%</span>
                   </div>
                 </div>
                 
-                <div className="bg-card/70 border border-border p-3 rounded-lg">
-                  <div className="text-xs text-muted-foreground mb-1">Average Return</div>
-                  <div className="font-bold">11.39%</div>
-                  <div className="flex items-center text-muted-foreground text-xs">
+                <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-4 rounded-xl shadow-lg shadow-blue-500/5">
+                  <div className="text-xs text-gray-400 mb-2">Average Return</div>
+                  <div className="font-bold text-white text-lg">11.39%</div>
+                  <div className="flex items-center text-gray-400 text-xs">
                     <span>across 5 portfolios</span>
                   </div>
                 </div>
               </div>
               
               {/* Subscribed Portfolio Cards */}
-              <div className="grid gap-3 pb-6">
+              <div className="grid gap-4 pb-6">
                 {subscribedPortfolios.map((portfolio, index) => (
                   <PortfolioCard 
                     key={index} 
