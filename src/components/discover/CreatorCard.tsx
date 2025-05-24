@@ -54,7 +54,7 @@ const CreatorCard = ({ creator }: CreatorCardProps) => {
         </div>
         
         <h4 className="font-bold text-foreground mb-1">{creator.name}</h4>
-        <Badge variant="secondary" className="text-xs mb-3 rounded-lg">
+        <Badge variant="secondary" className="text-xs mb-3 rounded-xl">
           Rank #{creator.rank}
         </Badge>
         

@@ -30,7 +30,7 @@ const IndustryHeatmap = ({ onSectorFilter }: IndustryHeatmapProps) => {
         {sectors.map((sector) => (
           <Card 
             key={sector.name}
-            className={`cursor-pointer hover:scale-[1.02] transition-all duration-200 ${
+            className={`cursor-pointer hover:scale-[1.02] transition-all duration-200 rounded-lg ${
               sector.trend === 'up' 
                 ? 'bg-emerald-500/10 border-emerald-500/30 hover:bg-emerald-500/20' 
                 : 'bg-red-500/10 border-red-500/30 hover:bg-red-500/20'
