@@ -17,8 +17,8 @@ interface PerformanceOverviewProps {
 
 const PerformanceOverview = ({ timeRange, setTimeRange, performanceData, chartConfig }: PerformanceOverviewProps) => {
   return (
-    <Card className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-6 shadow-xl shadow-emerald-500/5 rounded-2xl">
-      <div className="flex items-center justify-between mb-4">
+    <Card className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-4 shadow-xl shadow-emerald-500/5 rounded-2xl">
+      <div className="flex items-center justify-between mb-3">
         <h3 className="font-semibold text-lg text-white">Performance Overview</h3>
         <div className="flex bg-gray-900/60 backdrop-blur-sm rounded-xl p-1.5 text-xs border border-gray-800/40">
           {["LTD", "YTD", "3M", "1D"].map((period) => (
@@ -36,7 +36,7 @@ const PerformanceOverview = ({ timeRange, setTimeRange, performanceData, chartCo
           ))}
         </div>
       </div>
-      <div className="h-[200px] w-full">
+      <div className="h-[180px] w-full">
         <ChartContainer config={chartConfig}>
           <LineChart data={performanceData}>
             <XAxis dataKey="name" tick={{ fill: '#9ca3af', fontSize: 11 }} />
@@ -61,7 +61,7 @@ const PerformanceOverview = ({ timeRange, setTimeRange, performanceData, chartCo
           </LineChart>
         </ChartContainer>
       </div>
-      <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-800/40">
+      <div className="flex justify-between items-center mt-3 pt-3 border-t border-gray-800/40">
         <div className="text-sm font-semibold text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20 shadow-lg shadow-emerald-500/10">
           Overall: +28.5% YTD
         </div>

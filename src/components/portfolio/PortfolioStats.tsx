@@ -11,7 +11,7 @@ const PortfolioStats = ({ timeRange, setTimeRange }: PortfolioStatsProps) => {
   return (
     <>
       {/* Time Range Filter */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-4">
         <h3 className="font-semibold text-lg text-white">Performance</h3>
         <div className="flex bg-gray-900/60 backdrop-blur-sm rounded-xl p-1.5 text-xs border border-gray-800/40">
           {["LTD", "YTD", "3M", "1D"].map((period) => (
@@ -31,7 +31,7 @@ const PortfolioStats = ({ timeRange, setTimeRange }: PortfolioStatsProps) => {
       </div>
       
       {/* Portfolio Rankings Overview */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-4 rounded-xl shadow-lg shadow-blue-500/5">
           <div className="text-xs text-gray-400 mb-2">Top Performer</div>
           <div className="font-bold text-white text-lg">IT Portfolio</div>
