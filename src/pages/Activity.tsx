@@ -1,11 +1,12 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ActivitySummary from '@/components/activity/ActivitySummary';
 import ActivityFilters from '@/components/activity/ActivityFilters';
 import ActivityCard from '@/components/activity/ActivityCard';
 
 const Activity = () => {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [animateCards, setAnimateCards] = useState(false);
   
   const activities = [
     {
@@ -82,11 +83,20 @@ const Activity = () => {
     }
   });
 
+  // Trigger card animations when filter changes
+  useEffect(() => {
+    setAnimateCards(true);
+    const timer = setTimeout(() => setAnimateCards(false), 100);
+    return () => clearTimeout(timer);
+  }, [activeFilter]);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="p-4 pb-2">
-        <h1 className="text-2xl font-bold text-foreground">Activity</h1>
+        <h1 className="text-2xl font-bold text-foreground bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">
+          Activity
+        </h1>
         <p className="text-sm text-muted-foreground mt-1">
           Track your trading activity and performance
         </p>
@@ -108,15 +118,29 @@ const Activity = () => {
       {/* Activity List */}
       <div className="px-4 space-y-3 pb-6">
         {filteredActivities.map((activity, index) => (
-          <div key={index} className="animate-fade-in">
+          <div 
+            key={index} 
+            className={`transition-all duration-300 ${
+              animateCards ? 'translate-y-2 opacity-0' : 'translate-y-0 opacity-100'
+            }`}
+            style={{ 
+              transitionDelay: `${index * 50}ms` 
+            }}
+          >
             <ActivityCard activity={activity} />
           </div>
         ))}
         
         {filteredActivities.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-500/20 to-green-500/20 flex items-center justify-center">
+              <TrendingUp className="text-emerald-400" size={24} />
+            </div>
+            <p className="text-muted-foreground text-lg font-medium">
               No activities found for the selected filter.
+            </p>
+            <p className="text-muted-foreground/60 text-sm mt-1">
+              Try adjusting your filters or make some trades!
             </p>
           </div>
         )}

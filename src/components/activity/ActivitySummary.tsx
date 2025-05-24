@@ -1,9 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { TrendingUp, Activity, Trophy, DollarSign } from 'lucide-react';
+import { TrendingUp, Activity, Trophy, DollarSign, ChevronRight, Eye } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const ActivitySummary = () => {
+  const [expandedStat, setExpandedStat] = useState<string | null>(null);
+  
   const summaryData = {
     netGain: 1250,
     totalTrades: 24,
@@ -11,44 +14,95 @@ const ActivitySummary = () => {
     bestTrade: 325
   };
 
+  const handleStatClick = (statType: string) => {
+    setExpandedStat(expandedStat === statType ? null : statType);
+  };
+
+  const getTooltipContent = (statType: string) => {
+    switch (statType) {
+      case 'netGain':
+        return 'Tech: +$850, Healthcare: +$400, Real Estate: +$200, Auto: -$200';
+      case 'bestTrade':
+        return 'META +$325 on 05-17-2024';
+      default:
+        return '';
+    }
+  };
+
   return (
-    <Card className="mb-6 bg-gradient-to-r from-emerald-500/10 to-green-500/10 border-emerald-500/20">
+    <Card className="mb-6 bg-gradient-to-br from-emerald-500/10 via-green-500/5 to-emerald-600/10 border-emerald-500/20 backdrop-blur-sm shadow-2xl shadow-emerald-500/5">
       <CardContent className="p-4">
-        <div className="flex items-center gap-2 mb-3">
-          <Trophy className="text-emerald-400" size={20} />
-          <h3 className="text-lg font-bold text-foreground">Activity Summary</h3>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-full bg-gradient-to-br from-emerald-400/20 to-green-500/20 shadow-lg">
+              <Trophy className="text-emerald-400 drop-shadow-sm" size={20} />
+            </div>
+            <h3 className="text-lg font-bold text-foreground">Activity Summary</h3>
+          </div>
+          
+          <Button variant="ghost" size="sm" className="text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 transition-all duration-300">
+            <Eye size={14} className="mr-1" />
+            <span className="text-xs">Full Report</span>
+            <ChevronRight size={12} className="ml-1" />
+          </Button>
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-emerald-400 font-bold text-lg">
-              <DollarSign size={16} />
-              +{summaryData.netGain.toLocaleString()}
+          <div 
+            className="text-center cursor-pointer group relative"
+            onClick={() => handleStatClick('netGain')}
+          >
+            <div className="flex items-center justify-center gap-1 text-emerald-400 font-bold text-lg group-hover:scale-105 transition-transform duration-200">
+              <div className="p-1 rounded-full bg-emerald-500/20 group-hover:bg-emerald-500/30 transition-colors">
+                <DollarSign size={14} className="drop-shadow-sm" />
+              </div>
+              <span className="font-mono">+{summaryData.netGain.toLocaleString()}</span>
             </div>
-            <p className="text-xs text-muted-foreground">Net Gain</p>
+            <p className="text-xs text-muted-foreground mt-1">Net Gain</p>
+            
+            {expandedStat === 'netGain' && (
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 p-3 bg-card border border-emerald-500/20 rounded-lg shadow-xl z-20 min-w-[200px] animate-fade-in">
+                <p className="text-xs text-muted-foreground">{getTooltipContent('netGain')}</p>
+              </div>
+            )}
           </div>
           
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-foreground font-bold text-lg">
-              <Activity size={16} />
-              {summaryData.totalTrades}
+            <div className="flex items-center justify-center gap-1 text-foreground font-bold text-lg hover:scale-105 transition-transform duration-200">
+              <div className="p-1 rounded-full bg-blue-500/20 hover:bg-blue-500/30 transition-colors">
+                <Activity size={14} className="text-blue-400 drop-shadow-sm" />
+              </div>
+              <span className="font-mono">{summaryData.totalTrades}</span>
             </div>
-            <p className="text-xs text-muted-foreground">Total Trades</p>
+            <p className="text-xs text-muted-foreground mt-1">Total Trades</p>
           </div>
           
           <div className="text-center">
-            <div className="text-foreground font-bold text-sm truncate">
-              {summaryData.mostActivePortfolio}
+            <div className="text-foreground font-bold text-sm truncate hover:scale-105 transition-transform duration-200">
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                {summaryData.mostActivePortfolio}
+              </span>
             </div>
-            <p className="text-xs text-muted-foreground">Most Active</p>
+            <p className="text-xs text-muted-foreground mt-1">Most Active</p>
           </div>
           
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-emerald-400 font-bold text-lg">
-              <TrendingUp size={16} />
-              +{summaryData.bestTrade}
+          <div 
+            className="text-center cursor-pointer group relative"
+            onClick={() => handleStatClick('bestTrade')}
+          >
+            <div className="flex items-center justify-center gap-1 text-emerald-400 font-bold text-lg group-hover:scale-105 transition-transform duration-200">
+              <div className="p-1 rounded-full bg-emerald-500/20 group-hover:bg-emerald-500/30 transition-colors">
+                <TrendingUp size={14} className="drop-shadow-sm" />
+              </div>
+              <span className="font-mono">+{summaryData.bestTrade}</span>
             </div>
-            <p className="text-xs text-muted-foreground">Best Trade</p>
+            <p className="text-xs text-muted-foreground mt-1">Best Trade</p>
+            
+            {expandedStat === 'bestTrade' && (
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 p-3 bg-card border border-emerald-500/20 rounded-lg shadow-xl z-20 min-w-[160px] animate-fade-in">
+                <p className="text-xs text-muted-foreground">{getTooltipContent('bestTrade')}</p>
+              </div>
+            )}
           </div>
         </div>
       </CardContent>
