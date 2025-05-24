@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Calendar } from 'lucide-react';
+import { Calendar, Clock, TrendingUp, TrendingDown, FolderOpen } from 'lucide-react';
 
 interface ActivityFiltersProps {
   activeFilter: string;
@@ -12,12 +12,11 @@ const ActivityFilters = ({ activeFilter, onFilterChange }: ActivityFiltersProps)
   const [ripplePosition, setRipplePosition] = useState<{ x: number; y: number } | null>(null);
   
   const filters = [
-    { id: 'all', label: 'All Time', tooltip: 'Show all trading activity' },
-    { id: 'week', label: 'Past Week', tooltip: 'Last 7 days of trades' },
-    { id: 'buy', label: 'Buy Only', tooltip: 'Show only executed buy trades' },
-    { id: 'sell', label: 'Sell Only', tooltip: 'Show only executed sell trades' },
-    { id: 'portfolio', label: 'By Portfolio', tooltip: 'Group trades by portfolio' },
-    { id: 'custom', label: 'Custom', tooltip: 'Set custom date range', icon: Calendar }
+    { id: 'all', label: 'All Time', tooltip: 'Show all trading activity', icon: Clock },
+    { id: 'week', label: 'Past Week', tooltip: 'Last 7 days of trades', icon: Calendar },
+    { id: 'buy', label: 'Buy Only', tooltip: 'Show only executed buy trades', icon: TrendingUp },
+    { id: 'sell', label: 'Sell Only', tooltip: 'Show only executed sell trades', icon: TrendingDown },
+    { id: 'portfolio', label: 'By Portfolio', tooltip: 'Group trades by portfolio', icon: FolderOpen }
   ];
 
   const handleFilterClick = (filter: any, event: React.MouseEvent) => {
@@ -32,30 +31,30 @@ const ActivityFilters = ({ activeFilter, onFilterChange }: ActivityFiltersProps)
   };
 
   return (
-    <div className="flex gap-2 overflow-x-auto pb-2 mb-4 no-scrollbar sticky top-0 bg-background/95 backdrop-blur-md z-10 py-2">
+    <div className="flex gap-1.5 overflow-x-auto pb-1 mb-4 no-scrollbar sticky top-0 bg-background/95 backdrop-blur-md z-10 py-2 px-1">
       {filters.map((filter) => (
         <div key={filter.id} className="relative group">
           <Button
-            variant={activeFilter === filter.id ? "default" : "secondary"}
+            variant="ghost"
             size="sm"
             onClick={(e) => handleFilterClick(filter, e)}
-            className={`whitespace-nowrap transition-all duration-300 relative overflow-hidden ${
+            className={`whitespace-nowrap transition-all duration-300 relative overflow-hidden h-8 px-2.5 text-xs ${
               activeFilter === filter.id 
-                ? "bg-gradient-to-r from-emerald-500/30 to-green-500/30 text-emerald-400 border-emerald-500/40 hover:from-emerald-500/40 hover:to-green-500/40 shadow-lg shadow-emerald-500/20" 
-                : "hover:bg-secondary/80 hover:scale-105 hover:shadow-md"
+                ? "border-2 border-emerald-400/60 text-emerald-400 bg-emerald-500/10 shadow-lg shadow-emerald-500/20 hover:bg-emerald-500/20" 
+                : "hover:bg-secondary/80 hover:scale-105 hover:shadow-md border border-transparent"
             }`}
           >
-            {filter.icon && <filter.icon size={14} className="mr-1" />}
+            <filter.icon size={12} className="mr-1.5" />
             {filter.label}
             
             {ripplePosition && activeFilter !== filter.id && (
               <div
                 className="absolute rounded-full bg-emerald-400/30 animate-ping"
                 style={{
-                  left: ripplePosition.x - 10,
-                  top: ripplePosition.y - 10,
-                  width: 20,
-                  height: 20
+                  left: ripplePosition.x - 8,
+                  top: ripplePosition.y - 8,
+                  width: 16,
+                  height: 16
                 }}
               />
             )}

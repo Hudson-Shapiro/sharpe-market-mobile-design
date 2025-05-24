@@ -93,18 +93,8 @@ const Activity = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="p-4 pb-2">
-        <h1 className="text-2xl font-bold text-foreground bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">
-          Activity
-        </h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Track your trading activity and performance
-        </p>
-      </div>
-
       {/* Activity Summary */}
-      <div className="px-4">
+      <div className="px-4 pt-4">
         <ActivitySummary />
       </div>
 
@@ -117,7 +107,7 @@ const Activity = () => {
       </div>
 
       {/* Activity List */}
-      <div className="px-4 space-y-3 pb-6">
+      <div className="px-4 space-y-2 pb-6">
         {filteredActivities.map((activity, index) => (
           <div 
             key={index} 
