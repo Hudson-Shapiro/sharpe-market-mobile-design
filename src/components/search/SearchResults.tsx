@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import PortfolioCard from '@/components/portfolio/PortfolioCard';
@@ -31,8 +32,8 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
   const [securityConcentrationType, setSecurityConcentrationType] = useState("");
   const [securityConcentrationValue, setSecurityConcentrationValue] = useState("");
   const [sectorConcentration, setSectorConcentration] = useState(false);
-  const [sectorConcentrationType, setSectorConcentationType] = useState("");
-  const [sectorConcentrationValue, setSectorConcentationValue] = useState("");
+  const [sectorConcentrationType, setSectorConcentrationType] = useState("");
+  const [sectorConcentrationValue, setSectorConcentrationValue] = useState("");
 
   // Clear all filters
   const clearAllFilters = () => {
@@ -46,7 +47,7 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
     setSecurityConcentrationValue("");
     setSectorConcentration(false);
     setSectorConcentrationType("");
-    setSectorConcentationValue("");
+    setSectorConcentrationValue("");
     setActiveFilters([]);
   };
 
@@ -207,7 +208,7 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
               placeholder="Enter value" 
               className="bg-secondary border-border" 
               value={sectorConcentrationValue}
-              onChange={(e) => setSectorConcentationValue(e.target.value)}
+              onChange={(e) => setSectorConcentrationValue(e.target.value)}
               disabled={!sectorConcentration}
             />
           </div>
@@ -312,9 +313,59 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
 
       {/* Results based on selected filter */}
       <div className="mt-0">
-        {searchFilter === 'portfolios' && renderPortfolios()}
-        {searchFilter === 'users' && renderUsers()}
-        {searchFilter === 'stocks' && renderStocks()}
+        {searchFilter === 'portfolios' && (
+          <div className="space-y-2">
+            {Array(5).fill(0).map((_, i) => (
+              <PortfolioCard 
+                key={`portfolio-${i}`}
+                id={`${101 + i}`}
+                name={["AI Revolution", "Tech Innovators", "Green Energy", "Blue Chip Focus", "Dividend Kings"][i]}
+                return={[34.52, 28.71, 22.35, 19.28, 15.64][i]}
+                author={["Ryan Masters", "Emma Clark", "Dr. Liu Wei", "Sarah Williams", "Robert Johnson"][i]}
+                sharpeRatio={[2.14, 1.89, 1.65, 1.77, 1.92][i]}
+                rank={i + 1}
+              />
+            ))}
+          </div>
+        )}
+        {searchFilter === 'users' && (
+          <div className="space-y-2">
+            {Array(10).fill(0).map((_, i) => (
+              <div key={`user-${i}`} className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-3 flex items-center">
+                <div className="w-10 h-10 bg-secondary/70 rounded-full flex items-center justify-center mr-3 text-xl">
+                  {['🤵', '👩‍💼', '👴', '👩‍🔬', '👨‍💻'][i % 5]}
+                </div>
+                <div>
+                  <h4 className="font-medium">{
+                    ["Mark Cuban", "Lisa Su", "Warren Buffet", "Catherine Wood", "Elon Musk"][i % 5]
+                  }</h4>
+                  <p className="text-xs text-muted-foreground">{
+                    ["125K", "95K", "210K", "78K", "300K"][i % 5]
+                  } followers</p>
+                </div>
+                <button className="ml-auto bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-xs">
+                  Follow
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        {searchFilter === 'stocks' && (
+          <div className="space-y-2">
+            {Array(5).fill(0).map((_, i) => (
+              <div key={`stock-${i}`} className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-3 flex items-center justify-between">
+                <div>
+                  <h4 className="font-medium">{["AAPL", "GOOGL", "MSFT", "TSLA", "NVDA"][i]}</h4>
+                  <p className="text-xs text-muted-foreground">{["Apple Inc.", "Alphabet Inc.", "Microsoft Corp.", "Tesla Inc.", "NVIDIA Corp."][i]}</p>
+                </div>
+                <div className="text-right">
+                  <div className="font-medium">${[189.45, 2789.12, 378.85, 248.73, 875.32][i]}</div>
+                  <div className="text-xs text-emerald-400">+{[2.34, 1.89, 0.92, 3.45, 5.67][i]}%</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Filter Drawer */}
