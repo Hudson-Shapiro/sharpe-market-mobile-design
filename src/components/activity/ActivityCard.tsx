@@ -35,11 +35,12 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
 
   return (
     <Card 
-      className={`border transition-all duration-300 hover:scale-[1.01] hover:shadow-lg cursor-pointer relative overflow-hidden group rounded-lg ${
+      className={`border transition-all duration-300 hover:scale-[1.01] hover:shadow-lg cursor-pointer relative overflow-hidden group ${
         activity.type === 'BUY' 
           ? 'bg-gradient-to-r from-emerald-500/5 via-transparent to-emerald-500/5 hover:from-emerald-500/10 hover:to-emerald-500/10 border-emerald-500/20 hover:border-emerald-500/30 hover:shadow-emerald-500/10' 
           : 'bg-gradient-to-r from-red-500/5 via-transparent to-red-500/5 hover:from-red-500/10 hover:to-red-500/10 border-red-500/20 hover:border-red-500/30 hover:shadow-red-500/10 bg-card/95'
       }`}
+      style={{ borderRadius: '12px' }}
       onClick={handleCardClick}
     >
       {/* Subtle left edge stripe */}
@@ -57,11 +58,11 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
             <h3 className="font-semibold text-foreground text-sm truncate flex-1 mr-3">
               {activity.portfolio}
             </h3>
-            <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-xl text-xs font-bold transition-all duration-300 ${
+            <span className={`inline-flex items-center gap-1 px-3 py-1 text-xs font-bold transition-all duration-300 ${
               activity.type === 'BUY' 
                 ? 'bg-gradient-to-r from-emerald-500/30 to-green-500/40 text-emerald-400 shadow-md shadow-emerald-500/20' 
                 : 'bg-gradient-to-r from-red-500/30 to-red-600/40 text-red-400 shadow-md shadow-red-500/20'
-            }`}>
+            }`} style={{ borderRadius: '12px' }}>
               {activity.type === 'BUY' ? <TrendingUp size={10} className="drop-shadow-sm" /> : <TrendingDown size={10} className="drop-shadow-sm" />}
               {activity.type}
             </span>
