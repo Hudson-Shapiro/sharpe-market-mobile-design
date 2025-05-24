@@ -1,11 +1,26 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { DollarSign, Lock, Settings, Bell, FileText, HelpCircle, MessageSquare, Info, ChevronRight } from 'lucide-react';
+import { DollarSign, Lock, Settings, Bell, FileText, HelpCircle, MessageSquare, Info, ChevronRight, TrendingUp, CreditCard } from 'lucide-react';
 
 const SettingsMenu = () => {
   return (
     <div className="px-4">
+      {/* Earnings Section */}
+      <div className="mb-4">
+        <h3 className="text-sm font-semibold text-muted-foreground mb-2 px-2">Earnings</h3>
+        <Link to="/earnings" className="flex items-center justify-between p-2.5 rounded-lg transition-all duration-300 hover:bg-emerald-500/20 hover:text-emerald-400 hover:shadow-lg hover:shadow-emerald-500/25 active:bg-emerald-500/30 active:shadow-md active:shadow-emerald-500/30">
+          <div className="flex items-center">
+            <TrendingUp size={16} className="text-emerald-400 mr-3 transition-colors duration-300" />
+            <span className="font-medium text-sm">View Earnings</span>
+          </div>
+          <div className="flex items-center">
+            <span className="text-muted-foreground mr-2 text-xs">$2,487.50</span>
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          </div>
+        </Link>
+      </div>
+
       <div className="border-t border-border/50 pt-3 mb-3"></div>
       
       <div className="space-y-1">
@@ -44,14 +59,10 @@ const SettingsMenu = () => {
           <ChevronRight className="h-4 w-4 text-muted-foreground" />
         </Link>
         
-        <Link to="/settings/deposit" className="flex items-center justify-between p-2.5 rounded-lg transition-all duration-300 hover:bg-emerald-500/20 hover:text-emerald-400 hover:shadow-lg hover:shadow-emerald-500/25 active:bg-emerald-500/30 active:shadow-md active:shadow-emerald-500/30">
+        <Link to="/settings/withdrawal" className="flex items-center justify-between p-2.5 rounded-lg transition-all duration-300 hover:bg-emerald-500/20 hover:text-emerald-400 hover:shadow-lg hover:shadow-emerald-500/25 active:bg-emerald-500/30 active:shadow-md active:shadow-emerald-500/30">
           <div className="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-blue-400 mr-3 transition-colors duration-300">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="17 8 12 3 7 8"></polyline>
-              <line x1="12" y1="3" x2="12" y2="15"></line>
-            </svg>
-            <span className="font-medium text-sm">Deposit Methods</span>
+            <CreditCard size={16} className="text-blue-400 mr-3 transition-colors duration-300" />
+            <span className="font-medium text-sm">Withdrawal Methods</span>
           </div>
           <ChevronRight className="h-4 w-4 text-muted-foreground" />
         </Link>

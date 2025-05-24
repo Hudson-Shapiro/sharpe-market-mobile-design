@@ -16,13 +16,11 @@ const DiscoverHeader = () => {
   return (
     <div className="p-4 pb-2 flex items-center justify-between space-x-3 bg-background">
       <Link to="/profile">
-        <div className="w-10 h-10 bg-secondary hover:bg-secondary/80 transition-all rounded-full flex items-center justify-center">
-          <img 
-            src="/lovable-uploads/d0d2a007-8b8d-40cf-a33e-0d80b7c030db.png" 
-            alt="App Logo" 
-            className="w-6 h-6"
-          />
-        </div>
+        <img 
+          src="/lovable-uploads/d0d2a007-8b8d-40cf-a33e-0d80b7c030db.png" 
+          alt="App Logo" 
+          className="w-8 h-8 hover:opacity-80 transition-opacity"
+        />
       </Link>
       
       {/* Search Bar positioned in the middle */}
