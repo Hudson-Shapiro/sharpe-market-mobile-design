@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Trophy, Search, TrendingUp } from 'lucide-react';
+import DiscoverHeader from '@/components/layout/DiscoverHeader';
 import LeaderboardTab from '@/components/discover/LeaderboardTab';
 import DiscoverTab from '@/components/discover/DiscoverTab';
 import MarketTab from '@/components/discover/MarketTab';
@@ -13,6 +14,7 @@ const Discover = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <ScrollArea className="h-[calc(100vh-72px)]">
+        <DiscoverHeader />
         <div className="p-4">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-secondary/30 backdrop-blur-sm border-0 mb-6 shadow-lg p-1" style={{ borderRadius: '12px' }}>
