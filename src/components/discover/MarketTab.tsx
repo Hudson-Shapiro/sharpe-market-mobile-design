@@ -5,10 +5,8 @@ import { TrendingUp, TrendingDown } from 'lucide-react';
 import TopMoversCarousel from './TopMoversCarousel';
 import IndustryHeatmap from './IndustryHeatmap';
 import GlobalIndices from './GlobalIndices';
-import QuickFilters from './QuickFilters';
 
 const MarketTab = () => {
-  const [activeFilter, setActiveFilter] = useState("all");
   const [sectorFilter, setSectorFilter] = useState("");
 
   const marketData = [
@@ -56,14 +54,10 @@ const MarketTab = () => {
 
   const handleSectorFilter = (sector: string) => {
     setSectorFilter(sector);
-    setActiveFilter("sector");
   };
 
   return (
     <div className="space-y-6">
-      {/* Quick Filters */}
-      <QuickFilters activeFilter={activeFilter} onFilterChange={setActiveFilter} />
-
       {/* Top Movers Carousel */}
       <TopMoversCarousel />
 
