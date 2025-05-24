@@ -78,7 +78,7 @@ const PortfolioCard = ({
                 <Star size={12} className="text-amber-400 fill-amber-400 flex-shrink-0" />
               )}
               {isSubscribed && (
-                <span className="text-xs bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded-lg border border-emerald-500/30 font-medium flex-shrink-0">
+                <span className="text-xs bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded-xl border border-emerald-500/30 font-medium flex-shrink-0">
                   Sub
                 </span>
               )}
