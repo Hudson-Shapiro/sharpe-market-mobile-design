@@ -15,24 +15,24 @@ const Discover = () => {
       <ScrollArea className="h-[calc(100vh-72px)]">
         <div className="p-4">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-6 bg-secondary/50 p-1 rounded-xl">
+            <TabsList className="grid w-full grid-cols-3 bg-secondary/50 backdrop-blur-sm border border-border/40 mb-6 shadow-lg rounded-xl">
               <TabsTrigger 
                 value="leaderboard" 
-                className="flex items-center gap-2 rounded-lg transition-all duration-300 data-[state=active]:bg-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                className="text-sm transition-all duration-300 data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-400 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25 rounded-lg flex items-center gap-2"
               >
                 <Trophy size={16} />
                 Leaderboard
               </TabsTrigger>
               <TabsTrigger 
                 value="discover" 
-                className="flex items-center gap-2 rounded-lg transition-all duration-300 data-[state=active]:bg-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                className="text-sm transition-all duration-300 data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-400 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25 rounded-lg flex items-center gap-2"
               >
                 <Search size={16} />
                 Discover
               </TabsTrigger>
               <TabsTrigger 
                 value="market" 
-                className="flex items-center gap-2 rounded-lg transition-all duration-300 data-[state=active]:bg-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                className="text-sm transition-all duration-300 data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-400 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25 rounded-lg flex items-center gap-2"
               >
                 <TrendingUp size={16} />
                 Market
