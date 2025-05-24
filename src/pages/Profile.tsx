@@ -2,7 +2,6 @@
 import React from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import ProfileHeader from '@/components/profile/ProfileHeader';
 import ProfileCard from '@/components/profile/ProfileCard';
 import UserStats from '@/components/profile/UserStats';
 import SharpePlusCard from '@/components/profile/SharpePlusCard';
@@ -13,7 +12,6 @@ const Profile = () => {
   return (
     <ScrollArea className="h-full">
       <div className="min-h-screen bg-background text-foreground">
-        <ProfileHeader />
         <ProfileCard />
         <UserStats />
         <Separator className="mb-4" />
