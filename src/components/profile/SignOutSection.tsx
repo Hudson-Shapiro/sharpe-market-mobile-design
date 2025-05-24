@@ -7,7 +7,7 @@ const SignOutSection = () => {
     <>
       <div className="border-t border-border/50 pt-4 mt-4"></div>
       
-      <button className="w-full mt-4 mb-6 flex items-center justify-center space-x-2 py-3 px-4 rounded-lg transition-colors bg-gray-800 hover:bg-gray-700 text-white">
+      <button className="w-full mt-4 mb-6 flex items-center justify-center space-x-2 py-3 px-4 transition-colors bg-gray-800 hover:bg-gray-700 text-white" style={{ borderRadius: '12px' }}>
         <LogOut size={16} className="mr-2" />
         <span className="font-medium text-sm">Sign Out</span>
       </button>
