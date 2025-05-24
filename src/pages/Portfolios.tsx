@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { PlusCircle, ChevronRight, ArrowUp, ArrowDown } from 'lucide-react';
+import { PlusCircle, ChevronRight, ArrowUp, ArrowDown, BarChart3, Users } from 'lucide-react';
 import PortfolioCard from '../components/portfolio/PortfolioCard';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
@@ -72,17 +71,19 @@ const Portfolios = () => {
         {/* Main Content */}
         <div className="px-4">
           <Tabs defaultValue="my-portfolios" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-gray-900/60 backdrop-blur-sm border border-gray-800/40 mb-6 shadow-lg shadow-emerald-500/5">
+            <TabsList className="grid w-full grid-cols-2 bg-secondary/50 backdrop-blur-sm border border-border/40 mb-6 shadow-lg rounded-xl">
               <TabsTrigger 
                 value="my-portfolios" 
-                className="text-sm transition-all duration-300 data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-400 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25"
+                className="text-sm transition-all duration-300 data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-400 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25 rounded-lg flex items-center gap-2"
               >
+                <BarChart3 size={16} />
                 My Portfolios
               </TabsTrigger>
               <TabsTrigger 
                 value="subscribed" 
-                className="text-sm transition-all duration-300 data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-400 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25"
+                className="text-sm transition-all duration-300 data-[state=active]:bg-emerald-500/20 data-[state=active]:text-emerald-400 data-[state=active]:shadow-lg data-[state=active]:shadow-emerald-500/25 rounded-lg flex items-center gap-2"
               >
+                <Users size={16} />
                 Subscribed
               </TabsTrigger>
             </TabsList>

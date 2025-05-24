@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { TrendingUp, TrendingDown, Star } from 'lucide-react';
+import { TrendingUp, TrendingDown, Star, Crown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Area, AreaChart } from 'recharts';
+import MiniChart from '../discover/MiniChart';
 
 interface PortfolioCardProps {
   id: string;
@@ -16,19 +16,26 @@ interface PortfolioCardProps {
   rank?: number;
 }
 
-// Sample chart data - in real app, this would come from props
+// Generate sample chart data based on performance
 const generateSampleData = (isPositive: boolean) => {
-  const points = 20;
+  const points = 7;
   const data = [];
-  let value = 100;
+  let value = 30;
   
   for (let i = 0; i < points; i++) {
-    const change = (Math.random() - (isPositive ? 0.4 : 0.6)) * 5;
+    const change = (Math.random() - (isPositive ? 0.3 : 0.7)) * 8;
     value += change;
-    data.push({ value: Math.max(50, value) });
+    data.push(Math.max(10, Math.min(60, value)));
   }
   
   return data;
+};
+
+const getRankBadgeColor = (rank: number) => {
+  if (rank === 1) return "bg-gradient-to-r from-amber-400 to-amber-600 text-white shadow-lg shadow-amber-400/30";
+  if (rank === 2) return "bg-gradient-to-r from-gray-300 to-gray-500 text-white shadow-lg shadow-gray-400/30";
+  if (rank === 3) return "bg-gradient-to-r from-amber-700 to-orange-600 text-white shadow-lg shadow-amber-700/30";
+  return "bg-gray-800/80 text-gray-300 border border-gray-700/50";
 };
 
 const PortfolioCard = ({ 
@@ -46,91 +53,74 @@ const PortfolioCard = ({
   
   return (
     <div className={cn(
-      "group bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 rounded-2xl p-4 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-2xl active:scale-[0.98]",
-      "hover:bg-gray-900/80 hover:border-gray-700/80",
-      isPositive && "hover:shadow-emerald-500/10",
-      !isPositive && "hover:shadow-red-500/10",
+      "bg-card border border-border rounded-xl p-3 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]",
       rank === 1 && "border-l-4 border-l-amber-500 shadow-amber-500/10",
       rank === 2 && "border-l-4 border-l-gray-400 shadow-gray-400/10",
-      rank === 3 && "border-l-4 border-l-amber-700 shadow-amber-700/10",
+      rank === 3 && "border-l-4 border-l-amber-700 shadow-amber-700/10"
     )}>
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
+        {/* LEFT SECTION - Rank and Portfolio Info */}
+        <div className="flex items-center gap-2 flex-1 min-w-0">
           {rank && (
-            <span className="text-xs bg-gray-800/80 backdrop-blur-sm text-gray-300 w-6 h-6 rounded-full flex items-center justify-center font-semibold border border-gray-700/50">
-              {rank}
-            </span>
-          )}
-          <h3 className="text-white font-semibold text-base group-hover:text-gray-100 transition-colors">{name}</h3>
-          {rank && rank <= 3 && (
-            <Star size={14} className="text-amber-400 fill-amber-400 drop-shadow-lg" />
-          )}
-          {isSubscribed && (
-            <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30 font-medium">
-              Sub
-            </span>
-          )}
-        </div>
-        
-        <div className={cn(
-          "flex items-center gap-1 px-2.5 py-1 rounded-lg font-semibold text-sm transition-all duration-300",
-          isPositive 
-            ? "text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 shadow-lg shadow-emerald-500/10" 
-            : "text-red-400 bg-red-500/10 border border-red-500/20 shadow-lg shadow-red-500/10"
-        )}>
-          {isPositive ? (
-            <TrendingUp size={14} />
-          ) : (
-            <TrendingDown size={14} />
-          )}
-          <span>
-            {isPositive ? '+' : ''}{portfolioReturn.toFixed(1)}%
-          </span>
-        </div>
-      </div>
-      
-      <div className="flex items-center justify-between">
-        <div className="space-y-1">
-          {author && !isOwned && (
-            <p className="text-gray-400 text-xs">by {author}</p>
-          )}
-          {sharpeRatio && (
-            <div className="text-xs text-gray-400">
-              Sharpe: <span className={cn(
-                "font-semibold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20",
-                "shadow-sm shadow-blue-500/10"
-              )}>{sharpeRatio.toFixed(1)}</span>
+            <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${getRankBadgeColor(rank)}`}>
+              {rank <= 3 ? (
+                <Crown size={12} />
+              ) : (
+                rank
+              )}
             </div>
           )}
+          
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-1 mb-0.5">
+              <h3 className="font-bold text-foreground text-base truncate">{name}</h3>
+              {rank && rank <= 3 && (
+                <Star size={12} className="text-amber-400 fill-amber-400 flex-shrink-0" />
+              )}
+              {isSubscribed && (
+                <span className="text-xs bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded-full border border-emerald-500/30 font-medium flex-shrink-0">
+                  Sub
+                </span>
+              )}
+            </div>
+            
+            {author && !isOwned && (
+              <p className="text-xs text-muted-foreground truncate">by {author}</p>
+            )}
+            
+            {sharpeRatio && (
+              <div className="text-xs text-muted-foreground mt-0.5">
+                Sharpe: <span className="font-semibold text-blue-400">{sharpeRatio.toFixed(1)}</span>
+              </div>
+            )}
+          </div>
         </div>
-        
-        {/* Enhanced Mini Chart */}
-        <div className="w-20 h-10 group-hover:scale-105 transition-transform duration-300">
-          <AreaChart width={80} height={40} data={chartData} margin={{ top: 2, right: 2, left: 2, bottom: 2 }}>
-            <defs>
-              <linearGradient id={`chartGradient-${id}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={isPositive ? "#10b981" : "#ef4444"} stopOpacity={0.4}/>
-                <stop offset="95%" stopColor={isPositive ? "#10b981" : "#ef4444"} stopOpacity={0}/>
-              </linearGradient>
-              <filter id={`glow-${id}`}>
-                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                <feMerge> 
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            <Area 
-              type="monotone" 
-              dataKey="value" 
-              stroke={isPositive ? "#10b981" : "#ef4444"} 
-              strokeWidth={2}
-              fill={`url(#chartGradient-${id})`} 
-              dot={false}
-              animationDuration={0}
-              filter={`url(#glow-${id})`}
-            />
-          </AreaChart>
+
+        {/* CENTER SECTION - Mini Chart */}
+        <div className="flex-shrink-0 bg-secondary/30 rounded-lg p-2">
+          <MiniChart data={chartData} width={50} height={20} />
+        </div>
+
+        {/* RIGHT SECTION - Performance Stats */}
+        <div className="text-right flex-shrink-0 min-w-[80px]">
+          <div className={cn(
+            "text-lg font-bold flex items-center justify-end gap-1",
+            isPositive ? "text-emerald-400" : "text-red-400"
+          )}>
+            {isPositive ? (
+              <TrendingUp size={14} />
+            ) : (
+              <TrendingDown size={14} />
+            )}
+            <span>
+              {isPositive ? '+' : ''}{portfolioReturn.toFixed(1)}%
+            </span>
+          </div>
+          {isOwned && (
+            <div className="text-xs text-muted-foreground mt-1">
+              Your Portfolio
+            </div>
+          )}
         </div>
       </div>
     </div>
