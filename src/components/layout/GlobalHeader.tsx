@@ -2,17 +2,18 @@
 import React from 'react';
 import { Bell } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 const GlobalHeader = () => {
   return (
     <div className="p-4 pb-2 flex items-center justify-between space-x-3">
       <Link to="/profile">
-        <Avatar className="h-10 w-10 bg-gray-800/50 hover:bg-gray-800/80 transition-all">
-          <AvatarFallback className="text-base font-bold bg-gradient-to-r from-purple-400 to-emerald-400 text-transparent bg-clip-text">
-            HS
-          </AvatarFallback>
-        </Avatar>
+        <div className="w-10 h-10 bg-gray-800/50 hover:bg-gray-800/80 transition-all rounded-full flex items-center justify-center">
+          <img 
+            src="/lovable-uploads/d0d2a007-8b8d-40cf-a33e-0d80b7c030db.png" 
+            alt="App Logo" 
+            className="w-6 h-6"
+          />
+        </div>
       </Link>
       
       {/* Removed search bar */}
