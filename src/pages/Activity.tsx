@@ -1,6 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { TrendingUp } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import GlobalHeader from '@/components/layout/GlobalHeader';
 import ActivitySummary from '@/components/activity/ActivitySummary';
 import ActivityFilters from '@/components/activity/ActivityFilters';
 import ActivityCard from '@/components/activity/ActivityCard';
@@ -90,51 +91,55 @@ const Activity = () => {
   }, [activeFilter]);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Activity Summary - reduced padding */}
-      <div className="px-4 pt-2">
-        <ActivitySummary />
-      </div>
-
-      {/* Filters - reduced margin */}
-      <div className="px-4 mb-2">
-        <ActivityFilters 
-          activeFilter={activeFilter} 
-          onFilterChange={setActiveFilter} 
-        />
-      </div>
-
-      {/* Activity List - reduced spacing */}
-      <div className="px-4 space-y-2 pb-4">
-        {filteredActivities.map((activity, index) => (
-          <div 
-            key={index} 
-            className={`transition-all duration-300 ${
-              animateCards ? 'translate-y-2 opacity-0' : 'translate-y-0 opacity-100'
-            }`}
-            style={{ 
-              transitionDelay: `${index * 50}ms` 
-            }}
-          >
-            <ActivityCard activity={activity} />
-          </div>
-        ))}
+    <ScrollArea className="h-full">
+      <div className="min-h-screen bg-background">
+        <GlobalHeader />
         
-        {filteredActivities.length === 0 && (
-          <div className="text-center py-8">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-500/20 to-green-500/20 flex items-center justify-center">
-              <TrendingUp className="text-emerald-400" size={24} />
+        {/* Activity Summary - reduced padding */}
+        <div className="px-4 pt-2">
+          <ActivitySummary />
+        </div>
+
+        {/* Filters - reduced margin */}
+        <div className="px-4 mb-2">
+          <ActivityFilters 
+            activeFilter={activeFilter} 
+            onFilterChange={setActiveFilter} 
+          />
+        </div>
+
+        {/* Activity List - reduced spacing */}
+        <div className="px-4 space-y-2 pb-4">
+          {filteredActivities.map((activity, index) => (
+            <div 
+              key={index} 
+              className={`transition-all duration-300 ${
+                animateCards ? 'translate-y-2 opacity-0' : 'translate-y-0 opacity-100'
+              }`}
+              style={{ 
+                transitionDelay: `${index * 50}ms` 
+              }}
+            >
+              <ActivityCard activity={activity} />
             </div>
-            <p className="text-muted-foreground text-lg font-medium">
-              No activities found for the selected filter.
-            </p>
-            <p className="text-muted-foreground/60 text-sm mt-1">
-              Try adjusting your filters or make some trades!
-            </p>
-          </div>
-        )}
+          ))}
+          
+          {filteredActivities.length === 0 && (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-500/20 to-green-500/20 flex items-center justify-center">
+                <TrendingUp className="text-emerald-400" size={24} />
+              </div>
+              <p className="text-muted-foreground text-lg font-medium">
+                No activities found for the selected filter.
+              </p>
+              <p className="text-muted-foreground/60 text-sm mt-1">
+                Try adjusting your filters or make some trades!
+              </p>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </ScrollArea>
   );
 };
 

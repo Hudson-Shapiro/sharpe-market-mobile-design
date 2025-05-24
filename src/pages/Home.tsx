@@ -5,6 +5,7 @@ import TopMovers from '../components/dashboard/TopMovers';
 import { PlusCircle, Search } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Link } from 'react-router-dom';
+import GlobalHeader from '@/components/layout/GlobalHeader';
 
 const Home = () => {
   const myPortfolios = [
@@ -22,7 +23,7 @@ const Home = () => {
   return (
     <ScrollArea className="h-full">
       <div className="min-h-screen bg-gray-950">
-        {/* Removed DashboardHeader */}
+        <GlobalHeader />
         
         <div className="px-4 mb-4 flex items-center justify-between mt-2">
           <h2 className="text-xl font-bold text-white">My Portfolios</h2>

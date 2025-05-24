@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { BarChart3, Users } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import GlobalHeader from '@/components/layout/GlobalHeader';
 import MyPortfoliosTab from '../components/portfolio/MyPortfoliosTab';
 import SubscribedPortfoliosTab from '../components/portfolio/SubscribedPortfoliosTab';
 
@@ -53,6 +54,8 @@ const Portfolios = () => {
   return (
     <ScrollArea className="h-full">
       <div className="min-h-screen bg-background pt-2 relative">
+        <GlobalHeader />
+        
         {/* Main Content */}
         <div className="px-4">
           <Tabs defaultValue="my-portfolios" className="w-full">
