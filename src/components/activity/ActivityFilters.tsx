@@ -9,10 +9,10 @@ interface ActivityFiltersProps {
 
 const ActivityFilters = ({ activeFilter, onFilterChange }: ActivityFiltersProps) => {
   const filters = [
-    { id: 'all', label: 'All Time', tooltip: 'Show all trading activity', icon: Clock },
-    { id: 'week', label: 'Past Week', tooltip: 'Last 7 days of trades', icon: Calendar },
-    { id: 'buy', label: 'Buy Only', tooltip: 'Show only executed buy trades', icon: TrendingUp },
-    { id: 'sell', label: 'Sell Only', tooltip: 'Show only executed sell trades', icon: TrendingDown }
+    { id: 'all', label: 'All', tooltip: 'Show all trading activity', icon: Clock },
+    { id: 'week', label: 'Week', tooltip: 'Last 7 days of trades', icon: Calendar },
+    { id: 'buy', label: 'Buy', tooltip: 'Show only executed buy trades', icon: TrendingUp },
+    { id: 'sell', label: 'Sell', tooltip: 'Show only executed sell trades', icon: TrendingDown }
   ];
 
   return (
