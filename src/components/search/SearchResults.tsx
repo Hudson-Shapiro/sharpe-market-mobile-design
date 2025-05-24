@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { SlidersHorizontal, BarChart3, Users, X } from 'lucide-react';
@@ -14,10 +15,9 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface SearchResultsProps {
   searchQuery: string;
-  showInteractiveFilter?: boolean;
 }
 
-const SearchResults = ({ searchQuery, showInteractiveFilter = false }: SearchResultsProps) => {
+const SearchResults = ({ searchQuery }: SearchResultsProps) => {
   const [filterVisible, setFilterVisible] = useState(false);
   const [timeRange, setTimeRange] = useState("1m");
   const [minSharpeRatio, setMinSharpeRatio] = useState(0);
@@ -28,7 +28,7 @@ const SearchResults = ({ searchQuery, showInteractiveFilter = false }: SearchRes
   // Filter state
   const [filterTimeOption, setFilterTimeOption] = useState("daily");
   const [createdByMe, setCreatedByMe] = useState(false);
-  const [subscribedByMe, setSubscribedByMe] = useState(false);
+  const [subscribedByMe, setSubscribedByMe] = useState(true);
   const [benchmark, setBenchmark] = useState(false);
   const [securitySearch, setSecuritySearch] = useState("");
   const [securityConcentration, setSecurityConcentration] = useState(false);
@@ -62,6 +62,7 @@ const SearchResults = ({ searchQuery, showInteractiveFilter = false }: SearchRes
   const applyFilters = () => {
     const newActiveFilters = [];
     
+    // Add active filters to the array based on selected options
     if (filterTimeOption) {
       newActiveFilters.push(`${filterTimeOption} return`);
     }
@@ -262,30 +263,124 @@ const SearchResults = ({ searchQuery, showInteractiveFilter = false }: SearchRes
         </button>
       </div>
 
-      {/* Interactive Filter Button and Active Filters - Show if prop is true */}
-      {showInteractiveFilter && (
-        <div className="flex flex-wrap gap-2 mb-4">
+      {/* Interactive Filter Button and Active Filters */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        <Button 
+          variant="outline" 
+          className="flex items-center gap-2 bg-secondary border-border hover:bg-secondary/80"
+          onClick={() => setFilterVisible(true)}
+        >
+          <SlidersHorizontal size={16} />
+          Interactive Filter
+        </Button>
+        
+        {activeFilters.map((filter) => (
           <Button 
+            key={filter} 
             variant="outline" 
-            className="flex items-center gap-2 bg-secondary border-border hover:bg-secondary/80"
-            onClick={() => setFilterVisible(true)}
+            className="flex items-center gap-1.5 bg-secondary border-border hover:bg-secondary/80" 
+            onClick={() => removeFilter(filter)}
           >
-            <SlidersHorizontal size={16} />
-            Interactive Filter
+            {filter}
+            <X size={14} />
           </Button>
+        ))}
+      </div>
+
+      {/* Enhanced Filter Section */}
+      {filterVisible && (
+        <Card className="p-4 mb-4 bg-card border-border">
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <label className="text-sm text-muted-foreground mb-1 block">Time Range</label>
+              <Select value={timeRange} onValueChange={setTimeRange}>
+                <SelectTrigger className="w-full bg-secondary border-border">
+                  <SelectValue placeholder="Select range" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="1w">1 Week</SelectItem>
+                  <SelectItem value="1m">1 Month</SelectItem>
+                  <SelectItem value="3m">3 Months</SelectItem>
+                  <SelectItem value="6m">6 Months</SelectItem>
+                  <SelectItem value="1y">1 Year</SelectItem>
+                  <SelectItem value="all">All Time</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div>
+              <label className="text-sm text-muted-foreground mb-1 block">Sort By</label>
+              <Select value={sortMethod} onValueChange={setSortMethod}>
+                <SelectTrigger className="w-full bg-secondary border-border">
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="performance">Performance</SelectItem>
+                  <SelectItem value="sharpe">Sharpe Ratio</SelectItem>
+                  <SelectItem value="alphabetical">Alphabetical</SelectItem>
+                  <SelectItem value="followers">Followers</SelectItem>
+                  <SelectItem value="newest">Newest</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
           
-          {activeFilters.map((filter) => (
-            <Button 
-              key={filter} 
-              variant="outline" 
-              className="flex items-center gap-1.5 bg-secondary border-border hover:bg-secondary/80" 
-              onClick={() => removeFilter(filter)}
+          <div className="mb-4">
+            <label className="text-sm text-muted-foreground mb-1 block">Minimum Sharpe Ratio: {minSharpeRatio.toFixed(1)}</label>
+            <Slider 
+              value={[minSharpeRatio]} 
+              min={0} 
+              max={3.0} 
+              step={0.1}
+              onValueChange={(values) => setMinSharpeRatio(values[0])}
+              className="my-2"
+            />
+          </div>
+          
+          <div className="mb-4">
+            <label className="text-sm text-muted-foreground mb-2 block">Risk Tolerance</label>
+            <ToggleGroup 
+              type="single" 
+              value={riskTolerance} 
+              onValueChange={(value) => setRiskTolerance(value || riskTolerance)} 
+              className="justify-between"
             >
-              {filter}
-              <X size={14} />
-            </Button>
-          ))}
-        </div>
+              <ToggleGroupItem value="low" className="flex-1 text-xs bg-secondary data-[state=on]:bg-blue-600">
+                Conservative
+              </ToggleGroupItem>
+              <ToggleGroupItem value="medium" className="flex-1 text-xs bg-secondary data-[state=on]:bg-emerald-600">
+                Moderate
+              </ToggleGroupItem>
+              <ToggleGroupItem value="high" className="flex-1 text-xs bg-secondary data-[state=on]:bg-amber-600">
+                Aggressive
+              </ToggleGroupItem>
+              <ToggleGroupItem value="all" className="flex-1 text-xs bg-secondary data-[state=on]:bg-purple-600">
+                All
+              </ToggleGroupItem>
+            </ToggleGroup>
+          </div>
+          
+          <h3 className="font-medium mb-2">Performance</h3>
+          <RadioGroup defaultValue="all" className="mb-4">
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="all" id="all" />
+              <label htmlFor="all" className="text-sm">All returns</label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="positive" id="positive" />
+              <label htmlFor="positive" className="text-sm">Positive only</label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="negative" id="negative" />
+              <label htmlFor="negative" className="text-sm">Negative only</label>
+            </div>
+          </RadioGroup>
+          
+          <div className="flex gap-2">
+            <Button variant="outline" className="flex-1 border-border text-muted-foreground">Reset</Button>
+            <Button className="flex-1 bg-emerald-500 hover:bg-emerald-600">Apply</Button>
+          </div>
+        </Card>
       )}
       
       <TabsContent value="portfolios" className="mt-0">
