@@ -41,7 +41,7 @@ const TopMoversCarousel = () => {
         {stocks.map((stock, index) => (
           <Card 
             key={stock.symbol} 
-            className={`${type === 'gainers' ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'} hover:scale-[1.02] transition-all duration-200 cursor-pointer hover:shadow-lg`}
+            className={`${type === 'gainers' ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'} hover:scale-[1.02] transition-all duration-200 cursor-pointer hover:shadow-lg rounded-lg`}
             onClick={() => handleStockClick(stock.symbol)}
           >
             <CardContent className="p-3">

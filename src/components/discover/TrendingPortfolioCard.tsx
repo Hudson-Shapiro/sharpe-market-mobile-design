@@ -22,7 +22,7 @@ interface TrendingPortfolioCardProps {
 
 const TrendingPortfolioCard = ({ portfolio }: TrendingPortfolioCardProps) => {
   return (
-    <Card className={`bg-gradient-to-br ${portfolio.gradient} border-border hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:scale-105 group cursor-pointer`}>
+    <Card className={`bg-gradient-to-br ${portfolio.gradient} border-border hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:scale-105 group cursor-pointer rounded-lg`}>
       <CardContent className="p-4">
         <div className="flex items-center gap-3 mb-3">
           <div className="text-2xl bg-background/20 rounded-lg p-2 backdrop-blur-sm">
@@ -55,7 +55,7 @@ const TrendingPortfolioCard = ({ portfolio }: TrendingPortfolioCardProps) => {
           </div>
           <Button 
             size="sm" 
-            className="bg-emerald-500 hover:bg-emerald-600 text-white text-xs px-3 py-1 h-auto group-hover:shadow-lg group-hover:shadow-emerald-500/30"
+            className="bg-emerald-500 hover:bg-emerald-600 text-white text-xs px-3 py-1 h-auto group-hover:shadow-lg group-hover:shadow-emerald-500/30 rounded-lg"
           >
             Follow
           </Button>

@@ -31,7 +31,7 @@ const QuickFilters = ({ activeFilter, onFilterChange }: QuickFiltersProps) => {
           <Badge
             key={filter.value}
             variant={activeFilter === filter.value ? "default" : "outline"}
-            className={`cursor-pointer whitespace-nowrap transition-all duration-200 hover:scale-105 ${
+            className={`cursor-pointer whitespace-nowrap transition-all duration-200 hover:scale-105 rounded-xl ${
               activeFilter === filter.value 
                 ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/25' 
                 : 'hover:bg-emerald-500/10 hover:border-emerald-500/30'

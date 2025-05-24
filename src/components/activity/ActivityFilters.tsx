@@ -18,15 +18,15 @@ const ActivityFilters = ({ activeFilter, onFilterChange }: ActivityFiltersProps)
   return (
     <div className="flex justify-between items-center mb-4 px-4">
       <h3 className="font-semibold text-lg text-white">Activity</h3>
-      <div className="flex bg-gray-900/60 backdrop-blur-sm rounded-xl p-1.5 text-xs border border-gray-800/40">
+      <div className="flex bg-secondary/30 backdrop-blur-sm rounded-2xl p-1 text-xs border-0">
         {filters.map((filter) => (
           <button 
             key={filter.id}
             onClick={() => onFilterChange(filter.id)}
-            className={`px-3 py-1.5 rounded-lg transition-all duration-300 ${
+            className={`px-3 py-1.5 rounded-xl transition-all duration-300 font-medium ${
               activeFilter === filter.id 
-                ? "bg-emerald-500/30 text-emerald-400 shadow-lg shadow-emerald-500/20 backdrop-blur-sm" 
-                : "text-gray-400 hover:text-gray-300 hover:bg-gray-800/40"
+                ? "bg-white text-black shadow-lg font-bold" 
+                : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
             }`}
           >
             {filter.label}

@@ -11,11 +11,11 @@ interface SearchFiltersProps {
 const SearchFilters = ({ searchFilter, setSearchFilter, onInteractiveFilter }: SearchFiltersProps) => {
   return (
     <div className="flex p-3 gap-2 border-b border-border/40 justify-between items-center">
-      <div className="flex gap-1.5 bg-secondary/30 p-1 rounded-full">
+      <div className="flex gap-1.5 bg-secondary/30 p-1 rounded-2xl">
         <button 
-          className={`flex items-center justify-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+          className={`flex items-center justify-center px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
             searchFilter === 'portfolios' 
-              ? 'bg-white text-black shadow-lg' 
+              ? 'bg-white text-black shadow-lg font-bold' 
               : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
           }`}
           onClick={() => setSearchFilter('portfolios')}
@@ -24,9 +24,9 @@ const SearchFilters = ({ searchFilter, setSearchFilter, onInteractiveFilter }: S
           Portfolios
         </button>
         <button 
-          className={`flex items-center justify-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+          className={`flex items-center justify-center px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
             searchFilter === 'users' 
-              ? 'bg-white text-black shadow-lg' 
+              ? 'bg-white text-black shadow-lg font-bold' 
               : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
           }`}
           onClick={() => setSearchFilter('users')}
@@ -35,9 +35,9 @@ const SearchFilters = ({ searchFilter, setSearchFilter, onInteractiveFilter }: S
           Users
         </button>
         <button 
-          className={`flex items-center justify-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+          className={`flex items-center justify-center px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
             searchFilter === 'stocks' 
-              ? 'bg-white text-black shadow-lg' 
+              ? 'bg-white text-black shadow-lg font-bold' 
               : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
           }`}
           onClick={() => setSearchFilter('stocks')}
@@ -48,7 +48,7 @@ const SearchFilters = ({ searchFilter, setSearchFilter, onInteractiveFilter }: S
       </div>
       
       <button 
-        className="flex items-center gap-2 px-4 py-2 rounded-full text-sm bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 transition-all duration-300 border border-border/40"
+        className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm bg-secondary/50 text-secondary-foreground hover:bg-secondary/70 transition-all duration-300 border border-border/40"
         onClick={onInteractiveFilter}
       >
         <SlidersHorizontal size={14} />

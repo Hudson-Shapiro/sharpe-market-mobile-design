@@ -29,11 +29,11 @@ const ActivitySummary = () => {
   };
 
   return (
-    <Card className="mb-4 bg-gradient-to-br from-emerald-500/10 via-green-500/5 to-emerald-600/10 border-emerald-500/20 backdrop-blur-sm shadow-2xl shadow-emerald-500/5 rounded-2xl">
+    <Card className="mb-4 bg-gradient-to-br from-emerald-500/10 via-green-500/5 to-emerald-600/10 border-emerald-500/20 backdrop-blur-sm shadow-2xl shadow-emerald-500/5 rounded-lg">
       <CardContent className="p-3">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-full bg-gradient-to-br from-emerald-400/20 to-green-500/20 shadow-lg">
+            <div className="p-1.5 rounded-lg bg-gradient-to-br from-emerald-400/20 to-green-500/20 shadow-lg">
               <Trophy className="text-emerald-400 drop-shadow-sm" size={16} />
             </div>
             <h3 className="text-base font-bold text-foreground">Activity Summary</h3>
@@ -48,7 +48,7 @@ const ActivitySummary = () => {
             onClick={() => handleStatClick('netGain')}
           >
             <div className="flex items-center justify-center gap-1 text-emerald-400 font-bold text-lg group-hover:scale-105 transition-transform duration-200">
-              <div className="p-1 rounded-full bg-emerald-500/20 group-hover:bg-emerald-500/30 transition-colors">
+              <div className="p-1 rounded-lg bg-emerald-500/20 group-hover:bg-emerald-500/30 transition-colors">
                 <DollarSign size={12} className="drop-shadow-sm" />
               </div>
               <span className="font-mono text-base">+{summaryData.netGain.toLocaleString()}</span>
@@ -67,7 +67,7 @@ const ActivitySummary = () => {
             onClick={() => handleStatClick('bestTrade')}
           >
             <div className="flex items-center justify-center gap-1 text-emerald-400 font-bold text-lg group-hover:scale-105 transition-transform duration-200">
-              <div className="p-1 rounded-full bg-emerald-500/20 group-hover:bg-emerald-500/30 transition-colors">
+              <div className="p-1 rounded-lg bg-emerald-500/20 group-hover:bg-emerald-500/30 transition-colors">
                 <TrendingUp size={12} className="drop-shadow-sm" />
               </div>
               <span className="font-mono text-base">+{summaryData.bestTrade}</span>
@@ -84,7 +84,7 @@ const ActivitySummary = () => {
           {/* Bottom Row: Total Trades | Most Active */}
           <div className="text-center">
             <div className="flex items-center justify-center gap-1 text-foreground font-bold text-lg hover:scale-105 transition-transform duration-200">
-              <div className="p-1 rounded-full bg-blue-500/20 hover:bg-blue-500/30 transition-colors">
+              <div className="p-1 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 transition-colors">
                 <Activity size={12} className="text-blue-400 drop-shadow-sm" />
               </div>
               <span className="font-mono text-base">{summaryData.totalTrades}</span>
