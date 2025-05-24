@@ -258,20 +258,17 @@ const LeaderboardTab = () => {
 
   return (
     <div className="space-y-2">
+      {/* Combined Header and Time Range Filter - Now Inline */}
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold text-foreground">Top Performers</h2>
-      </div>
-
-      {/* Time Range Filter - Reduced options for mobile */}
-      <div className="flex justify-center mb-6">
-        <div className="flex bg-secondary/50 backdrop-blur-sm rounded-xl p-1.5 text-xs border border-border/40 gap-1">
+        <h2 className="text-lg font-bold text-foreground">Top Performers</h2>
+        <div className="flex bg-secondary/50 backdrop-blur-sm rounded-lg p-1 text-xs border border-border/40 gap-0.5">
           {timeRanges.map((period) => (
             <button 
               key={period}
               onClick={() => setTimeRange(period)}
-              className={`px-4 py-2 rounded-lg transition-all duration-300 font-medium ${
+              className={`px-2.5 py-1.5 rounded-md transition-all duration-300 font-medium text-xs ${
                 timeRange === period 
-                  ? "bg-emerald-500/30 text-emerald-400 shadow-lg shadow-emerald-500/20 backdrop-blur-sm" 
+                  ? "bg-emerald-500/30 text-emerald-400 shadow-md shadow-emerald-500/20 backdrop-blur-sm" 
                   : "text-muted-foreground hover:text-foreground hover:bg-secondary/40"
               }`}
             >
