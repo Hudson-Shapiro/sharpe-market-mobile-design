@@ -1,0 +1,102 @@
+
+import React from 'react';
+import { Badge } from '@/components/ui/badge';
+import { TrendingUp, TrendingDown } from 'lucide-react';
+
+const MarketTab = () => {
+  const marketData = [
+    {
+      symbol: "SPY",
+      name: "SPDR S&P 500 ETF",
+      price: 445.67,
+      change: 2.34,
+      changePercent: 0.53,
+      volume: "45.2M"
+    },
+    {
+      symbol: "QQQ",
+      name: "Invesco QQQ Trust",
+      price: 378.92,
+      change: -1.45,
+      changePercent: -0.38,
+      volume: "28.7M"
+    },
+    {
+      symbol: "AAPL",
+      name: "Apple Inc.",
+      price: 189.45,
+      change: 3.21,
+      changePercent: 1.72,
+      volume: "67.1M"
+    },
+    {
+      symbol: "MSFT",
+      name: "Microsoft Corporation",
+      price: 378.85,
+      change: -0.89,
+      changePercent: -0.23,
+      volume: "23.4M"
+    },
+    {
+      symbol: "NVDA",
+      name: "NVIDIA Corporation",
+      price: 875.32,
+      change: 15.67,
+      changePercent: 1.82,
+      volume: "89.3M"
+    }
+  ];
+
+  return (
+    <div className="space-y-4">
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-bold text-foreground">Market Overview</h2>
+        <Badge variant="outline" className="text-muted-foreground">
+          Live
+        </Badge>
+      </div>
+
+      <div className="space-y-3">
+        {marketData.map((stock, index) => (
+          <div key={index} className="bg-card border border-border rounded-xl p-4 hover:bg-card/80 transition-all duration-300">
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-bold text-foreground">{stock.symbol}</h3>
+                  <Badge variant="secondary" className="text-xs">
+                    Vol: {stock.volume}
+                  </Badge>
+                </div>
+                <p className="text-muted-foreground text-sm">{stock.name}</p>
+              </div>
+              
+              <div className="text-right">
+                <div className="text-lg font-bold text-foreground">
+                  ${stock.price.toFixed(2)}
+                </div>
+                <div className={`flex items-center gap-1 justify-end ${
+                  stock.change >= 0 ? 'text-emerald-400' : 'text-red-400'
+                }`}>
+                  {stock.change >= 0 ? (
+                    <TrendingUp size={14} />
+                  ) : (
+                    <TrendingDown size={14} />
+                  )}
+                  <span className="text-sm font-medium">
+                    {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)} ({stock.changePercent >= 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%)
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button className="w-full mt-6 py-3 text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors border border-emerald-400/30 rounded-xl hover:bg-emerald-400/10">
+        View All Markets
+      </button>
+    </div>
+  );
+};
+
+export default MarketTab;
