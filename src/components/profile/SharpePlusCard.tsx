@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { DollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -16,12 +17,14 @@ const SharpePlusCard = () => {
             <p className="text-muted-foreground text-xs">Unlock premium features</p>
           </div>
         </div>
-        <Button 
-          size="sm" 
-          className="bg-gradient-to-r from-purple-600 to-emerald-500 hover:opacity-90 text-white text-xs h-7 px-3"
-        >
-          Subscribe
-        </Button>
+        <Link to="/sharpe-plus">
+          <Button 
+            size="sm" 
+            className="bg-gradient-to-r from-purple-600 to-emerald-500 hover:opacity-90 text-white text-xs h-7 px-3"
+          >
+            Subscribe
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import StockDetail from "./pages/StockDetail";
 import CreatorProfile from "./pages/CreatorProfile";
+import SharpePlus from "./pages/SharpePlus";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,19 +24,24 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <MobileLayout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/portfolios" element={<Portfolios />} />
-            <Route path="/discover" element={<Discover />} />
-            <Route path="/activity" element={<Activity />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/stock/:symbol" element={<StockDetail />} />
-            <Route path="/creator/:creatorId" element={<CreatorProfile />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </MobileLayout>
+        <Routes>
+          <Route path="/sharpe-plus" element={<SharpePlus />} />
+          <Route path="*" element={
+            <MobileLayout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/portfolios" element={<Portfolios />} />
+                <Route path="/discover" element={<Discover />} />
+                <Route path="/activity" element={<Activity />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/stock/:symbol" element={<StockDetail />} />
+                <Route path="/creator/:creatorId" element={<CreatorProfile />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </MobileLayout>
+          } />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
