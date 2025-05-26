@@ -23,7 +23,7 @@ const Discover = () => {
                 className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
                 style={{ borderRadius: '12px' }}
               >
-                <Trophy size={16} />
+                <Trophy size={18} />
                 Leaderboard
               </TabsTrigger>
               <TabsTrigger 
@@ -31,7 +31,7 @@ const Discover = () => {
                 className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
                 style={{ borderRadius: '12px' }}
               >
-                <Search size={16} />
+                <Search size={18} />
                 Discover
               </TabsTrigger>
               <TabsTrigger 
@@ -39,7 +39,7 @@ const Discover = () => {
                 className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
                 style={{ borderRadius: '12px' }}
               >
-                <TrendingUp size={16} />
+                <TrendingUp size={18} />
                 Market
               </TabsTrigger>
             </TabsList>

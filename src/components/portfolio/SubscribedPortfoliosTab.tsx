@@ -22,11 +22,11 @@ interface SubscribedPortfoliosTabProps {
 
 const SubscribedPortfoliosTab = ({ subscribedPortfolios, timeRange, setTimeRange }: SubscribedPortfoliosTabProps) => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 pb-20">
       <PortfolioStats timeRange={timeRange} setTimeRange={setTimeRange} />
       
-      {/* Subscribed Portfolio Cards */}
-      <div className="grid gap-3 pb-4">
+      {/* Subscribed Portfolio Cards with proper spacing */}
+      <div className="grid gap-3">
         {subscribedPortfolios.map((portfolio, index) => (
           <PortfolioCard 
             key={index} 
