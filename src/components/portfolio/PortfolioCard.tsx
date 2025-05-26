@@ -46,6 +46,7 @@ const PortfolioCard = ({
   isOwned = false,
   isSubscribed = false,
   author,
+  recentPurchases = [],
   rank
 }: PortfolioCardProps) => {
   const isPositive = portfolioReturn >= 0;
@@ -53,12 +54,14 @@ const PortfolioCard = ({
   
   return (
     <div className={cn(
-      "bg-card border border-border p-3 mx-2 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]",
+      "bg-card border border-border p-4 mx-2 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]",
       rank === 1 && "border-l-4 border-l-amber-500 shadow-amber-500/10",
       rank === 2 && "border-l-4 border-l-gray-400 shadow-gray-400/10",
       rank === 3 && "border-l-4 border-l-amber-700 shadow-amber-700/10"
     )} style={{ borderRadius: '12px' }}>
-      <div className="flex items-center gap-2 sm:gap-3">
+      
+      {/* Top Row - Main Info */}
+      <div className="flex items-center gap-2 sm:gap-3 mb-3">
         {/* LEFT SECTION - Rank and Portfolio Info */}
         <div className="flex items-center gap-1 sm:gap-2 flex-1 min-w-0">
           {rank && (
@@ -71,9 +74,9 @@ const PortfolioCard = ({
             </div>
           )}
           
-          <div className="flex-1 min-w-0 max-w-[120px] sm:max-w-none">
-            <div className="flex items-center gap-1 mb-0.5">
-              <h3 className="font-bold text-foreground text-sm sm:text-base truncate max-w-[80px] sm:max-w-none">{name}</h3>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-1 mb-1">
+              <h3 className="font-bold text-foreground text-sm sm:text-base truncate">{name}</h3>
               {rank && rank <= 3 && (
                 <Star size={10} className="text-amber-400 fill-amber-400 flex-shrink-0 hidden sm:inline" />
               )}
@@ -88,24 +91,18 @@ const PortfolioCard = ({
             </div>
             
             {author && !isOwned && (
-              <p className="text-xs text-muted-foreground truncate max-w-[80px] sm:max-w-none">by {author}</p>
-            )}
-            
-            {sharpeRatio && (
-              <div className="text-xs text-muted-foreground mt-0.5 hidden sm:block">
-                Sharpe: <span className="font-semibold text-blue-400">{sharpeRatio.toFixed(1)}</span>
-              </div>
+              <p className="text-xs text-muted-foreground truncate">by {author}</p>
             )}
           </div>
         </div>
 
-        {/* CENTER SECTION - Mini Chart - Hidden on very small screens */}
+        {/* CENTER SECTION - Mini Chart */}
         <div className="hidden sm:flex flex-shrink-0 bg-secondary/30 p-2" style={{ borderRadius: '12px' }}>
-          <MiniChart data={chartData} width={40} height={16} />
+          <MiniChart data={chartData} width={50} height={20} />
         </div>
 
         {/* RIGHT SECTION - Performance Stats */}
-        <div className="text-right flex-shrink-0 min-w-[65px] sm:min-w-[80px]">
+        <div className="text-right flex-shrink-0 min-w-[70px] sm:min-w-[85px]">
           <div className={cn(
             "text-base sm:text-lg font-bold flex items-center justify-end gap-1",
             isPositive ? "text-emerald-400" : "text-red-400"
@@ -120,11 +117,37 @@ const PortfolioCard = ({
             </span>
           </div>
           {isOwned && (
-            <div className="text-xs text-muted-foreground mt-1 hidden sm:block">
+            <div className="text-xs text-muted-foreground mt-1">
               Your Portfolio
             </div>
           )}
         </div>
+      </div>
+
+      {/* Bottom Row - Additional Info */}
+      <div className="flex items-center justify-between gap-3">
+        {/* Left: Recent Purchases */}
+        <div className="flex-1 min-w-0">
+          {recentPurchases.length > 0 && (
+            <div className="text-xs text-muted-foreground">
+              <span className="hidden sm:inline">Recent: </span>
+              <span className="font-medium text-foreground">
+                {recentPurchases.slice(0, 3).join(', ')}
+                {recentPurchases.length > 3 && (
+                  <span className="text-muted-foreground"> +{recentPurchases.length - 3}</span>
+                )}
+              </span>
+            </div>
+          )}
+        </div>
+        
+        {/* Right: Sharpe Ratio */}
+        {sharpeRatio && (
+          <div className="text-xs text-muted-foreground flex-shrink-0">
+            <span className="hidden sm:inline">Sharpe: </span>
+            <span className="font-semibold text-blue-400">{sharpeRatio.toFixed(1)}</span>
+          </div>
+        )}
       </div>
     </div>
   );
