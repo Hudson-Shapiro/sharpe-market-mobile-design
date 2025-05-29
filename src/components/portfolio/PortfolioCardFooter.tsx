@@ -12,7 +12,6 @@ interface PortfolioCardFooterProps {
 }
 
 const PortfolioCardFooter = ({ 
-  createdDate, 
   lastEditedDate, 
   isOwned = false, 
   isSubscribed = false, 
@@ -21,17 +20,17 @@ const PortfolioCardFooter = ({
 }: PortfolioCardFooterProps) => {
   return (
     <div className="flex items-center justify-between text-xs text-muted-foreground relative">
-      <div className="flex items-center gap-2">
-        <span>📅 {createdDate} · ✏️ {lastEditedDate}</span>
+      <div className="flex flex-col gap-1">
+        <span className="text-xs text-gray-400">Last trade: {lastEditedDate}</span>
+        {author && isSubscribed && (
+          <span className="text-xs text-gray-400">by {author}</span>
+        )}
       </div>
       
       {/* Ownership/Creator Info */}
       <div className="flex items-center gap-2">
         {isOwned && (
-          <span className="text-emerald-400 font-medium">Your Portfolio</span>
-        )}
-        {author && isSubscribed && (
-          <span className="text-muted-foreground">👤 by {author}</span>
+          <span className="text-emerald-400 font-medium text-xs">Your Portfolio</span>
         )}
         
         {/* Dropdown Chevron */}
