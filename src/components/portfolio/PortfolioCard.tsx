@@ -71,9 +71,9 @@ const PortfolioCard = ({
       )} style={{ borderRadius: '10px' }}>
         
         <CollapsibleTrigger asChild>
-          <div className="p-2.5 cursor-pointer">
-            {/* Header Section - Compact Top Row */}
-            <div className="flex items-center gap-2 mb-1">
+          <div className="p-3 cursor-pointer">
+            {/* Header Section */}
+            <div className="flex items-center gap-2 mb-2">
               {/* Rank Badge */}
               {rank && (
                 <div className={`w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 ${getRankBadgeColor(rank)}`} style={{ borderRadius: '8px' }}>
@@ -85,7 +85,7 @@ const PortfolioCard = ({
                 </div>
               )}
               
-              {/* Portfolio Name & Creator */}
+              {/* Portfolio Name */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1">
                   <h3 className="font-bold text-foreground text-sm truncate">{name}</h3>
@@ -93,21 +93,7 @@ const PortfolioCard = ({
                     <Star size={8} className="text-amber-400 fill-amber-400 flex-shrink-0" />
                   )}
                 </div>
-                {/* Creator Info for Subscribed Portfolios */}
-                {author && isSubscribed && (
-                  <div className="flex items-center gap-1 mt-0.5">
-                    <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full" />
-                    <p className="text-xs text-muted-foreground truncate">by {author}</p>
-                  </div>
-                )}
               </div>
-
-              {/* Sharpe Ratio */}
-              {sharpeRatio && (
-                <div className="text-xs text-blue-400 font-semibold flex-shrink-0">
-                  {sharpeRatio.toFixed(1)}
-                </div>
-              )}
 
               {/* Mini Chart */}
               <div className="flex-shrink-0 bg-secondary/20 p-1" style={{ borderRadius: '6px' }}>
@@ -139,61 +125,64 @@ const PortfolioCard = ({
               </div>
             </div>
 
-            {/* Date Info Row */}
-            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
-              <span>🕓 Created {createdDate}</span>
-              <span>•</span>
-              <span>✏️ Last edited {lastEditedDate}</span>
-            </div>
-
-            {/* Info Row - Compact */}
+            {/* Condensed Date Info & Creator */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <span>📅 {createdDate} · ✏️ {lastEditedDate}</span>
+              </div>
+              
+              {/* Ownership/Creator Info */}
               <div className="flex items-center gap-2">
                 {isOwned && (
                   <span className="text-emerald-400 font-medium">Your Portfolio</span>
                 )}
+                {author && isSubscribed && (
+                  <span className="text-muted-foreground">👤 by {author}</span>
+                )}
               </div>
-              <span className="text-emerald-400 text-xs font-medium hover:text-emerald-300 cursor-pointer">
-                View Stats →
-              </span>
             </div>
           </div>
         </CollapsibleTrigger>
 
         {/* Expandable Content */}
         <CollapsibleContent>
-          <div className="px-2.5 pb-2.5 pt-0 border-t border-border/30 bg-secondary/5" style={{ borderRadius: '0 0 10px 10px' }}>
-            <div className="space-y-2 pt-2">
-              {/* Portfolio Metrics */}
+          <div className="px-3 pb-3 pt-0 border-t border-border/30 bg-secondary/5" style={{ borderRadius: '0 0 10px 10px' }}>
+            <div className="space-y-3 pt-3">
+              {/* Unified Details Section */}
               <div>
-                <h4 className="text-xs font-semibold text-muted-foreground mb-1">Metrics</h4>
-                <div className="space-y-0.5 text-xs text-muted-foreground">
-                  {sharpeRatio && <div>Sharpe: {sharpeRatio.toFixed(2)}</div>}
-                  {sortinioRatio && <div>Sortino: {sortinioRatio.toFixed(2)}</div>}
-                  <div>Benchmark: {benchmark}</div>
-                </div>
-              </div>
-              
-              {/* Portfolio Info */}
-              <div>
-                <h4 className="text-xs font-semibold text-muted-foreground mb-1">Portfolio Info</h4>
-                <div className="space-y-0.5 text-xs text-muted-foreground">
-                  <div>Created: {createdDate}</div>
-                  <div>Last Updated: {lastEditedDate}</div>
-                  {author && isSubscribed && <div>Strategy: {author}'s approach</div>}
+                <h4 className="text-xs font-semibold text-muted-foreground mb-2">Details</h4>
+                <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+                  {sharpeRatio && (
+                    <div className="flex justify-between">
+                      <span>Sharpe Ratio:</span>
+                      <span className="text-blue-400 font-medium">{sharpeRatio.toFixed(2)}</span>
+                    </div>
+                  )}
+                  {sortinioRatio && (
+                    <div className="flex justify-between">
+                      <span>Sortino Ratio:</span>
+                      <span className="text-blue-400 font-medium">{sortinioRatio.toFixed(2)}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <span>Benchmark:</span>
+                    <span className="text-foreground font-medium">{benchmark}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Created:</span>
+                    <span className="text-foreground">{createdDate}</span>
+                  </div>
                 </div>
               </div>
               
               {/* Action Button */}
-              <div className="pt-1">
-                <Button 
-                  size="sm" 
-                  className="w-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs h-7"
-                  style={{ borderRadius: '10px' }}
-                >
-                  View Full Stats
-                </Button>
-              </div>
+              <Button 
+                size="sm" 
+                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs h-8"
+                style={{ borderRadius: '10px' }}
+              >
+                View Full Stats
+              </Button>
             </div>
           </div>
         </CollapsibleContent>
