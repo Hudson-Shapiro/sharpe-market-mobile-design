@@ -66,12 +66,67 @@ const PortfolioCard = ({
         
         <CollapsibleTrigger asChild>
           <div className="p-3 cursor-pointer">
-            <PortfolioCardHeader 
-              rank={rank}
-              name={name}
-              portfolioReturn={portfolioReturn}
-              chartData={chartData}
-            />
+            {/* Portfolio Header with integrated dropdown indicator */}
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                {/* Rank badge if applicable */}
+                {rank && rank <= 3 && (
+                  <div className={cn(
+                    "w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white",
+                    rank === 1 && "bg-amber-500",
+                    rank === 2 && "bg-gray-400", 
+                    rank === 3 && "bg-amber-700"
+                  )}>
+                    {rank}
+                  </div>
+                )}
+                
+                {/* Portfolio name with dropdown indicator */}
+                <h3 className="font-semibold text-foreground flex items-center gap-1">
+                  {name}
+                  <div className="text-muted-foreground/60">
+                    {isExpanded ? (
+                      <ChevronUp size={16} />
+                    ) : (
+                      <ChevronDown size={16} />
+                    )}
+                  </div>
+                </h3>
+              </div>
+              
+              {/* Return percentage */}
+              <div className={cn(
+                "text-sm font-bold flex items-center gap-1",
+                isPositive ? "text-emerald-400" : "text-red-400"
+              )}>
+                <span className="text-xs">{isPositive ? "↗" : "↘"}</span>
+                {isPositive ? "+" : ""}{portfolioReturn}%
+              </div>
+            </div>
+
+            {/* Chart and other content */}
+            <div className="flex items-center justify-between">
+              {/* Mini chart */}
+              <div className="w-16 h-8">
+                <svg width="100%" height="100%" viewBox="0 0 64 32">
+                  <polyline
+                    fill="none"
+                    stroke={isPositive ? "#10b981" : "#ef4444"}
+                    strokeWidth="1.5"
+                    points={chartData.map((value, index) => 
+                      `${index * (64 / (chartData.length - 1))},${32 - (value / 60) * 32}`
+                    ).join(' ')}
+                  />
+                </svg>
+              </div>
+              
+              {/* Ownership/subscription status */}
+              <div className="text-xs text-muted-foreground">
+                {isOwned && "Your Portfolio"}
+                {isSubscribed && !isOwned && "Subscribed"}
+                {author && !isOwned && !isSubscribed && `by ${author}`}
+              </div>
+            </div>
 
             <PortfolioCardFooter 
               createdDate={createdDate}
@@ -82,15 +137,6 @@ const PortfolioCard = ({
             />
           </div>
         </CollapsibleTrigger>
-
-        {/* Enhanced Dropdown Indicator - Moved to bottom right */}
-        <div className="absolute bottom-3 right-3 bg-secondary/80 backdrop-blur-sm p-1.5 rounded-md transition-all duration-200 hover:bg-secondary">
-          {isExpanded ? (
-            <ChevronUp size={14} className="text-muted-foreground" />
-          ) : (
-            <ChevronDown size={14} className="text-muted-foreground" />
-          )}
-        </div>
 
         {/* Expandable Content */}
         <CollapsibleContent>
