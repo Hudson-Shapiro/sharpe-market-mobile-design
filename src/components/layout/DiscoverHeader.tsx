@@ -1,16 +1,21 @@
 
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Bell } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
 const DiscoverHeader = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const navigate = useNavigate();
 
   const handleSearchFocus = () => {
     setIsSearchExpanded(true);
+  };
+
+  const handleSearchClick = () => {
+    navigate('/search');
   };
 
   const handleCancel = () => {
@@ -21,7 +26,7 @@ const DiscoverHeader = () => {
   return (
     <div className="p-4 pb-2 flex items-center justify-between space-x-3 bg-background relative overflow-hidden">
       {/* Logo - hidden when search is expanded */}
-      <div className={`transition-all duration-300 ${isSearchExpanded ? 'opacity-0 -translate-x-4 pointer-events-none' : 'opacity-100 translate-x-0'}`}>
+      <div className={`transition-all duration-300 ${isSearchExpanded ? 'opacity-0 -translate-x-4 pointer-events-none absolute' : 'opacity-100 translate-x-0'}`}>
         <Link to="/profile">
           <img 
             src="/lovable-uploads/d0d2a007-8b8d-40cf-a33e-0d80b7c030db.png" 
@@ -34,8 +39,8 @@ const DiscoverHeader = () => {
       {/* Search Bar - expands to fill space when focused */}
       <div className={`relative transition-all duration-300 ${
         isSearchExpanded 
-          ? 'flex-1 -ml-12' 
-          : 'flex-1'
+          ? 'flex-1 ml-0' 
+          : 'flex-1 ml-12'
       }`}>
         <div className="flex items-center bg-card rounded-xl py-2.5 px-4">
           <Search size={20} className="text-muted-foreground mr-2" />
@@ -46,6 +51,7 @@ const DiscoverHeader = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={handleSearchFocus}
+            onClick={handleSearchClick}
           />
         </div>
       </div>
