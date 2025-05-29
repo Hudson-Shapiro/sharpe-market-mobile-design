@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { TrendingUp, BarChart3, Activity } from 'lucide-react';
+import { TrendingUp, BarChart3 } from 'lucide-react';
 
 interface PortfolioStatsProps {
   timeRange: string;
@@ -35,7 +35,7 @@ const PortfolioStats = ({ timeRange, setTimeRange }: PortfolioStatsProps) => {
         </div>
       </div>
       
-      {/* Three Horizontal Metric Cards */}
+      {/* Two Horizontal Metric Cards */}
       <div className="flex gap-2 mb-4 overflow-x-auto sm:overflow-visible">
         {/* Top Performer Card */}
         <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-2.5 shadow-lg min-w-[120px] flex-1 max-w-[150px]" style={{ borderRadius: '12px' }}>
@@ -58,18 +58,6 @@ const PortfolioStats = ({ timeRange, setTimeRange }: PortfolioStatsProps) => {
             </div>
             <div className="text-sm font-bold text-white mb-1">+11.39%</div>
             <div className="text-xs text-gray-500">5 portfolios</div>
-          </div>
-        </div>
-        
-        {/* Most Active Card */}
-        <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-2.5 shadow-lg min-w-[120px] flex-1 max-w-[150px]" style={{ borderRadius: '12px' }}>
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1 mb-1.5">
-              <Activity size={10} className="text-purple-400" />
-              <span className="text-xs text-gray-400">Most Active</span>
-            </div>
-            <div className="text-xs font-bold text-white mb-1">Auto Portfolio</div>
-            <div className="text-xs text-gray-500">12 trades</div>
           </div>
         </div>
       </div>
