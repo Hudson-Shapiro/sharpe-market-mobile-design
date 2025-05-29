@@ -16,7 +16,7 @@ const SearchScopeSelector = ({ searchScope, setSearchScope }: SearchScopeSelecto
   ];
 
   return (
-    <div className="p-4 bg-background">
+    <div className="px-4 py-2 bg-background">
       <div className="flex gap-2">
         {scopes.map((scope) => {
           const Icon = scope.icon;
@@ -26,14 +26,15 @@ const SearchScopeSelector = ({ searchScope, setSearchScope }: SearchScopeSelecto
             <Button
               key={scope.id}
               variant={isActive ? "default" : "outline"}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
+              size="sm"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-300 text-xs font-medium ${
                 isActive 
                   ? 'bg-white text-black hover:bg-white/90' 
                   : 'border-border/50 hover:bg-secondary/50'
               }`}
               onClick={() => setSearchScope(scope.id)}
             >
-              <Icon size={16} />
+              <Icon size={14} />
               {scope.label}
             </Button>
           );

@@ -55,10 +55,10 @@ const Search = () => {
         setSearchScope={handleScopeChange}
       />
 
-      <ScrollArea className="h-[calc(100vh-140px)]">
-        <div className="p-4 space-y-6">
+      <ScrollArea className="h-[calc(100vh-120px)]">
+        <div className="p-3 space-y-4">
           {!isSearching ? (
-            <div className="animate-fade-in space-y-6">
+            <div className="animate-fade-in space-y-4">
               {/* Search Context Tip */}
               <SearchTip />
               
