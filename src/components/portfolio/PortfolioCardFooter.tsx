@@ -20,14 +20,19 @@ const PortfolioCardFooter = ({
 }: PortfolioCardFooterProps) => {
   return (
     <div className="flex items-center justify-between text-xs text-muted-foreground relative">
-      <div className="flex flex-col gap-1">
-        <span className="text-xs text-gray-400">Last trade: {lastEditedDate}</span>
-        {author && isSubscribed && (
-          <span className="text-xs text-gray-400">by {author}</span>
+      {/* Left side - Author and Last Trade info */}
+      <div className="flex items-center gap-4">
+        {author && isSubscribed ? (
+          <>
+            <span className="text-xs text-gray-400">by {author}</span>
+            <span className="text-xs text-gray-400">Last trade: {lastEditedDate}</span>
+          </>
+        ) : (
+          <span className="text-xs text-gray-400">Last trade: {lastEditedDate}</span>
         )}
       </div>
       
-      {/* Ownership/Creator Info */}
+      {/* Right side - Ownership/Creator Info and Chevron */}
       <div className="flex items-center gap-2">
         {isOwned && (
           <span className="text-emerald-400 font-medium text-xs">Your Portfolio</span>
