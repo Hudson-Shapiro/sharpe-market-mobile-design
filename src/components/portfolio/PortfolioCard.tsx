@@ -65,9 +65,9 @@ const PortfolioCard = ({
       )} style={{ borderRadius: '10px' }}>
         
         <CollapsibleTrigger asChild>
-          <div className="p-3 cursor-pointer">
-            {/* Portfolio Header with integrated dropdown indicator */}
-            <div className="flex items-center justify-between mb-2">
+          <div className="p-4 cursor-pointer">
+            {/* Header Row: Title + Dropdown + Return */}
+            <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 {/* Rank badge if applicable */}
                 {rank && rank <= 3 && (
@@ -82,59 +82,84 @@ const PortfolioCard = ({
                 )}
                 
                 {/* Portfolio name with dropdown indicator */}
-                <h3 className="font-semibold text-foreground flex items-center gap-1">
+                <h3 className="font-semibold text-foreground text-base">
                   {name}
-                  <div className="text-muted-foreground/60">
-                    {isExpanded ? (
-                      <ChevronUp size={16} />
-                    ) : (
-                      <ChevronDown size={16} />
-                    )}
-                  </div>
                 </h3>
+                
+                {/* Dropdown chevron right next to title */}
+                <div className="text-muted-foreground/60">
+                  {isExpanded ? (
+                    <ChevronUp size={16} />
+                  ) : (
+                    <ChevronDown size={16} />
+                  )}
+                </div>
               </div>
               
               {/* Return percentage */}
               <div className={cn(
-                "text-sm font-bold flex items-center gap-1",
+                "text-base font-bold flex items-center gap-1",
                 isPositive ? "text-emerald-400" : "text-red-400"
               )}>
-                <span className="text-xs">{isPositive ? "↗" : "↘"}</span>
+                <span className="text-sm">{isPositive ? "📈" : "📉"}</span>
                 {isPositive ? "+" : ""}{portfolioReturn}%
               </div>
             </div>
 
-            {/* Chart and other content */}
-            <div className="flex items-center justify-between">
-              {/* Mini chart */}
-              <div className="w-16 h-8">
-                <svg width="100%" height="100%" viewBox="0 0 64 32">
+            {/* Centered Graph Area */}
+            <div className="flex justify-center mb-4">
+              <div className="w-20 h-8">
+                <svg width="100%" height="100%" viewBox="0 0 80 32">
+                  <defs>
+                    <linearGradient id={`gradient-${id}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor={isPositive ? "#10b981" : "#ef4444"} stopOpacity="0.2" />
+                      <stop offset="100%" stopColor={isPositive ? "#10b981" : "#ef4444"} stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Gradient fill under the line */}
+                  <polygon
+                    fill={`url(#gradient-${id})`}
+                    points={`0,32 ${chartData.map((value, index) => 
+                      `${index * (80 / (chartData.length - 1))},${32 - (value / 60) * 32}`
+                    ).join(' ')} 80,32`}
+                  />
+                  
+                  {/* The main line */}
                   <polyline
                     fill="none"
                     stroke={isPositive ? "#10b981" : "#ef4444"}
-                    strokeWidth="1.5"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     points={chartData.map((value, index) => 
-                      `${index * (64 / (chartData.length - 1))},${32 - (value / 60) * 32}`
+                      `${index * (80 / (chartData.length - 1))},${32 - (value / 60) * 32}`
                     ).join(' ')}
                   />
                 </svg>
               </div>
-              
-              {/* Ownership/subscription status */}
-              <div className="text-xs text-muted-foreground">
-                {isOwned && "Your Portfolio"}
-                {isSubscribed && !isOwned && "Subscribed"}
-                {author && !isOwned && !isSubscribed && `by ${author}`}
-              </div>
             </div>
 
-            <PortfolioCardFooter 
-              createdDate={createdDate}
-              lastEditedDate={lastEditedDate}
-              isOwned={isOwned}
-              isSubscribed={isSubscribed}
-              author={author}
-            />
+            {/* Meta Row: Dates + Ownership */}
+            <div className="flex items-center justify-between text-sm text-muted-foreground">
+              <div className="flex items-center gap-3">
+                <span>📅 {createdDate}</span>
+                <span>✏️ {lastEditedDate}</span>
+              </div>
+              
+              {/* Ownership/Creator Info */}
+              <div className="flex items-center">
+                {isOwned && (
+                  <span className="text-emerald-400 font-medium">✅ Your Portfolio</span>
+                )}
+                {author && isSubscribed && !isOwned && (
+                  <span className="text-purple-400 font-medium">👤 by {author}</span>
+                )}
+                {author && !isSubscribed && !isOwned && (
+                  <span className="text-muted-foreground">👤 by {author}</span>
+                )}
+              </div>
+            </div>
           </div>
         </CollapsibleTrigger>
 
