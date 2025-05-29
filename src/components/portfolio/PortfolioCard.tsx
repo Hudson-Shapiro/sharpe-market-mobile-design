@@ -57,14 +57,14 @@ const PortfolioCard = ({
   return (
     <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
       <div className={cn(
-        "bg-card border border-border mx-2 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.01] shadow-sm",
+        "bg-card border border-border hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.01] shadow-sm",
         rank === 1 && "border-l-4 border-l-amber-500 shadow-amber-500/10",
         rank === 2 && "border-l-4 border-l-gray-400 shadow-gray-400/10",
         rank === 3 && "border-l-4 border-l-amber-700 shadow-amber-700/10"
       )} style={{ borderRadius: '10px' }}>
         
         <CollapsibleTrigger asChild>
-          <div className="p-3 cursor-pointer">
+          <div className="p-4 cursor-pointer">
             <PortfolioCardHeader 
               rank={rank}
               name={name}
