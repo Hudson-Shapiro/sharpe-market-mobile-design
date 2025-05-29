@@ -58,7 +58,7 @@ const PortfolioCard = ({
   return (
     <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
       <div className={cn(
-        "bg-card border border-border mx-2 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.01] shadow-sm",
+        "bg-card border border-border mx-2 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.01] shadow-sm relative",
         rank === 1 && "border-l-4 border-l-amber-500 shadow-amber-500/10",
         rank === 2 && "border-l-4 border-l-gray-400 shadow-gray-400/10",
         rank === 3 && "border-l-4 border-l-amber-700 shadow-amber-700/10"
@@ -80,17 +80,17 @@ const PortfolioCard = ({
               isSubscribed={isSubscribed}
               author={author}
             />
-
-            {/* Expand Icon */}
-            <div className="absolute top-3 right-3">
-              {isExpanded ? (
-                <ChevronUp size={12} className="text-muted-foreground" />
-              ) : (
-                <ChevronDown size={12} className="text-muted-foreground" />
-              )}
-            </div>
           </div>
         </CollapsibleTrigger>
+
+        {/* Enhanced Dropdown Indicator */}
+        <div className="absolute top-3 right-3 bg-secondary/80 backdrop-blur-sm p-1.5 rounded-md transition-all duration-200 hover:bg-secondary">
+          {isExpanded ? (
+            <ChevronUp size={14} className="text-muted-foreground" />
+          ) : (
+            <ChevronDown size={14} className="text-muted-foreground" />
+          )}
+        </div>
 
         {/* Expandable Content */}
         <CollapsibleContent>
