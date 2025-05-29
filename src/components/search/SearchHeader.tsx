@@ -18,9 +18,7 @@ const SearchHeader = ({ searchQuery, setSearchQuery }: SearchHeaderProps) => {
 
   return (
     <div className="p-4 flex items-center gap-3">
-      <button onClick={handleClose} className="text-muted-foreground hover:text-foreground transition-colors">
-        <X size={24} />
-      </button>
+      {/* Search bar now takes full width */}
       <div className="flex-1 relative">
         <div className="flex items-center bg-secondary/70 rounded-2xl py-3 px-4 border border-border/50 shadow-sm">
           <SearchIcon size={20} className="text-muted-foreground mr-3" />

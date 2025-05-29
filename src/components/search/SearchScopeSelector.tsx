@@ -26,7 +26,7 @@ const SearchScopeSelector = ({ searchScope, setSearchScope }: SearchScopeSelecto
               key={scope.id}
               className={`flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 flex-1 ${
                 isActive 
-                  ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/25' 
+                  ? 'bg-white text-black shadow-lg' 
                   : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
               }`}
               onClick={() => setSearchScope(scope.id)}
