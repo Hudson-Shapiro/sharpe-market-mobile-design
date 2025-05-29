@@ -11,8 +11,11 @@ interface SubscribedPortfolio {
   isOwned: boolean;
   author: string;
   sharpeRatio: number;
-  recentPurchases: string[];
+  sortinioRatio: number;
   rank: number;
+  createdDate: string;
+  lastEditedDate: string;
+  benchmark: string;
 }
 
 interface SubscribedPortfoliosTabProps {

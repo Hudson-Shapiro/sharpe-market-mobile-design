@@ -9,7 +9,10 @@ interface Portfolio {
   return: number;
   isOwned: boolean;
   sharpeRatio: number;
-  recentPurchases: string[];
+  sortinioRatio: number;
+  createdDate: string;
+  lastEditedDate: string;
+  benchmark: string;
 }
 
 interface MyPortfoliosTabProps {
