@@ -17,17 +17,17 @@ const SearchHeader = ({ searchQuery, setSearchQuery }: SearchHeaderProps) => {
   };
 
   return (
-    <div className="p-4 flex items-center gap-3 border-b border-border">
+    <div className="p-4 flex items-center gap-3">
       <button onClick={handleClose} className="text-muted-foreground hover:text-foreground transition-colors">
         <X size={24} />
       </button>
       <div className="flex-1 relative">
-        <div className="flex items-center bg-secondary rounded-full py-2.5 px-4 shadow-sm">
-          <SearchIcon size={20} className="text-muted-foreground mr-2" />
+        <div className="flex items-center bg-secondary/70 rounded-2xl py-3 px-4 border border-border/50 shadow-sm">
+          <SearchIcon size={20} className="text-muted-foreground mr-3" />
           <Input 
             type="text" 
             placeholder="Search portfolios, users, stocks..." 
-            className="bg-transparent border-none focus:outline-none w-full h-auto p-0 placeholder:text-muted-foreground/70"
+            className="bg-transparent border-none focus:outline-none w-full h-auto p-0 placeholder:text-muted-foreground/70 font-medium"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             autoFocus
@@ -42,7 +42,7 @@ const SearchHeader = ({ searchQuery, setSearchQuery }: SearchHeaderProps) => {
           )}
         </div>
       </div>
-      <button className="text-emerald-400 font-medium hover:text-emerald-300 transition-colors" onClick={handleClose}>
+      <button className="text-emerald-400 font-semibold hover:text-emerald-300 transition-colors" onClick={handleClose}>
         Cancel
       </button>
     </div>
