@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import PortfolioCardHeader from './PortfolioCardHeader';
@@ -79,16 +78,8 @@ const PortfolioCard = ({
               isOwned={isOwned}
               isSubscribed={isSubscribed}
               author={author}
+              isExpanded={isExpanded}
             />
-
-            {/* Expand Icon */}
-            <div className="absolute top-3 right-3">
-              {isExpanded ? (
-                <ChevronUp size={12} className="text-muted-foreground" />
-              ) : (
-                <ChevronDown size={12} className="text-muted-foreground" />
-              )}
-            </div>
           </div>
         </CollapsibleTrigger>
 

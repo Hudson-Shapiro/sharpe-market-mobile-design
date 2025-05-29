@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface PortfolioCardFooterProps {
   createdDate: string;
@@ -7,6 +8,7 @@ interface PortfolioCardFooterProps {
   isOwned?: boolean;
   isSubscribed?: boolean;
   author?: string;
+  isExpanded?: boolean;
 }
 
 const PortfolioCardFooter = ({ 
@@ -14,10 +16,11 @@ const PortfolioCardFooter = ({
   lastEditedDate, 
   isOwned = false, 
   isSubscribed = false, 
-  author 
+  author,
+  isExpanded = false
 }: PortfolioCardFooterProps) => {
   return (
-    <div className="flex items-center justify-between text-xs text-muted-foreground">
+    <div className="flex items-center justify-between text-xs text-muted-foreground relative">
       <div className="flex items-center gap-2">
         <span>📅 {createdDate} · ✏️ {lastEditedDate}</span>
       </div>
@@ -30,6 +33,15 @@ const PortfolioCardFooter = ({
         {author && isSubscribed && (
           <span className="text-muted-foreground">👤 by {author}</span>
         )}
+        
+        {/* Dropdown Chevron */}
+        <div className="opacity-60 hover:opacity-100 transition-opacity duration-200 ml-1">
+          {isExpanded ? (
+            <ChevronUp size={12} className="text-muted-foreground transition-transform duration-200" />
+          ) : (
+            <ChevronDown size={12} className="text-muted-foreground transition-transform duration-200" />
+          )}
+        </div>
       </div>
     </div>
   );
