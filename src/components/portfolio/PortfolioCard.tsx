@@ -11,11 +11,14 @@ interface PortfolioCardProps {
   name: string;
   return: number;
   sharpeRatio?: number;
+  sortinioRatio?: number;
   isOwned?: boolean;
   isSubscribed?: boolean;
   author?: string;
-  recentPurchases?: string[];
   rank?: number;
+  createdDate?: string;
+  lastEditedDate?: string;
+  benchmark?: string;
 }
 
 // Generate sample chart data based on performance
@@ -45,11 +48,14 @@ const PortfolioCard = ({
   name, 
   return: portfolioReturn, 
   sharpeRatio, 
+  sortinioRatio,
   isOwned = false,
   isSubscribed = false,
   author,
-  recentPurchases = [],
-  rank
+  rank,
+  createdDate = "May 10",
+  lastEditedDate = "2 days ago",
+  benchmark = "SPY"
 }: PortfolioCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isPositive = portfolioReturn >= 0;
@@ -133,36 +139,16 @@ const PortfolioCard = ({
               </div>
             </div>
 
-            {/* Holdings Pills Row */}
-            {recentPurchases.length > 0 && (
-              <div className="flex items-center gap-1 mb-1">
-                <div className="flex gap-1 flex-wrap">
-                  {recentPurchases.slice(0, 3).map((ticker, index) => (
-                    <span
-                      key={index}
-                      className="text-xs bg-secondary/40 text-foreground px-1.5 py-0.5 font-medium"
-                      style={{ borderRadius: '999px' }}
-                    >
-                      {ticker}
-                    </span>
-                  ))}
-                  {recentPurchases.length > 3 && (
-                    <span
-                      className="text-xs bg-secondary/40 text-muted-foreground px-1.5 py-0.5"
-                      style={{ borderRadius: '999px' }}
-                    >
-                      +{recentPurchases.length - 3}
-                    </span>
-                  )}
-                </div>
-              </div>
-            )}
+            {/* Date Info Row */}
+            <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+              <span>🕓 Created {createdDate}</span>
+              <span>•</span>
+              <span>✏️ Last edited {lastEditedDate}</span>
+            </div>
 
             {/* Info Row - Compact */}
             <div className="flex items-center justify-between text-xs text-muted-foreground">
               <div className="flex items-center gap-2">
-                <span>🧠 {sharpeRatio && sharpeRatio > 1.5 ? 'Moderate' : sharpeRatio && sharpeRatio > 1 ? 'Conservative' : 'Aggressive'}</span>
-                <span>🕒 2d ago</span>
                 {isOwned && (
                   <span className="text-emerald-400 font-medium">Your Portfolio</span>
                 )}
@@ -178,31 +164,23 @@ const PortfolioCard = ({
         <CollapsibleContent>
           <div className="px-2.5 pb-2.5 pt-0 border-t border-border/30 bg-secondary/5" style={{ borderRadius: '0 0 10px 10px' }}>
             <div className="space-y-2 pt-2">
-              {/* Recent Holdings */}
-              {recentPurchases.length > 0 && (
-                <div>
-                  <h4 className="text-xs font-semibold text-muted-foreground mb-1">Recent Holdings</h4>
-                  <div className="flex flex-wrap gap-1">
-                    {recentPurchases.map((ticker, index) => (
-                      <span
-                        key={index}
-                        className="text-xs bg-secondary/50 text-foreground px-2 py-1 font-medium"
-                        style={{ borderRadius: '10px' }}
-                      >
-                        {ticker}
-                      </span>
-                    ))}
-                  </div>
+              {/* Portfolio Metrics */}
+              <div>
+                <h4 className="text-xs font-semibold text-muted-foreground mb-1">Metrics</h4>
+                <div className="space-y-0.5 text-xs text-muted-foreground">
+                  {sharpeRatio && <div>Sharpe: {sharpeRatio.toFixed(2)}</div>}
+                  {sortinioRatio && <div>Sortino: {sortinioRatio.toFixed(2)}</div>}
+                  <div>Benchmark: {benchmark}</div>
                 </div>
-              )}
+              </div>
               
               {/* Portfolio Info */}
               <div>
                 <h4 className="text-xs font-semibold text-muted-foreground mb-1">Portfolio Info</h4>
                 <div className="space-y-0.5 text-xs text-muted-foreground">
-                  <div>Strategy: {isOwned ? 'Personal portfolio' : `${author}'s strategy`}</div>
-                  <div>Risk Level: {sharpeRatio && sharpeRatio > 1.5 ? 'Moderate' : sharpeRatio && sharpeRatio > 1 ? 'Conservative' : 'Aggressive'}</div>
-                  <div>Last Updated: 2 days ago</div>
+                  <div>Created: {createdDate}</div>
+                  <div>Last Updated: {lastEditedDate}</div>
+                  {author && isSubscribed && <div>Strategy: {author}'s approach</div>}
                 </div>
               </div>
               

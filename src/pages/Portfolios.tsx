@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { BarChart3, Users } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -11,16 +10,96 @@ const Portfolios = () => {
   const [timeRange, setTimeRange] = useState("LTD");
   
   const myPortfolios = [
-    { id: '124358', name: 'Dividend Portfolio', return: 26, isOwned: true, sharpeRatio: 1.8, recentPurchases: ['JNJ', 'PG', 'KO', 'VZ'] },
-    { id: '267943', name: 'Tech Growth Portfolio', return: 32.5, isOwned: true, sharpeRatio: 2.1, recentPurchases: ['AAPL', 'MSFT', 'NVDA', 'AMZN'] },
+    { 
+      id: '124358', 
+      name: 'Dividend Portfolio', 
+      return: 26, 
+      isOwned: true, 
+      sharpeRatio: 1.8, 
+      sortinioRatio: 2.1,
+      createdDate: 'May 10',
+      lastEditedDate: '2 days ago',
+      benchmark: 'SPY'
+    },
+    { 
+      id: '267943', 
+      name: 'Tech Growth Portfolio', 
+      return: 32.5, 
+      isOwned: true, 
+      sharpeRatio: 2.1, 
+      sortinioRatio: 2.4,
+      createdDate: 'Mar 15',
+      lastEditedDate: '1 day ago',
+      benchmark: 'QQQ'
+    },
   ];
 
   const subscribedPortfolios = [
-    { id: '124358', name: 'Real Estate Portfolio', return: 14.05, isOwned: false, author: 'Emma Stone', sharpeRatio: 1.2, recentPurchases: ['SPG', 'AMT', 'EQIX'], rank: 12 },
-    { id: '346792', name: 'Healthcare Portfolio', return: -2.15, isOwned: false, author: 'Jacob Wilson', sharpeRatio: 0.9, recentPurchases: ['UNH', 'JNJ', 'PFE'], rank: 45 },
-    { id: '578431', name: 'Auto Portfolio', return: 14.05, isOwned: false, author: 'Madison Gray', sharpeRatio: 1.4, recentPurchases: ['TSLA', 'F', 'GM'], rank: 8 },
-    { id: '698752', name: 'FMCG Portfolio', return: 8.33, isOwned: false, author: 'Chris Evans', sharpeRatio: 1.1, recentPurchases: ['PG', 'K', 'KHC'], rank: 36 },
-    { id: '789023', name: 'IT Portfolio', return: 22.67, isOwned: false, author: 'Robert Lopez', sharpeRatio: 1.6, recentPurchases: ['MSFT', 'ORCL', 'CRM'], rank: 3 },
+    { 
+      id: '124358', 
+      name: 'Real Estate Portfolio', 
+      return: 14.05, 
+      isOwned: false, 
+      author: 'Emma Stone', 
+      sharpeRatio: 1.2, 
+      sortinioRatio: 1.5,
+      rank: 12,
+      createdDate: 'Jan 22',
+      lastEditedDate: '3 days ago',
+      benchmark: 'VNQ'
+    },
+    { 
+      id: '346792', 
+      name: 'Healthcare Portfolio', 
+      return: -2.15, 
+      isOwned: false, 
+      author: 'Jacob Wilson', 
+      sharpeRatio: 0.9, 
+      sortinioRatio: 1.1,
+      rank: 45,
+      createdDate: 'Feb 8',
+      lastEditedDate: '1 week ago',
+      benchmark: 'XLV'
+    },
+    { 
+      id: '578431', 
+      name: 'Auto Portfolio', 
+      return: 14.05, 
+      isOwned: false, 
+      author: 'Madison Gray', 
+      sharpeRatio: 1.4, 
+      sortinioRatio: 1.7,
+      rank: 8,
+      createdDate: 'Apr 3',
+      lastEditedDate: '4 days ago',
+      benchmark: 'CARZ'
+    },
+    { 
+      id: '698752', 
+      name: 'FMCG Portfolio', 
+      return: 8.33, 
+      isOwned: false, 
+      author: 'Chris Evans', 
+      sharpeRatio: 1.1, 
+      sortinioRatio: 1.3,
+      rank: 36,
+      createdDate: 'Jun 12',
+      lastEditedDate: '5 days ago',
+      benchmark: 'XLP'
+    },
+    { 
+      id: '789023', 
+      name: 'IT Portfolio', 
+      return: 22.67, 
+      isOwned: false, 
+      author: 'Robert Lopez', 
+      sharpeRatio: 1.6, 
+      sortinioRatio: 1.9,
+      rank: 3,
+      createdDate: 'Mar 28',
+      lastEditedDate: '2 days ago',
+      benchmark: 'XLK'
+    },
   ];
   
   // Sample chart data for performance 
