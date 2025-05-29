@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { TrendingUp, BarChart3, Clock } from 'lucide-react';
+import { TrendingUp, BarChart3 } from 'lucide-react';
 
 interface PortfolioStatsProps {
   timeRange: string;
@@ -31,27 +31,23 @@ const PortfolioStats = ({ timeRange, setTimeRange }: PortfolioStatsProps) => {
         </div>
       </div>
       
-      {/* Unified Portfolio Stats Overview */}
-      <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-4 mb-4 shadow-lg shadow-blue-500/5" style={{ borderRadius: '12px' }}>
-        <div className="space-y-3">
+      {/* Separate Bubble Cards */}
+      <div className="space-y-3 mb-4">
+        <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-3 shadow-lg shadow-blue-500/5" style={{ borderRadius: '12px' }}>
           <div className="flex items-center gap-2 text-sm">
             <TrendingUp size={14} className="text-emerald-400" />
             <span className="text-gray-400">Top:</span>
             <span className="font-semibold text-emerald-400">IT Portfolio</span>
             <span className="text-emerald-400 font-bold">↑ +22.67%</span>
           </div>
-          
+        </div>
+        
+        <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-3 shadow-lg shadow-blue-500/5" style={{ borderRadius: '12px' }}>
           <div className="flex items-center gap-2 text-sm">
             <BarChart3 size={14} className="text-blue-400" />
             <span className="text-gray-400">Avg Return:</span>
             <span className="font-semibold text-white">+11.39%</span>
             <span className="text-gray-500">across 5 followed portfolios</span>
-          </div>
-          
-          <div className="flex items-center gap-2 text-sm">
-            <Clock size={14} className="text-gray-400" />
-            <span className="text-gray-400">Last Trade:</span>
-            <span className="text-gray-300">May 22, 2025</span>
           </div>
         </div>
       </div>
