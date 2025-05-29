@@ -31,8 +31,8 @@ const PortfolioStats = ({ timeRange, setTimeRange }: PortfolioStatsProps) => {
         </div>
       </div>
       
-      {/* Separate Bubble Cards */}
-      <div className="space-y-3 mb-4">
+      {/* Side by Side Bubble Cards */}
+      <div className="grid grid-cols-1 gap-3 mb-4">
         <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-3 shadow-lg shadow-blue-500/5" style={{ borderRadius: '12px' }}>
           <div className="flex items-center gap-2 text-sm">
             <TrendingUp size={14} className="text-emerald-400" />
