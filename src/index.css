@@ -89,6 +89,11 @@
   .add-portfolio-hover:hover .add-portfolio-icon {
     @apply animate-pulse text-emerald-400;
   }
+
+  /* Safe area padding for mobile devices */
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom, 1.5rem);
+  }
 }
 
 /* Force dark mode by default */

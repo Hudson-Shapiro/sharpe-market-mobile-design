@@ -14,7 +14,7 @@ const Discover = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <DiscoverHeader />
-      <div className="p-4 pb-32">
+      <div className="p-4 pb-24 safe-area-pb">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-3 bg-secondary/30 backdrop-blur-sm border-0 mb-6 shadow-lg p-1.5 rounded-2xl">
             <TabsTrigger 
