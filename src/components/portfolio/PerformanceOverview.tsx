@@ -3,6 +3,7 @@ import React from 'react';
 import { Card } from '@/components/ui/card';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { LineChart, Line, XAxis, YAxis } from 'recharts';
+import { TrendingUp, BarChart3, Clock } from 'lucide-react';
 
 interface PerformanceOverviewProps {
   timeRange: string;
@@ -19,7 +20,7 @@ const PerformanceOverview = ({ timeRange, setTimeRange, performanceData, chartCo
   return (
     <Card className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-4 shadow-xl shadow-emerald-500/5" style={{ borderRadius: '12px' }}>
       <div className="flex items-center justify-between mb-3">
-        <h3 className="font-semibold text-lg text-white">Performance Overview</h3>
+        <h3 className="font-semibold text-lg text-white">My Portfolio Performance</h3>
         <div className="flex bg-secondary/30 backdrop-blur-sm p-1 text-xs border-0" style={{ borderRadius: '12px' }}>
           {["LTD", "YTD", "3M", "1D"].map((period) => (
             <button 
@@ -62,12 +63,27 @@ const PerformanceOverview = ({ timeRange, setTimeRange, performanceData, chartCo
           </LineChart>
         </ChartContainer>
       </div>
-      <div className="flex justify-between items-center mt-3 pt-3 border-t border-gray-800/40">
-        <div className="text-sm font-semibold text-emerald-400 bg-emerald-500/10 px-3 py-1.5 border border-emerald-500/20 shadow-lg shadow-emerald-500/10" style={{ borderRadius: '12px' }}>
-          Overall: +28.5% YTD
+      
+      {/* Updated Summary Section */}
+      <div className="space-y-2 mt-3 pt-3 border-t border-gray-800/40">
+        <div className="flex items-center gap-2 text-sm">
+          <TrendingUp size={14} className="text-emerald-400" />
+          <span className="text-gray-400">Top Portfolio:</span>
+          <span className="font-semibold text-emerald-400">Tech Growth Portfolio</span>
+          <span className="text-emerald-400 font-bold">↑ +32.5%</span>
         </div>
-        <div className="text-xs text-gray-400">
-          Last updated: May 22, 2025
+        
+        <div className="flex items-center gap-2 text-sm">
+          <BarChart3 size={14} className="text-blue-400" />
+          <span className="text-gray-400">Avg Return:</span>
+          <span className="font-semibold text-white">+29.3%</span>
+          <span className="text-gray-500">across 2 portfolios</span>
+        </div>
+        
+        <div className="flex items-center gap-2 text-sm">
+          <Clock size={14} className="text-gray-400" />
+          <span className="text-gray-400">Last Trade:</span>
+          <span className="text-gray-300">May 22, 2025</span>
         </div>
       </div>
     </Card>
