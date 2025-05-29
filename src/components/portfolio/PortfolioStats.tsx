@@ -35,29 +35,29 @@ const PortfolioStats = ({ timeRange, setTimeRange }: PortfolioStatsProps) => {
         </div>
       </div>
       
-      {/* Two Horizontal Metric Cards */}
-      <div className="flex gap-2 mb-4 overflow-x-auto sm:overflow-visible">
+      {/* Two Large Horizontal Metric Cards */}
+      <div className="flex gap-3 mb-4">
         {/* Top Performer Card */}
-        <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-2.5 shadow-lg min-w-[120px] flex-1 max-w-[150px]" style={{ borderRadius: '12px' }}>
+        <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-6 shadow-lg flex-1" style={{ borderRadius: '12px' }}>
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1 mb-1.5">
-              <TrendingUp size={10} className="text-emerald-400" />
-              <span className="text-xs text-gray-400">Top Performer</span>
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <TrendingUp size={16} className="text-emerald-400" />
+              <span className="text-sm text-gray-400">Top Performer</span>
             </div>
-            <div className="text-xs font-bold text-emerald-400 mb-1">IT Portfolio</div>
-            <div className="text-sm font-bold text-emerald-400">+22.67%</div>
+            <div className="text-lg font-bold text-emerald-400 mb-2">IT Portfolio</div>
+            <div className="text-2xl font-bold text-emerald-400">+22.67%</div>
           </div>
         </div>
         
         {/* Average Return Card */}
-        <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-2.5 shadow-lg min-w-[120px] flex-1 max-w-[150px]" style={{ borderRadius: '12px' }}>
+        <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-6 shadow-lg flex-1" style={{ borderRadius: '12px' }}>
           <div className="text-center">
-            <div className="flex items-center justify-center gap-1 mb-1.5">
-              <BarChart3 size={10} className="text-blue-400" />
-              <span className="text-xs text-gray-400">Avg Return</span>
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <BarChart3 size={16} className="text-blue-400" />
+              <span className="text-sm text-gray-400">Avg Return</span>
             </div>
-            <div className="text-sm font-bold text-white mb-1">+11.39%</div>
-            <div className="text-xs text-gray-500">5 portfolios</div>
+            <div className="text-2xl font-bold text-white mb-2">+11.39%</div>
+            <div className="text-sm text-gray-500">5 portfolios</div>
           </div>
         </div>
       </div>
