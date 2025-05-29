@@ -33,23 +33,29 @@ const SubscribedPortfoliosTab = ({ subscribedPortfolios, timeRange, setTimeRange
         <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
       </div>
       
-      {/* Compact Bubble Cards - Side by Side */}
-      <div className="space-y-3 px-2 mb-6">
-        <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-3 shadow-lg shadow-emerald-500/5" style={{ borderRadius: '12px' }}>
-          <div className="flex items-center gap-2 text-sm">
-            <TrendingUp size={14} className="text-emerald-400" />
-            <span className="text-gray-400">Top:</span>
-            <span className="font-semibold text-emerald-400">IT Portfolio</span>
-            <span className="text-emerald-400 font-bold">↑ +22.67%</span>
+      {/* Large Square Performance Cards - Side by Side */}
+      <div className="grid grid-cols-2 gap-4 px-2 mb-6">
+        <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-6 shadow-lg shadow-emerald-500/5 aspect-square flex flex-col justify-center" style={{ borderRadius: '16px' }}>
+          <div className="text-center space-y-3">
+            <TrendingUp size={24} className="text-emerald-400 mx-auto" />
+            <div>
+              <div className="text-gray-400 text-sm mb-1">Top Performer</div>
+              <div className="font-bold text-lg text-white mb-2">IT Portfolio</div>
+              <div className="bg-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-bold">
+                ↑ +22.67%
+              </div>
+            </div>
           </div>
         </div>
         
-        <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-3 shadow-lg shadow-blue-500/5" style={{ borderRadius: '12px' }}>
-          <div className="flex items-center gap-2 text-sm">
-            <BarChart3 size={14} className="text-blue-400" />
-            <span className="text-gray-400">Avg Return:</span>
-            <span className="font-semibold text-white">+11.39%</span>
-            <span className="text-gray-500">across 5 portfolios</span>
+        <div className="bg-gray-900/70 backdrop-blur-sm border border-gray-800/60 p-6 shadow-lg shadow-blue-500/5 aspect-square flex flex-col justify-center" style={{ borderRadius: '16px' }}>
+          <div className="text-center space-y-3">
+            <BarChart3 size={24} className="text-blue-400 mx-auto" />
+            <div>
+              <div className="text-gray-400 text-sm mb-1">Average Return</div>
+              <div className="font-bold text-2xl text-white mb-2">11.39%</div>
+              <div className="text-gray-500 text-sm">across 5 portfolios</div>
+            </div>
           </div>
         </div>
       </div>

@@ -17,29 +17,26 @@ const Discover = () => {
         <DiscoverHeader />
         <div className="p-4">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-secondary/30 backdrop-blur-sm border-0 mb-6 shadow-lg p-1" style={{ borderRadius: '12px' }}>
+            <TabsList className="grid w-full grid-cols-3 bg-secondary/30 backdrop-blur-sm border-0 mb-6 shadow-lg p-1.5 rounded-2xl">
               <TabsTrigger 
                 value="leaderboard" 
-                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
-                style={{ borderRadius: '12px' }}
+                className="text-sm font-semibold transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold rounded-xl px-4 py-2.5"
               >
-                <Trophy size={18} />
+                <Trophy size={16} />
                 Leaderboard
               </TabsTrigger>
               <TabsTrigger 
                 value="discover" 
-                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
-                style={{ borderRadius: '12px' }}
+                className="text-sm font-semibold transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold rounded-xl px-4 py-2.5"
               >
-                <Search size={18} />
+                <Search size={16} />
                 Discover
               </TabsTrigger>
               <TabsTrigger 
                 value="market" 
-                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
-                style={{ borderRadius: '12px' }}
+                className="text-sm font-semibold transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold rounded-xl px-4 py-2.5"
               >
-                <TrendingUp size={18} />
+                <TrendingUp size={16} />
                 Market
               </TabsTrigger>
             </TabsList>
