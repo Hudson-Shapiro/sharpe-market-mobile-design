@@ -11,6 +11,7 @@ import Discover from "./pages/Discover";
 import Activity from "./pages/Activity";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
+import Notifications from "./pages/Notifications";
 import StockDetail from "./pages/StockDetail";
 import CreatorProfile from "./pages/CreatorProfile";
 import SharpePlus from "./pages/SharpePlus";
@@ -35,6 +36,7 @@ const App = () => (
                 <Route path="/activity" element={<Activity />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/notifications" element={<Notifications />} />
                 <Route path="/stock/:symbol" element={<StockDetail />} />
                 <Route path="/creator/:creatorId" element={<CreatorProfile />} />
                 <Route path="*" element={<NotFound />} />

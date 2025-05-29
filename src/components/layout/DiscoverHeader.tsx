@@ -23,6 +23,10 @@ const DiscoverHeader = () => {
     setSearchQuery("");
   };
 
+  const handleNotificationsClick = () => {
+    navigate('/notifications');
+  };
+
   return (
     <div className="p-4 pb-2 flex items-center justify-between space-x-3 bg-background relative overflow-hidden">
       {/* Logo - hidden when search is expanded */}
@@ -66,7 +70,10 @@ const DiscoverHeader = () => {
             Cancel
           </button>
         ) : (
-          <button className="w-10 h-10 bg-card rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors relative">
+          <button 
+            onClick={handleNotificationsClick}
+            className="w-10 h-10 bg-card rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors relative"
+          >
             <Bell size={20} />
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
           </button>

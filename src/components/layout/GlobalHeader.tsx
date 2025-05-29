@@ -1,9 +1,15 @@
 
 import React from 'react';
 import { Bell } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const GlobalHeader = () => {
+  const navigate = useNavigate();
+
+  const handleNotificationsClick = () => {
+    navigate('/notifications');
+  };
+
   return (
     <div className="p-4 pb-2 flex items-center justify-between space-x-3 bg-background/95 backdrop-blur-sm border-b border-border/20">
       <Link to="/profile">
@@ -18,7 +24,10 @@ const GlobalHeader = () => {
       <div className="flex-1"></div>
       
       <div className="flex items-center">
-        <button className="w-10 h-10 bg-gray-800/50 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-colors relative">
+        <button 
+          onClick={handleNotificationsClick}
+          className="w-10 h-10 bg-gray-800/50 rounded-full flex items-center justify-center text-gray-300 hover:text-white transition-colors relative"
+        >
           <Bell size={20} />
           <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
         </button>
