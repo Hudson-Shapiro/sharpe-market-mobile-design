@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { TrendingUp, Users, Eye, Flame, Search, Gem, Play, BookOpen, Clock, Star, Crown, Zap } from 'lucide-react';
+import { TrendingUp, Users, Eye, Flame, Search, Gem, Play, BookOpen, Clock, Star, Crown, Zap, Sparkles } from 'lucide-react';
 import TrendingPortfolioCard from './TrendingPortfolioCard';
 import CreatorCard from './CreatorCard';
 import QuickActionCard from './QuickActionCard';
@@ -83,6 +83,41 @@ const DiscoverTab = () => {
 
   return (
     <div className="space-y-6">
+      {/* SharpeMarket Spotlight */}
+      <div className="p-4 rounded-lg border border-emerald-500/20 bg-gradient-to-r from-emerald-500/5 to-blue-500/5 backdrop-blur-sm shadow-sm">
+        <div className="flex items-center gap-2 mb-3">
+          <Sparkles className="text-emerald-400" size={20} />
+          <h3 className="text-lg font-bold text-foreground">SharpeMarket Spotlight</h3>
+          <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 text-xs">
+            Curated
+          </Badge>
+        </div>
+        <div className="mb-3">
+          <h4 className="font-bold text-foreground text-xl mb-1">"AI Revolution"</h4>
+          <p className="text-sm text-muted-foreground mb-3">
+            Selected for its breakout AI theme & exceptional performance this month. 
+            This portfolio captures the essence of the AI transformation happening across markets.
+          </p>
+          <div className="grid grid-cols-3 gap-4 mb-4">
+            <div className="text-center">
+              <div className="text-lg font-bold text-emerald-400">+34.2%</div>
+              <div className="text-xs text-muted-foreground">1M Return</div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-bold text-foreground">Sarah Chen</div>
+              <div className="text-xs text-muted-foreground">Creator</div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-bold text-foreground">2.3k</div>
+              <div className="text-xs text-muted-foreground">Followers</div>
+            </div>
+          </div>
+        </div>
+        <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white" style={{ borderRadius: '8px' }}>
+          🔎 View Portfolio
+        </Button>
+      </div>
+
       {/* Trending Portfolios Carousel */}
       <div>
         <div className="flex items-center gap-2 mb-3">
@@ -93,9 +128,9 @@ const DiscoverTab = () => {
           </Badge>
         </div>
         <Carousel className="w-full">
-          <CarouselContent className="-ml-2 md:-ml-4">
+          <CarouselContent className="-ml-2 md:-ml-3">
             {trendingPortfolios.map((portfolio) => (
-              <CarouselItem key={portfolio.id} className="pl-2 md:pl-4 basis-[280px]">
+              <CarouselItem key={portfolio.id} className="pl-2 md:pl-3 basis-auto">
                 <TrendingPortfolioCard portfolio={portfolio} />
               </CarouselItem>
             ))}
@@ -159,24 +194,6 @@ const DiscoverTab = () => {
 
       {/* Mini Poll Widget */}
       <MiniPoll />
-
-      {/* Portfolio of the Day */}
-      <Card className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-500/30" style={{ borderRadius: '12px' }}>
-        <CardContent className="p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <Star className="text-yellow-400 fill-yellow-400" size={16} />
-            <span className="text-sm font-medium text-purple-400">Portfolio of the Day</span>
-            <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">
-              +32.1%
-            </Badge>
-          </div>
-          <h4 className="font-bold text-foreground mb-1">ESG Growth Leaders</h4>
-          <p className="text-sm text-muted-foreground mb-3">Sustainable companies driving the future</p>
-          <Button size="sm" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600" style={{ borderRadius: '12px' }}>
-            View Portfolio
-          </Button>
-        </CardContent>
-      </Card>
     </div>
   );
 };
