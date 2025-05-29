@@ -257,7 +257,7 @@ const LeaderboardTab = () => {
   };
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 pb-8">
       {/* Combined Header and Time Range Filter - Now Pill Style */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold text-foreground">Top Performers</h2>
