@@ -1,8 +1,7 @@
-
 import React from 'react';
 import PortfolioCard from './PortfolioCard';
 import PortfolioStats from './PortfolioStats';
-import { Users, ChevronDown } from 'lucide-react';
+import { Users } from 'lucide-react';
 
 interface SubscribedPortfolio {
   id: string;
@@ -33,7 +32,6 @@ const SubscribedPortfoliosTab = ({ subscribedPortfolios, timeRange, setTimeRange
       <div className="flex items-center gap-2 px-2 mb-3">
         <Users size={18} className="text-emerald-400" />
         <h3 className="font-bold text-lg text-foreground">Subscribed Portfolios</h3>
-        <ChevronDown size={16} className="text-emerald-400" />
         <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
       </div>
       
