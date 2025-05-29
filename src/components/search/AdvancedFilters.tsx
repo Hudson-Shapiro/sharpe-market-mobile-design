@@ -1,16 +1,29 @@
 
 import React from 'react';
-import { SlidersHorizontal, ChevronDown, Filter, X } from 'lucide-react';
+import { SlidersHorizontal, Filter, X } from 'lucide-react';
+import PortfolioFilterModal from './PortfolioFilterModal';
 
 interface AdvancedFiltersProps {
   onAdvancedFilter: () => void;
   activeFilters: string[];
   setActiveFilters: (filters: string[]) => void;
+  filterVisible: boolean;
+  setFilterVisible: (visible: boolean) => void;
 }
 
-const AdvancedFilters = ({ onAdvancedFilter, activeFilters, setActiveFilters }: AdvancedFiltersProps) => {
+const AdvancedFilters = ({ 
+  onAdvancedFilter, 
+  activeFilters, 
+  setActiveFilters, 
+  filterVisible, 
+  setFilterVisible 
+}: AdvancedFiltersProps) => {
   const removeFilter = (filter: string) => {
     setActiveFilters(activeFilters.filter(f => f !== filter));
+  };
+
+  const handleApplyFilters = (filters: string[]) => {
+    setActiveFilters(filters);
   };
 
   return (
@@ -26,13 +39,22 @@ const AdvancedFilters = ({ onAdvancedFilter, activeFilters, setActiveFilters }: 
               <SlidersHorizontal size={20} className="text-emerald-400" />
             </div>
             <div className="text-left">
-              <h3 className="font-semibold text-foreground">Advanced Filters</h3>
+              <h3 className="font-semibold text-foreground">
+                Filter Portfolios
+                {activeFilters.length > 0 && (
+                  <span className="ml-2 text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full">
+                    {activeFilters.length}
+                  </span>
+                )}
+              </h3>
               <p className="text-sm text-muted-foreground">
                 Filter by performance, risk, holdings & more
               </p>
             </div>
           </div>
-          <ChevronDown size={20} className="text-muted-foreground group-hover:text-emerald-400 transition-colors" />
+          <div className="text-emerald-400 group-hover:scale-110 transition-transform">
+            <SlidersHorizontal size={20} />
+          </div>
         </div>
       </button>
 
@@ -57,6 +79,14 @@ const AdvancedFilters = ({ onAdvancedFilter, activeFilters, setActiveFilters }: 
           </div>
         </div>
       )}
+
+      {/* Portfolio Filter Modal */}
+      <PortfolioFilterModal
+        isOpen={filterVisible}
+        onClose={() => setFilterVisible(false)}
+        onApplyFilters={handleApplyFilters}
+        activeFilters={activeFilters}
+      />
     </div>
   );
 };

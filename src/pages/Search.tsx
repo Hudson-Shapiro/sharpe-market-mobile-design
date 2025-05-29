@@ -30,6 +30,15 @@ const Search = () => {
     setFilterVisible(true);
   };
 
+  const handleScopeChange = (scope: string) => {
+    setSearchScope(scope);
+    // Clear portfolio-specific filters when switching away from portfolios
+    if (scope !== "portfolios") {
+      setActiveFilters([]);
+      setFilterVisible(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Search Header - Sticky */}
@@ -43,7 +52,7 @@ const Search = () => {
       {/* Search Scope Selector */}
       <SearchScopeSelector 
         searchScope={searchScope}
-        setSearchScope={setSearchScope}
+        setSearchScope={handleScopeChange}
       />
 
       <ScrollArea className="h-[calc(100vh-140px)]">
@@ -53,12 +62,18 @@ const Search = () => {
               {/* Search Context Tip */}
               <SearchTip />
               
-              {/* Advanced Filters Section */}
-              <AdvancedFilters 
-                onAdvancedFilter={handleAdvancedFilter}
-                activeFilters={activeFilters}
-                setActiveFilters={setActiveFilters}
-              />
+              {/* Advanced Filters Section - Only for Portfolios */}
+              {searchScope === "portfolios" && (
+                <div className="animate-fade-in">
+                  <AdvancedFilters 
+                    onAdvancedFilter={handleAdvancedFilter}
+                    activeFilters={activeFilters}
+                    setActiveFilters={setActiveFilters}
+                    filterVisible={filterVisible}
+                    setFilterVisible={setFilterVisible}
+                  />
+                </div>
+              )}
               
               {/* Recent Searches */}
               <RecentSearches 
