@@ -64,7 +64,7 @@ const PortfolioCard = ({
       )} style={{ borderRadius: '10px' }}>
         
         <CollapsibleTrigger asChild>
-          <div className="p-4 cursor-pointer">
+          <div className="px-4 py-4 cursor-pointer">
             <PortfolioCardHeader 
               rank={rank}
               name={name}
