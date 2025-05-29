@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -186,7 +187,7 @@ const StockDetail = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Compact Header */}
+      {/* Sticky Header */}
       <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/50">
         <div className="flex items-center justify-between p-3">
           <div className="flex items-center gap-3">
@@ -194,25 +195,25 @@ const StockDetail = () => {
               variant="ghost" 
               size="icon"
               onClick={() => navigate(-1)}
-              className="rounded-full w-8 h-8"
+              className="rounded-full w-9 h-9"
             >
-              <ArrowLeft size={16} />
+              <ArrowLeft size={18} />
             </Button>
             <div>
-              <h1 className="text-base font-bold">{stock.symbol}</h1>
+              <h1 className="text-lg font-bold">{stock.symbol}</h1>
               <p className="text-xs text-muted-foreground">{stock.name}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Badge variant={isPositive ? "default" : "destructive"} className="text-xs px-2 py-0.5 rounded-full h-6">
-              {isPositive ? "GAINING" : "FALLING"}
+            <Badge variant={isPositive ? "default" : "destructive"} className="text-xs px-2 py-1 rounded-full">
+              {isPositive ? "🔺 GAINING" : "🔻 FALLING"}
             </Badge>
-            <Button size="sm" variant="outline" className="rounded-full h-7 px-2 text-xs">
-              <Star size={12} className="mr-1" />
+            <Button size="sm" variant="outline" className="rounded-full h-8 px-3">
+              <Star size={14} className="mr-1" />
               Watch
             </Button>
-            <Button size="sm" variant="outline" className="rounded-full h-7 px-2 text-xs">
-              <Bell size={12} className="mr-1" />
+            <Button size="sm" variant="outline" className="rounded-full h-8 px-3">
+              <Bell size={14} className="mr-1" />
               Alert
             </Button>
           </div>
@@ -221,36 +222,38 @@ const StockDetail = () => {
 
       <ScrollArea className="h-[calc(100vh-65px)]">
         <div className="p-3 space-y-4 pb-20">
-          {/* Compact Hero Price Section */}
-          <Card className="bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-emerald-500/10 border-none shadow-sm" style={{ borderRadius: '12px' }}>
-            <CardContent className="p-3">
+          {/* Hero Price Section */}
+          <Card className="bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-emerald-500/10 border-none shadow-lg" style={{ borderRadius: '16px' }}>
+            <CardContent className="p-4">
               <div className="text-center">
-                <div className={`text-3xl font-bold mb-1 ${isPositive ? 'text-emerald-400' : 'text-red-400'}`}>
+                <div className={`text-4xl font-bold mb-1 ${isPositive ? 'text-emerald-400' : 'text-red-400'}`}>
                   ${stock.price.toFixed(2)}
                 </div>
-                <div className={`flex items-center justify-center gap-2 text-base font-semibold mb-1 ${
+                <div className={`flex items-center justify-center gap-2 text-lg font-semibold mb-2 ${
                   isPositive ? 'text-emerald-400' : 'text-red-400'
                 }`}>
-                  {isPositive ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
+                  {isPositive ? <TrendingUp size={18} /> : <TrendingDown size={18} />}
                   {isPositive ? '+' : ''}{stock.change.toFixed(2)} ({isPositive ? '+' : ''}{stock.changePercent.toFixed(2)}%)
                 </div>
-                <div className="text-xs text-muted-foreground">
-                  Updated {formatTime(lastUpdated)} · Vol {stock.volume}
+                <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+                  <span>Updated {formatTime(lastUpdated)}</span>
+                  <span>•</span>
+                  <span>Vol {stock.volume}</span>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           {/* Compact Chart Section */}
-          <Card style={{ borderRadius: '12px' }} className="shadow-sm">
+          <Card style={{ borderRadius: '16px' }} className="shadow-lg">
             <CardContent className="p-3">
-              <div className="flex justify-between items-center mb-2">
+              <div className="flex justify-between items-center mb-3">
                 <div className="flex gap-1">
                   <button 
                     onClick={() => setChartType("line")}
-                    className={`px-2 py-1 rounded-full text-xs transition-all ${
+                    className={`px-3 py-1 rounded-full text-xs transition-all ${
                       chartType === "line" 
-                        ? "bg-emerald-500/20 text-emerald-400" 
+                        ? "bg-emerald-500/30 text-emerald-400" 
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
@@ -258,9 +261,9 @@ const StockDetail = () => {
                   </button>
                   <button 
                     onClick={() => setChartType("candle")}
-                    className={`px-2 py-1 rounded-full text-xs transition-all ${
+                    className={`px-3 py-1 rounded-full text-xs transition-all ${
                       chartType === "candle" 
-                        ? "bg-emerald-500/20 text-emerald-400" 
+                        ? "bg-emerald-500/30 text-emerald-400" 
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
@@ -271,21 +274,21 @@ const StockDetail = () => {
                   variant={showVolume ? "default" : "outline"}
                   size="sm"
                   onClick={() => setShowVolume(!showVolume)}
-                  className="text-xs rounded-full h-6 px-2"
+                  className="text-xs rounded-full h-7 px-2"
                 >
-                  <Volume2 size={10} className="mr-1" />
+                  <Volume2 size={12} className="mr-1" />
                   Vol
                 </Button>
               </div>
               
-              <div className="flex bg-secondary/20 rounded-full p-0.5 text-xs mb-2">
+              <div className="flex bg-secondary/30 rounded-full p-1 text-xs mb-3">
                 {chartTimeRanges.map((period) => (
                   <button 
                     key={period}
                     onClick={() => setChartTimeRange(period)}
-                    className={`px-2 py-1 rounded-full transition-all flex-1 ${
+                    className={`px-3 py-1 rounded-full transition-all flex-1 ${
                       chartTimeRange === period 
-                        ? "bg-white text-black shadow-sm font-semibold" 
+                        ? "bg-white text-black shadow-md font-semibold" 
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
@@ -294,7 +297,7 @@ const StockDetail = () => {
                 ))}
               </div>
               
-              <div className="h-48">
+              <div className="h-56">
                 <ResponsiveContainer width="100%" height="100%">
                   <ComposedChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgb(55 65 81)" />
@@ -312,7 +315,7 @@ const StockDetail = () => {
                       contentStyle={{
                         backgroundColor: 'rgb(30 41 59)',
                         border: '1px solid rgb(71 85 105)',
-                        borderRadius: '8px',
+                        borderRadius: '12px',
                         color: 'white'
                       }}
                       formatter={(value, name) => [
@@ -326,7 +329,7 @@ const StockDetail = () => {
                       stroke={isPositive ? "rgb(34 197 94)" : "rgb(239 68 68)"}
                       strokeWidth={2}
                       dot={false}
-                      activeDot={{ r: 3, fill: isPositive ? "rgb(34 197 94)" : "rgb(239 68 68)" }}
+                      activeDot={{ r: 4, fill: isPositive ? "rgb(34 197 94)" : "rgb(239 68 68)" }}
                     />
                     {showVolume && (
                       <Bar 
@@ -342,43 +345,49 @@ const StockDetail = () => {
             </CardContent>
           </Card>
 
-          {/* Compact Stats Grid - Gemini Style */}
-          <div className="grid grid-cols-2 gap-x-4 gap-y-3 px-2">
-            <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">Market Cap</span>
-              <span className="text-sm font-semibold text-foreground">{stock.marketCap}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">P/E Ratio</span>
-              <span className="text-sm font-semibold text-foreground">{stock.pe}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">Dividend</span>
-              <span className="text-sm font-semibold text-foreground">{stock.dividend}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-muted-foreground">Beta</span>
-              <span className="text-sm font-semibold text-foreground">{stock.beta}</span>
-            </div>
+          {/* Compact Stats Grid */}
+          <div className="grid grid-cols-2 gap-2">
+            <Card style={{ borderRadius: '12px' }} className="text-center p-3 hover:shadow-lg transition-all">
+              <div className="text-lg mb-1">🏢</div>
+              <p className="text-xs text-muted-foreground mb-1">Market Cap</p>
+              <p className="text-sm font-bold text-foreground">{stock.marketCap}</p>
+            </Card>
+            <Card style={{ borderRadius: '12px' }} className="text-center p-3 hover:shadow-lg transition-all">
+              <div className="text-lg mb-1">📊</div>
+              <p className="text-xs text-muted-foreground mb-1">P/E Ratio</p>
+              <p className="text-sm font-bold text-foreground">{stock.pe}</p>
+            </Card>
+            <Card style={{ borderRadius: '12px' }} className="text-center p-3 hover:shadow-lg transition-all">
+              <div className="text-lg mb-1">💰</div>
+              <p className="text-xs text-muted-foreground mb-1">Dividend</p>
+              <p className="text-sm font-bold text-foreground">{stock.dividend}</p>
+            </Card>
+            <Card style={{ borderRadius: '12px' }} className="text-center p-3 hover:shadow-lg transition-all">
+              <div className="text-lg mb-1">⚡</div>
+              <p className="text-xs text-muted-foreground mb-1">Beta</p>
+              <p className="text-sm font-bold text-foreground">{stock.beta}</p>
+            </Card>
           </div>
 
           {/* Compact Events Section */}
           <div>
-            <h3 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2 px-2">
-              <Calendar size={14} />
+            <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+              <Calendar size={16} />
               What's Happening
             </h3>
             <div className="space-y-2">
               {stock.events.map((event, index) => (
-                <div key={index} className="flex items-center justify-between p-2 rounded-lg bg-gradient-to-r from-blue-500/5 to-purple-500/5 hover:from-blue-500/10 hover:to-purple-500/10 transition-all border border-blue-500/10">
-                  <div className="flex items-center gap-2">
-                    <div className="text-sm">
+                <div key={index} className="flex items-center justify-between p-3 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 transition-all border border-blue-500/20">
+                  <div className="flex items-center gap-3">
+                    <div className="text-lg">
                       {event.type === 'earnings' && '📊'}
                       {event.type === 'dividend' && '💸'}
                       {event.type === 'news' && '📰'}
                       {event.type === 'vote' && '🗳️'}
                     </div>
-                    <p className="font-medium text-foreground text-sm">{event.title}</p>
+                    <div>
+                      <p className="font-medium text-foreground text-sm">{event.title}</p>
+                    </div>
                   </div>
                   <p className="text-xs text-muted-foreground">{event.date}</p>
                 </div>
@@ -386,21 +395,21 @@ const StockDetail = () => {
             </div>
           </div>
 
-          {/* Compact Day Range */}
-          <Card style={{ borderRadius: '12px' }} className="shadow-sm">
-            <CardContent className="p-3">
-              <h3 className="text-sm font-semibold text-foreground mb-2">Today's Range</h3>
-              <div className="flex justify-between text-sm text-muted-foreground mb-1">
+          {/* Day Range */}
+          <Card style={{ borderRadius: '16px' }} className="shadow-lg">
+            <CardContent className="p-4">
+              <h3 className="text-sm font-semibold text-foreground mb-3">Today's Range</h3>
+              <div className="flex justify-between text-sm text-muted-foreground mb-2">
                 <span>${stock.dayRange.low}</span>
                 <span>${stock.dayRange.high}</span>
               </div>
-              <div className="w-full bg-secondary/30 rounded-full h-1.5 relative">
+              <div className="w-full bg-secondary/30 rounded-full h-2 relative">
                 <div 
-                  className="bg-gradient-to-r from-red-400 to-emerald-400 h-1.5 rounded-full"
+                  className="bg-gradient-to-r from-red-400 to-emerald-400 h-2 rounded-full"
                   style={{ width: '100%' }}
                 />
                 <div 
-                  className="absolute top-0 w-1.5 h-1.5 bg-white border border-blue-500 rounded-full transform -translate-y-0"
+                  className="absolute top-0 w-2 h-2 bg-white border border-blue-500 rounded-full transform -translate-y-0"
                   style={{ 
                     left: `${((stock.price - stock.dayRange.low) / (stock.dayRange.high - stock.dayRange.low)) * 100}%` 
                   }}
@@ -411,18 +420,18 @@ const StockDetail = () => {
 
           {/* Related Stocks - Horizontal Scroll */}
           <div>
-            <h3 className="text-sm font-semibold text-foreground mb-2 px-2">Related Stocks</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3">Related Stocks</h3>
             <div className="flex gap-3 overflow-x-auto pb-2">
               {relatedStocks.map((relatedStock) => (
                 <Card 
                   key={relatedStock.symbol}
-                  className="min-w-[120px] cursor-pointer hover:shadow-md transition-all duration-300 hover:scale-105 flex-shrink-0"
+                  className="min-w-[140px] cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105 flex-shrink-0"
                   onClick={() => navigate(`/stock/${relatedStock.symbol}`)}
-                  style={{ borderRadius: '10px' }}
+                  style={{ borderRadius: '12px' }}
                 >
-                  <CardContent className="p-2">
+                  <CardContent className="p-3">
                     <div className="text-center space-y-1">
-                      <div className="text-lg">{relatedStock.logo}</div>
+                      <div className="text-2xl">{relatedStock.logo}</div>
                       <h4 className="font-bold text-foreground text-sm">{relatedStock.symbol}</h4>
                       <div>
                         <p className="text-sm font-bold text-foreground">${relatedStock.price.toFixed(2)}</p>

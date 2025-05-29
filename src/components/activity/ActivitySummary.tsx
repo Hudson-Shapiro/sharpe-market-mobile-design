@@ -29,81 +29,80 @@ const ActivitySummary = () => {
   };
 
   return (
-    <div className="mb-4 px-4">
-      {/* Clean 2x2 Stats Grid */}
-      <div className="bg-card/60 backdrop-blur-sm border border-border/50 p-4 shadow-sm" style={{ borderRadius: '12px' }}>
-        {/* Top Row */}
-        <div className="grid grid-cols-2 gap-6 mb-4">
-          {/* Net Gain */}
+    <Card className="mb-6 bg-gradient-to-br from-emerald-500/10 via-green-500/5 to-emerald-600/10 border-emerald-500/20 backdrop-blur-sm shadow-2xl shadow-emerald-500/5" style={{ borderRadius: '12px' }}>
+      <CardContent className="p-4">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <div className="p-1.5 bg-gradient-to-br from-emerald-400/20 to-green-500/20 shadow-lg" style={{ borderRadius: '12px' }}>
+              <Trophy className="text-emerald-400 drop-shadow-sm" size={16} />
+            </div>
+            <h3 className="text-base font-bold text-foreground">Activity Summary</h3>
+          </div>
+        </div>
+        
+        {/* 2x2 Grid Layout */}
+        <div className="grid grid-cols-2 gap-4">
+          {/* Top Row: Net Gain | Best Trade */}
           <div 
-            className="cursor-pointer group relative"
+            className="text-center cursor-pointer group relative"
             onClick={() => handleStatClick('netGain')}
           >
-            <div className="flex items-center gap-2 mb-1">
-              <DollarSign size={14} className="text-emerald-400" />
-              <span className="text-sm font-medium text-muted-foreground">Net Gain</span>
+            <div className="flex items-center justify-center gap-1 text-emerald-400 font-bold text-lg group-hover:scale-105 transition-transform duration-200">
+              <div className="p-1 bg-emerald-500/20 group-hover:bg-emerald-500/30 transition-colors" style={{ borderRadius: '12px' }}>
+                <DollarSign size={12} className="drop-shadow-sm" />
+              </div>
+              <span className="font-mono text-base">+{summaryData.netGain.toLocaleString()}</span>
             </div>
-            <div className="text-xl font-bold text-emerald-400 group-hover:text-emerald-300 transition-colors">
-              +${summaryData.netGain.toLocaleString()}
-            </div>
+            <p className="text-xs text-muted-foreground mt-0.5">Net Gain</p>
             
             {expandedStat === 'netGain' && (
-              <div className="absolute top-full left-0 mt-2 p-3 bg-card border border-border shadow-lg z-20 min-w-[200px] animate-fade-in" style={{ borderRadius: '8px' }}>
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 p-3 bg-card border border-emerald-500/20 shadow-xl z-20 min-w-[200px] animate-fade-in" style={{ borderRadius: '12px' }}>
                 <p className="text-xs text-muted-foreground">{getTooltipContent('netGain')}</p>
               </div>
             )}
           </div>
 
-          {/* Best Trade */}
           <div 
-            className="cursor-pointer group relative"
+            className="text-center cursor-pointer group relative"
             onClick={() => handleStatClick('bestTrade')}
           >
-            <div className="flex items-center gap-2 mb-1">
-              <TrendingUp size={14} className="text-emerald-400" />
-              <span className="text-sm font-medium text-muted-foreground">Best Trade</span>
+            <div className="flex items-center justify-center gap-1 text-emerald-400 font-bold text-lg group-hover:scale-105 transition-transform duration-200">
+              <div className="p-1 bg-emerald-500/20 group-hover:bg-emerald-500/30 transition-colors" style={{ borderRadius: '12px' }}>
+                <TrendingUp size={12} className="drop-shadow-sm" />
+              </div>
+              <span className="font-mono text-base">+{summaryData.bestTrade}</span>
             </div>
-            <div className="text-xl font-bold text-emerald-400 group-hover:text-emerald-300 transition-colors">
-              +${summaryData.bestTrade}
-            </div>
+            <p className="text-xs text-muted-foreground mt-0.5">Best Trade</p>
             
             {expandedStat === 'bestTrade' && (
-              <div className="absolute top-full left-0 mt-2 p-3 bg-card border border-border shadow-lg z-20 min-w-[160px] animate-fade-in" style={{ borderRadius: '8px' }}>
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 p-3 bg-card border border-emerald-500/20 shadow-xl z-20 min-w-[160px] animate-fade-in" style={{ borderRadius: '12px' }}>
                 <p className="text-xs text-muted-foreground">{getTooltipContent('bestTrade')}</p>
               </div>
             )}
           </div>
-        </div>
 
-        {/* Subtle divider */}
-        <div className="w-full h-px bg-border/30 mb-4"></div>
-
-        {/* Bottom Row */}
-        <div className="grid grid-cols-2 gap-6">
-          {/* Total Trades */}
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <Activity size={14} className="text-blue-400" />
-              <span className="text-sm font-medium text-muted-foreground">Trades</span>
+          {/* Bottom Row: Total Trades | Most Active */}
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-1 text-foreground font-bold text-lg hover:scale-105 transition-transform duration-200">
+              <div className="p-1 bg-blue-500/20 hover:bg-blue-500/30 transition-colors" style={{ borderRadius: '12px' }}>
+                <Activity size={12} className="text-blue-400 drop-shadow-sm" />
+              </div>
+              <span className="font-mono text-base">{summaryData.totalTrades}</span>
             </div>
-            <div className="text-xl font-bold text-foreground">
-              {summaryData.totalTrades}
-            </div>
+            <p className="text-xs text-muted-foreground mt-0.5">Trades</p>
           </div>
           
-          {/* Most Active */}
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <Trophy size={14} className="text-purple-400" />
-              <span className="text-sm font-medium text-muted-foreground">Most Active</span>
+          <div className="text-center">
+            <div className="text-foreground font-bold text-sm truncate hover:scale-105 transition-transform duration-200">
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent text-base">
+                {summaryData.mostActivePortfolio}
+              </span>
             </div>
-            <div className="text-xl font-bold text-purple-400">
-              {summaryData.mostActivePortfolio}
-            </div>
+            <p className="text-xs text-muted-foreground mt-0.5">Most Active</p>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

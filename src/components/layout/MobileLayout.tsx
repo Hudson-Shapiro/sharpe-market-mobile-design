@@ -26,14 +26,14 @@ const MobileLayout = ({ children }: MobileLayoutProps) => {
 
   return (
     <div className="h-screen flex flex-col bg-background text-foreground">
-      {/* Main Content - with bottom padding to account for navigation */}
-      <div className="flex-1 overflow-hidden pb-20">
+      {/* Main Content - headers are now inside the scrollable content */}
+      <div className="flex-1 overflow-hidden">
         {children}
       </div>
       
-      {/* Bottom Navigation - Fixed with higher z-index */}
-      <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-border z-50">
-        <div className="flex items-center justify-around py-2 px-2 safe-area-pb">
+      {/* Bottom Navigation */}
+      <div className="bg-background border-t border-border">
+        <div className="flex items-center justify-around py-2">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Search as SearchIcon } from 'lucide-react';
+import { X, Search as SearchIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,29 +16,28 @@ const SearchHeader = ({ searchQuery, setSearchQuery }: SearchHeaderProps) => {
     navigate(-1);
   };
 
-  const handleClearSearch = () => {
-    setSearchQuery("");
-  };
-
   return (
     <div className="p-4 flex items-center gap-3">
+      <button onClick={handleClose} className="text-muted-foreground hover:text-foreground transition-colors">
+        <X size={24} />
+      </button>
       <div className="flex-1 relative">
-        <div className="flex items-center bg-card rounded-xl py-2.5 px-4 ring-2 ring-emerald-500/30 shadow-lg shadow-emerald-500/10 border border-emerald-500/20">
-          <SearchIcon size={20} className="text-muted-foreground mr-2" />
+        <div className="flex items-center bg-secondary/70 rounded-2xl py-3 px-4 border border-border/50 shadow-sm">
+          <SearchIcon size={20} className="text-muted-foreground mr-3" />
           <Input 
             type="text" 
             placeholder="Search portfolios, users, stocks..." 
-            className="bg-transparent border-none focus:outline-none w-full h-auto p-0 placeholder:text-muted-foreground/70 font-medium focus:ring-0"
+            className="bg-transparent border-none focus:outline-none w-full h-auto p-0 placeholder:text-muted-foreground/70 font-medium"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             autoFocus
           />
           {searchQuery && (
             <button 
-              onClick={handleClearSearch} 
-              className="text-muted-foreground hover:text-foreground transition-colors ml-2 text-sm"
+              onClick={() => setSearchQuery("")} 
+              className="text-muted-foreground hover:text-foreground transition-colors ml-2"
             >
-              Clear
+              <X size={18} />
             </button>
           )}
         </div>

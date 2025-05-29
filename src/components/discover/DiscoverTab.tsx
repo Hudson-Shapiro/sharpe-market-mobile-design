@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -81,7 +82,7 @@ const DiscoverTab = () => {
   ];
 
   return (
-    <div className="space-y-6 pb-8">
+    <div className="space-y-6">
       {/* Trending Portfolios Carousel */}
       <div>
         <div className="flex items-center gap-2 mb-3">
