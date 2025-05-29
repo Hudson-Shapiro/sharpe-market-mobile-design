@@ -83,8 +83,8 @@ const PortfolioCard = ({
           </div>
         </CollapsibleTrigger>
 
-        {/* Enhanced Dropdown Indicator */}
-        <div className="absolute top-3 right-3 bg-secondary/80 backdrop-blur-sm p-1.5 rounded-md transition-all duration-200 hover:bg-secondary">
+        {/* Enhanced Dropdown Indicator - Moved to bottom right */}
+        <div className="absolute bottom-3 right-3 bg-secondary/80 backdrop-blur-sm p-1.5 rounded-md transition-all duration-200 hover:bg-secondary">
           {isExpanded ? (
             <ChevronUp size={14} className="text-muted-foreground" />
           ) : (
