@@ -92,43 +92,43 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-lg max-h-[80vh] bg-background border border-border rounded-2xl p-0">
-        <DialogHeader className="px-6 pt-6 pb-2">
-          <DialogTitle className="flex items-center gap-3 text-foreground text-xl">
-            <div className="w-8 h-8 bg-emerald-500/20 rounded-xl flex items-center justify-center">
-              <BarChart3 size={18} className="text-emerald-400" />
+      <DialogContent className="max-w-md w-[95vw] max-h-[85vh] bg-background border border-border rounded-2xl p-0 overflow-hidden">
+        <DialogHeader className="px-6 pt-6 pb-3 border-b border-border/20">
+          <DialogTitle className="flex items-center gap-3 text-foreground text-lg">
+            <div className="w-7 h-7 bg-emerald-500/20 rounded-xl flex items-center justify-center">
+              <BarChart3 size={16} className="text-emerald-400" />
             </div>
             Portfolio Filters
           </DialogTitle>
         </DialogHeader>
         
-        <div className="flex flex-col h-full">
-          <div className="overflow-y-auto flex-1 px-6 space-y-4">
+        <div className="flex flex-col h-full overflow-hidden">
+          <div className="overflow-y-auto flex-1 px-6 py-4 space-y-6">
             {/* Performance Section */}
             <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                  <span className="text-sm">📈</span>
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                  <BarChart3 size={12} className="text-emerald-400" />
                 </div>
-                <h3 className="font-semibold text-foreground">Performance</h3>
+                <h3 className="font-semibold text-foreground text-sm">Performance</h3>
               </div>
               
-              <div className="space-y-4 bg-secondary/30 p-3 rounded-xl">
+              <div className="space-y-4 bg-secondary/20 p-4 rounded-xl">
                 <div>
-                  <div className="flex justify-between items-center mb-2">
+                  <div className="flex justify-between items-center mb-3">
                     <label className="text-sm font-medium text-muted-foreground">Annual Return</label>
                     <span className="text-sm font-semibold text-emerald-400">{returnRange[0]}% - {returnRange[1]}%</span>
                   </div>
-                  <div className="relative">
+                  <div className="px-2">
                     <Slider
                       value={returnRange}
                       onValueChange={setReturnRange}
                       max={100}
                       min={0}
                       step={5}
-                      className="[&>.relative]:bg-secondary [&_[role=slider]]:border-emerald-500 [&_[role=slider]]:bg-emerald-500"
+                      className="w-full"
                     />
-                    <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                    <div className="flex justify-between text-xs text-muted-foreground mt-2">
                       <span>0%</span>
                       <span>100%</span>
                     </div>
@@ -136,20 +136,20 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
                 </div>
                 
                 <div>
-                  <div className="flex justify-between items-center mb-2">
+                  <div className="flex justify-between items-center mb-3">
                     <label className="text-sm font-medium text-muted-foreground">Sharpe Ratio</label>
                     <span className="text-sm font-semibold text-emerald-400">{sharpeRatio[0].toFixed(1)} - {sharpeRatio[1].toFixed(1)}</span>
                   </div>
-                  <div className="relative">
+                  <div className="px-2">
                     <Slider
                       value={sharpeRatio}
                       onValueChange={setSharpeRatio}
                       max={5}
                       min={0}
                       step={0.1}
-                      className="[&>.relative]:bg-secondary [&_[role=slider]]:border-emerald-500 [&_[role=slider]]:bg-emerald-500"
+                      className="w-full"
                     />
-                    <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                    <div className="flex justify-between text-xs text-muted-foreground mt-2">
                       <span>0.0</span>
                       <span>5.0</span>
                     </div>
@@ -160,11 +160,11 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
 
             {/* Benchmark Section */}
             <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                  <BarChart3 size={14} className="text-emerald-400" />
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                  <BarChart3 size={12} className="text-emerald-400" />
                 </div>
-                <h3 className="font-semibold text-foreground">Benchmark</h3>
+                <h3 className="font-semibold text-foreground text-sm">Benchmark</h3>
               </div>
               
               <RadioGroup value={benchmark} onValueChange={setBenchmark}>
@@ -178,7 +178,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
                       />
                       <label 
                         htmlFor={bench.id} 
-                        className="flex items-center justify-center px-3 py-2 rounded-xl border-2 transition-all duration-200 cursor-pointer hover:scale-105 peer-checked:bg-emerald-500/20 peer-checked:border-emerald-500/50 peer-checked:shadow-lg peer-checked:shadow-emerald-500/20 font-medium text-sm"
+                        className="flex items-center justify-center px-3 py-2.5 rounded-xl border-2 border-border/50 transition-all duration-200 cursor-pointer hover:border-emerald-500/50 peer-checked:bg-emerald-500/20 peer-checked:border-emerald-500 font-medium text-sm bg-card"
                       >
                         {bench.label}
                       </label>
@@ -190,11 +190,11 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
 
             {/* Group ID Search */}
             <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                  <Search size={14} className="text-emerald-400" />
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                  <Search size={12} className="text-emerald-400" />
                 </div>
-                <h3 className="font-semibold text-foreground">Search by Group ID</h3>
+                <h3 className="font-semibold text-foreground text-sm">Search by Group ID</h3>
               </div>
               
               <div className="relative">
@@ -202,7 +202,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
                   value={groupId}
                   onChange={(e) => setGroupId(e.target.value)}
                   placeholder="Enter Group ID..."
-                  className="pl-10 rounded-xl border-2 h-10 transition-all duration-200 focus:border-emerald-500/50 focus:ring-emerald-500/20"
+                  className="pl-10 rounded-xl border-2 h-11 transition-all duration-200 focus:border-emerald-500"
                 />
                 <Search size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
               </div>
@@ -210,15 +210,15 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
 
             {/* Creator Filters */}
             <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                  <span className="text-sm">👤</span>
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                  <Users size={12} className="text-emerald-400" />
                 </div>
-                <h3 className="font-semibold text-foreground">Creator</h3>
+                <h3 className="font-semibold text-foreground text-sm">Creator</h3>
               </div>
               
-              <div className="flex items-center justify-between bg-secondary/30 p-3 rounded-xl">
-                <span className="font-medium text-foreground">Verified Creators Only</span>
+              <div className="flex items-center justify-between bg-secondary/20 p-4 rounded-xl">
+                <span className="font-medium text-foreground text-sm">Verified Creators Only</span>
                 <Switch 
                   checked={verifiedOnly} 
                   onCheckedChange={setVerifiedOnly}
@@ -229,11 +229,11 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
 
             {/* Sector Focus */}
             <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                  <Zap size={14} className="text-emerald-400" />
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                  <Zap size={12} className="text-emerald-400" />
                 </div>
-                <h3 className="font-semibold text-foreground">Sector Focus</h3>
+                <h3 className="font-semibold text-foreground text-sm">Sector Focus</h3>
               </div>
               
               <ToggleGroup type="multiple" value={sectors} onValueChange={setSectors}>
@@ -242,7 +242,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
                     <ToggleGroupItem
                       key={sector}
                       value={sector}
-                      className="px-3 py-2 rounded-xl border-2 transition-all duration-200 hover:scale-105 data-[state=on]:bg-emerald-500/20 data-[state=on]:border-emerald-500/50 data-[state=on]:shadow-lg data-[state=on]:shadow-emerald-500/20 text-sm font-medium"
+                      className="px-3 py-2.5 rounded-xl border-2 border-border/50 transition-all duration-200 hover:border-emerald-500/50 data-[state=on]:bg-emerald-500/20 data-[state=on]:border-emerald-500 text-sm font-medium bg-card"
                     >
                       {sector}
                     </ToggleGroupItem>
@@ -254,19 +254,19 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
             {/* Advanced Filters Collapsible */}
             <Collapsible open={advancedOpen} onOpenChange={setAdvancedOpen}>
               <CollapsibleTrigger className="w-full">
-                <div className="flex items-center justify-between bg-secondary/30 p-3 rounded-xl hover:bg-secondary/50 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                      <BarChart3 size={14} className="text-emerald-400" />
+                <div className="flex items-center justify-between bg-secondary/20 p-4 rounded-xl hover:bg-secondary/30 transition-colors">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                      <BarChart3 size={12} className="text-emerald-400" />
                     </div>
-                    <h3 className="font-semibold text-foreground">Advanced Filters</h3>
+                    <h3 className="font-semibold text-foreground text-sm">Advanced Filters</h3>
                   </div>
-                  {advancedOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                  {advancedOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                 </div>
               </CollapsibleTrigger>
               
               <CollapsibleContent className="space-y-3 mt-3">
-                <div className="space-y-3 bg-secondary/20 p-3 rounded-xl">
+                <div className="space-y-4 bg-secondary/10 p-4 rounded-xl">
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-2">
                       Highest Security Concentration
@@ -275,7 +275,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
                       value={securityConcentration}
                       onChange={(e) => setSecurityConcentration(e.target.value)}
                       placeholder="e.g., AAPL > 10%"
-                      className="rounded-xl border-2 h-10 transition-all duration-200 focus:border-emerald-500/50"
+                      className="rounded-xl border-2 h-10 transition-all duration-200 focus:border-emerald-500"
                     />
                   </div>
                   
@@ -287,7 +287,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
                       value={sectorConcentration}
                       onChange={(e) => setSectorConcentration(e.target.value)}
                       placeholder="e.g., Technology > 25%"
-                      className="rounded-xl border-2 h-10 transition-all duration-200 focus:border-emerald-500/50"
+                      className="rounded-xl border-2 h-10 transition-all duration-200 focus:border-emerald-500"
                     />
                   </div>
                 </div>
@@ -295,19 +295,19 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
             </Collapsible>
           </div>
 
-          {/* Sticky Footer */}
-          <div className="sticky bottom-0 bg-background px-6 py-4 border-t border-border">
+          {/* Fixed Footer */}
+          <div className="border-t border-border/20 bg-background px-6 py-4">
             <div className="flex gap-3">
               <Button 
                 variant="outline" 
                 onClick={handleClearAll} 
-                className="flex-1 h-10 rounded-xl font-medium hover:bg-secondary/80 transition-colors"
+                className="flex-1 h-11 rounded-xl font-medium hover:bg-secondary/80 transition-colors"
               >
                 Clear All
               </Button>
               <Button 
                 onClick={handleApplyFilters} 
-                className="flex-1 h-10 rounded-xl bg-emerald-500 hover:bg-emerald-600 font-medium shadow-lg shadow-emerald-500/20 transition-all duration-200 hover:scale-105"
+                className="flex-1 h-11 rounded-xl bg-emerald-500 hover:bg-emerald-600 font-medium shadow-lg shadow-emerald-500/20 transition-all duration-200"
               >
                 Apply Filters
               </Button>
