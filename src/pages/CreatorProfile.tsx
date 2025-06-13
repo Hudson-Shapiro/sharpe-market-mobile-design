@@ -94,8 +94,8 @@ const CreatorProfile = () => {
             <h1 className="text-xl font-bold text-foreground">Creator Profile</h1>
           </div>
 
-          {/* Creator Info Card */}
-          <div className="bg-gradient-to-br from-purple-500/10 via-blue-500/5 to-purple-600/10 border border-purple-500/20 rounded-lg p-6 mb-6">
+          {/* Creator Info Card - Updated to match theme */}
+          <div className="bg-card border border-border rounded-lg p-6 mb-6 shadow-sm">
             <div className="flex items-start gap-4">
               <div className="relative">
                 <Avatar className="h-16 w-16 bg-gradient-to-br from-purple-400 to-emerald-400">
@@ -113,12 +113,12 @@ const CreatorProfile = () => {
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <h2 className="text-2xl font-bold text-foreground">{creatorData.name}</h2>
-                  <Badge variant="secondary" className="text-xs">
-                    Rank #{creatorData.rank}
+                  <Badge 
+                    className="text-xs bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
+                    style={{ borderRadius: '12px' }}
+                  >
+                    Rank #{creatorData.rank} ⭐
                   </Badge>
-                  {creatorData.rank <= 3 && (
-                    <Star size={16} className="text-yellow-400 fill-yellow-400" />
-                  )}
                 </div>
                 
                 <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
@@ -141,7 +141,7 @@ const CreatorProfile = () => {
                     <p className="text-muted-foreground text-xs">Avg Return</p>
                   </div>
                   <div className="text-center">
-                    <div className="flex items-center justify-center gap-1 text-purple-400 font-bold text-lg">
+                    <div className="flex items-center justify-center gap-1 text-foreground font-bold text-lg">
                       <BarChart3 size={14} />
                       <span>{creatorData.portfolios}</span>
                     </div>
@@ -155,7 +155,7 @@ const CreatorProfile = () => {
           {/* Portfolios Section */}
           <div>
             <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-              <BarChart3 className="text-purple-400" size={20} />
+              <BarChart3 className="text-foreground" size={20} />
               Active Portfolios
             </h3>
             
