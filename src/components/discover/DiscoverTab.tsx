@@ -7,7 +7,6 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { TrendingUp, Users, Eye, Flame, Search, Gem, Play, BookOpen, Clock, Star, Crown, Zap, Sparkles } from 'lucide-react';
 import TrendingPortfolioCard from './TrendingPortfolioCard';
 import CreatorCard from './CreatorCard';
-import QuickActionCard from './QuickActionCard';
 import MiniPoll from './MiniPoll';
 
 const DiscoverTab = () => {
@@ -60,60 +59,38 @@ const DiscoverTab = () => {
     { name: "Alex R.", followers: 2156, avgReturn: 28.9, portfolios: 6, rank: 4 }
   ];
 
-  const quickActions = [
-    {
-      title: "Build Your First Portfolio",
-      description: "Get started in 5 minutes",
-      icon: Play,
-      color: "from-emerald-400 to-green-500"
-    },
-    {
-      title: "Watch Portfolio Breakdown",
-      description: "Learn from the pros",
-      icon: BookOpen,
-      color: "from-blue-400 to-purple-500"
-    },
-    {
-      title: "Learn Sharpe Ratios",
-      description: "Master in 30 seconds",
-      icon: Clock,
-      color: "from-orange-400 to-red-500"
-    }
-  ];
-
   return (
     <div className="space-y-6">
       {/* SharpeMarket Spotlight - Condensed */}
-      <div className="p-4 rounded-2xl border border-emerald-500/20 bg-gradient-to-r from-emerald-500/5 to-blue-500/5 backdrop-blur-sm shadow-sm">
+      <div className="p-3 rounded-xl border border-emerald-500/20 bg-gradient-to-r from-emerald-500/5 to-blue-500/5 backdrop-blur-sm shadow-sm">
         <div className="flex items-center gap-2 mb-2">
-          <Sparkles className="text-emerald-400" size={18} />
-          <h3 className="text-base font-bold text-foreground">SharpeMarket Spotlight</h3>
+          <Sparkles className="text-emerald-400" size={16} />
+          <h3 className="text-sm font-bold text-foreground">SharpeMarket Spotlight</h3>
           <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 text-xs">
             Curated
           </Badge>
         </div>
         <div className="mb-3">
-          <h4 className="font-bold text-foreground text-lg mb-1">"AI Revolution"</h4>
-          <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-            Selected for its breakout AI theme & exceptional performance this month. 
-            This portfolio captures the essence of the AI transformation happening across markets.
+          <h4 className="font-bold text-foreground text-base mb-1">"AI Revolution"</h4>
+          <p className="text-xs text-muted-foreground mb-2 leading-relaxed">
+            Selected for its breakout AI theme & exceptional performance this month.
           </p>
-          <div className="grid grid-cols-3 gap-3 mb-3">
+          <div className="grid grid-cols-3 gap-2 mb-2">
             <div className="text-center">
-              <div className="text-base font-bold text-emerald-400">+34.2%</div>
+              <div className="text-sm font-bold text-emerald-400">+34.2%</div>
               <div className="text-xs text-muted-foreground">1M Return</div>
             </div>
             <div className="text-center">
-              <div className="text-base font-bold text-foreground">Sarah Chen</div>
+              <div className="text-sm font-bold text-foreground">Sarah Chen</div>
               <div className="text-xs text-muted-foreground">Creator</div>
             </div>
             <div className="text-center">
-              <div className="text-base font-bold text-foreground">2.3k</div>
+              <div className="text-sm font-bold text-foreground">2.3k</div>
               <div className="text-xs text-muted-foreground">Followers</div>
             </div>
           </div>
         </div>
-        <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white text-sm py-2" style={{ borderRadius: '12px' }}>
+        <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white text-sm py-1.5" style={{ borderRadius: '8px' }}>
           🔎 View Portfolio
         </Button>
       </div>
@@ -180,16 +157,6 @@ const DiscoverTab = () => {
           <CarouselPrevious className="left-2" />
           <CarouselNext className="right-2" />
         </Carousel>
-      </div>
-
-      {/* Quick Actions */}
-      <div>
-        <h3 className="text-lg font-bold text-foreground mb-3">Quick Actions</h3>
-        <div className="grid grid-cols-1 gap-3">
-          {quickActions.map((action, index) => (
-            <QuickActionCard key={index} action={action} />
-          ))}
-        </div>
       </div>
 
       {/* Mini Poll Widget */}

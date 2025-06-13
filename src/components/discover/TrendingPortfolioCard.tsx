@@ -50,7 +50,7 @@ const TrendingPortfolioCard = ({ portfolio }: TrendingPortfolioCardProps) => {
             className="bg-emerald-500 hover:bg-emerald-600 text-white text-xs px-2 py-0.5 h-auto group-hover:shadow-lg group-hover:shadow-emerald-500/30"
             style={{ borderRadius: '6px' }}
           >
-            Follow
+            Subscribe
           </Button>
         </div>
       </CardContent>
