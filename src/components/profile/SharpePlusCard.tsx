@@ -20,7 +20,7 @@ const SharpePlusCard = () => {
         <Link to="/sharpe-plus">
           <Button 
             size="sm" 
-            className="bg-gradient-to-r from-purple-600 to-emerald-500 hover:opacity-90 text-white text-xs h-7 px-3"
+            className="bg-gradient-to-r from-purple-600 to-emerald-500 hover:opacity-90 text-white text-xs h-7 px-3 rounded-full"
           >
             Subscribe
           </Button>

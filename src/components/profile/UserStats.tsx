@@ -1,22 +1,26 @@
 
 import React from 'react';
+import { TrendingUp, BarChart3 } from 'lucide-react';
+import StatCard from './StatCard';
 
 const UserStats = () => {
   return (
-    <div className="px-4 mb-3 grid grid-cols-3 gap-2 text-center">
-      <div className="py-3">
-        <p className="text-muted-foreground text-sm">Subscribed</p>
-        <p className="text-2xl font-bold">12</p>
-      </div>
-      
-      <div className="py-3">
-        <p className="text-muted-foreground text-sm">Subscribers</p>
-        <p className="text-2xl font-bold">30</p>
-      </div>
-      
-      <div className="py-3">
-        <p className="text-muted-foreground text-sm">Portfolios</p>
-        <p className="text-2xl font-bold">7</p>
+    <div className="px-4 mb-6">
+      <div className="grid grid-cols-2 gap-3">
+        <StatCard
+          icon={<TrendingUp size={14} className="text-emerald-400" />}
+          title="Top Performer"
+          value="+22.67%"
+          subtitle=""
+          variant="performance"
+        />
+        <StatCard
+          icon={<BarChart3 size={14} className="text-muted-foreground" />}
+          title="Avg Return"
+          value="+11.39%"
+          subtitle="5 portfolios"
+          variant="default"
+        />
       </div>
     </div>
   );
