@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -77,6 +76,9 @@ const CreatorProfile = () => {
     return "from-blue-400 to-blue-600";
   };
 
+  // Check if creator is performing well (top 3 rank and good avg return)
+  const isPerformingWell = creatorData.rank <= 3 && creatorData.avgReturn > 20;
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <ScrollArea className="h-[calc(100vh-72px)]">
@@ -94,8 +96,15 @@ const CreatorProfile = () => {
             <h1 className="text-xl font-bold text-foreground">Creator Profile</h1>
           </div>
 
-          {/* Creator Info Card - Updated to match theme */}
-          <div className="bg-card border border-border rounded-lg p-6 mb-6 shadow-sm">
+          {/* Creator Info Card - Updated with rounded edges and green accent */}
+          <div className={`bg-card border border-border rounded-2xl p-6 mb-6 shadow-sm relative overflow-hidden ${
+            isPerformingWell ? 'border-emerald-500/30' : ''
+          }`}>
+            {/* Green underbelly for high performers */}
+            {isPerformingWell && (
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400/60 via-emerald-500/80 to-emerald-600/60" />
+            )}
+            
             <div className="flex items-start gap-4">
               <div className="relative">
                 <Avatar className="h-16 w-16 bg-gradient-to-br from-purple-400 to-emerald-400">
