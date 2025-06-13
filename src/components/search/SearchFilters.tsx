@@ -52,7 +52,7 @@ const SearchFilters = ({ searchFilter, setSearchFilter, onInteractiveFilter }: S
         onClick={onInteractiveFilter}
       >
         <SlidersHorizontal size={14} />
-        Interactive Filter
+        Advanced Filter
       </button>
     </div>
   );

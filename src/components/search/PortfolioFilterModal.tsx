@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { X, TrendingUp, Shield, Target, BarChart3, Users, Zap, Search, ChevronDown, ChevronUp, Clock } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -101,36 +100,36 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
     { id: '1W', label: '1W' },
     { id: '1M', label: '1M' },
     { id: '1Y', label: '1Y' },
-    { id: 'Lifetime', label: 'Lifetime' }
+    { id: 'Lifetime', label: 'All' }
   ];
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md w-[95vw] h-[90vh] bg-background border border-border rounded-2xl p-0 overflow-hidden flex flex-col">
-        <DialogHeader className="px-6 pt-6 pb-4 border-b border-border/20 flex-shrink-0">
-          <DialogTitle className="flex items-center gap-3 text-foreground text-lg">
-            <div className="w-8 h-8 bg-gradient-to-br from-emerald-500/20 to-emerald-400/10 rounded-full flex items-center justify-center">
-              <BarChart3 size={18} className="text-emerald-500" />
+      <DialogContent className="max-w-md w-[95vw] h-[95vh] bg-background border border-border rounded-2xl p-0 overflow-hidden flex flex-col">
+        <DialogHeader className="px-4 pt-4 pb-2 border-b border-border/20 flex-shrink-0">
+          <DialogTitle className="flex items-center gap-2 text-foreground text-lg">
+            <div className="w-6 h-6 bg-gradient-to-br from-emerald-500/20 to-emerald-400/10 rounded-full flex items-center justify-center">
+              <BarChart3 size={14} className="text-emerald-500" />
             </div>
-            Portfolio Filters
+            Advanced Filter
           </DialogTitle>
         </DialogHeader>
         
         <div className="flex-1 overflow-y-auto">
-          <div className="px-6 py-4 space-y-8">
+          <div className="px-4 py-3 space-y-4">
             {/* Performance Section */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-gradient-to-br from-emerald-500/20 to-emerald-400/10 rounded-full flex items-center justify-center">
-                  <TrendingUp size={14} className="text-emerald-500" />
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-gradient-to-br from-emerald-500/20 to-emerald-400/10 rounded-full flex items-center justify-center">
+                  <TrendingUp size={12} className="text-emerald-500" />
                 </div>
-                <h3 className="font-semibold text-foreground">Performance</h3>
+                <h3 className="font-medium text-foreground text-sm">Performance</h3>
               </div>
               
-              <div className="space-y-6 bg-secondary/20 p-5 rounded-xl">
+              <div className="space-y-3 bg-secondary/20 p-3 rounded-lg">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-3">Annual Return</label>
-                  <div className="px-3">
+                  <label className="block text-xs font-medium text-foreground mb-2">Annual Return</label>
+                  <div className="px-2">
                     <Slider
                       value={returnRange}
                       onValueChange={setReturnRange}
@@ -139,7 +138,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
                       step={5}
                       className="w-full"
                     />
-                    <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                    <div className="flex justify-between text-xs text-muted-foreground mt-1">
                       <span>{returnRange[0]}%</span>
                       <span>{returnRange[1]}%</span>
                     </div>
@@ -147,8 +146,8 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-3">Sharpe Ratio</label>
-                  <div className="px-3">
+                  <label className="block text-xs font-medium text-foreground mb-2">Sharpe Ratio</label>
+                  <div className="px-2">
                     <Slider
                       value={sharpeRatio}
                       onValueChange={setSharpeRatio}
@@ -157,7 +156,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
                       step={0.1}
                       className="w-full"
                     />
-                    <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                    <div className="flex justify-between text-xs text-muted-foreground mt-1">
                       <span>{sharpeRatio[0].toFixed(1)}</span>
                       <span>{sharpeRatio[1].toFixed(1)}</span>
                     </div>
@@ -167,16 +166,16 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
             </div>
 
             {/* Benchmark Section */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-gradient-to-br from-blue-500/20 to-blue-400/10 rounded-full flex items-center justify-center">
-                  <Target size={14} className="text-blue-500" />
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-gradient-to-br from-blue-500/20 to-blue-400/10 rounded-full flex items-center justify-center">
+                  <Target size={12} className="text-blue-500" />
                 </div>
-                <h3 className="font-semibold text-foreground">Benchmark</h3>
+                <h3 className="font-medium text-foreground text-sm">Benchmark</h3>
               </div>
               
               <RadioGroup value={benchmark} onValueChange={setBenchmark}>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2">
                   {benchmarkOptions.map((bench) => (
                     <div key={bench.id} className="relative">
                       <RadioGroupItem 
@@ -186,7 +185,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
                       />
                       <label 
                         htmlFor={bench.id} 
-                        className="flex items-center justify-center px-4 py-3 rounded-xl border-2 border-border/50 transition-all duration-200 cursor-pointer hover:border-blue-500/50 peer-checked:bg-blue-500/10 peer-checked:border-blue-500 font-medium text-sm bg-card"
+                        className="flex items-center justify-center px-3 py-2 rounded-lg border-2 border-border/50 transition-all duration-200 cursor-pointer hover:border-blue-500/50 peer-checked:bg-blue-500/10 peer-checked:border-blue-500 font-medium text-xs bg-card"
                       >
                         {bench.label}
                       </label>
@@ -196,42 +195,22 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
               </RadioGroup>
             </div>
 
-            {/* Search by Group ID */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-gradient-to-br from-purple-500/20 to-purple-400/10 rounded-full flex items-center justify-center">
-                  <Search size={14} className="text-purple-500" />
-                </div>
-                <h3 className="font-semibold text-foreground">Search by Group ID</h3>
-              </div>
-              
-              <div className="relative">
-                <Input
-                  value={groupId}
-                  onChange={(e) => setGroupId(e.target.value)}
-                  placeholder="Enter Group ID..."
-                  className="pl-12 rounded-xl border-2 h-12 transition-all duration-200 focus:border-purple-500"
-                />
-                <Search size={18} className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
-              </div>
-            </div>
-
             {/* Time Frame */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-gradient-to-br from-orange-500/20 to-orange-400/10 rounded-full flex items-center justify-center">
-                  <Clock size={14} className="text-orange-500" />
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-gradient-to-br from-orange-500/20 to-orange-400/10 rounded-full flex items-center justify-center">
+                  <Clock size={12} className="text-orange-500" />
                 </div>
-                <h3 className="font-semibold text-foreground">Time Frame</h3>
+                <h3 className="font-medium text-foreground text-sm">Time Frame</h3>
               </div>
               
               <ToggleGroup type="single" value={timeFrame} onValueChange={setTimeFrame}>
-                <div className="grid grid-cols-5 gap-2 w-full">
+                <div className="grid grid-cols-5 gap-1 w-full">
                   {timeFrameOptions.map((frame) => (
                     <ToggleGroupItem
                       key={frame.id}
                       value={frame.id}
-                      className="px-3 py-2.5 rounded-xl border-2 border-border/50 transition-all duration-200 hover:border-orange-500/50 data-[state=on]:bg-orange-500/10 data-[state=on]:border-orange-500 text-sm font-medium bg-card"
+                      className="px-2 py-2 rounded-lg border-2 border-border/50 transition-all duration-200 hover:border-orange-500/50 data-[state=on]:bg-orange-500/10 data-[state=on]:border-orange-500 text-xs font-medium bg-card"
                     >
                       {frame.label}
                     </ToggleGroupItem>
@@ -240,78 +219,70 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
               </ToggleGroup>
             </div>
 
-            {/* Security Concentration */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-gradient-to-br from-red-500/20 to-red-400/10 rounded-full flex items-center justify-center">
-                  <Shield size={14} className="text-red-500" />
+            {/* Concentrations - Combined */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-gradient-to-br from-red-500/20 to-red-400/10 rounded-full flex items-center justify-center">
+                  <Shield size={12} className="text-red-500" />
                 </div>
-                <h3 className="font-semibold text-foreground">Security Concentration</h3>
+                <h3 className="font-medium text-foreground text-sm">Portfolio Concentration</h3>
               </div>
               
-              <div className="bg-secondary/20 p-5 rounded-xl">
-                <label className="block text-sm font-medium text-foreground mb-3">Top 5 Holdings % of Portfolio</label>
-                <div className="px-3">
-                  <Slider
-                    value={securityConcentration}
-                    onValueChange={setSecurityConcentration}
-                    max={100}
-                    min={0}
-                    step={5}
-                    className="w-full"
-                  />
-                  <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                    <span>{securityConcentration[0]}%</span>
-                    <span>{securityConcentration[1]}%</span>
+              <div className="bg-secondary/20 p-3 rounded-lg space-y-3">
+                <div>
+                  <label className="block text-xs font-medium text-foreground mb-2">Top 5 Holdings %</label>
+                  <div className="px-2">
+                    <Slider
+                      value={securityConcentration}
+                      onValueChange={setSecurityConcentration}
+                      max={100}
+                      min={0}
+                      step={5}
+                      className="w-full"
+                    />
+                    <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                      <span>{securityConcentration[0]}%</span>
+                      <span>{securityConcentration[1]}%</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Sector Concentration */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-gradient-to-br from-indigo-500/20 to-indigo-400/10 rounded-full flex items-center justify-center">
-                  <Zap size={14} className="text-indigo-500" />
-                </div>
-                <h3 className="font-semibold text-foreground">Sector Concentration</h3>
-              </div>
-              
-              <div className="bg-secondary/20 p-5 rounded-xl">
-                <label className="block text-sm font-medium text-foreground mb-3">Max Exposure to Any Sector</label>
-                <div className="px-3">
-                  <Slider
-                    value={sectorConcentration}
-                    onValueChange={setSectorConcentration}
-                    max={100}
-                    min={0}
-                    step={5}
-                    className="w-full"
-                  />
-                  <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                    <span>{sectorConcentration[0]}%</span>
-                    <span>{sectorConcentration[1]}%</span>
+                
+                <div>
+                  <label className="block text-xs font-medium text-foreground mb-2">Max Sector Exposure</label>
+                  <div className="px-2">
+                    <Slider
+                      value={sectorConcentration}
+                      onValueChange={setSectorConcentration}
+                      max={100}
+                      min={0}
+                      step={5}
+                      className="w-full"
+                    />
+                    <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                      <span>{sectorConcentration[0]}%</span>
+                      <span>{sectorConcentration[1]}%</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Sector Focus */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-full flex items-center justify-center">
-                  <Zap size={14} className="text-green-500" />
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-full flex items-center justify-center">
+                  <Zap size={12} className="text-green-500" />
                 </div>
-                <h3 className="font-semibold text-foreground">Sector Focus</h3>
+                <h3 className="font-medium text-foreground text-sm">Sector Focus</h3>
               </div>
               
               <ToggleGroup type="multiple" value={sectors} onValueChange={setSectors}>
-                <div className="grid grid-cols-2 gap-3 w-full">
+                <div className="grid grid-cols-2 gap-2 w-full">
                   {sectorOptions.map((sector) => (
                     <ToggleGroupItem
                       key={sector}
                       value={sector}
-                      className="px-3 py-3 rounded-xl border-2 border-border/50 transition-all duration-200 hover:border-green-500/50 data-[state=on]:bg-green-500/10 data-[state=on]:border-green-500 text-sm font-medium bg-card"
+                      className="px-2 py-2 rounded-lg border-2 border-border/50 transition-all duration-200 hover:border-green-500/50 data-[state=on]:bg-green-500/10 data-[state=on]:border-green-500 text-xs font-medium bg-card"
                     >
                       {sector}
                     </ToggleGroupItem>
@@ -320,22 +291,42 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
               </ToggleGroup>
             </div>
 
+            {/* Search by Group ID */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 bg-gradient-to-br from-purple-500/20 to-purple-400/10 rounded-full flex items-center justify-center">
+                  <Search size={12} className="text-purple-500" />
+                </div>
+                <h3 className="font-medium text-foreground text-sm">Group ID</h3>
+              </div>
+              
+              <div className="relative">
+                <Input
+                  value={groupId}
+                  onChange={(e) => setGroupId(e.target.value)}
+                  placeholder="Enter Group ID..."
+                  className="pl-10 rounded-lg border-2 h-10 transition-all duration-200 focus:border-purple-500 text-sm"
+                />
+                <Search size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+              </div>
+            </div>
+
             {/* Advanced Options Collapsible */}
             <Collapsible open={advancedOpen} onOpenChange={setAdvancedOpen}>
               <CollapsibleTrigger className="w-full">
-                <div className="flex items-center justify-between bg-secondary/20 p-4 rounded-xl hover:bg-secondary/30 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-gradient-to-br from-gray-500/20 to-gray-400/10 rounded-full flex items-center justify-center">
-                      <Users size={14} className="text-gray-500" />
+                <div className="flex items-center justify-between bg-secondary/20 p-3 rounded-lg hover:bg-secondary/30 transition-colors">
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 bg-gradient-to-br from-gray-500/20 to-gray-400/10 rounded-full flex items-center justify-center">
+                      <Users size={12} className="text-gray-500" />
                     </div>
-                    <h3 className="font-semibold text-foreground">Advanced Options</h3>
+                    <h3 className="font-medium text-foreground text-sm">Advanced Options</h3>
                   </div>
-                  {advancedOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                  {advancedOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </div>
               </CollapsibleTrigger>
               
-              <CollapsibleContent className="space-y-4 mt-4">
-                <div className="bg-secondary/10 p-4 rounded-xl">
+              <CollapsibleContent className="space-y-3 mt-2">
+                <div className="bg-secondary/10 p-3 rounded-lg">
                   <div className="flex items-center justify-between">
                     <span className="font-medium text-foreground text-sm">Verified Creators Only</span>
                     <Switch 
@@ -347,25 +338,22 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters, activeFilters }
                 </div>
               </CollapsibleContent>
             </Collapsible>
-
-            {/* Extra spacing at bottom for scroll */}
-            <div className="h-4"></div>
           </div>
         </div>
 
-        {/* Fixed Footer */}
-        <div className="border-t border-border/20 bg-background px-6 py-4 flex-shrink-0">
-          <div className="flex gap-3">
+        {/* Fixed Footer - More Compact */}
+        <div className="border-t border-border/20 bg-background px-4 py-3 flex-shrink-0">
+          <div className="flex gap-2">
             <Button 
               variant="outline" 
               onClick={handleClearAll} 
-              className="flex-1 h-12 rounded-xl font-medium hover:bg-secondary/80 transition-colors"
+              className="flex-1 h-10 rounded-lg font-medium hover:bg-secondary/80 transition-colors text-sm"
             >
               Clear All
             </Button>
             <Button 
               onClick={handleApplyFilters} 
-              className="flex-1 h-12 rounded-xl bg-emerald-500 hover:bg-emerald-600 font-medium shadow-lg shadow-emerald-500/20 transition-all duration-200"
+              className="flex-1 h-10 rounded-lg bg-emerald-500 hover:bg-emerald-600 font-medium shadow-lg shadow-emerald-500/20 transition-all duration-200 text-sm"
             >
               Apply Filters
             </Button>

@@ -7,6 +7,7 @@ import AdvancedFilters from '@/components/search/AdvancedFilters';
 import RecentSearches from '@/components/search/RecentSearches';
 import SearchResults from '@/components/search/SearchResults';
 import SearchTip from '@/components/search/SearchTip';
+import BasicFilterBar from '@/components/search/BasicFilterBar';
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,6 +15,10 @@ const Search = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [filterVisible, setFilterVisible] = useState(false);
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  
+  // Basic filter states
+  const [basicTimeFrame, setBasicTimeFrame] = useState("1M");
+  const [basicSortBy, setBasicSortBy] = useState("highest");
 
   const recentSearches = ["Tech stocks", "AI Revolution", "Green Energy", "John Smith"];
   
@@ -39,6 +44,8 @@ const Search = () => {
     }
   };
 
+  const showBasicFilter = isSearching && searchScope === "portfolios";
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Search Header - Sticky */}
@@ -54,6 +61,16 @@ const Search = () => {
         searchScope={searchScope}
         setSearchScope={handleScopeChange}
       />
+
+      {/* Basic Filter Bar - Shows when searching portfolios */}
+      {showBasicFilter && (
+        <BasicFilterBar
+          timeFrame={basicTimeFrame}
+          setTimeFrame={setBasicTimeFrame}
+          sortBy={basicSortBy}
+          setSortBy={setBasicSortBy}
+        />
+      )}
 
       <ScrollArea className="h-[calc(100vh-120px)]">
         <div className="p-3 space-y-4">

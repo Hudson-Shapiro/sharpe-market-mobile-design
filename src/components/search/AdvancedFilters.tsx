@@ -40,7 +40,7 @@ const AdvancedFilters = ({
             </div>
             <div className="text-left">
               <h3 className="font-semibold text-foreground">
-                Filter Portfolios
+                Advanced Filter
                 {activeFilters.length > 0 && (
                   <span className="ml-2 text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full">
                     {activeFilters.length}
