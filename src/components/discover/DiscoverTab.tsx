@@ -83,37 +83,37 @@ const DiscoverTab = () => {
 
   return (
     <div className="space-y-6">
-      {/* SharpeMarket Spotlight */}
-      <div className="p-4 rounded-lg border border-emerald-500/20 bg-gradient-to-r from-emerald-500/5 to-blue-500/5 backdrop-blur-sm shadow-sm">
-        <div className="flex items-center gap-2 mb-3">
-          <Sparkles className="text-emerald-400" size={20} />
-          <h3 className="text-lg font-bold text-foreground">SharpeMarket Spotlight</h3>
+      {/* SharpeMarket Spotlight - Condensed */}
+      <div className="p-4 rounded-2xl border border-emerald-500/20 bg-gradient-to-r from-emerald-500/5 to-blue-500/5 backdrop-blur-sm shadow-sm">
+        <div className="flex items-center gap-2 mb-2">
+          <Sparkles className="text-emerald-400" size={18} />
+          <h3 className="text-base font-bold text-foreground">SharpeMarket Spotlight</h3>
           <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30 text-xs">
             Curated
           </Badge>
         </div>
         <div className="mb-3">
-          <h4 className="font-bold text-foreground text-xl mb-1">"AI Revolution"</h4>
-          <p className="text-sm text-muted-foreground mb-3">
+          <h4 className="font-bold text-foreground text-lg mb-1">"AI Revolution"</h4>
+          <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
             Selected for its breakout AI theme & exceptional performance this month. 
             This portfolio captures the essence of the AI transformation happening across markets.
           </p>
-          <div className="grid grid-cols-3 gap-4 mb-4">
+          <div className="grid grid-cols-3 gap-3 mb-3">
             <div className="text-center">
-              <div className="text-lg font-bold text-emerald-400">+34.2%</div>
+              <div className="text-base font-bold text-emerald-400">+34.2%</div>
               <div className="text-xs text-muted-foreground">1M Return</div>
             </div>
             <div className="text-center">
-              <div className="text-lg font-bold text-foreground">Sarah Chen</div>
+              <div className="text-base font-bold text-foreground">Sarah Chen</div>
               <div className="text-xs text-muted-foreground">Creator</div>
             </div>
             <div className="text-center">
-              <div className="text-lg font-bold text-foreground">2.3k</div>
+              <div className="text-base font-bold text-foreground">2.3k</div>
               <div className="text-xs text-muted-foreground">Followers</div>
             </div>
           </div>
         </div>
-        <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white" style={{ borderRadius: '8px' }}>
+        <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white text-sm py-2" style={{ borderRadius: '12px' }}>
           🔎 View Portfolio
         </Button>
       </div>
