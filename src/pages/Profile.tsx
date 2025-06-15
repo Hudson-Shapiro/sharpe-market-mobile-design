@@ -12,13 +12,14 @@ import SignOutSection from '@/components/profile/SignOutSection';
 const Profile = () => {
   return (
     <ScrollArea className="h-full">
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-screen bg-background text-foreground pb-4">
         <GlobalHeader />
         <ProfileCard />
         <UserStats />
-        <Separator className="mb-4" />
+        <Separator className="my-4" />
         <SharpePlusCard />
         <SettingsMenu />
+        <Separator className="my-4 mx-4" />
         <div className="px-4">
           <SignOutSection />
         </div>

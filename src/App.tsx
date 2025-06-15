@@ -16,6 +16,9 @@ import StockDetail from "./pages/StockDetail";
 import CreatorProfile from "./pages/CreatorProfile";
 import SharpePlus from "./pages/SharpePlus";
 import NotFound from "./pages/NotFound";
+import Settings from "./pages/Settings";
+import Earnings from "./pages/Earnings";
+import Billing from "./pages/Billing";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +30,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/sharpe-plus" element={<SharpePlus />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/earnings" element={<Earnings />} />
+          <Route path="/billing" element={<Billing />} />
           <Route path="*" element={
             <MobileLayout>
               <Routes>
