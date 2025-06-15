@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronLeft, Lock, Bell, Landmark, Trash2, ChevronRight } from 'lucide-react';
+import { ChevronLeft, Lock, Trash2, ChevronRight } from 'lucide-react';
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -11,13 +10,6 @@ const Settings = () => {
       title: "Account",
       items: [
         { to: "/settings/security", icon: Lock, text: "Change Password" },
-        { to: "/settings/stripe-connect", icon: Landmark, text: "Stripe Connect" },
-      ]
-    },
-    {
-      title: "Application",
-      items: [
-        { to: "/settings/notifications", icon: Bell, text: "Notification Settings" },
       ]
     },
     {

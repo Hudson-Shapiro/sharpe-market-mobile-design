@@ -19,6 +19,8 @@ import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
 import Earnings from "./pages/Earnings";
 import Billing from "./pages/Billing";
+import StripeConnect from "./pages/StripeConnect";
+import NotificationSettings from "./pages/NotificationSettings";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,8 @@ const App = () => (
           <Route path="/settings" element={<Settings />} />
           <Route path="/earnings" element={<Earnings />} />
           <Route path="/billing" element={<Billing />} />
+          <Route path="/stripe-connect" element={<StripeConnect />} />
+          <Route path="/notification-settings" element={<NotificationSettings />} />
           <Route path="*" element={
             <MobileLayout>
               <Routes>

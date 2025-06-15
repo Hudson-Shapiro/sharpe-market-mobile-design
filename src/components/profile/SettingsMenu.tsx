@@ -1,13 +1,15 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TrendingUp, CreditCard, Settings, ChevronRight } from 'lucide-react';
+import { TrendingUp, CreditCard, Settings, ChevronRight, Landmark, Bell } from 'lucide-react';
 
 const SettingsMenu = () => {
   const menuItems = [
     { to: "/earnings", icon: TrendingUp, text: "Earnings" },
     { to: "/billing", icon: CreditCard, text: "Billing" },
-    { to: "/settings", icon: Settings, text: "Settings" },
+    { to: "/stripe-connect", icon: Landmark, text: "Stripe Connect" },
+    { to: "/notification-settings", icon: Bell, text: "Notification Settings" },
+    { to: "/settings", icon: Settings, text: "More Settings" },
   ];
 
   return (
