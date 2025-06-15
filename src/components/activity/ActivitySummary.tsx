@@ -8,70 +8,67 @@ const ActivitySummary = () => {
     totalPortfolios: 6,
     subscribedPortfolios: 12,
     bestPerformingPortfolio: 'Tech Fund',
-    avgAllocation: 47.2  // New derived stat - average allocation across activities
+    avgAllocation: 47.2
   };
 
+  const summaryItems = [
+    {
+      label: "My Portfolios",
+      value: summaryData.totalPortfolios,
+      icon: Briefcase,
+      color: "text-emerald-400",
+      bgColor: "bg-emerald-500/10"
+    },
+    {
+      label: "Subscribed",
+      value: summaryData.subscribedPortfolios,
+      icon: Users,
+      color: "text-blue-400",
+      bgColor: "bg-blue-500/10"
+    },
+    {
+      label: "Avg Allocation",
+      value: `${summaryData.avgAllocation}%`,
+      icon: Percent,
+      color: "text-orange-400",
+      bgColor: "bg-orange-500/10"
+    },
+    {
+      label: "Best Performing",
+      value: summaryData.bestPerformingPortfolio,
+      icon: Star,
+      color: "text-purple-400",
+      bgColor: "bg-purple-500/10"
+    }
+  ];
+
   return (
-    <Card className="mb-6 bg-gradient-to-br from-emerald-500/10 via-green-500/5 to-emerald-600/10 border-emerald-500/20 backdrop-blur-sm shadow-2xl shadow-emerald-500/5" style={{ borderRadius: '12px' }}>
+    <Card className="mb-6 bg-gradient-to-br from-background via-background/50 to-secondary/20 border-border/20 backdrop-blur-sm shadow-lg" style={{ borderRadius: '16px' }}>
       <CardContent className="p-4">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 bg-gradient-to-br from-emerald-400/20 to-green-500/20 shadow-lg" style={{ borderRadius: '12px' }}>
-              <Trophy className="text-emerald-400 drop-shadow-sm" size={16} />
-            </div>
-            <h3 className="text-base font-bold text-foreground">Activity Summary</h3>
+        <div className="flex items-center gap-2 mb-4">
+          <div className="p-1.5 bg-gradient-to-br from-emerald-400/20 to-green-500/20 shadow-md rounded-xl">
+            <Trophy className="text-emerald-400 drop-shadow-sm" size={16} />
           </div>
+          <h3 className="text-base font-bold text-foreground">Activity Summary</h3>
         </div>
         
-        {/* Updated Grid Layout - Now 4 columns */}
-        <div className="grid grid-cols-4 gap-3">
-          {/* My Portfolios */}
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-emerald-400 font-bold text-lg hover:scale-105 transition-transform duration-200">
-              <div className="p-1 bg-emerald-500/20 hover:bg-emerald-500/30 transition-colors" style={{ borderRadius: '8px' }}>
-                <Briefcase size={10} className="drop-shadow-sm" />
+        <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+          {summaryItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div key={item.label} className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className={`p-1.5 ${item.bgColor} rounded-lg`}>
+                    <Icon className={item.color} size={14} />
+                  </div>
+                  <p className="text-sm text-muted-foreground">{item.label}</p>
+                </div>
+                <p className={`text-sm font-bold font-mono ${item.color} truncate pl-2`}>
+                  {item.value}
+                </p>
               </div>
-              <span className="font-mono text-sm">{summaryData.totalPortfolios}</span>
-            </div>
-            <p className="text-xs text-muted-foreground mt-0.5">My Portfolios</p>
-          </div>
-
-          {/* Subscribed */}
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-blue-400 font-bold text-lg hover:scale-105 transition-transform duration-200">
-              <div className="p-1 bg-blue-500/20 hover:bg-blue-500/30 transition-colors" style={{ borderRadius: '8px' }}>
-                <Users size={10} className="drop-shadow-sm" />
-              </div>
-              <span className="font-mono text-sm">{summaryData.subscribedPortfolios}</span>
-            </div>
-            <p className="text-xs text-muted-foreground mt-0.5">Subscribed</p>
-          </div>
-          
-          {/* Average Allocation - New derived stat */}
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-orange-400 font-bold text-lg hover:scale-105 transition-transform duration-200">
-              <div className="p-1 bg-orange-500/20 hover:bg-orange-500/30 transition-colors" style={{ borderRadius: '8px' }}>
-                <Percent size={10} className="drop-shadow-sm" />
-              </div>
-              <span className="font-mono text-sm">{summaryData.avgAllocation}%</span>
-            </div>
-            <p className="text-xs text-muted-foreground mt-0.5">Avg Allocation</p>
-          </div>
-          
-          {/* Best Performing */}
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-1 text-purple-400 font-bold text-lg hover:scale-105 transition-transform duration-200">
-              <div className="p-1 bg-purple-500/20 hover:bg-purple-500/30 transition-colors" style={{ borderRadius: '8px' }}>
-                <Star size={10} className="drop-shadow-sm" />
-              </div>
-            </div>
-            <div className="text-foreground font-bold text-xs truncate hover:scale-105 transition-transform duration-200">
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent text-xs">
-                {summaryData.bestPerformingPortfolio}
-              </span>
-            </div>
-            <p className="text-xs text-muted-foreground mt-0.5">Best Performing</p>
-          </div>
+            );
+          })}
         </div>
       </CardContent>
     </Card>
