@@ -85,41 +85,41 @@ const MarketTab = () => {
 
         <div className="space-y-2">
           {marketData.map((stock, index) => (
-            <div key={index} className="bg-card border border-border p-3 hover:bg-card/80 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg" style={{ borderRadius: '12px' }}>
+            <div key={index} className="bg-card border border-border p-2.5 hover:bg-card/80 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg" style={{ borderRadius: '12px' }}>
               <div className="flex items-center justify-between">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-bold text-foreground text-lg">{stock.symbol}</h3>
-                    <Badge variant="secondary" className="text-xs" style={{ borderRadius: '8px' }}>
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <h3 className="font-bold text-foreground text-base">{stock.symbol}</h3>
+                    <Badge variant="secondary" className="text-xs px-1.5 py-0.5" style={{ borderRadius: '6px' }}>
                       Vol: {stock.volume}
                     </Badge>
                   </div>
-                  <p className="text-muted-foreground text-sm truncate">{stock.name}</p>
+                  <p className="text-muted-foreground text-xs truncate">{stock.name}</p>
                 </div>
                 
                 {/* Mini Chart in the middle */}
-                <div className="flex-shrink-0 mx-4">
+                <div className="flex-shrink-0 mx-3">
                   <MiniChart 
                     data={stock.chartData} 
-                    width={80} 
-                    height={32}
+                    width={60} 
+                    height={24}
                     isPositive={stock.change >= 0}
                   />
                 </div>
                 
                 <div className="text-right flex-shrink-0">
-                  <div className="text-lg font-bold text-foreground">
+                  <div className="text-base font-bold text-foreground">
                     ${stock.price.toFixed(2)}
                   </div>
                   <div className={`flex items-center gap-1 justify-end transition-all duration-200 ${
                     stock.change >= 0 ? 'text-emerald-400' : 'text-red-400'
                   }`}>
                     {stock.change >= 0 ? (
-                      <TrendingUp size={12} />
+                      <TrendingUp size={10} />
                     ) : (
-                      <TrendingDown size={12} />
+                      <TrendingDown size={10} />
                     )}
-                    <span className="text-sm font-medium">
+                    <span className="text-xs font-medium">
                       {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)} ({stock.changePercent >= 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%)
                     </span>
                   </div>
