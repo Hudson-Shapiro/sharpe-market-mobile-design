@@ -52,7 +52,7 @@ const ActivitySummary = () => {
           <h3 className="text-base font-bold text-foreground">Activity Summary</h3>
         </div>
         
-        <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
           {summaryItems.map((item) => {
             const Icon = item.icon;
             return (

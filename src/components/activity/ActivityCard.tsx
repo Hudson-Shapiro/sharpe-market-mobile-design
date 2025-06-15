@@ -69,34 +69,34 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
         </div>
 
         {isExpanded && (
-          <div className="mt-3 pt-3 border-t border-border/20 animate-fade-in text-xs">
-            <div className="space-y-1.5">
+          <div className="mt-4 pt-4 border-t border-border/20 animate-fade-in text-sm">
+            <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-muted-foreground flex items-center gap-1.5"><Calendar size={12}/> Date</span>
+                <span className="text-muted-foreground flex items-center gap-2"><Calendar size={14}/> Date</span>
                 <span className="font-mono text-foreground">{activity.date}</span>
               </div>
               {activity.allocation && (
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground flex items-center gap-1.5"><Percent size={12}/> Allocation</span>
+                  <span className="text-muted-foreground flex items-center gap-2"><Percent size={14}/> Allocation</span>
                   <span className="font-mono text-foreground">{activity.allocation.toFixed(2)}%</span>
                 </div>
               )}
               {activity.smPrice && (
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground flex items-center gap-1.5"><DollarSign size={12}/> SM Price</span>
+                  <span className="text-muted-foreground flex items-center gap-2"><DollarSign size={14}/> SM Price</span>
                   <span className="font-mono text-foreground">${activity.smPrice.toFixed(2)}</span>
                 </div>
               )}
               {activity.currentPrice && (
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground flex items-center gap-1.5"><TrendingUp size={12}/> Current Price</span>
+                  <span className="text-muted-foreground flex items-center gap-2"><TrendingUp size={14}/> Current Price</span>
                   <span className="font-mono text-foreground">${activity.currentPrice.toFixed(2)}</span>
                 </div>
               )}
                {priceChange !== null && (
                 <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground flex items-center gap-1.5">
-                    <TrendingUp size={12} className={priceChange >= 0 ? 'text-emerald-400' : 'text-red-400'}/> Gain/Loss
+                  <span className="text-muted-foreground flex items-center gap-2">
+                    <TrendingUp size={14} className={priceChange >= 0 ? 'text-emerald-400' : 'text-red-400'}/> Gain/Loss
                   </span>
                   <span className={`font-mono font-medium ${priceChange >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {priceChange >= 0 ? '+' : ''}{priceChange.toFixed(1)}%
