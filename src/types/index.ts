@@ -10,6 +10,8 @@
  * with minimal modifications.
  */
 
+import { LucideIcon } from 'lucide-react';
+
 // ========================================
 // Core Business Domain Types
 // ========================================
@@ -157,10 +159,11 @@ export interface Activity {
 /**
  * Navigation tab configuration
  * Used by MobileLayout component
+ * Updated to properly handle Lucide icons
  */
 export interface NavigationTab {
   path: string;
-  icon: React.ComponentType<{ size?: number }>;
+  icon: LucideIcon;
   label: string;
   isActive?: boolean;
 }
@@ -172,7 +175,7 @@ export interface FilterOption {
   id: string;
   label: string;
   value: string;
-  icon?: React.ComponentType<{ size?: number }>;
+  icon?: LucideIcon;
 }
 
 /**
@@ -375,16 +378,3 @@ export interface PlatformStyles {
   android?: object;
   web?: string; // Tailwind classes
 }
-
-// ========================================
-// Export all types for easy importing
-// ========================================
-
-export type {
-  // Re-export common React types for convenience
-  React,
-  ReactNode,
-  ComponentType,
-  FC,
-  PropsWithChildren,
-} from 'react';

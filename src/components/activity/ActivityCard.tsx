@@ -1,110 +1,228 @@
 
-import React, { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { TrendingUp, TrendingDown, Percent, DollarSign } from 'lucide-react';
+import React from 'react';
+import { TrendingUp, TrendingDown } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import type { Activity } from '@/types';
+
+/**
+ * ActivityCard Component
+ * 
+ * Displays individual trading activity in a card format with visual indicators
+ * for buy/sell actions and performance metrics.
+ * 
+ * Key Features:
+ * - Visual buy/sell indicators with color coding
+ * - Portfolio and stock information display
+ * - Price and allocation details
+ * - Responsive design for mobile-first experience
+ * 
+ * React Native Conversion Notes:
+ * - Replace Card with custom View component
+ * - Use TouchableOpacity for interactive elements
+ * - Convert Tailwind classes to StyleSheet
+ * - Use React Native's Text component for typography
+ * 
+ * Props:
+ * @param activity - Activity object containing transaction details
+ */
 
 interface ActivityCardProps {
-  activity: {
-    portfolio: string;
-    stock: string;
-    date: string;
-    quantity: number;
-    price: number;
-    amount: number;
-    type: 'BUY' | 'SELL';
-    allocation?: number;
-    smPrice?: number;
-    currentPrice?: number;
-  };
+  /** Trading activity data */
+  activity: Activity;
+  /** Optional className for styling overrides */
+  className?: string;
 }
 
-const ActivityCard = ({ activity }: ActivityCardProps) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+/**
+ * ActivityCard Component Implementation
+ */
+const ActivityCard: React.FC<ActivityCardProps> = ({ activity, className = '' }) => {
+  const isBuy = activity.type === 'BUY';
   
-  const priceChange = activity.smPrice && activity.currentPrice 
-    ? ((activity.currentPrice - activity.smPrice) / activity.smPrice * 100)
-    : null;
-
   return (
-    <Card 
-      onClick={() => setIsExpanded(!isExpanded)}
-      className={`border transition-all duration-300 hover:scale-[1.01] hover:shadow-xl relative overflow-hidden group cursor-pointer ${
-        activity.type === 'BUY' 
-          ? 'bg-gradient-to-r from-emerald-900/10 via-transparent to-emerald-900/10 border-emerald-500/20 hover:border-emerald-500/40 hover:shadow-emerald-500/10' 
-          : 'bg-gradient-to-r from-red-900/10 via-transparent to-red-900/10 border-red-500/20 hover:border-red-500/40 hover:shadow-red-500/10'
-      }`}
-      style={{ borderRadius: '12px' }}
-    >
-      <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${
-        activity.type === 'BUY' ? 'bg-emerald-500/70' : 'bg-red-500/70'
-      }`} />
-      
-      <CardContent className="p-3 pl-5">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 flex-1 min-w-0">
-            <div className={`flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full ${
-              activity.type === 'BUY' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'
+    <Card className={`p-4 bg-card border-border ${className}`}>
+      <div className="flex items-center justify-between">
+        {/* Left side: Portfolio and stock info */}
+        <div className="flex-1">
+          {/* Portfolio name */}
+          <p className="text-sm text-muted-foreground mb-1">
+            {activity.portfolio.name}
+          </p>
+          
+          {/* Stock and action */}
+          <div className="flex items-center gap-2">
+            <span className="font-medium text-foreground">
+              {activity.stock}
+            </span>
+            <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
+              isBuy 
+                ? 'bg-emerald-500/20 text-emerald-400' 
+                : 'bg-red-500/20 text-red-400'
             }`}>
-              {activity.type === 'BUY' ? <TrendingUp size={18} /> : <TrendingDown size={18} />}
-            </div>
-            
-            <div className="flex flex-col min-w-0 flex-1">
-              <span className="font-bold text-foreground text-sm truncate">{activity.stock}</span>
-              <div className="text-xs text-muted-foreground truncate">
-                {activity.portfolio}
-              </div>
+              {isBuy ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+              {activity.type}
             </div>
           </div>
           
-          <div className="flex flex-col items-end flex-shrink-0">
-            <div className={`font-bold text-base font-mono ${
-              activity.type === 'BUY' ? 'text-emerald-400' : 'text-red-400'
-            }`}>
-              {activity.type === 'BUY' ? '+' : '-'}${activity.amount.toLocaleString()}
-            </div>
-            <div className="text-xs text-muted-foreground font-mono">
-              {activity.quantity} @ ${activity.price.toFixed(2)}
-            </div>
+          {/* Date and quantity */}
+          <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
+            <span>{activity.date}</span>
+            <span>{activity.quantity} shares</span>
           </div>
         </div>
-
-        {isExpanded && (
-          <div className="mt-3 pt-3 border-t border-border/20 animate-fade-in text-xs">
-            <div className="grid grid-cols-2 gap-2">
-              {activity.allocation && (
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground flex items-center gap-1.5"><Percent size={12}/> Allocation</span>
-                  <span className="font-mono text-foreground">{activity.allocation.toFixed(2)}%</span>
-                </div>
-              )}
-              {activity.smPrice && (
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground flex items-center gap-1.5"><DollarSign size={12}/> SM Price</span>
-                  <span className="font-mono text-foreground">${activity.smPrice.toFixed(2)}</span>
-                </div>
-              )}
-              {activity.currentPrice && (
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground flex items-center gap-1.5"><TrendingUp size={12}/> Current Price</span>
-                  <span className="font-mono text-foreground">${activity.currentPrice.toFixed(2)}</span>
-                </div>
-              )}
-              {priceChange !== null && (
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground flex items-center gap-1.5">
-                    <TrendingUp size={12} className={priceChange >= 0 ? 'text-emerald-400' : 'text-red-400'}/> Gain/Loss
-                  </span>
-                  <span className={`font-mono font-medium ${priceChange >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                    {priceChange >= 0 ? '+' : ''}{priceChange.toFixed(1)}%
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-      </CardContent>
+        
+        {/* Right side: Price and allocation */}
+        <div className="text-right">
+          {/* Amount */}
+          <p className="font-medium text-foreground">
+            ${activity.amount.toLocaleString()}
+          </p>
+          
+          {/* Price per share */}
+          <p className="text-sm text-muted-foreground">
+            @ ${activity.price.toFixed(2)}
+          </p>
+          
+          {/* Allocation percentage */}
+          <p className="text-xs text-muted-foreground mt-1">
+            {activity.allocation.toFixed(1)}% allocation
+          </p>
+        </div>
+      </div>
     </Card>
   );
 };
 
+// Add display name for debugging
+ActivityCard.displayName = 'ActivityCard';
+
 export default ActivityCard;
+
+/**
+ * React Native Implementation Example:
+ * 
+ * import React from 'react';
+ * import { View, Text, StyleSheet } from 'react-native';
+ * import { TrendingUp, TrendingDown } from 'react-native-vector-icons/Feather';
+ * 
+ * const ActivityCard = ({ activity }) => {
+ *   const isBuy = activity.type === 'BUY';
+ *   
+ *   return (
+ *     <View style={styles.card}>
+ *       <View style={styles.container}>
+ *         <View style={styles.leftSection}>
+ *           <Text style={styles.portfolioName}>
+ *             {activity.portfolio.name}
+ *           </Text>
+ *           
+ *           <View style={styles.stockInfo}>
+ *             <Text style={styles.stockSymbol}>{activity.stock}</Text>
+ *             <View style={[styles.actionBadge, isBuy ? styles.buyBadge : styles.sellBadge]}>
+ *               {isBuy ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+ *               <Text style={styles.actionText}>{activity.type}</Text>
+ *             </View>
+ *           </View>
+ *           
+ *           <View style={styles.details}>
+ *             <Text style={styles.detailText}>{activity.date}</Text>
+ *             <Text style={styles.detailText}>{activity.quantity} shares</Text>
+ *           </View>
+ *         </View>
+ *         
+ *         <View style={styles.rightSection}>
+ *           <Text style={styles.amount}>
+ *             ${activity.amount.toLocaleString()}
+ *           </Text>
+ *           <Text style={styles.price}>
+ *             @ ${activity.price.toFixed(2)}
+ *           </Text>
+ *           <Text style={styles.allocation}>
+ *             {activity.allocation.toFixed(1)}% allocation
+ *           </Text>
+ *         </View>
+ *       </View>
+ *     </View>
+ *   );
+ * };
+ * 
+ * const styles = StyleSheet.create({
+ *   card: {
+ *     backgroundColor: '#1a1a1a',
+ *     borderRadius: 8,
+ *     padding: 16,
+ *     marginBottom: 8,
+ *     borderWidth: 1,
+ *     borderColor: '#333',
+ *   },
+ *   container: {
+ *     flexDirection: 'row',
+ *     justifyContent: 'space-between',
+ *     alignItems: 'center',
+ *   },
+ *   leftSection: {
+ *     flex: 1,
+ *   },
+ *   portfolioName: {
+ *     color: '#888',
+ *     fontSize: 14,
+ *     marginBottom: 4,
+ *   },
+ *   stockInfo: {
+ *     flexDirection: 'row',
+ *     alignItems: 'center',
+ *     gap: 8,
+ *   },
+ *   stockSymbol: {
+ *     color: '#fff',
+ *     fontSize: 16,
+ *     fontWeight: '500',
+ *   },
+ *   actionBadge: {
+ *     flexDirection: 'row',
+ *     alignItems: 'center',
+ *     paddingHorizontal: 8,
+ *     paddingVertical: 4,
+ *     borderRadius: 12,
+ *     gap: 4,
+ *   },
+ *   buyBadge: {
+ *     backgroundColor: 'rgba(16, 185, 129, 0.2)',
+ *   },
+ *   sellBadge: {
+ *     backgroundColor: 'rgba(239, 68, 68, 0.2)',
+ *   },
+ *   actionText: {
+ *     fontSize: 12,
+ *     fontWeight: '500',
+ *   },
+ *   details: {
+ *     flexDirection: 'row',
+ *     gap: 16,
+ *     marginTop: 8,
+ *   },
+ *   detailText: {
+ *     color: '#888',
+ *     fontSize: 14,
+ *   },
+ *   rightSection: {
+ *     alignItems: 'flex-end',
+ *   },
+ *   amount: {
+ *     color: '#fff',
+ *     fontSize: 16,
+ *     fontWeight: '500',
+ *   },
+ *   price: {
+ *     color: '#888',
+ *     fontSize: 14,
+ *   },
+ *   allocation: {
+ *     color: '#888',
+ *     fontSize: 12,
+ *     marginTop: 4,
+ *   },
+ * });
+ * 
+ * export default ActivityCard;
+ */
