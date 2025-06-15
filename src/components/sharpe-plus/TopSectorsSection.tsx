@@ -10,12 +10,12 @@ interface TopSectorsSectionProps {
 
 const TopSectorsSection = ({ isExpanded, onToggle }: TopSectorsSectionProps) => {
   const topSectors = [
-    { name: 'Technology', percent: 42.3, avgAllocation: 28.7, change: 2.4, icon: '💻' },
-    { name: 'Healthcare', percent: 15.8, avgAllocation: 12.1, change: -0.8, icon: '🧬' },
-    { name: 'Financial', percent: 12.4, avgAllocation: 9.6, change: 1.2, icon: '🏦' },
-    { name: 'Consumer Disc.', percent: 11.7, avgAllocation: 8.3, change: -1.5, icon: '🛒' },
-    { name: 'Energy', percent: 8.9, avgAllocation: 6.2, change: 3.1, icon: '⚡' },
-    { name: 'Industrial', percent: 5.2, avgAllocation: 4.1, change: 0.6, icon: '🏭' }
+    { name: 'Technology', portfolioPercent: 42.3, avgAllocation: 28.7, dayChange: 2.4, icon: '💻' },
+    { name: 'Healthcare', portfolioPercent: 15.8, avgAllocation: 12.1, dayChange: -0.8, icon: '🧬' },
+    { name: 'Financial', portfolioPercent: 12.4, avgAllocation: 9.6, dayChange: 1.2, icon: '🏦' },
+    { name: 'Consumer Disc.', portfolioPercent: 11.7, avgAllocation: 8.3, dayChange: -1.5, icon: '🛒' },
+    { name: 'Energy', portfolioPercent: 8.9, avgAllocation: 6.2, dayChange: 3.1, icon: '⚡' },
+    { name: 'Industrial', portfolioPercent: 5.2, avgAllocation: 4.1, dayChange: 0.6, icon: '🏭' }
   ];
 
   const generateSparklineData = () => {
@@ -36,22 +36,38 @@ const TopSectorsSection = ({ isExpanded, onToggle }: TopSectorsSectionProps) => 
       </button>
       {isExpanded && (
         <div className="px-4 pb-4 space-y-2">
+          {/* Headers */}
+          <div className="grid grid-cols-4 gap-2 text-xs text-muted-foreground font-medium px-3 py-2 bg-background/20" style={{ borderRadius: '8px' }}>
+            <div>Sector</div>
+            <div className="text-center">% of Portfolios</div>
+            <div className="text-center">Avg Allocation %</div>
+            <div className="text-center">Day Change %</div>
+          </div>
+          
           {topSectors.map((sector, i) => (
-            <div key={i} className="flex items-center justify-between p-3 bg-background/30" style={{ borderRadius: '10px' }}>
-              <div className="flex items-center gap-3">
+            <div key={i} className="grid grid-cols-4 gap-2 items-center p-3 bg-background/30" style={{ borderRadius: '10px' }}>
+              <div className="flex items-center gap-2">
                 <span className="text-lg">{sector.icon}</span>
                 <div>
                   <div className="font-medium text-sm">{sector.name}</div>
-                  <div className="text-xs text-muted-foreground">{sector.percent}% of portfolios</div>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <div className={`flex items-center gap-1 ${sector.change >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                  {sector.change >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-                  <span className="text-xs font-medium">{Math.abs(sector.change)}%</span>
+              
+              <div className="text-center">
+                <div className="text-sm font-medium">{sector.portfolioPercent}%</div>
+              </div>
+              
+              <div className="text-center">
+                <div className="text-sm font-medium text-blue-400">{sector.avgAllocation}%</div>
+              </div>
+              
+              <div className="flex items-center justify-center gap-1">
+                <div className={`flex items-center gap-1 ${sector.dayChange >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  {sector.dayChange >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+                  <span className="text-sm font-medium">{Math.abs(sector.dayChange)}%</span>
                 </div>
-                <div className="w-8 h-4">
-                  <MiniChart data={generateSparklineData()} width={32} height={16} />
+                <div className="w-6 h-3 ml-1">
+                  <MiniChart data={generateSparklineData()} width={24} height={12} />
                 </div>
               </div>
             </div>

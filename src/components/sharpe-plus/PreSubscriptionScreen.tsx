@@ -25,8 +25,27 @@ const PreSubscriptionScreen = () => {
             Unlock Sharpe+
           </h1>
           <p className="text-muted-foreground mb-6">
-            See how investors are allocating capital — in real time.
+            See how investors are allocating capital — with detailed metrics.
           </p>
+        </div>
+
+        {/* Key Metrics Preview */}
+        <div className="mb-6">
+          <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
+            📊 Get These Key Metrics
+          </h2>
+          <div className="grid grid-cols-3 gap-2 mb-4">
+            {[
+              { label: 'Avg Allocation %', desc: 'Average allocation across portfolios', color: 'text-blue-400' },
+              { label: '% of Portfolios', desc: 'Percentage of portfolios holding', color: 'text-emerald-400' },
+              { label: 'Day Change %', desc: 'Daily allocation change', color: 'text-purple-400' }
+            ].map((metric, i) => (
+              <div key={i} className="p-2 bg-card/30 border border-border/20" style={{ borderRadius: '8px' }}>
+                <div className={`text-xs font-bold ${metric.color} mb-1`}>{metric.label}</div>
+                <div className="text-xs text-muted-foreground leading-tight">{metric.desc}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* What You're Missing Section */}
@@ -35,54 +54,54 @@ const PreSubscriptionScreen = () => {
             🔥 What You're Missing
           </h2>
           
-          {/* Trending Tickers - Blurred with Movement */}
+          {/* Top Holdings Preview - Blurred with detailed metrics */}
           <div className="bg-card/50 border border-border backdrop-blur-sm relative overflow-hidden mb-3" style={{ borderRadius: '12px' }}>
             <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10" style={{ borderRadius: '12px' }}>
               <Lock size={18} className="text-emerald-400 animate-pulse" />
             </div>
             <div className="p-3 blur-sm">
               <h3 className="font-medium text-sm mb-2 flex items-center gap-2">
-                📈 Trending Tickers
+                📈 Top Holdings Analysis
               </h3>
               <div className="space-y-2">
-                {['TSLA', 'NVDA', 'AAPL'].map((ticker, i) => (
-                  <div key={i} className="flex items-center justify-between">
-                    <span className="font-medium text-sm">{ticker}</span>
-                    <div className="flex items-center gap-2">
-                      <TrendingUp size={12} className="text-emerald-400" />
-                      <div className="w-12 h-3">
-                        <MiniChart data={generateSparklineData()} width={48} height={12} />
-                      </div>
-                      <span className="text-xs text-emerald-400">+•.•%</span>
-                    </div>
+                {[
+                  { ticker: 'NVDA', portfolios: '78.4%', avg: '12.3%', change: '+5.2%' },
+                  { ticker: 'AAPL', portfolios: '72.1%', avg: '8.7%', change: '-2.1%' },
+                  { ticker: 'MSFT', portfolios: '68.9%', avg: '9.4%', change: '+3.7%' }
+                ].map((holding, i) => (
+                  <div key={i} className="grid grid-cols-4 gap-2 items-center text-xs">
+                    <span className="font-medium">{holding.ticker}</span>
+                    <span className="text-center">{holding.portfolios}</span>
+                    <span className="text-center text-blue-400">{holding.avg}</span>
+                    <span className={`text-center ${holding.change.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>
+                      {holding.change}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Sector Rotations - Horizontal tiles */}
+          {/* Top Sectors Preview - Blurred with detailed metrics */}
           <div className="bg-card/50 border border-border backdrop-blur-sm relative overflow-hidden mb-3" style={{ borderRadius: '12px' }}>
             <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10" style={{ borderRadius: '12px' }}>
               <Lock size={18} className="text-emerald-400 animate-pulse" />
             </div>
             <div className="p-3 blur-sm">
-              <h3 className="font-medium text-sm mb-2">🔄 Sector Rotations</h3>
-              <div className="flex gap-2">
+              <h3 className="font-medium text-sm mb-2">🔄 Sector Allocation Trends</h3>
+              <div className="space-y-2">
                 {[
-                  { name: 'Tech', trend: 'up' },
-                  { name: 'Energy', trend: 'down' },
-                  { name: 'Health', trend: 'up' }
+                  { name: 'Technology', portfolios: '42.3%', avg: '28.7%', change: '+2.4%' },
+                  { name: 'Healthcare', portfolios: '15.8%', avg: '12.1%', change: '-0.8%' },
+                  { name: 'Financial', portfolios: '12.4%', avg: '9.6%', change: '+1.2%' }
                 ].map((sector, i) => (
-                  <div key={i} className="flex-1 p-2 bg-background/30 text-center" style={{ borderRadius: '8px' }}>
-                    <div className="text-xs font-medium">{sector.name}</div>
-                    <div className="flex items-center justify-center gap-1 mt-1">
-                      {sector.trend === 'up' ? 
-                        <TrendingUp size={10} className="text-emerald-400" /> : 
-                        <TrendingDown size={10} className="text-red-400" />
-                      }
-                      <span className="text-xs">•.•%</span>
-                    </div>
+                  <div key={i} className="grid grid-cols-4 gap-2 items-center text-xs">
+                    <span className="font-medium truncate">{sector.name}</span>
+                    <span className="text-center">{sector.portfolios}</span>
+                    <span className="text-center text-blue-400">{sector.avg}</span>
+                    <span className={`text-center ${sector.change.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>
+                      {sector.change}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -92,20 +111,20 @@ const PreSubscriptionScreen = () => {
           <div className="text-center">
             <p className="text-xs text-muted-foreground flex items-center justify-center gap-2">
               <Lock size={12} className="text-emerald-400" />
-              See the full picture with Sharpe+
+              See detailed allocation metrics with Sharpe+
             </p>
           </div>
         </div>
 
-        {/* What You Get - Tighter Layout */}
+        {/* What You Get - Enhanced with specific metrics */}
         <div className="mb-6">
           <h2 className="text-lg font-bold text-center mb-4">What You Get</h2>
           <div className="grid grid-cols-2 gap-2">
             {[
-              { icon: '📊', text: 'Track top investor trades' },
-              { icon: '🔄', text: 'Monitor allocation shifts' },
-              { icon: '📈', text: 'See sector-level rotation trends' },
-              { icon: '⚡', text: 'Spot momentum before market reacts' }
+              { icon: '📊', text: 'Detailed allocation percentages' },
+              { icon: '🔄', text: 'Daily allocation change tracking' },
+              { icon: '📈', text: 'Portfolio penetration metrics' },
+              { icon: '⚡', text: 'Real-time sector rotations' }
             ].map((feature, i) => (
               <div key={i} className="p-3 bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/15 transition-colors" style={{ borderRadius: '12px' }}>
                 <div className="text-center">
@@ -123,10 +142,10 @@ const PreSubscriptionScreen = () => {
             <Sparkles size={14} className="text-amber-400 animate-pulse" />
           </div>
           <h3 className="font-bold text-sm mb-1 flex items-center gap-2">
-            🧠 Sharpe+ Watchlist
+            🧠 Sharpe+ Analytics
           </h3>
           <p className="text-xs text-muted-foreground">
-            Curated watchlists from top performers
+            Advanced portfolio allocation insights & trends
           </p>
         </div>
       </div>
