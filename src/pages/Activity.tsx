@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { TrendingUp } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -12,58 +13,76 @@ const Activity = () => {
   
   const activities = [
     {
-      portfolio: 'Dividend Portfolio',
-      stock: 'AAPB',
-      date: '05-20-2024',
+      portfolio: 'Mixed Batch (Hudson Shapiro)',
+      stock: 'SPHR',
+      date: '06-03-2024',
       quantity: 10,
-      price: 25,
-      amount: 250,
-      type: 'BUY' as const
+      price: 37.70,
+      amount: 377,
+      type: 'SELL' as const,
+      allocation: 95.05,
+      smPrice: 37.70,
+      currentPrice: 37.70
     },
     {
-      portfolio: 'Real Estate Portfolio',
-      stock: 'AAPB',
-      date: '05-20-2024',
-      quantity: 10,
-      price: 25,
-      amount: 250,
-      type: 'BUY' as const
+      portfolio: 'Tech Bull (Hudson Shapiro)',
+      stock: 'V',
+      date: '06-03-2024',
+      quantity: 1,
+      price: 365.19,
+      amount: 365,
+      type: 'BUY' as const,
+      allocation: 10.79,
+      smPrice: 365.19,
+      currentPrice: 365.19
     },
     {
-      portfolio: 'HealthCare Portfolio',
-      stock: 'AAPB',
-      date: '05-20-2024',
-      quantity: 10,
-      price: 25,
-      amount: 250,
-      type: 'SELL' as const
-    },
-    {
-      portfolio: 'Auto Portfolio',
+      portfolio: 'DEFUND THE GOV... (Hudson S...)',
       stock: 'TSLA',
-      date: '05-19-2024',
-      quantity: 5,
-      price: 245,
-      amount: 1225,
-      type: 'BUY' as const
-    },
-    {
-      portfolio: 'FMCG Portfolio',
-      stock: 'NVDA',
-      date: '05-18-2024',
+      date: '06-03-2024',
       quantity: 2,
-      price: 875,
-      amount: 1750,
-      type: 'SELL' as const
+      price: 346.46,
+      amount: 693,
+      type: 'BUY' as const,
+      allocation: 17.89,
+      smPrice: 346.46,
+      currentPrice: 346.46
     },
     {
-      portfolio: 'Tech Portfolio',
-      stock: 'META',
-      date: '05-17-2024',
-      quantity: 8,
-      price: 312,
-      amount: 2496,
-      type: 'BUY' as const
+      portfolio: 'Tech Bull (Hudson Shapiro)',
+      stock: 'MSTR',
+      date: '06-03-2024',
+      quantity: 1,
+      price: 369.06,
+      amount: 369,
+      type: 'BUY' as const,
+      allocation: 16.35,
+      smPrice: 369.06,
+      currentPrice: 369.06
+    },
+    {
+      portfolio: 'DEFUND THE GOV... (Hudson S...)',
+      stock: 'MSTR',
+      date: '06-03-2024',
+      quantity: 1,
+      price: 369.06,
+      amount: 369,
+      type: 'BUY' as const,
+      allocation: 19.07,
+      smPrice: 369.06,
+      currentPrice: 369.06
+    },
+    {
+      portfolio: 'COMO (Hudson Shapiro)',
+      stock: 'SLV',
+      date: '06-03-2024',
+      quantity: 15,
+      price: 30.00,
+      amount: 450,
+      type: 'BUY' as const,
+      allocation: 100.00,
+      smPrice: 30.00,
+      currentPrice: 30.00
     },
   ];
 
@@ -71,7 +90,7 @@ const Activity = () => {
   const filteredActivities = activities.filter(activity => {
     switch (activeFilter) {
       case 'week':
-        return ['05-20-2024', '05-19-2024'].includes(activity.date);
+        return ['06-03-2024'].includes(activity.date);
       case 'buy':
         return activity.type === 'BUY';
       case 'sell':

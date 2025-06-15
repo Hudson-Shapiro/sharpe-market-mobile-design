@@ -1,13 +1,14 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Trophy, Briefcase, Users, Star } from 'lucide-react';
+import { Trophy, Briefcase, Users, Star, Percent } from 'lucide-react';
 
 const ActivitySummary = () => {
   const summaryData = {
     totalPortfolios: 6,
     subscribedPortfolios: 12,
-    bestPerformingPortfolio: 'Tech Fund'
+    bestPerformingPortfolio: 'Tech Fund',
+    avgAllocation: 47.2  // New derived stat - average allocation across activities
   };
 
   return (
@@ -22,15 +23,15 @@ const ActivitySummary = () => {
           </div>
         </div>
         
-        {/* Updated Grid Layout */}
-        <div className="grid grid-cols-3 gap-4">
+        {/* Updated Grid Layout - Now 4 columns */}
+        <div className="grid grid-cols-4 gap-3">
           {/* My Portfolios */}
           <div className="text-center">
             <div className="flex items-center justify-center gap-1 text-emerald-400 font-bold text-lg hover:scale-105 transition-transform duration-200">
-              <div className="p-1 bg-emerald-500/20 hover:bg-emerald-500/30 transition-colors" style={{ borderRadius: '12px' }}>
-                <Briefcase size={12} className="drop-shadow-sm" />
+              <div className="p-1 bg-emerald-500/20 hover:bg-emerald-500/30 transition-colors" style={{ borderRadius: '8px' }}>
+                <Briefcase size={10} className="drop-shadow-sm" />
               </div>
-              <span className="font-mono text-base">{summaryData.totalPortfolios}</span>
+              <span className="font-mono text-sm">{summaryData.totalPortfolios}</span>
             </div>
             <p className="text-xs text-muted-foreground mt-0.5">My Portfolios</p>
           </div>
@@ -38,23 +39,34 @@ const ActivitySummary = () => {
           {/* Subscribed */}
           <div className="text-center">
             <div className="flex items-center justify-center gap-1 text-blue-400 font-bold text-lg hover:scale-105 transition-transform duration-200">
-              <div className="p-1 bg-blue-500/20 hover:bg-blue-500/30 transition-colors" style={{ borderRadius: '12px' }}>
-                <Users size={12} className="drop-shadow-sm" />
+              <div className="p-1 bg-blue-500/20 hover:bg-blue-500/30 transition-colors" style={{ borderRadius: '8px' }}>
+                <Users size={10} className="drop-shadow-sm" />
               </div>
-              <span className="font-mono text-base">{summaryData.subscribedPortfolios}</span>
+              <span className="font-mono text-sm">{summaryData.subscribedPortfolios}</span>
             </div>
             <p className="text-xs text-muted-foreground mt-0.5">Subscribed</p>
+          </div>
+          
+          {/* Average Allocation - New derived stat */}
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-1 text-orange-400 font-bold text-lg hover:scale-105 transition-transform duration-200">
+              <div className="p-1 bg-orange-500/20 hover:bg-orange-500/30 transition-colors" style={{ borderRadius: '8px' }}>
+                <Percent size={10} className="drop-shadow-sm" />
+              </div>
+              <span className="font-mono text-sm">{summaryData.avgAllocation}%</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-0.5">Avg Allocation</p>
           </div>
           
           {/* Best Performing */}
           <div className="text-center">
             <div className="flex items-center justify-center gap-1 text-purple-400 font-bold text-lg hover:scale-105 transition-transform duration-200">
-              <div className="p-1 bg-purple-500/20 hover:bg-purple-500/30 transition-colors" style={{ borderRadius: '12px' }}>
-                <Star size={12} className="drop-shadow-sm" />
+              <div className="p-1 bg-purple-500/20 hover:bg-purple-500/30 transition-colors" style={{ borderRadius: '8px' }}>
+                <Star size={10} className="drop-shadow-sm" />
               </div>
             </div>
-            <div className="text-foreground font-bold text-sm truncate hover:scale-105 transition-transform duration-200">
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent text-sm">
+            <div className="text-foreground font-bold text-xs truncate hover:scale-105 transition-transform duration-200">
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent text-xs">
                 {summaryData.bestPerformingPortfolio}
               </span>
             </div>
