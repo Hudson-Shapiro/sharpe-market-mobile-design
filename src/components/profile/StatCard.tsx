@@ -13,8 +13,8 @@ const StatCard = ({ icon, title, value, subtitle, variant = 'default' }: StatCar
   const isPerformance = variant === 'performance';
   
   return (
-    <div className={`p-4 rounded-xl border ${isPerformance ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-card border-border'}`}>
-      <div className="flex items-center justify-between mb-2">
+    <div className={`p-3 rounded-xl border ${isPerformance ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-card border-border'}`}>
+      <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-2">
           {icon}
           <span className="text-xs text-muted-foreground font-medium">{title}</span>
