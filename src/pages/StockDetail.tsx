@@ -495,16 +495,6 @@ const StockDetail = () => {
           </Card>
         </div>
       </ScrollArea>
-
-      {/* Floating Action Buttons */}
-      <div className="fixed bottom-6 right-6 flex flex-col gap-3">
-        <Button size="icon" className="rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
-          <Plus size={20} />
-        </Button>
-        <Button size="icon" variant="outline" className="rounded-full bg-background/80 backdrop-blur-sm border-border/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110">
-          <Heart size={20} />
-        </Button>
-      </div>
     </div>
   );
 };
