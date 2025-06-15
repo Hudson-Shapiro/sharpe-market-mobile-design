@@ -128,4 +128,4 @@ export const stockData = {
   }
 };
 
-export type Stock = typeof stockData.NVDA;
+export type Stock = (typeof stockData)[keyof typeof stockData];
