@@ -2,10 +2,9 @@
 import React, { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Trophy, Search, TrendingUp } from 'lucide-react';
+import { Trophy, TrendingUp } from 'lucide-react';
 import DiscoverHeader from '@/components/layout/DiscoverHeader';
 import LeaderboardTab from '@/components/discover/LeaderboardTab';
-import DiscoverTab from '@/components/discover/DiscoverTab';
 import MarketTab from '@/components/discover/MarketTab';
 
 const Discover = () => {
@@ -17,7 +16,7 @@ const Discover = () => {
         <DiscoverHeader />
         <div className="p-4">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-secondary/30 backdrop-blur-sm border-0 mb-6 shadow-lg p-1" style={{ borderRadius: '12px' }}>
+            <TabsList className="grid w-full grid-cols-2 bg-secondary/30 backdrop-blur-sm border-0 mb-6 shadow-lg p-1" style={{ borderRadius: '12px' }}>
               <TabsTrigger 
                 value="leaderboard" 
                 className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
@@ -25,14 +24,6 @@ const Discover = () => {
               >
                 <Trophy size={18} />
                 Leaderboard
-              </TabsTrigger>
-              <TabsTrigger 
-                value="discover" 
-                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
-                style={{ borderRadius: '12px' }}
-              >
-                <Search size={18} />
-                Discover
               </TabsTrigger>
               <TabsTrigger 
                 value="market" 
@@ -46,10 +37,6 @@ const Discover = () => {
 
             <TabsContent value="leaderboard" className="animate-fade-in">
               <LeaderboardTab />
-            </TabsContent>
-
-            <TabsContent value="discover" className="animate-fade-in">
-              <DiscoverTab />
             </TabsContent>
 
             <TabsContent value="market" className="animate-fade-in">
