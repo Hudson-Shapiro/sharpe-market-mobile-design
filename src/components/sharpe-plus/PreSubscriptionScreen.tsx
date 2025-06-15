@@ -9,6 +9,20 @@ const PreSubscriptionScreen = () => {
     return Array.from({ length: 7 }, () => Math.random() * 40 + 20);
   };
 
+  // Real teaser data to show what users get
+  const teaserHoldings = [
+    { ticker: 'NVDA', portfolios: '78.4%', avg: '12.3%', change: '+5.2%', trend: 'up' },
+    { ticker: 'AAPL', portfolios: '72.1%', avg: '8.7%', change: '-2.1%', trend: 'down' },
+    { ticker: 'MSFT', portfolios: '68.9%', avg: '9.4%', change: '+3.7%', trend: 'up' },
+    { ticker: 'TSLA', portfolios: '55.2%', avg: '6.8%', change: '-4.3%', trend: 'down' }
+  ];
+
+  const teaserSectors = [
+    { name: 'Technology', portfolios: '42.3%', avg: '28.7%', change: '+2.4%', trend: 'up' },
+    { name: 'Healthcare', portfolios: '15.8%', avg: '12.1%', change: '-0.8%', trend: 'down' },
+    { name: 'Financial', portfolios: '12.4%', avg: '9.6%', change: '+1.2%', trend: 'up' }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-900/30 via-emerald-800/20 to-emerald-700/30 relative overflow-hidden">
       {/* Background glow effects */}
@@ -48,32 +62,37 @@ const PreSubscriptionScreen = () => {
           </div>
         </div>
 
-        {/* What You're Missing Section */}
+        {/* What You're Missing Section with Real Data Teasers */}
         <div className="mb-6">
           <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
             🔥 What You're Missing
           </h2>
           
-          {/* Top Holdings Preview - Blurred with detailed metrics */}
+          {/* Top Holdings Preview - with actual teaser data */}
           <div className="bg-card/50 border border-border backdrop-blur-sm relative overflow-hidden mb-3" style={{ borderRadius: '12px' }}>
-            <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10" style={{ borderRadius: '12px' }}>
-              <Lock size={18} className="text-emerald-400 animate-pulse" />
+            <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-10" style={{ borderRadius: '12px' }}>
+              <div className="text-center">
+                <Lock size={20} className="text-emerald-400 animate-pulse mx-auto mb-2" />
+                <p className="text-xs text-emerald-400 font-medium">Live Data</p>
+              </div>
             </div>
-            <div className="p-3 blur-sm">
+            <div className="p-3 blur-[2px]">
               <h3 className="font-medium text-sm mb-2 flex items-center gap-2">
                 📈 Top Holdings Analysis
               </h3>
-              <div className="space-y-2">
-                {[
-                  { ticker: 'NVDA', portfolios: '78.4%', avg: '12.3%', change: '+5.2%' },
-                  { ticker: 'AAPL', portfolios: '72.1%', avg: '8.7%', change: '-2.1%' },
-                  { ticker: 'MSFT', portfolios: '68.9%', avg: '9.4%', change: '+3.7%' }
-                ].map((holding, i) => (
-                  <div key={i} className="grid grid-cols-4 gap-2 items-center text-xs">
-                    <span className="font-medium">{holding.ticker}</span>
-                    <span className="text-center">{holding.portfolios}</span>
-                    <span className="text-center text-blue-400">{holding.avg}</span>
-                    <span className={`text-center ${holding.change.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>
+              <div className="grid grid-cols-4 gap-2 text-xs text-muted-foreground font-medium mb-2 px-1">
+                <div>Stock</div>
+                <div className="text-center">% Portfolios</div>
+                <div className="text-center">Avg Alloc %</div>
+                <div className="text-center">Day Change</div>
+              </div>
+              <div className="space-y-1.5">
+                {teaserHoldings.map((holding, i) => (
+                  <div key={i} className="grid grid-cols-4 gap-2 items-center text-xs bg-background/20 p-2 rounded-lg">
+                    <span className="font-bold">{holding.ticker}</span>
+                    <span className="text-center font-medium">{holding.portfolios}</span>
+                    <span className="text-center text-blue-400 font-medium">{holding.avg}</span>
+                    <span className={`text-center font-medium ${holding.trend === 'up' ? 'text-emerald-400' : 'text-red-400'}`}>
                       {holding.change}
                     </span>
                   </div>
@@ -82,24 +101,29 @@ const PreSubscriptionScreen = () => {
             </div>
           </div>
 
-          {/* Top Sectors Preview - Blurred with detailed metrics */}
+          {/* Top Sectors Preview - with actual teaser data */}
           <div className="bg-card/50 border border-border backdrop-blur-sm relative overflow-hidden mb-3" style={{ borderRadius: '12px' }}>
-            <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10" style={{ borderRadius: '12px' }}>
-              <Lock size={18} className="text-emerald-400 animate-pulse" />
+            <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-10" style={{ borderRadius: '12px' }}>
+              <div className="text-center">
+                <Lock size={20} className="text-emerald-400 animate-pulse mx-auto mb-2" />
+                <p className="text-xs text-emerald-400 font-medium">Live Data</p>
+              </div>
             </div>
-            <div className="p-3 blur-sm">
+            <div className="p-3 blur-[2px]">
               <h3 className="font-medium text-sm mb-2">🔄 Sector Allocation Trends</h3>
-              <div className="space-y-2">
-                {[
-                  { name: 'Technology', portfolios: '42.3%', avg: '28.7%', change: '+2.4%' },
-                  { name: 'Healthcare', portfolios: '15.8%', avg: '12.1%', change: '-0.8%' },
-                  { name: 'Financial', portfolios: '12.4%', avg: '9.6%', change: '+1.2%' }
-                ].map((sector, i) => (
-                  <div key={i} className="grid grid-cols-4 gap-2 items-center text-xs">
+              <div className="grid grid-cols-4 gap-2 text-xs text-muted-foreground font-medium mb-2 px-1">
+                <div>Sector</div>
+                <div className="text-center">% Portfolios</div>
+                <div className="text-center">Avg Alloc %</div>
+                <div className="text-center">Day Change</div>
+              </div>
+              <div className="space-y-1.5">
+                {teaserSectors.map((sector, i) => (
+                  <div key={i} className="grid grid-cols-4 gap-2 items-center text-xs bg-background/20 p-2 rounded-lg">
                     <span className="font-medium truncate">{sector.name}</span>
-                    <span className="text-center">{sector.portfolios}</span>
-                    <span className="text-center text-blue-400">{sector.avg}</span>
-                    <span className={`text-center ${sector.change.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>
+                    <span className="text-center font-medium">{sector.portfolios}</span>
+                    <span className="text-center text-blue-400 font-medium">{sector.avg}</span>
+                    <span className={`text-center font-medium ${sector.trend === 'up' ? 'text-emerald-400' : 'text-red-400'}`}>
                       {sector.change}
                     </span>
                   </div>
@@ -150,12 +174,12 @@ const PreSubscriptionScreen = () => {
         </div>
       </div>
 
-      {/* Sticky Footer CTA */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background via-background/95 to-transparent backdrop-blur-sm">
+      {/* Sticky Footer CTA - Fixed styling */}
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background via-background to-transparent backdrop-blur-sm">
         <div className="max-w-md mx-auto">
           <Button 
             size="lg" 
-            className="w-full bg-gradient-to-r from-emerald-600 to-purple-600 hover:from-emerald-500 hover:to-purple-500 text-white py-4 text-lg font-bold shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300 hover:scale-[1.02]"
+            className="w-full bg-gradient-to-r from-emerald-600 to-purple-600 hover:from-emerald-500 hover:to-purple-500 text-white py-4 text-lg font-bold shadow-xl border-0 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
             style={{ borderRadius: '12px' }}
           >
             🔓 Subscribe Now — $9.99/month
