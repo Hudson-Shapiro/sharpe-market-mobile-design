@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { TrendingUp, Crown, Star } from 'lucide-react';
@@ -16,7 +17,7 @@ const LeaderboardTab = () => {
         rank: 1,
         username: "Josh",
         author: "by Joshua Kroll",
-        topPercent: "Top 1%",
+        topPercent: "1%",
         sharpe: 9.2,
         return: 2.4,
         vsSpReturn: 1.8,
@@ -27,7 +28,7 @@ const LeaderboardTab = () => {
         rank: 2,
         username: "Sarah Chen",
         author: "by Sarah C.",
-        topPercent: "Top 1%",
+        topPercent: "1%",
         sharpe: 8.7,
         return: 1.9,
         vsSpReturn: 1.3,
@@ -38,7 +39,7 @@ const LeaderboardTab = () => {
         rank: 3,
         username: "Mike Johnson",
         author: "by Mike J.",
-        topPercent: "Top 3%",
+        topPercent: "10%",
         sharpe: 7.4,
         return: 1.5,
         vsSpReturn: 0.9,
@@ -49,7 +50,7 @@ const LeaderboardTab = () => {
         rank: 4,
         username: "Test",
         author: "by Test User",
-        topPercent: "Top 5%",
+        topPercent: "10%",
         sharpe: 6.8,
         return: 1.2,
         vsSpReturn: 0.6,
@@ -60,7 +61,7 @@ const LeaderboardTab = () => {
         rank: 5,
         username: "Alex Rivera",
         author: "by Alex R.",
-        topPercent: "Top 5%",
+        topPercent: "25%",
         sharpe: 6.2,
         return: 0.9,
         vsSpReturn: 0.3,
@@ -73,7 +74,7 @@ const LeaderboardTab = () => {
         rank: 1,
         username: "Josh",
         author: "by Joshua Kroll",
-        topPercent: "Top 1%",
+        topPercent: "1%",
         sharpe: 9.2,
         return: 59.6,
         vsSpReturn: 51.2,
@@ -84,7 +85,7 @@ const LeaderboardTab = () => {
         rank: 2,
         username: "Sarah Chen",
         author: "by Sarah C.",
-        topPercent: "Top 1%",
+        topPercent: "1%",
         sharpe: 8.7,
         return: 45.3,
         vsSpReturn: 37.8,
@@ -95,7 +96,7 @@ const LeaderboardTab = () => {
         rank: 3,
         username: "Mike Johnson",
         author: "by Mike J.",
-        topPercent: "Top 3%",
+        topPercent: "10%",
         sharpe: 7.4,
         return: 38.2,
         vsSpReturn: 30.7,
@@ -106,7 +107,7 @@ const LeaderboardTab = () => {
         rank: 4,
         username: "Test",
         author: "by Test User",
-        topPercent: "Top 5%",
+        topPercent: "10%",
         sharpe: 6.8,
         return: 32.1,
         vsSpReturn: 24.6,
@@ -117,7 +118,7 @@ const LeaderboardTab = () => {
         rank: 5,
         username: "Alex Rivera",
         author: "by Alex R.",
-        topPercent: "Top 5%",
+        topPercent: "25%",
         sharpe: 6.2,
         return: 28.9,
         vsSpReturn: 21.4,
@@ -130,7 +131,7 @@ const LeaderboardTab = () => {
         rank: 1,
         username: "Josh",
         author: "by Joshua Kroll",
-        topPercent: "Top 1%",
+        topPercent: "1%",
         sharpe: 9.2,
         return: 89.2,
         vsSpReturn: 76.8,
@@ -141,7 +142,7 @@ const LeaderboardTab = () => {
         rank: 2,
         username: "Sarah Chen",
         author: "by Sarah C.",
-        topPercent: "Top 1%",
+        topPercent: "1%",
         sharpe: 8.7,
         return: 71.5,
         vsSpReturn: 59.2,
@@ -152,7 +153,7 @@ const LeaderboardTab = () => {
         rank: 3,
         username: "Mike Johnson",
         author: "by Mike J.",
-        topPercent: "Top 3%",
+        topPercent: "10%",
         sharpe: 7.4,
         return: 59.8,
         vsSpReturn: 47.5,
@@ -163,7 +164,7 @@ const LeaderboardTab = () => {
         rank: 4,
         username: "Test",
         author: "by Test User",
-        topPercent: "Top 5%",
+        topPercent: "10%",
         sharpe: 6.8,
         return: 52.1,
         vsSpReturn: 39.8,
@@ -174,7 +175,7 @@ const LeaderboardTab = () => {
         rank: 5,
         username: "Alex Rivera",
         author: "by Alex R.",
-        topPercent: "Top 5%",
+        topPercent: "25%",
         sharpe: 6.2,
         return: 46.7,
         vsSpReturn: 34.4,
@@ -187,7 +188,7 @@ const LeaderboardTab = () => {
         rank: 1,
         username: "Josh",
         author: "by Joshua Kroll",
-        topPercent: "Top 1%",
+        topPercent: "1%",
         sharpe: 9.2,
         return: 124.7,
         vsSpReturn: 102.3,
@@ -198,7 +199,7 @@ const LeaderboardTab = () => {
         rank: 2,
         username: "Sarah Chen",
         author: "by Sarah C.",
-        topPercent: "Top 1%",
+        topPercent: "1%",
         sharpe: 8.7,
         return: 98.2,
         vsSpReturn: 76.8,
@@ -209,7 +210,7 @@ const LeaderboardTab = () => {
         rank: 3,
         username: "Mike Johnson",
         author: "by Mike J.",
-        topPercent: "Top 3%",
+        topPercent: "10%",
         sharpe: 7.4,
         return: 81.5,
         vsSpReturn: 60.1,
@@ -220,7 +221,7 @@ const LeaderboardTab = () => {
         rank: 4,
         username: "Test",
         author: "by Test User",
-        topPercent: "Top 5%",
+        topPercent: "10%",
         sharpe: 6.8,
         return: 69.8,
         vsSpReturn: 48.4,
@@ -231,7 +232,7 @@ const LeaderboardTab = () => {
         rank: 5,
         username: "Alex Rivera",
         author: "by Alex R.",
-        topPercent: "Top 5%",
+        topPercent: "25%",
         sharpe: 6.2,
         return: 61.2,
         vsSpReturn: 39.8,
@@ -251,9 +252,10 @@ const LeaderboardTab = () => {
   };
 
   const getTopPercentBadgeColor = (percent: string) => {
-    if (percent === "Top 1%") return "bg-gradient-to-r from-emerald-400 to-green-500 text-white";
-    if (percent === "Top 3%") return "bg-gradient-to-r from-emerald-500 to-teal-500 text-white";
-    return "bg-gradient-to-r from-teal-500 to-cyan-500 text-white";
+    if (percent === "1%") return "bg-gradient-to-r from-yellow-400 to-amber-500 text-white shadow-lg";
+    if (percent === "10%") return "bg-gradient-to-r from-emerald-400 to-green-500 text-white";
+    if (percent === "25%") return "bg-gradient-to-r from-blue-400 to-blue-500 text-white";
+    return "bg-gradient-to-r from-gray-400 to-gray-500 text-white";
   };
 
   return (
@@ -305,7 +307,7 @@ const LeaderboardTab = () => {
                 <Badge 
                   className={`text-xs mt-0.5 ${getTopPercentBadgeColor(performer.topPercent)}`}
                 >
-                  {performer.topPercent}
+                  Top {performer.topPercent}
                 </Badge>
               </div>
             </div>
