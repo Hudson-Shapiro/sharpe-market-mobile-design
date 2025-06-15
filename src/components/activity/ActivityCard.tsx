@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -38,54 +37,37 @@ interface ActivityCardProps {
  */
 const ActivityCard: React.FC<ActivityCardProps> = ({ activity, className = '' }) => {
   const isBuy = activity.type === 'BUY';
-  
+  const sign = isBuy ? '+' : '-';
+  const amountColor = isBuy ? 'text-emerald-400' : 'text-red-400';
+  const cardBg = isBuy ? 'bg-emerald-500/10' : 'bg-red-500/10';
+  const iconBg = isBuy ? 'bg-emerald-500/20' : 'bg-red-500/20';
+  const iconColor = isBuy ? 'text-emerald-400' : 'text-red-400';
+
   return (
-    <Card className={`p-4 bg-card border-border ${className}`}>
-      <div className="flex items-center justify-between">
-        {/* Left side: Portfolio and stock info */}
-        <div className="flex-1">
-          {/* Portfolio name */}
-          <p className="text-sm text-muted-foreground mb-1">
-            {activity.portfolio.name}
-          </p>
-          
-          {/* Stock and action */}
-          <div className="flex items-center gap-2">
-            <span className="font-medium text-foreground">
-              {activity.stock}
-            </span>
-            <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
-              isBuy 
-                ? 'bg-emerald-500/20 text-emerald-400' 
-                : 'bg-red-500/20 text-red-400'
-            }`}>
-              {isBuy ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-              {activity.type}
-            </div>
-          </div>
-          
-          {/* Date and quantity */}
-          <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
-            <span>{activity.date}</span>
-            <span>{activity.quantity} shares</span>
-          </div>
+    <Card className={`p-3 border-border/20 ${cardBg} ${className}`}>
+      <div className="flex items-center justify-between gap-3">
+        {/* Icon */}
+        <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${iconBg}`}>
+          {isBuy ? (
+            <TrendingUp className={iconColor} size={20} />
+          ) : (
+            <TrendingDown className={iconColor} size={20} />
+          )}
         </div>
-        
-        {/* Right side: Price and allocation */}
-        <div className="text-right">
-          {/* Amount */}
-          <p className="font-medium text-foreground">
-            ${activity.amount.toLocaleString()}
+
+        {/* Middle Info */}
+        <div className="flex-1 min-w-0">
+          <p className="font-bold text-foreground text-base truncate">{activity.stock}</p>
+          <p className="text-sm text-muted-foreground truncate">{activity.portfolio.name}</p>
+        </div>
+
+        {/* Right Info */}
+        <div className="text-right flex-shrink-0 ml-2">
+          <p className={`font-bold text-base ${amountColor}`}>
+            {sign}${activity.amount.toLocaleString()}
           </p>
-          
-          {/* Price per share */}
           <p className="text-sm text-muted-foreground">
-            @ ${activity.price.toFixed(2)}
-          </p>
-          
-          {/* Allocation percentage */}
-          <p className="text-xs text-muted-foreground mt-1">
-            {activity.allocation.toFixed(1)}% allocation
+            {`${activity.quantity} @ $${activity.price.toFixed(2)}`}
           </p>
         </div>
       </div>
