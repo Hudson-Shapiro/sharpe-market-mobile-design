@@ -10,6 +10,11 @@ interface PortfolioCardDetailsProps {
 }
 
 const PortfolioCardDetails = ({ sharpeRatio, sortinioRatio, benchmark, createdDate }: PortfolioCardDetailsProps) => {
+  // Generate sample data for the new stats
+  const numSecurities = Math.floor(Math.random() * 15) + 5; // 5-20 securities
+  const betaToBenchmark = (Math.random() * 1.5 + 0.5).toFixed(2); // 0.5-2.0 beta
+  const trades30d = Math.floor(Math.random() * 25) + 3; // 3-28 trades
+
   return (
     <div className="px-3 pb-3 pt-0 border-t border-border/30 bg-secondary/5" style={{ borderRadius: '0 0 10px 10px' }}>
       <div className="space-y-3 pt-3">
@@ -23,19 +28,17 @@ const PortfolioCardDetails = ({ sharpeRatio, sortinioRatio, benchmark, createdDa
                 <span className="text-blue-400 font-medium">{sharpeRatio.toFixed(2)}</span>
               </div>
             )}
-            {sortinioRatio && (
-              <div className="flex justify-between">
-                <span>Sortino Ratio:</span>
-                <span className="text-blue-400 font-medium">{sortinioRatio.toFixed(2)}</span>
-              </div>
-            )}
             <div className="flex justify-between">
-              <span>Benchmark:</span>
-              <span className="text-foreground font-medium">{benchmark}</span>
+              <span># Securities:</span>
+              <span className="text-foreground font-medium">{numSecurities}</span>
             </div>
             <div className="flex justify-between">
-              <span>Created:</span>
-              <span className="text-foreground">{createdDate}</span>
+              <span>Beta to {benchmark}:</span>
+              <span className="text-foreground font-medium">{betaToBenchmark}</span>
+            </div>
+            <div className="flex justify-between">
+              <span># Trades (30d):</span>
+              <span className="text-foreground font-medium">{trades30d}</span>
             </div>
           </div>
         </div>
