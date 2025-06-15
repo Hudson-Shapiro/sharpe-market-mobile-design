@@ -353,10 +353,10 @@ const PreSubscriptionScreen: React.FC = () => {
 
       {/* 
         Fixed Footer CTA
-        Sticky subscription button optimized for mobile
+        Sticky subscription button with improved styling and scroll behavior
         RN Conversion: Absolutely positioned View at bottom
       */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border/20 safe-area-inset-bottom">
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-t border-border/20">
         <div className="p-4 max-w-md mx-auto">
           <Button 
             size="lg" 
