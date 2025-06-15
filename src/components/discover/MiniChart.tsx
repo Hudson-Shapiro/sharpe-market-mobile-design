@@ -8,7 +8,7 @@ interface MiniChartProps {
   isPositive?: boolean;
 }
 
-const MiniChart = ({ data, width = 60, height = 24, isPositive = true }: MiniChartProps) => {
+const MiniChart = ({ data, width = 70, height = 30, isPositive = true }: MiniChartProps) => {
   const max = Math.max(...data);
   const min = Math.min(...data);
   const range = max - min;
