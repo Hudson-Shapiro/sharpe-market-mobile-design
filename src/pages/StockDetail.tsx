@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -8,8 +9,6 @@ import ChartTimeRangeSelector from '@/components/stock-detail/ChartTimeRangeSele
 import StockChartCard from '@/components/stock-detail/StockChartCard';
 import StockStatsGrid from '@/components/stock-detail/StockStatsGrid';
 import StockAboutCard from '@/components/stock-detail/StockAboutCard';
-import StockEventsCard from '@/components/stock-detail/StockEventsCard';
-import StockRelatedList from '@/components/stock-detail/StockRelatedList';
 import StockNotFound from '@/components/stock-detail/StockNotFound';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Star } from 'lucide-react';
@@ -38,10 +37,6 @@ const StockDetail = () => {
   }
 
   const chartData = stock.chartData[chartTimeRange as keyof typeof stock.chartData] || stock.chartData["1D"];
-
-  const relatedStocks = Object.values(stockData)
-    .filter((s: Stock) => s.symbol !== stock.symbol)
-    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background relative">
@@ -87,11 +82,6 @@ const StockDetail = () => {
           <div className="mt-8 px-4 space-y-4">
             <StockStatsGrid stock={stock} />
             <StockAboutCard stock={stock} />
-            <StockEventsCard events={stock.events} />
-            <StockRelatedList 
-              relatedStocks={relatedStocks}
-              onStockClick={(newSymbol) => navigate(`/stock/${newSymbol}`)}
-            />
           </div>
         </div>
       </ScrollArea>
