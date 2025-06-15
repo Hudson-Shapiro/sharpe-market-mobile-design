@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -8,7 +7,6 @@ import StockInfoDisplay from '@/components/stock-detail/StockInfoDisplay';
 import ChartTimeRangeSelector from '@/components/stock-detail/ChartTimeRangeSelector';
 import StockChartCard from '@/components/stock-detail/StockChartCard';
 import StockStatsGrid from '@/components/stock-detail/StockStatsGrid';
-import StockHoldingsCard from '@/components/stock-detail/StockHoldingsCard';
 import StockAboutCard from '@/components/stock-detail/StockAboutCard';
 import StockEventsCard from '@/components/stock-detail/StockEventsCard';
 import StockRelatedList from '@/components/stock-detail/StockRelatedList';
@@ -88,7 +86,6 @@ const StockDetail = () => {
           
           <div className="mt-8 px-4 space-y-4">
             <StockStatsGrid stock={stock} />
-            <StockHoldingsCard stock={stock} />
             <StockAboutCard stock={stock} />
             <StockEventsCard events={stock.events} />
             <StockRelatedList 
