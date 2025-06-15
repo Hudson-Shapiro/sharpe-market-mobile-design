@@ -4,8 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { stockData, Stock } from '@/data/stocks';
 
-import StockHeader from '@/components/stock-detail/StockHeader';
-import StockPriceCard from '@/components/stock-detail/StockPriceCard';
+import StockInfoDisplay from '@/components/stock-detail/StockInfoDisplay';
+import ChartTimeRangeSelector from '@/components/stock-detail/ChartTimeRangeSelector';
 import StockChartCard from '@/components/stock-detail/StockChartCard';
 import StockStatsGrid from '@/components/stock-detail/StockStatsGrid';
 import StockHoldingsCard from '@/components/stock-detail/StockHoldingsCard';
@@ -13,21 +13,19 @@ import StockAboutCard from '@/components/stock-detail/StockAboutCard';
 import StockEventsCard from '@/components/stock-detail/StockEventsCard';
 import StockRelatedList from '@/components/stock-detail/StockRelatedList';
 import StockNotFound from '@/components/stock-detail/StockNotFound';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, Star } from 'lucide-react';
 
 const StockDetail = () => {
   const { symbol } = useParams<{ symbol: string }>();
   const navigate = useNavigate();
   const [chartTimeRange, setChartTimeRange] = useState("1D");
-  const [lastUpdated, setLastUpdated] = useState(new Date());
   const [isWatchlisted, setIsWatchlisted] = useState(false);
 
   const stock = stockData[symbol as keyof typeof stockData];
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setLastUpdated(new Date());
-    }, 60000);
-    return () => clearInterval(interval);
+    // No interval needed anymore
   }, []);
   
   // Reset state when symbol changes
@@ -48,30 +46,56 @@ const StockDetail = () => {
     .slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/10">
-      <StockHeader 
-        stock={stock}
-        isWatchlisted={isWatchlisted}
-        onWatchlistToggle={() => setIsWatchlisted(!isWatchlisted)}
-        onGoBack={() => navigate(-1)}
-      />
+    <div className="min-h-screen bg-background relative">
+       <div className="absolute top-4 left-4 z-10">
+         <Button 
+          variant="ghost" 
+          size="icon"
+          onClick={() => navigate(-1)}
+          className="rounded-full w-10 h-10 bg-background/50 hover:bg-background/80 backdrop-blur-sm"
+        >
+          <ArrowLeft size={20} />
+        </Button>
+      </div>
+      <div className="absolute top-4 right-4 z-10">
+        <Button 
+            size="icon" 
+            variant="ghost"
+            onClick={() => setIsWatchlisted(!isWatchlisted)}
+            className="rounded-full w-10 h-10 bg-background/50 hover:bg-background/80 backdrop-blur-sm"
+        >
+            <Star size={20} className={`transition-colors duration-300 ${isWatchlisted ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`} />
+        </Button>
+      </div>
 
-      <ScrollArea className="h-[calc(100vh-80px)]">
-        <div className="p-4 space-y-4 pb-8">
-          <StockPriceCard stock={stock} lastUpdated={lastUpdated} />
-          <StockChartCard 
-            chartData={chartData}
-            chartTimeRange={chartTimeRange}
-            onTimeRangeChange={setChartTimeRange}
-          />
-          <StockStatsGrid stock={stock} />
-          <StockHoldingsCard stock={stock} />
-          <StockAboutCard stock={stock} />
-          <StockEventsCard events={stock.events} />
-          <StockRelatedList 
-            relatedStocks={relatedStocks}
-            onStockClick={(newSymbol) => navigate(`/stock/${newSymbol}`)}
-          />
+
+      <ScrollArea className="h-screen">
+        <div className="pt-20 pb-8">
+          <div className="px-4">
+            <StockInfoDisplay stock={stock} />
+          </div>
+          
+          <div className="mt-6">
+            <StockChartCard chartData={chartData} />
+          </div>
+
+          <div className="mt-6 px-4">
+            <ChartTimeRangeSelector 
+              selectedRange={chartTimeRange}
+              onRangeChange={setChartTimeRange}
+            />
+          </div>
+          
+          <div className="mt-8 px-4 space-y-4">
+            <StockStatsGrid stock={stock} />
+            <StockHoldingsCard stock={stock} />
+            <StockAboutCard stock={stock} />
+            <StockEventsCard events={stock.events} />
+            <StockRelatedList 
+              relatedStocks={relatedStocks}
+              onStockClick={(newSymbol) => navigate(`/stock/${newSymbol}`)}
+            />
+          </div>
         </div>
       </ScrollArea>
     </div>
