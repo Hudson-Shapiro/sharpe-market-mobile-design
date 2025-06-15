@@ -33,7 +33,7 @@ const TopMoversCarousel = () => {
   };
 
   const MoversCard = ({ stocks, title, type }: { stocks: Stock[], title: string, type: 'gainers' | 'losers' }) => (
-    <div className="min-w-[280px] space-y-3">
+    <div className="min-w-[220px] space-y-3">
       <h4 className={`font-semibold text-sm ${type === 'gainers' ? 'text-emerald-400' : 'text-red-400'}`}>
         {title}
       </h4>
@@ -51,7 +51,7 @@ const TopMoversCarousel = () => {
                   {index === 0 && <Flame size={14} className={type === 'gainers' ? 'text-emerald-400' : 'text-red-400'} />}
                   <div>
                     <div className="font-bold text-foreground text-sm">{stock.symbol}</div>
-                    <div className="text-xs text-muted-foreground truncate max-w-[120px]">{stock.name}</div>
+                    <div className="text-xs text-muted-foreground truncate max-w-[80px]">{stock.name}</div>
                   </div>
                 </div>
                 <div className="text-right">
