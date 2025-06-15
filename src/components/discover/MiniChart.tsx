@@ -5,9 +5,10 @@ interface MiniChartProps {
   data: number[];
   width?: number;
   height?: number;
+  isPositive?: boolean;
 }
 
-const MiniChart = ({ data, width = 60, height = 24 }: MiniChartProps) => {
+const MiniChart = ({ data, width = 60, height = 24, isPositive = true }: MiniChartProps) => {
   const max = Math.max(...data);
   const min = Math.min(...data);
   const range = max - min;
@@ -18,28 +19,32 @@ const MiniChart = ({ data, width = 60, height = 24 }: MiniChartProps) => {
     return `${x},${y}`;
   }).join(' ');
 
+  const strokeColor = isPositive ? 'rgb(34, 197, 94)' : 'rgb(239, 68, 68)';
+  const gradientId = `chartGradient-${isPositive ? 'positive' : 'negative'}`;
+  const gradientColor = isPositive ? 'rgb(34, 197, 94)' : 'rgb(239, 68, 68)';
+
   return (
     <div className="relative">
       <svg width={width} height={height} className="overflow-visible">
         <defs>
-          <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="rgb(34, 197, 94)" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="rgb(34, 197, 94)" stopOpacity="0" />
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor={gradientColor} stopOpacity="0.2" />
+            <stop offset="100%" stopColor={gradientColor} stopOpacity="0" />
           </linearGradient>
         </defs>
         
         {/* Gradient fill under the line */}
         <polygon
           points={`0,${height} ${points} ${width},${height}`}
-          fill="url(#chartGradient)"
+          fill={`url(#${gradientId})`}
         />
         
         {/* The line itself */}
         <polyline
           points={points}
           fill="none"
-          stroke="rgb(34, 197, 94)"
-          strokeWidth="2"
+          stroke={strokeColor}
+          strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />

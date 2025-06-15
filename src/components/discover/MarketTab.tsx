@@ -5,6 +5,7 @@ import { TrendingUp, TrendingDown } from 'lucide-react';
 import TopMoversCarousel from './TopMoversCarousel';
 import IndustryHeatmap from './IndustryHeatmap';
 import GlobalIndices from './GlobalIndices';
+import MiniChart from './MiniChart';
 
 const MarketTab = () => {
   const [sectorFilter, setSectorFilter] = useState("");
@@ -16,7 +17,8 @@ const MarketTab = () => {
       price: 445.67,
       change: 2.34,
       changePercent: 0.53,
-      volume: "45.2M"
+      volume: "45.2M",
+      chartData: [440, 442, 441, 443, 445, 444, 446, 445.67]
     },
     {
       symbol: "QQQ",
@@ -24,7 +26,8 @@ const MarketTab = () => {
       price: 378.92,
       change: -1.45,
       changePercent: -0.38,
-      volume: "28.7M"
+      volume: "28.7M",
+      chartData: [380, 382, 381, 379, 378, 377, 379, 378.92]
     },
     {
       symbol: "AAPL",
@@ -32,7 +35,8 @@ const MarketTab = () => {
       price: 189.45,
       change: 3.21,
       changePercent: 1.72,
-      volume: "67.1M"
+      volume: "67.1M",
+      chartData: [186, 187, 188, 187, 189, 190, 191, 189.45]
     },
     {
       symbol: "MSFT",
@@ -40,7 +44,8 @@ const MarketTab = () => {
       price: 378.85,
       change: -0.89,
       changePercent: -0.23,
-      volume: "23.4M"
+      volume: "23.4M",
+      chartData: [380, 379, 378, 379, 380, 378, 379, 378.85]
     },
     {
       symbol: "NVDA",
@@ -48,7 +53,8 @@ const MarketTab = () => {
       price: 875.32,
       change: 15.67,
       changePercent: 1.82,
-      volume: "89.3M"
+      volume: "89.3M",
+      chartData: [860, 865, 870, 872, 875, 873, 876, 875.32]
     }
   ];
 
@@ -77,21 +83,31 @@ const MarketTab = () => {
           </Badge>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-2">
           {marketData.map((stock, index) => (
-            <div key={index} className="bg-card border border-border p-4 hover:bg-card/80 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg" style={{ borderRadius: '12px' }}>
+            <div key={index} className="bg-card border border-border p-3 hover:bg-card/80 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg" style={{ borderRadius: '12px' }}>
               <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-bold text-foreground">{stock.symbol}</h3>
-                    <Badge variant="secondary" className="text-xs" style={{ borderRadius: '12px' }}>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="font-bold text-foreground text-lg">{stock.symbol}</h3>
+                    <Badge variant="secondary" className="text-xs" style={{ borderRadius: '8px' }}>
                       Vol: {stock.volume}
                     </Badge>
                   </div>
-                  <p className="text-muted-foreground text-sm">{stock.name}</p>
+                  <p className="text-muted-foreground text-sm truncate">{stock.name}</p>
                 </div>
                 
-                <div className="text-right">
+                {/* Mini Chart in the middle */}
+                <div className="flex-shrink-0 mx-4">
+                  <MiniChart 
+                    data={stock.chartData} 
+                    width={80} 
+                    height={32}
+                    isPositive={stock.change >= 0}
+                  />
+                </div>
+                
+                <div className="text-right flex-shrink-0">
                   <div className="text-lg font-bold text-foreground">
                     ${stock.price.toFixed(2)}
                   </div>
@@ -99,9 +115,9 @@ const MarketTab = () => {
                     stock.change >= 0 ? 'text-emerald-400' : 'text-red-400'
                   }`}>
                     {stock.change >= 0 ? (
-                      <TrendingUp size={14} />
+                      <TrendingUp size={12} />
                     ) : (
-                      <TrendingDown size={14} />
+                      <TrendingDown size={12} />
                     )}
                     <span className="text-sm font-medium">
                       {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)} ({stock.changePercent >= 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%)
