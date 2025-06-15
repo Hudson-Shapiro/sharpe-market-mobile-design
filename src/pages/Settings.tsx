@@ -1,5 +1,4 @@
 
-```tsx
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Lock, Bell, Landmark, Trash2, ChevronRight } from 'lucide-react';
@@ -70,4 +69,3 @@ const Settings = () => {
 };
 
 export default Settings;
-```
