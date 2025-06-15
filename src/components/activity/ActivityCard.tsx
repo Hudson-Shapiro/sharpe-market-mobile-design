@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { TrendingUp, TrendingDown, Percent, DollarSign, Calendar } from 'lucide-react';
+import { TrendingUp, TrendingDown, Percent, DollarSign } from 'lucide-react';
 
 interface ActivityCardProps {
   activity: {
@@ -70,11 +70,7 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
 
         {isExpanded && (
           <div className="mt-3 pt-3 border-t border-border/20 animate-fade-in text-xs">
-            <div className="space-y-1.5">
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground flex items-center gap-1.5"><Calendar size={12}/> Date</span>
-                <span className="font-mono text-foreground">{activity.date}</span>
-              </div>
+            <div className="grid grid-cols-2 gap-2">
               {activity.allocation && (
                 <div className="flex justify-between items-center">
                   <span className="text-muted-foreground flex items-center gap-1.5"><Percent size={12}/> Allocation</span>
@@ -93,7 +89,7 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
                   <span className="font-mono text-foreground">${activity.currentPrice.toFixed(2)}</span>
                 </div>
               )}
-               {priceChange !== null && (
+              {priceChange !== null && (
                 <div className="flex justify-between items-center">
                   <span className="text-muted-foreground flex items-center gap-1.5">
                     <TrendingUp size={12} className={priceChange >= 0 ? 'text-emerald-400' : 'text-red-400'}/> Gain/Loss
