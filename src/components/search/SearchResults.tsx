@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import PortfolioCard from '@/components/portfolio/PortfolioCard';
@@ -254,7 +253,7 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
   const renderUsers = () => (
     <div className="space-y-2">
       {Array(10).fill(0).map((_, i) => (
-        <div key={`user-${i}`} className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-3 flex items-center">
+        <Card key={`user-${i}`} className="bg-card/50 backdrop-blur-sm p-3 flex items-center rounded-xl shadow-none">
           <div className="w-10 h-10 bg-secondary/70 rounded-full flex items-center justify-center mr-3 text-xl">
             {['🤵', '👩‍💼', '👴', '👩‍🔬', '👨‍💻'][i % 5]}
           </div>
@@ -269,7 +268,7 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
           <button className="ml-auto bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-xs">
             Follow
           </button>
-        </div>
+        </Card>
       ))}
     </div>
   );
@@ -278,7 +277,7 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
   const renderStocks = () => (
     <div className="space-y-2">
       {Array(5).fill(0).map((_, i) => (
-        <div key={`stock-${i}`} className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-3 flex items-center justify-between">
+        <Card key={`stock-${i}`} className="bg-card/50 backdrop-blur-sm p-3 flex items-center justify-between rounded-xl shadow-none">
           <div>
             <h4 className="font-medium">{["AAPL", "GOOGL", "MSFT", "TSLA", "NVDA"][i]}</h4>
             <p className="text-xs text-muted-foreground">{["Apple Inc.", "Alphabet Inc.", "Microsoft Corp.", "Tesla Inc.", "NVIDIA Corp."][i]}</p>
@@ -287,7 +286,7 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
             <div className="font-medium">${[189.45, 2789.12, 378.85, 248.73, 875.32][i]}</div>
             <div className="text-xs text-emerald-400">+{[2.34, 1.89, 0.92, 3.45, 5.67][i]}%</div>
           </div>
-        </div>
+        </Card>
       ))}
     </div>
   );
@@ -331,7 +330,7 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
         {searchFilter === 'users' && (
           <div className="space-y-2">
             {Array(10).fill(0).map((_, i) => (
-              <div key={`user-${i}`} className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-3 flex items-center">
+              <Card key={`user-${i}`} className="bg-card/50 backdrop-blur-sm p-3 flex items-center rounded-xl shadow-none">
                 <div className="w-10 h-10 bg-secondary/70 rounded-full flex items-center justify-center mr-3 text-xl">
                   {['🤵', '👩‍💼', '👴', '👩‍🔬', '👨‍💻'][i % 5]}
                 </div>
@@ -346,14 +345,14 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
                 <button className="ml-auto bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-xs">
                   Follow
                 </button>
-              </div>
+              </Card>
             ))}
           </div>
         )}
         {searchFilter === 'stocks' && (
           <div className="space-y-2">
             {Array(5).fill(0).map((_, i) => (
-              <div key={`stock-${i}`} className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-3 flex items-center justify-between">
+              <Card key={`stock-${i}`} className="bg-card/50 backdrop-blur-sm p-3 flex items-center justify-between rounded-xl shadow-none">
                 <div>
                   <h4 className="font-medium">{["AAPL", "GOOGL", "MSFT", "TSLA", "NVDA"][i]}</h4>
                   <p className="text-xs text-muted-foreground">{["Apple Inc.", "Alphabet Inc.", "Microsoft Corp.", "Tesla Inc.", "NVIDIA Corp."][i]}</p>
@@ -362,7 +361,7 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
                   <div className="font-medium">${[189.45, 2789.12, 378.85, 248.73, 875.32][i]}</div>
                   <div className="text-xs text-emerald-400">+{[2.34, 1.89, 0.92, 3.45, 5.67][i]}%</div>
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
         )}
