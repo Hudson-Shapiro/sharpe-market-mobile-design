@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, TrendingUp, TrendingDown, Volume2, Calendar, DollarSign, Percent, Building, Users, Star, Clock, Bell, Vote, BarChart3, Eye, Info, Heart, Plus, Activity, Shield, Briefcase } from 'lucide-react';
+import { ArrowLeft, TrendingUp, TrendingDown, Volume2, Calendar, DollarSign, Percent, Building, Users, Star, Clock, Bell, Vote, BarChart3, Eye, Info, Activity, Shield, Briefcase } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Area, AreaChart } from 'recharts';
 import MiniChart from '@/components/discover/MiniChart';
 
@@ -232,12 +231,12 @@ const StockDetail = () => {
       </div>
 
       <ScrollArea className="h-[calc(100vh-80px)]">
-        <div className="p-4 space-y-6">
+        <div className="p-4 space-y-4">
           {/* Enhanced Price Section with Animation */}
           <Card className="bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border-border/30" style={{ borderRadius: '16px' }}>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="text-4xl font-bold text-foreground animate-pulse-slow">
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between mb-3">
+                <div className="text-3xl font-bold text-foreground animate-pulse-slow">
                   ${stock.price.toFixed(2)}
                 </div>
                 <div className="text-right">
@@ -263,15 +262,15 @@ const StockDetail = () => {
 
           {/* Enhanced Chart Section */}
           <Card className="bg-gradient-to-br from-card/40 to-card/20 backdrop-blur-sm border-border/30" style={{ borderRadius: '16px' }}>
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               {/* Time Period Selector */}
-              <div className="flex justify-center mb-6">
+              <div className="flex justify-center mb-4">
                 <div className="flex bg-secondary/30 rounded-full p-1 backdrop-blur-sm">
                   {chartTimeRanges.map((period) => (
                     <button 
                       key={period}
                       onClick={() => setChartTimeRange(period)}
-                      className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
+                      className={`px-3 py-1.5 text-sm font-medium rounded-full transition-all duration-300 ${
                         chartTimeRange === period 
                           ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg transform scale-105" 
                           : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
@@ -284,7 +283,7 @@ const StockDetail = () => {
               </div>
               
               {/* Enhanced Chart */}
-              <div className="h-64 relative">
+              <div className="h-48 relative">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={chartData}>
                     <defs>
@@ -335,25 +334,25 @@ const StockDetail = () => {
 
           {/* Enhanced Stats Grid */}
           <div>
-            <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
               <BarChart3 size={20} className="text-emerald-400" />
               Key Statistics
             </h3>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2">
               {statsData.map((stat, index) => (
                 <Card 
                   key={stat.label}
                   className={`bg-gradient-to-br from-${stat.color}-500/10 via-${stat.color}-500/5 to-transparent backdrop-blur-sm border-${stat.color}-500/20 hover:border-${stat.color}-500/40 transition-all duration-300 hover:scale-105 cursor-pointer`}
                   style={{ borderRadius: '12px' }}
                 >
-                  <CardContent className="p-4">
+                  <CardContent className="p-3">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-xs text-muted-foreground mb-1">{stat.label}</p>
-                        <p className="text-lg font-bold text-foreground">{stat.value}</p>
+                        <p className="text-base font-bold text-foreground">{stat.value}</p>
                       </div>
                       <div className={`p-2 bg-${stat.color}-500/20 rounded-lg`}>
-                        <stat.icon size={16} className={`text-${stat.color}-400`} />
+                        <stat.icon size={14} className={`text-${stat.color}-400`} />
                       </div>
                     </div>
                   </CardContent>
@@ -364,18 +363,18 @@ const StockDetail = () => {
 
           {/* Portfolio Holdings Section */}
           <Card className="bg-gradient-to-br from-purple-500/10 via-purple-500/5 to-transparent backdrop-blur-sm border-purple-500/20" style={{ borderRadius: '12px' }}>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <Briefcase size={20} className="text-purple-400" />
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Briefcase size={18} className="text-purple-400" />
                 Portfolio Holdings
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
+            <CardContent className="pt-0">
+              <div className="space-y-2">
                 <div className="flex items-center justify-between p-3 bg-secondary/20 rounded-lg">
                   <div>
-                    <p className="font-medium text-foreground">{stock.holdings.topHolder}</p>
-                    <p className="text-sm text-muted-foreground">Avg. Buy: ${stock.holdings.avgBuyPrice}</p>
+                    <p className="font-medium text-foreground text-sm">{stock.holdings.topHolder}</p>
+                    <p className="text-xs text-muted-foreground">Avg. Buy: ${stock.holdings.avgBuyPrice}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-medium text-emerald-400">+{((stock.price - stock.holdings.avgBuyPrice) / stock.holdings.avgBuyPrice * 100).toFixed(1)}%</p>
@@ -391,20 +390,20 @@ const StockDetail = () => {
 
           {/* Enhanced About Section */}
           <Card className="bg-gradient-to-br from-card/30 to-card/10 backdrop-blur-sm border-border/30" style={{ borderRadius: '12px' }}>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <Info size={20} className="text-blue-400" />
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Info size={18} className="text-blue-400" />
                 About {stock.symbol}
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground leading-relaxed mb-4">{stock.description}</p>
+            <CardContent className="pt-0">
+              <p className="text-muted-foreground leading-relaxed mb-3 text-sm">{stock.description}</p>
               <div className="flex flex-wrap gap-2">
                 {stock.sectors.map((sector) => (
                   <Badge 
                     key={sector} 
                     variant="secondary" 
-                    className="bg-secondary/50 text-foreground hover:bg-secondary/70 transition-colors cursor-pointer"
+                    className="bg-secondary/50 text-foreground hover:bg-secondary/70 transition-colors cursor-pointer text-xs"
                     style={{ borderRadius: '8px' }}
                   >
                     {sector}
@@ -416,29 +415,29 @@ const StockDetail = () => {
 
           {/* Enhanced Events Section */}
           <Card className="bg-gradient-to-br from-orange-500/10 via-orange-500/5 to-transparent backdrop-blur-sm border-orange-500/20" style={{ borderRadius: '12px' }}>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <Calendar size={20} className="text-orange-400" />
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Calendar size={18} className="text-orange-400" />
                 Upcoming Events
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
+            <CardContent className="pt-0">
+              <div className="space-y-2">
                 {stock.events.map((event, index) => (
                   <Card key={index} className="bg-secondary/20 border-border/30 hover:bg-secondary/30 transition-all duration-200 cursor-pointer" style={{ borderRadius: '8px' }}>
-                    <CardContent className="p-4">
+                    <CardContent className="p-3">
                       <div className="flex items-center gap-3">
-                        <div className="text-2xl">
+                        <div className="text-lg">
                           {event.type === 'earnings' && '📊'}
                           {event.type === 'dividend' && '💸'}
                           {event.type === 'news' && '📰'}
                           {event.type === 'vote' && '🗳️'}
                         </div>
                         <div className="flex-1">
-                          <p className="font-medium text-foreground">{event.title}</p>
-                          <p className="text-sm text-muted-foreground">{event.date}</p>
+                          <p className="font-medium text-foreground text-sm">{event.title}</p>
+                          <p className="text-xs text-muted-foreground">{event.date}</p>
                         </div>
-                        <ArrowLeft size={16} className="text-muted-foreground rotate-180" />
+                        <ArrowLeft size={14} className="text-muted-foreground rotate-180" />
                       </div>
                     </CardContent>
                   </Card>
@@ -449,14 +448,14 @@ const StockDetail = () => {
 
           {/* Related Stocks */}
           <Card className="bg-gradient-to-br from-card/30 to-card/10 backdrop-blur-sm border-border/30" style={{ borderRadius: '12px' }}>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
-                <TrendingUp size={20} className="text-emerald-400" />
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <TrendingUp size={18} className="text-emerald-400" />
                 Related Stocks
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
+            <CardContent className="pt-0">
+              <div className="space-y-2">
                 {relatedStocks.map((relatedStock) => (
                   <Card 
                     key={relatedStock.symbol}
@@ -464,25 +463,25 @@ const StockDetail = () => {
                     style={{ borderRadius: '8px' }}
                     onClick={() => navigate(`/stock/${relatedStock.symbol}`)}
                   >
-                    <CardContent className="p-4">
+                    <CardContent className="p-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <span className="text-xl">{relatedStock.logo}</span>
+                          <span className="text-lg">{relatedStock.logo}</span>
                           <div>
-                            <p className="font-medium text-foreground">{relatedStock.symbol}</p>
-                            <p className="text-sm text-muted-foreground truncate max-w-32">{relatedStock.name}</p>
+                            <p className="font-medium text-foreground text-sm">{relatedStock.symbol}</p>
+                            <p className="text-xs text-muted-foreground truncate max-w-32">{relatedStock.name}</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
                           <MiniChart 
                             data={relatedStock.chartData["1D"].map(d => d.price)} 
                             isPositive={relatedStock.change >= 0}
-                            width={50}
-                            height={20}
+                            width={40}
+                            height={16}
                           />
                           <div className="text-right">
-                            <p className="font-medium text-foreground">${relatedStock.price}</p>
-                            <p className={`text-sm ${relatedStock.change >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                            <p className="font-medium text-foreground text-sm">${relatedStock.price}</p>
+                            <p className={`text-xs ${relatedStock.change >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                               {relatedStock.change >= 0 ? '+' : ''}{relatedStock.changePercent.toFixed(1)}%
                             </p>
                           </div>
