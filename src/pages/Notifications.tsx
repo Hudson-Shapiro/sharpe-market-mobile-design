@@ -106,12 +106,12 @@ const Notifications = () => {
           </div>
           {unreadCount > 0 && (
             <Button 
-              variant="ghost" 
+              variant="outline" 
               size="sm" 
               onClick={markAllAsRead}
-              className="text-emerald-400 hover:text-emerald-300"
+              className="bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-500/50 hover:text-emerald-300 transition-all duration-200 font-medium"
             >
-              <CheckCheck size={16} />
+              <CheckCheck size={16} className="mr-1.5" />
               Mark all read
             </Button>
           )}
