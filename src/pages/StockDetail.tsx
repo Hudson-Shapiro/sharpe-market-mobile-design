@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -16,7 +15,7 @@ const StockDetail = () => {
   const [chartType, setChartType] = useState("line");
   const [lastUpdated, setLastUpdated] = useState(new Date());
 
-  const chartTimeRanges = ["1D", "5D", "1M", "3M", "6M", "1Y"];
+  const chartTimeRanges = ["1D", "1W", "1M", "3M", "1Y", "5Y", "Max"];
 
   // Mock stock data - enhanced with more realistic data
   const stockData = {
@@ -27,7 +26,7 @@ const StockDetail = () => {
       change: 45.67,
       changePercent: 5.51,
       logo: "🚀",
-      description: "NVIDIA Corporation designs graphics processing units for the gaming and professional markets, as well as system on a chip units for the mobile computing and automotive market.",
+      description: "NVIDIA Corporation designs graphics processing units for the gaming and professional markets, as well as system on a chip units for the gaming and professional markets, as well as system on a chip units for the mobile computing and automotive market.",
       marketCap: "2.16T",
       volume: "89.3M",
       pe: 65.2,
@@ -187,108 +186,55 @@ const StockDetail = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Sticky Header */}
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/50">
-        <div className="flex items-center justify-between p-3">
+      {/* Clean Header */}
+      <div className="sticky top-0 z-50 bg-background border-b border-border/20">
+        <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-3">
             <Button 
               variant="ghost" 
               size="icon"
               onClick={() => navigate(-1)}
-              className="rounded-full w-9 h-9"
+              className="rounded-full w-10 h-10"
             >
-              <ArrowLeft size={18} />
+              <ArrowLeft size={20} />
             </Button>
             <div>
-              <h1 className="text-lg font-bold">{stock.symbol}</h1>
-              <p className="text-xs text-muted-foreground">{stock.name}</p>
+              <h1 className="text-xl font-bold">{stock.symbol}</h1>
+              <p className="text-sm text-muted-foreground">{stock.name}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Badge variant={isPositive ? "default" : "destructive"} className="text-xs px-2 py-1 rounded-full">
-              {isPositive ? "🔺 GAINING" : "🔻 FALLING"}
-            </Badge>
-            <Button size="sm" variant="outline" className="rounded-full h-8 px-3">
-              <Star size={14} className="mr-1" />
-              Watch
-            </Button>
-            <Button size="sm" variant="outline" className="rounded-full h-8 px-3">
-              <Bell size={14} className="mr-1" />
-              Alert
-            </Button>
-          </div>
+          <Button size="sm" variant="outline" className="rounded-full">
+            <Star size={16} />
+          </Button>
         </div>
       </div>
 
-      <ScrollArea className="h-[calc(100vh-65px)]">
-        <div className="p-3 space-y-4 pb-20">
-          {/* Hero Price Section */}
-          <Card className="bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-emerald-500/10 border-none shadow-lg" style={{ borderRadius: '16px' }}>
-            <CardContent className="p-4">
-              <div className="text-center">
-                <div className={`text-4xl font-bold mb-1 ${isPositive ? 'text-emerald-400' : 'text-red-400'}`}>
-                  ${stock.price.toFixed(2)}
-                </div>
-                <div className={`flex items-center justify-center gap-2 text-lg font-semibold mb-2 ${
-                  isPositive ? 'text-emerald-400' : 'text-red-400'
-                }`}>
-                  {isPositive ? <TrendingUp size={18} /> : <TrendingDown size={18} />}
-                  {isPositive ? '+' : ''}{stock.change.toFixed(2)} ({isPositive ? '+' : ''}{stock.changePercent.toFixed(2)}%)
-                </div>
-                <div className="flex items-center justify-center gap-4 text-xs text-muted-foreground">
-                  <span>Updated {formatTime(lastUpdated)}</span>
-                  <span>•</span>
-                  <span>Vol {stock.volume}</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+      <ScrollArea className="h-[calc(100vh-80px)]">
+        <div className="p-4 space-y-6">
+          {/* Clean Price Section */}
+          <div className="text-left space-y-2">
+            <div className="text-4xl font-bold text-foreground">
+              ${stock.price.toFixed(2)}
+            </div>
+            <div className={`flex items-center gap-2 text-lg font-medium ${
+              isPositive ? 'text-emerald-500' : 'text-red-500'
+            }`}>
+              {isPositive ? <TrendingUp size={18} /> : <TrendingDown size={18} />}
+              {isPositive ? '+' : ''}${stock.change.toFixed(2)} ({isPositive ? '+' : ''}{stock.changePercent.toFixed(2)}%) Today
+            </div>
+          </div>
 
-          {/* Compact Chart Section */}
-          <Card style={{ borderRadius: '16px' }} className="shadow-lg">
-            <CardContent className="p-3">
-              <div className="flex justify-between items-center mb-3">
-                <div className="flex gap-1">
-                  <button 
-                    onClick={() => setChartType("line")}
-                    className={`px-3 py-1 rounded-full text-xs transition-all ${
-                      chartType === "line" 
-                        ? "bg-emerald-500/30 text-emerald-400" 
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    Line
-                  </button>
-                  <button 
-                    onClick={() => setChartType("candle")}
-                    className={`px-3 py-1 rounded-full text-xs transition-all ${
-                      chartType === "candle" 
-                        ? "bg-emerald-500/30 text-emerald-400" 
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    Candles
-                  </button>
-                </div>
-                <Button
-                  variant={showVolume ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setShowVolume(!showVolume)}
-                  className="text-xs rounded-full h-7 px-2"
-                >
-                  <Volume2 size={12} className="mr-1" />
-                  Vol
-                </Button>
-              </div>
-              
-              <div className="flex bg-secondary/30 rounded-full p-1 text-xs mb-3">
+          {/* Clean Chart Section */}
+          <div className="space-y-4">
+            <div className="flex justify-center">
+              <div className="flex bg-secondary/20 rounded-full p-1 text-sm">
                 {chartTimeRanges.map((period) => (
                   <button 
                     key={period}
                     onClick={() => setChartTimeRange(period)}
-                    className={`px-3 py-1 rounded-full transition-all flex-1 ${
+                    className={`px-4 py-2 rounded-full transition-all ${
                       chartTimeRange === period 
-                        ? "bg-white text-black shadow-md font-semibold" 
+                        ? "bg-emerald-500 text-white font-semibold" 
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
@@ -296,88 +242,91 @@ const StockDetail = () => {
                   </button>
                 ))}
               </div>
-              
-              <div className="h-56">
-                <ResponsiveContainer width="100%" height="100%">
-                  <ComposedChart data={chartData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgb(55 65 81)" />
-                    <XAxis 
-                      dataKey="time" 
-                      stroke="rgb(156 163 175)"
-                      fontSize={10}
-                    />
-                    <YAxis 
-                      stroke="rgb(156 163 175)"
-                      fontSize={10}
-                      domain={['dataMin - 5', 'dataMax + 5']}
-                    />
-                    <Tooltip 
-                      contentStyle={{
-                        backgroundColor: 'rgb(30 41 59)',
-                        border: '1px solid rgb(71 85 105)',
-                        borderRadius: '12px',
-                        color: 'white'
-                      }}
-                      formatter={(value, name) => [
-                        name === 'price' ? `$${value}` : `${value}M`,
-                        name === 'price' ? 'Price' : 'Volume'
-                      ]}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="price" 
-                      stroke={isPositive ? "rgb(34 197 94)" : "rgb(239 68 68)"}
-                      strokeWidth={2}
-                      dot={false}
-                      activeDot={{ r: 4, fill: isPositive ? "rgb(34 197 94)" : "rgb(239 68 68)" }}
-                    />
-                    {showVolume && (
-                      <Bar 
-                        dataKey="volume" 
-                        fill="rgb(99 102 241)"
-                        opacity={0.3}
-                        yAxisId="volume"
-                      />
-                    )}
-                  </ComposedChart>
-                </ResponsiveContainer>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Compact Stats Grid */}
-          <div className="grid grid-cols-2 gap-2">
-            <Card style={{ borderRadius: '12px' }} className="text-center p-3 hover:shadow-lg transition-all">
-              <div className="text-lg mb-1">🏢</div>
-              <p className="text-xs text-muted-foreground mb-1">Market Cap</p>
-              <p className="text-sm font-bold text-foreground">{stock.marketCap}</p>
-            </Card>
-            <Card style={{ borderRadius: '12px' }} className="text-center p-3 hover:shadow-lg transition-all">
-              <div className="text-lg mb-1">📊</div>
-              <p className="text-xs text-muted-foreground mb-1">P/E Ratio</p>
-              <p className="text-sm font-bold text-foreground">{stock.pe}</p>
-            </Card>
-            <Card style={{ borderRadius: '12px' }} className="text-center p-3 hover:shadow-lg transition-all">
-              <div className="text-lg mb-1">💰</div>
-              <p className="text-xs text-muted-foreground mb-1">Dividend</p>
-              <p className="text-sm font-bold text-foreground">{stock.dividend}</p>
-            </Card>
-            <Card style={{ borderRadius: '12px' }} className="text-center p-3 hover:shadow-lg transition-all">
-              <div className="text-lg mb-1">⚡</div>
-              <p className="text-xs text-muted-foreground mb-1">Beta</p>
-              <p className="text-sm font-bold text-foreground">{stock.beta}</p>
-            </Card>
+            </div>
+            
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgb(55 65 81)" opacity={0.3} />
+                  <XAxis 
+                    dataKey="time" 
+                    stroke="rgb(156 163 175)"
+                    fontSize={12}
+                    axisLine={false}
+                    tickLine={false}
+                  />
+                  <YAxis 
+                    stroke="rgb(156 163 175)"
+                    fontSize={12}
+                    domain={['dataMin - 5', 'dataMax + 5']}
+                    axisLine={false}
+                    tickLine={false}
+                  />
+                  <Tooltip 
+                    contentStyle={{
+                      backgroundColor: 'rgb(30 41 59)',
+                      border: '1px solid rgb(71 85 105)',
+                      borderRadius: '8px',
+                      color: 'white'
+                    }}
+                    formatter={(value) => [`$${value}`, 'Price']}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="price" 
+                    stroke="rgb(34 197 94)"
+                    strokeWidth={3}
+                    dot={false}
+                    activeDot={{ r: 6, fill: "rgb(34 197 94)", strokeWidth: 0 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
 
-          {/* Compact Events Section */}
+          {/* Stats Section */}
           <div>
-            <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
-              <Calendar size={16} />
-              What's Happening
-            </h3>
-            <div className="space-y-2">
+            <h3 className="text-lg font-semibold text-foreground mb-4">Stats</h3>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center py-2 border-b border-border/20">
+                <span className="text-muted-foreground">Market Cap</span>
+                <span className="font-medium">{stock.marketCap}</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-border/20">
+                <span className="text-muted-foreground">P/E Ratio</span>
+                <span className="font-medium">{stock.pe}</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-border/20">
+                <span className="text-muted-foreground">52W High</span>
+                <span className="font-medium">${stock.high52w}</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-border/20">
+                <span className="text-muted-foreground">52W Low</span>
+                <span className="font-medium">${stock.low52w}</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-border/20">
+                <span className="text-muted-foreground">Volume</span>
+                <span className="font-medium">{stock.volume}</span>
+              </div>
+              <div className="flex justify-between items-center py-2">
+                <span className="text-muted-foreground">Beta</span>
+                <span className="font-medium">{stock.beta}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* About Section */}
+          <div>
+            <h3 className="text-lg font-semibold text-foreground mb-3">About</h3>
+            <p className="text-muted-foreground leading-relaxed">{stock.description}</p>
+          </div>
+
+          {/* Events Section */}
+          <div>
+            <h3 className="text-lg font-semibold text-foreground mb-3">Upcoming Events</h3>
+            <div className="space-y-3">
               {stock.events.map((event, index) => (
-                <div key={index} className="flex items-center justify-between p-3 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 transition-all border border-blue-500/20">
+                <div key={index} className="flex items-center justify-between py-3 border-b border-border/20 last:border-b-0">
                   <div className="flex items-center gap-3">
                     <div className="text-lg">
                       {event.type === 'earnings' && '📊'}
@@ -386,65 +335,11 @@ const StockDetail = () => {
                       {event.type === 'vote' && '🗳️'}
                     </div>
                     <div>
-                      <p className="font-medium text-foreground text-sm">{event.title}</p>
+                      <p className="font-medium text-foreground">{event.title}</p>
+                      <p className="text-sm text-muted-foreground">{event.date}</p>
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground">{event.date}</p>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Day Range */}
-          <Card style={{ borderRadius: '16px' }} className="shadow-lg">
-            <CardContent className="p-4">
-              <h3 className="text-sm font-semibold text-foreground mb-3">Today's Range</h3>
-              <div className="flex justify-between text-sm text-muted-foreground mb-2">
-                <span>${stock.dayRange.low}</span>
-                <span>${stock.dayRange.high}</span>
-              </div>
-              <div className="w-full bg-secondary/30 rounded-full h-2 relative">
-                <div 
-                  className="bg-gradient-to-r from-red-400 to-emerald-400 h-2 rounded-full"
-                  style={{ width: '100%' }}
-                />
-                <div 
-                  className="absolute top-0 w-2 h-2 bg-white border border-blue-500 rounded-full transform -translate-y-0"
-                  style={{ 
-                    left: `${((stock.price - stock.dayRange.low) / (stock.dayRange.high - stock.dayRange.low)) * 100}%` 
-                  }}
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Related Stocks - Horizontal Scroll */}
-          <div>
-            <h3 className="text-sm font-semibold text-foreground mb-3">Related Stocks</h3>
-            <div className="flex gap-3 overflow-x-auto pb-2">
-              {relatedStocks.map((relatedStock) => (
-                <Card 
-                  key={relatedStock.symbol}
-                  className="min-w-[140px] cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105 flex-shrink-0"
-                  onClick={() => navigate(`/stock/${relatedStock.symbol}`)}
-                  style={{ borderRadius: '12px' }}
-                >
-                  <CardContent className="p-3">
-                    <div className="text-center space-y-1">
-                      <div className="text-2xl">{relatedStock.logo}</div>
-                      <h4 className="font-bold text-foreground text-sm">{relatedStock.symbol}</h4>
-                      <div>
-                        <p className="text-sm font-bold text-foreground">${relatedStock.price.toFixed(2)}</p>
-                        <p className={`text-xs flex items-center justify-center gap-1 ${
-                          relatedStock.change >= 0 ? 'text-emerald-400' : 'text-red-400'
-                        }`}>
-                          {relatedStock.change >= 0 ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
-                          {relatedStock.change >= 0 ? '+' : ''}{relatedStock.changePercent.toFixed(2)}%
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
               ))}
             </div>
           </div>
