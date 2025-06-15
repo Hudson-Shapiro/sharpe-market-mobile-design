@@ -4,7 +4,7 @@ import { TrendingUp } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import GlobalHeader from '@/components/layout/GlobalHeader';
 import ActivitySummary from '@/components/activity/ActivitySummary';
-import ActivityDropdownFilter from '@/components/activity/ActivityDropdownFilter';
+import ActivityFilters from '@/components/activity/ActivityFilters';
 import ActivityCard from '@/components/activity/ActivityCard';
 
 const Activity = () => {
@@ -119,9 +119,9 @@ const Activity = () => {
           <ActivitySummary />
         </div>
 
-        {/* Filters - using new dropdown */}
+        {/* Filters - using original rounded filters */}
         <div className="px-4 mb-2">
-          <ActivityDropdownFilter 
+          <ActivityFilters 
             activeFilter={activeFilter} 
             onFilterChange={setActiveFilter} 
           />
