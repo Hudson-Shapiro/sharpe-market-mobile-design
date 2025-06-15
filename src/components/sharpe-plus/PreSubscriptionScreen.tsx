@@ -29,7 +29,7 @@ const PreSubscriptionScreen = () => {
       <div className="absolute top-20 left-4 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl" />
       <div className="absolute bottom-20 right-4 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl" />
       
-      <div className="relative z-10 p-4 max-w-md mx-auto">
+      <div className="relative z-10 p-4 max-w-md mx-auto pb-28">
         {/* Hero Section */}
         <div className="text-center mb-6 pt-16">
           <div className="w-16 h-16 rounded-xl bg-gradient-to-r from-emerald-500/20 to-purple-500/20 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
@@ -174,9 +174,9 @@ const PreSubscriptionScreen = () => {
         </div>
       </div>
 
-      {/* Sticky Footer CTA - Fixed styling */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background via-background to-transparent backdrop-blur-sm">
-        <div className="max-w-md mx-auto">
+      {/* Fixed Footer CTA - Enhanced for mobile */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border/20 safe-area-inset-bottom">
+        <div className="p-4 max-w-md mx-auto">
           <Button 
             size="lg" 
             className="w-full bg-gradient-to-r from-emerald-600 to-purple-600 hover:from-emerald-500 hover:to-purple-500 text-white py-4 text-lg font-bold shadow-xl border-0 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
