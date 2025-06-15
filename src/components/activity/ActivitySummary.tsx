@@ -1,14 +1,12 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Trophy, Briefcase, Users, Star, Percent } from 'lucide-react';
+import { Trophy, Briefcase, Users } from 'lucide-react';
 
 const ActivitySummary = () => {
   const summaryData = {
     totalPortfolios: 6,
     subscribedPortfolios: 12,
-    bestPerformingPortfolio: 'Tech Fund',
-    avgAllocation: 47.2
   };
 
   const summaryItems = [
@@ -25,20 +23,6 @@ const ActivitySummary = () => {
       icon: Users,
       color: "text-blue-400",
       bgColor: "bg-blue-500/10"
-    },
-    {
-      label: "Avg Allocation",
-      value: `${summaryData.avgAllocation}%`,
-      icon: Percent,
-      color: "text-orange-400",
-      bgColor: "bg-orange-500/10"
-    },
-    {
-      label: "Best Performing",
-      value: summaryData.bestPerformingPortfolio,
-      icon: Star,
-      color: "text-purple-400",
-      bgColor: "bg-purple-500/10"
     }
   ];
 
