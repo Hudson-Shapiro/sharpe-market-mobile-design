@@ -9,16 +9,14 @@ import {
   TrendingUp, 
   Plus, 
   Minus, 
-  MessageCircle, 
   BarChart3,
   ChevronLeft,
-  Settings,
   CheckCheck
 } from 'lucide-react';
 
 interface Notification {
   id: string;
-  type: 'rank' | 'portfolio_add' | 'portfolio_sell' | 'message' | 'summary';
+  type: 'rank' | 'portfolio_add' | 'portfolio_sell' | 'summary';
   title: string;
   description: string;
   timestamp: string;
@@ -49,26 +47,6 @@ const Notifications = () => {
       isRead: false,
       icon: Plus,
       iconColor: 'text-blue-400'
-    },
-    {
-      id: '3',
-      type: 'portfolio_sell',
-      title: 'Portfolio Activity',
-      description: 'Portfolio "Green Energy" you subscribed to sold TSLA shares',
-      timestamp: '1 hour ago',
-      isRead: true,
-      icon: Minus,
-      iconColor: 'text-red-400'
-    },
-    {
-      id: '4',
-      type: 'message',
-      title: 'New Message',
-      description: 'Sarah Chen sent you a message about portfolio strategy',
-      timestamp: '3 hours ago',
-      isRead: true,
-      icon: MessageCircle,
-      iconColor: 'text-purple-400'
     },
     {
       id: '5',
@@ -126,22 +104,17 @@ const Notifications = () => {
               )}
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            {unreadCount > 0 && (
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={markAllAsRead}
-                className="text-emerald-400 hover:text-emerald-300"
-              >
-                <CheckCheck size={16} />
-                Mark all read
-              </Button>
-            )}
-            <button className="w-10 h-10 bg-card rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
-              <Settings size={20} />
-            </button>
-          </div>
+          {unreadCount > 0 && (
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={markAllAsRead}
+              className="text-emerald-400 hover:text-emerald-300"
+            >
+              <CheckCheck size={16} />
+              Mark all read
+            </Button>
+          )}
         </div>
       </div>
 
