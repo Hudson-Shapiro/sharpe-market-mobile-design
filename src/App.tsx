@@ -14,6 +14,7 @@ import Search from "./pages/Search";
 import Notifications from "./pages/Notifications";
 import StockDetail from "./pages/StockDetail";
 import CreatorProfile from "./pages/CreatorProfile";
+import PublicProfile from "./pages/PublicProfile";
 import SharpePlus from "./pages/SharpePlus";
 import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
@@ -49,6 +50,7 @@ const App = () => (
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/stock/:symbol" element={<StockDetail />} />
                 <Route path="/creator/:creatorId" element={<CreatorProfile />} />
+                <Route path="/user/:username" element={<PublicProfile />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </MobileLayout>

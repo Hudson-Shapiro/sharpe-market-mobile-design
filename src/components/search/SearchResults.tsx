@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X } from 'lucide-react';
@@ -73,9 +72,9 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
 
   // Handle user click navigation
   const handleUserClick = (userName: string) => {
-    // Navigate to profile page - for now using a generic profile route
-    // In a real app, you'd navigate to the specific user's profile
-    navigate('/profile');
+    // Convert user name to URL-friendly username
+    const username = userName.toLowerCase().replace(/\s+/g, '-');
+    navigate(`/user/${username}`);
   };
 
   // Filter component
