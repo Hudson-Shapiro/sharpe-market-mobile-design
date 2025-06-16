@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { X } from 'lucide-react';
 import PortfolioCard from '@/components/portfolio/PortfolioCard';
 import { Card } from '@/components/ui/card';
@@ -20,6 +22,7 @@ interface SearchResultsProps {
 }
 
 const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisible }: SearchResultsProps) => {
+  const navigate = useNavigate();
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
 
   // Filter state
@@ -66,6 +69,13 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
   // Remove a specific filter
   const removeFilter = (filter: string) => {
     setActiveFilters(activeFilters.filter(f => f !== filter));
+  };
+
+  // Handle user click navigation
+  const handleUserClick = (userName: string) => {
+    // Navigate to profile page - for now using a generic profile route
+    // In a real app, you'd navigate to the specific user's profile
+    navigate('/profile');
   };
 
   // Filter component
@@ -254,7 +264,11 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
   const renderUsers = () => (
     <div className="space-y-2">
       {Array(10).fill(0).map((_, i) => (
-        <Card key={`user-${i}`} className="bg-card/50 backdrop-blur-sm p-3 flex items-center rounded-xl shadow-none">
+        <Card 
+          key={`user-${i}`} 
+          className="bg-card/50 backdrop-blur-sm p-3 flex items-center rounded-xl shadow-none cursor-pointer hover:bg-card/70 transition-colors"
+          onClick={() => handleUserClick(["Mark Cuban", "Lisa Su", "Warren Buffet", "Catherine Wood", "Elon Musk"][i % 5])}
+        >
           <div className="w-10 h-10 bg-secondary/70 rounded-full flex items-center justify-center mr-3 text-xl">
             {['🤵', '👩‍💼', '👴', '👩‍🔬', '👨‍💻'][i % 5]}
           </div>
