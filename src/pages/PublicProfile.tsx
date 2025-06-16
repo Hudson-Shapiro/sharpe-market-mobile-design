@@ -18,11 +18,6 @@ const PublicProfile = () => {
       'mark-cuban': {
         name: "Mark Cuban",
         username: "@markcuban",
-        followers: 125000,
-        following: 342,
-        location: "Dallas, TX",
-        joinedDate: "March 2022",
-        bio: "Entrepreneur, investor, and owner of the Dallas Mavericks. Focus on disruptive technology and innovative business models.",
         totalPortfolios: 8,
         avgReturn: 25.8,
         bestReturn: 47.2
@@ -30,11 +25,6 @@ const PublicProfile = () => {
       'lisa-su': {
         name: "Lisa Su",
         username: "@lisasu",
-        followers: 95000,
-        following: 156,
-        location: "Silicon Valley, CA",
-        joinedDate: "January 2023",
-        bio: "CEO & tech executive with deep expertise in semiconductors and emerging technologies. Long-term value investor.",
         totalPortfolios: 6,
         avgReturn: 42.1,
         bestReturn: 58.9
@@ -42,11 +32,6 @@ const PublicProfile = () => {
       'warren-buffet': {
         name: "Warren Buffet",
         username: "@warrenbuffet",
-        followers: 210000,
-        following: 89,
-        location: "Omaha, NE",
-        joinedDate: "December 2021",
-        bio: "Value investor focused on fundamentally sound businesses with strong competitive advantages and excellent management.",
         totalPortfolios: 4,
         avgReturn: 18.9,
         bestReturn: 31.4
@@ -121,7 +106,7 @@ const PublicProfile = () => {
 
           {/* User Profile Card */}
           <div className="bg-card border border-border rounded-2xl p-6 mb-6 shadow-sm">
-            <div className="flex items-start gap-4 mb-4">
+            <div className="flex items-start gap-4 mb-6">
               <Avatar className="h-20 w-20 bg-gradient-to-br from-blue-400 to-emerald-400">
                 <AvatarFallback className="text-white font-bold bg-transparent text-xl">
                   {getInitials(userData.name)}
@@ -132,35 +117,9 @@ const PublicProfile = () => {
                 <div className="flex items-center gap-2 mb-1">
                   <h2 className="text-2xl font-bold text-foreground">{userData.name}</h2>
                 </div>
-                <p className="text-muted-foreground text-sm mb-2">{userData.username}</p>
-                
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                  <div className="flex items-center gap-1">
-                    <MapPin size={14} />
-                    <span>{userData.location}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Calendar size={14} />
-                    <span>Joined {userData.joinedDate}</span>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4 text-sm">
-                  <div>
-                    <span className="font-bold text-foreground">{userData.followers.toLocaleString()}</span>
-                    <span className="text-muted-foreground ml-1">Followers</span>
-                  </div>
-                  <div>
-                    <span className="font-bold text-foreground">{userData.following}</span>
-                    <span className="text-muted-foreground ml-1">Following</span>
-                  </div>
-                </div>
+                <p className="text-muted-foreground text-sm mb-4">{userData.username}</p>
               </div>
             </div>
-            
-            <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-              {userData.bio}
-            </p>
             
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 text-sm pt-4 border-t border-border">
