@@ -1,8 +1,6 @@
 
 import React from 'react';
-import { Clock, TrendingDown } from 'lucide-react';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ArrowUp, ArrowDown } from 'lucide-react';
 
 interface BasicFilterBarProps {
   timeFrame: string;
@@ -19,11 +17,14 @@ const BasicFilterBar = ({ timeFrame, setTimeFrame, sortBy, setSortBy }: BasicFil
     { id: 'Lifetime', label: 'All' }
   ];
 
+  const toggleSort = () => {
+    setSortBy(sortBy === 'highest' ? 'lowest' : 'highest');
+  };
+
   return (
     <div className="flex items-center justify-between gap-4 p-4 bg-secondary/10 border-b border-border/20">
       {/* Time Frame */}
       <div className="flex items-center gap-3">
-        <Clock size={16} className="text-muted-foreground" />
         <div className="flex bg-secondary/30 backdrop-blur-sm p-1 text-xs border-0 gap-1" style={{ borderRadius: '12px' }}>
           {timeFrameOptions.map((frame) => (
             <button
@@ -42,23 +43,19 @@ const BasicFilterBar = ({ timeFrame, setTimeFrame, sortBy, setSortBy }: BasicFil
         </div>
       </div>
 
-      {/* Sort by P&L */}
-      <div className="flex items-center gap-3">
-        <TrendingDown size={16} className="text-muted-foreground" />
-        <Select value={sortBy} onValueChange={setSortBy}>
-          <SelectTrigger className="w-[140px] h-9 text-xs font-medium border border-border/40 bg-secondary/30 backdrop-blur-sm hover:border-emerald-500/50 transition-all duration-200" style={{ borderRadius: '12px' }}>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent className="bg-card/95 backdrop-blur-md border border-border/40 shadow-xl" style={{ borderRadius: '12px' }}>
-            <SelectItem value="highest" className="hover:bg-emerald-500/10 hover:text-emerald-400 transition-colors" style={{ borderRadius: '8px' }}>
-              Highest P&L
-            </SelectItem>
-            <SelectItem value="lowest" className="hover:bg-emerald-500/10 hover:text-emerald-400 transition-colors" style={{ borderRadius: '8px' }}>
-              Lowest P&L
-            </SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      {/* P&L Sort Button */}
+      <button
+        onClick={toggleSort}
+        className="flex items-center gap-2 px-4 py-2 text-xs font-medium border border-border/40 bg-secondary/30 backdrop-blur-sm hover:border-emerald-500/50 transition-all duration-200"
+        style={{ borderRadius: '12px' }}
+      >
+        <span>P&L</span>
+        {sortBy === 'highest' ? (
+          <ArrowUp size={14} className="text-muted-foreground" />
+        ) : (
+          <ArrowDown size={14} className="text-muted-foreground" />
+        )}
+      </button>
     </div>
   );
 };
