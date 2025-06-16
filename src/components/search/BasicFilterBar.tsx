@@ -20,35 +20,40 @@ const BasicFilterBar = ({ timeFrame, setTimeFrame, sortBy, setSortBy }: BasicFil
   ];
 
   return (
-    <div className="flex items-center justify-between gap-3 p-3 bg-secondary/10 border-b border-border/30">
+    <div className="flex items-center justify-between gap-4 p-4 bg-secondary/10 border-b border-border/20">
       {/* Time Frame */}
-      <div className="flex items-center gap-2">
-        <Clock size={14} className="text-muted-foreground" />
-        <ToggleGroup type="single" value={timeFrame} onValueChange={setTimeFrame} className="gap-1">
+      <div className="flex items-center gap-3">
+        <Clock size={16} className="text-muted-foreground" />
+        <div className="flex bg-secondary/30 backdrop-blur-sm p-1 text-xs border-0 gap-1" style={{ borderRadius: '12px' }}>
           {timeFrameOptions.map((frame) => (
-            <ToggleGroupItem
+            <button
               key={frame.id}
-              value={frame.id}
-              className="px-2.5 py-1.5 text-xs font-medium rounded-full border border-border/40 transition-all duration-200 hover:border-emerald-500/50 data-[state=on]:bg-emerald-500/15 data-[state=on]:border-emerald-500/60 data-[state=on]:text-emerald-400 bg-card/60 backdrop-blur-sm"
+              onClick={() => setTimeFrame(frame.id)}
+              className={`px-3 py-1.5 transition-all duration-300 font-medium ${
+                timeFrame === frame.id 
+                  ? "bg-white text-black shadow-lg font-bold" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+              }`}
+              style={{ borderRadius: '12px' }}
             >
               {frame.label}
-            </ToggleGroupItem>
+            </button>
           ))}
-        </ToggleGroup>
+        </div>
       </div>
 
       {/* Sort by P&L */}
-      <div className="flex items-center gap-2">
-        <TrendingDown size={14} className="text-muted-foreground" />
+      <div className="flex items-center gap-3">
+        <TrendingDown size={16} className="text-muted-foreground" />
         <Select value={sortBy} onValueChange={setSortBy}>
-          <SelectTrigger className="w-[130px] h-8 text-xs font-medium border border-border/40 bg-card/60 backdrop-blur-sm rounded-full hover:border-emerald-500/50 transition-all duration-200">
+          <SelectTrigger className="w-[140px] h-9 text-xs font-medium border border-border/40 bg-secondary/30 backdrop-blur-sm hover:border-emerald-500/50 transition-all duration-200" style={{ borderRadius: '12px' }}>
             <SelectValue />
           </SelectTrigger>
-          <SelectContent className="bg-card/95 backdrop-blur-md border border-border/40 rounded-xl shadow-xl">
-            <SelectItem value="highest" className="rounded-lg hover:bg-emerald-500/10 hover:text-emerald-400 transition-colors">
+          <SelectContent className="bg-card/95 backdrop-blur-md border border-border/40 shadow-xl" style={{ borderRadius: '12px' }}>
+            <SelectItem value="highest" className="hover:bg-emerald-500/10 hover:text-emerald-400 transition-colors" style={{ borderRadius: '8px' }}>
               Highest P&L
             </SelectItem>
-            <SelectItem value="lowest" className="rounded-lg hover:bg-emerald-500/10 hover:text-emerald-400 transition-colors">
+            <SelectItem value="lowest" className="hover:bg-emerald-500/10 hover:text-emerald-400 transition-colors" style={{ borderRadius: '8px' }}>
               Lowest P&L
             </SelectItem>
           </SelectContent>
