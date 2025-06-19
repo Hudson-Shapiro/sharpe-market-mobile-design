@@ -1,6 +1,8 @@
+
 import React from 'react';
 import PortfolioSection from '../components/dashboard/PortfolioSection';
 import TopMovers from '../components/dashboard/TopMovers';
+import PerformanceOverview from '../components/portfolio/PerformanceOverview';
 import { PlusCircle, Search, ChevronDown } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Link } from 'react-router-dom';
@@ -13,6 +15,39 @@ const Home = () => {
     { id: '14', name: 'Mixed Bag', return: 14.16, sharpeRatio: 6.23, isOwned: true },
   ];
 
+  // Sort portfolios by return (highest to lowest) and take top 3
+  const topPortfolios = [...myPortfolios].sort((a, b) => b.return - a.return).slice(0, 3);
+
+  // Generate performance data for the top 3 portfolios
+  const generatePerformanceData = (portfolios: typeof topPortfolios) => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+    
+    return months.map(month => {
+      const dataPoint: any = { name: month };
+      
+      portfolios.forEach((portfolio, index) => {
+        // Generate sample data based on portfolio performance
+        const baseReturn = portfolio.return;
+        const variation = (Math.random() - 0.5) * 10;
+        dataPoint[portfolio.name] = Math.max(0, baseReturn + variation);
+      });
+      
+      return dataPoint;
+    });
+  };
+
+  const performanceData = generatePerformanceData(topPortfolios);
+
+  // Create chart config for the top portfolios
+  const chartConfig = topPortfolios.reduce((config, portfolio, index) => {
+    const colors = ['#10b981', '#3b82f6', '#f59e0b']; // emerald, blue, amber
+    config[portfolio.name] = {
+      label: portfolio.name,
+      color: colors[index] || '#6b7280'
+    };
+    return config;
+  }, {} as any);
+
   const subscribedPortfolios = [
     { id: '16', name: 'Money Making Machine', return: 11.23, author: 'Sarah Chen', isSubscribed: true },
     { id: '18', name: 'Gained Stocks', return: 9.30, author: 'Mike Johnson', isSubscribed: true },
@@ -24,9 +59,22 @@ const Home = () => {
       <div className="min-h-screen bg-gray-950">
         <GlobalHeader />
         
+        {/* Performance Overview - Only show if user has portfolios */}
+        {topPortfolios.length > 0 && (
+          <div className="px-4 mb-6 mt-4">
+            <PerformanceOverview 
+              timeRange="YTD"
+              setTimeRange={() => {}}
+              performanceData={performanceData}
+              chartConfig={chartConfig}
+              topPortfolios={topPortfolios}
+            />
+          </div>
+        )}
+        
         <div className="px-4 mb-4 flex items-center justify-between mt-2">
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold text-white">My Portfolios</h2>
+            <h2 className="text-xl font-bold text-white">Top 3 Portfolios</h2>
             <ChevronDown size={16} className="text-emerald-400" />
           </div>
           <Link to="/portfolios" className="flex items-center bg-gradient-to-r from-emerald-600 to-emerald-500 text-white py-2 px-4 rounded-full text-sm font-medium transition-all hover:opacity-90">
@@ -36,7 +84,7 @@ const Home = () => {
         </div>
         
         <div className="px-4 mb-6 grid grid-cols-1 gap-4">
-          {myPortfolios.map(portfolio => (
+          {topPortfolios.map(portfolio => (
             <div key={portfolio.id} className="bg-gray-900/70 border border-gray-800 rounded-xl p-4 hover:bg-gray-900/90 transition-all">
               <div className="flex justify-between items-start mb-3">
                 <div>
