@@ -54,7 +54,9 @@ const Discover = () => {
               >
                 <span 
                   style={{
-                    textShadow: '0 0 8px rgba(16, 185, 129, 0.6), 0 0 16px rgba(16, 185, 129, 0.3), 0 0 24px rgba(16, 185, 129, 0.2)'
+                    textShadow: activeTab === 'sharpe-plus' 
+                      ? '0 0 8px rgba(16, 185, 129, 0.6), 0 0 16px rgba(16, 185, 129, 0.3), 0 0 24px rgba(16, 185, 129, 0.2), 1px 1px 2px rgba(0, 0, 0, 0.8)'
+                      : '0 0 8px rgba(16, 185, 129, 0.6), 0 0 16px rgba(16, 185, 129, 0.3), 0 0 24px rgba(16, 185, 129, 0.2)'
                   }}
                   className="text-emerald-400"
                 >
