@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -54,8 +53,9 @@ const Discover = () => {
               >
                 <span 
                   style={{
+                    WebkitTextStroke: activeTab === 'sharpe-plus' ? '0.5px rgba(0, 0, 0, 0.7)' : 'none',
                     textShadow: activeTab === 'sharpe-plus' 
-                      ? '0 1px 2px rgba(0, 0, 0, 0.5), 0 0 12px rgba(16, 185, 129, 0.5), 0 0 24px rgba(16, 185, 129, 0.3)'
+                      ? 'none'
                       : '0 0 8px rgba(16, 185, 129, 0.6), 0 0 16px rgba(16, 185, 129, 0.3), 0 0 24px rgba(16, 185, 129, 0.2)'
                   }}
                   className="text-emerald-400"
