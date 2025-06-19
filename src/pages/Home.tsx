@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PortfolioSection from '../components/dashboard/PortfolioSection';
 import TopMovers from '../components/dashboard/TopMovers';
@@ -10,9 +9,10 @@ import GlobalHeader from '@/components/layout/GlobalHeader';
 
 const Home = () => {
   const myPortfolios = [
-    { id: '5', name: 'Tech Bull', return: 28.58, sharpeRatio: 7.48, isOwned: true },
+    { id: '5', name: 'Tech Growth Portfolio', return: 32.5, sharpeRatio: 7.48, isOwned: true },
     { id: '6', name: 'DEFUND THE GOVT', return: 27.76, sharpeRatio: 8.74, isOwned: true },
     { id: '14', name: 'Mixed Bag', return: 14.16, sharpeRatio: 6.23, isOwned: true },
+    { id: '7', name: 'Meta Verse Pro', return: 19.84, sharpeRatio: 5.92, isOwned: true },
   ];
 
   // Sort portfolios by return (highest to lowest) and take top 3

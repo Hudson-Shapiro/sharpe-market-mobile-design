@@ -51,6 +51,23 @@ const PerformanceOverview = ({ timeRange, setTimeRange, performanceData, chartCo
           ))}
         </div>
       </div>
+      
+      {/* Chart Key */}
+      <div className="mb-3 text-xs text-gray-400 flex items-center gap-1">
+        <span>Showing top 3 portfolios</span>
+        <div className="flex items-center gap-3 ml-2">
+          {topPortfolios.map((portfolio, index) => (
+            <div key={portfolio.name} className="flex items-center gap-1">
+              <div 
+                className="w-2 h-2 rounded-full" 
+                style={{ backgroundColor: portfolioColors[index] }}
+              ></div>
+              <span className="text-xs text-gray-300">{portfolio.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      
       <div className="h-[180px] w-full">
         <ChartContainer config={chartConfig}>
           <LineChart data={performanceData}>
