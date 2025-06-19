@@ -22,6 +22,7 @@ import Earnings from "./pages/Earnings";
 import Billing from "./pages/Billing";
 import StripeConnect from "./pages/StripeConnect";
 import NotificationSettings from "./pages/NotificationSettings";
+import Referrals from "./pages/Referrals";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/billing" element={<Billing />} />
           <Route path="/stripe-connect" element={<StripeConnect />} />
           <Route path="/notification-settings" element={<NotificationSettings />} />
+          <Route path="/referrals" element={<Referrals />} />
           <Route path="*" element={
             <MobileLayout>
               <Routes>
