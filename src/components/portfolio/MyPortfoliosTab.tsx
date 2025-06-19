@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Plus, FolderPlus } from 'lucide-react';
 import PortfolioCard from './PortfolioCard';
@@ -28,6 +29,9 @@ interface MyPortfoliosTabProps {
 }
 
 const MyPortfoliosTab = ({ myPortfolios, timeRange, setTimeRange, performanceData, chartConfig }: MyPortfoliosTabProps) => {
+  // Get top 3 portfolios sorted by return
+  const topPortfolios = [...myPortfolios].sort((a, b) => b.return - a.return).slice(0, 3);
+
   return (
     <div className="space-y-4">
       {/* Performance Overview */}
@@ -37,6 +41,7 @@ const MyPortfoliosTab = ({ myPortfolios, timeRange, setTimeRange, performanceDat
           setTimeRange={setTimeRange}
           performanceData={performanceData}
           chartConfig={chartConfig}
+          topPortfolios={topPortfolios}
         />
       )}
       
