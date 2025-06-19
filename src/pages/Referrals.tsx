@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Users, Copy, Share } from 'lucide-react';
@@ -115,15 +114,15 @@ const Referrals = () => {
           <div className="bg-gradient-to-r from-card to-emerald-950/10 border border-emerald-500/15 p-4 rounded-2xl shadow-lg">
             <h3 className="font-semibold mb-3 text-emerald-300">How it Works</h3>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <div className="flex items-start gap-3 p-2 bg-emerald-500/5 rounded-lg">
+              <div className="flex items-start gap-3 p-2">
                 <span className="text-emerald-400 font-bold text-base">1.</span>
                 <span>Share your referral code or link with friends</span>
               </div>
-              <div className="flex items-start gap-3 p-2 bg-emerald-500/5 rounded-lg">
+              <div className="flex items-start gap-3 p-2">
                 <span className="text-emerald-400 font-bold text-base">2.</span>
                 <span>They sign up using your code</span>
               </div>
-              <div className="flex items-start gap-3 p-2 bg-emerald-500/5 rounded-lg">
+              <div className="flex items-start gap-3 p-2">
                 <span className="text-emerald-400 font-bold text-base">3.</span>
                 <span>Get 50% of all revenue they generate for the first 3 months on the platform</span>
               </div>
