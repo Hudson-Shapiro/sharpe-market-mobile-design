@@ -2,13 +2,17 @@
 import React, { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Trophy, TrendingUp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Trophy, TrendingUp, DollarSign, ToggleLeft, ToggleRight } from 'lucide-react';
 import DiscoverHeader from '@/components/layout/DiscoverHeader';
 import LeaderboardTab from '@/components/discover/LeaderboardTab';
 import MarketTab from '@/components/discover/MarketTab';
+import PreSubscriptionScreen from '@/components/sharpe-plus/PreSubscriptionScreen';
+import PostSubscriptionScreen from '@/components/sharpe-plus/PostSubscriptionScreen';
 
 const Discover = () => {
   const [activeTab, setActiveTab] = useState("leaderboard");
+  const [isSharpePlusSubscribed, setIsSharpePlusSubscribed] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -16,7 +20,7 @@ const Discover = () => {
         <DiscoverHeader />
         <div className="p-4">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-secondary/30 backdrop-blur-sm border-0 mb-6 shadow-lg p-1" style={{ borderRadius: '12px' }}>
+            <TabsList className="grid w-full grid-cols-3 bg-secondary/30 backdrop-blur-sm border-0 mb-6 shadow-lg p-1" style={{ borderRadius: '12px' }}>
               <TabsTrigger 
                 value="leaderboard" 
                 className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
@@ -33,6 +37,14 @@ const Discover = () => {
                 <TrendingUp size={18} />
                 Market
               </TabsTrigger>
+              <TabsTrigger 
+                value="sharpe-plus" 
+                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                style={{ borderRadius: '12px' }}
+              >
+                <DollarSign size={18} />
+                Sharpe+
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="leaderboard" className="animate-fade-in">
@@ -41,6 +53,29 @@ const Discover = () => {
 
             <TabsContent value="market" className="animate-fade-in">
               <MarketTab />
+            </TabsContent>
+
+            <TabsContent value="sharpe-plus" className="animate-fade-in">
+              <div className="relative">
+                {/* Floating Toggle Button */}
+                <div className="fixed top-6 right-4 z-50">
+                  <Button
+                    onClick={() => setIsSharpePlusSubscribed(!isSharpePlusSubscribed)}
+                    variant="outline"
+                    size="sm"
+                    className="bg-background/90 backdrop-blur-sm border-border/50 hover:bg-background px-4 py-2 flex items-center gap-2 shadow-lg"
+                    style={{ borderRadius: '999px' }}
+                  >
+                    {isSharpePlusSubscribed ? <ToggleRight size={16} className="text-emerald-400" /> : <ToggleLeft size={16} />}
+                    <span className="text-xs font-medium">Preview Mode</span>
+                  </Button>
+                </div>
+
+                {/* Screen Content */}
+                <div className="pt-4">
+                  {isSharpePlusSubscribed ? <PostSubscriptionScreen /> : <PreSubscriptionScreen />}
+                </div>
+              </div>
             </TabsContent>
           </Tabs>
         </div>
