@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { Trophy, TrendingUp, DollarSign, ToggleLeft, ToggleRight } from 'lucide-react';
+import { Trophy, TrendingUp, ToggleLeft, ToggleRight } from 'lucide-react';
 import DiscoverHeader from '@/components/layout/DiscoverHeader';
 import LeaderboardTab from '@/components/discover/LeaderboardTab';
 import MarketTab from '@/components/discover/MarketTab';
@@ -52,11 +52,11 @@ const Discover = () => {
                 className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
                 style={{ borderRadius: '12px' }}
               >
-                <DollarSign size={18} />
                 <span 
                   style={{
-                    textShadow: activeTab === 'sharpe-plus' ? '0 0 6px rgba(16, 185, 129, 0.5), 0 0 12px rgba(16, 185, 129, 0.2)' : 'none'
+                    textShadow: '0 0 8px rgba(16, 185, 129, 0.6), 0 0 16px rgba(16, 185, 129, 0.3), 0 0 24px rgba(16, 185, 129, 0.2)'
                   }}
+                  className="text-emerald-400"
                 >
                   Sharpe+
                 </span>
