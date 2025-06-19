@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { BarChart3, Users } from 'lucide-react';
+import { BarChart3, Users, DollarSign, ToggleLeft, ToggleRight } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Button } from '@/components/ui/button';
 import GlobalHeader from '@/components/layout/GlobalHeader';
 import MyPortfoliosTab from '../components/portfolio/MyPortfoliosTab';
 import SubscribedPortfoliosTab from '../components/portfolio/SubscribedPortfoliosTab';
+import PreSubscriptionScreen from '@/components/sharpe-plus/PreSubscriptionScreen';
+import PostSubscriptionScreen from '@/components/sharpe-plus/PostSubscriptionScreen';
 
 const Portfolios = () => {
   const [timeRange, setTimeRange] = useState("LTD");
+  const [isSharpePlusSubscribed, setIsSharpePlusSubscribed] = useState(false);
   
   const myPortfolios = [
     { 
@@ -138,7 +142,7 @@ const Portfolios = () => {
         {/* Main Content */}
         <div className="px-4">
           <Tabs defaultValue="my-portfolios" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-secondary/30 backdrop-blur-sm border-0 mb-4 shadow-lg p-1" style={{ borderRadius: '12px' }}>
+            <TabsList className="grid w-full grid-cols-3 bg-secondary/30 backdrop-blur-sm border-0 mb-4 shadow-lg p-1" style={{ borderRadius: '12px' }}>
               <TabsTrigger 
                 value="my-portfolios" 
                 className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
@@ -154,6 +158,14 @@ const Portfolios = () => {
               >
                 <Users size={16} />
                 Subscribed
+              </TabsTrigger>
+              <TabsTrigger 
+                value="sharpe-plus" 
+                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
+                style={{ borderRadius: '12px' }}
+              >
+                <DollarSign size={16} />
+                Sharpe+
               </TabsTrigger>
             </TabsList>
             
@@ -175,6 +187,30 @@ const Portfolios = () => {
                 timeRange={timeRange}
                 setTimeRange={setTimeRange}
               />
+            </TabsContent>
+
+            {/* Sharpe+ Tab */}
+            <TabsContent value="sharpe-plus">
+              <div className="relative">
+                {/* Floating Toggle Button */}
+                <div className="fixed top-6 right-4 z-50">
+                  <Button
+                    onClick={() => setIsSharpePlusSubscribed(!isSharpePlusSubscribed)}
+                    variant="outline"
+                    size="sm"
+                    className="bg-background/90 backdrop-blur-sm border-border/50 hover:bg-background px-4 py-2 flex items-center gap-2 shadow-lg"
+                    style={{ borderRadius: '999px' }}
+                  >
+                    {isSharpePlusSubscribed ? <ToggleRight size={16} className="text-emerald-400" /> : <ToggleLeft size={16} />}
+                    <span className="text-xs font-medium">Preview Mode</span>
+                  </Button>
+                </div>
+
+                {/* Screen Content */}
+                <div className="pt-4">
+                  {isSharpePlusSubscribed ? <PostSubscriptionScreen /> : <PreSubscriptionScreen />}
+                </div>
+              </div>
             </TabsContent>
           </Tabs>
         </div>
