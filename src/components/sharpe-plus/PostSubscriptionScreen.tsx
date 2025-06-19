@@ -14,45 +14,42 @@ const PostSubscriptionScreen = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900/30 via-emerald-800/20 to-emerald-700/30 relative overflow-hidden pb-20">
-      {/* Background glow effects */}
-      <div className="absolute top-20 left-4 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-4 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl" />
-      
-      <div className="relative z-10 p-4 max-w-md mx-auto">
+    <div className="min-h-full bg-transparent relative overflow-hidden">
+      {/* 
+        Main Content Container - More compact spacing
+      */}
+      <div className="relative z-10 p-4 max-w-md mx-auto pb-20">
         {/* Header */}
-        <div className="text-center mb-6 pt-16">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="w-12 h-12 bg-gradient-to-r from-emerald-500/20 to-purple-500/20 border border-emerald-500/30 flex items-center justify-center" style={{ borderRadius: '10px' }}>
-              <Brain size={20} className="text-emerald-400" />
-            </div>
+        <div className="text-center mb-6 pt-4">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-emerald-500/15 to-purple-500/15 border border-emerald-500/20 flex items-center justify-center mx-auto mb-3">
+            <Brain size={20} className="text-emerald-400" />
           </div>
-          <h1 className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent mb-1">
+          <h1 className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent mb-2">
             👋 Welcome to Sharpe+
           </h1>
-          <p className="text-sm text-muted-foreground">Live allocation insights & detailed metrics.</p>
+          <p className="text-muted-foreground text-sm">Live allocation insights & detailed metrics.</p>
         </div>
 
         {/* Platform Summary */}
-        <div className="bg-card/60 border border-border backdrop-blur-sm p-4 mb-4" style={{ borderRadius: '12px' }}>
-          <div className="flex items-center justify-between mb-2">
+        <div className="bg-card/40 border border-border/30 backdrop-blur-sm p-4 mb-4" style={{ borderRadius: '10px' }}>
+          <div className="flex items-center justify-between mb-3">
             <h2 className="font-bold text-sm flex items-center gap-2">
               📊 Platform Summary
               <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 font-medium animate-pulse" style={{ borderRadius: '8px' }}>Live</span>
             </h2>
           </div>
-          <div className="grid grid-cols-3 gap-3 text-center">
-            <div className="p-2 bg-background/30" style={{ borderRadius: '8px' }}>
-              <div className="text-xs text-muted-foreground">Net Flow</div>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="p-2.5 bg-background/30" style={{ borderRadius: '8px' }}>
+              <div className="text-xs text-muted-foreground mb-1">Net Flow</div>
               <div className="text-sm font-bold text-emerald-400">$2.4B Buy</div>
             </div>
-            <div className="p-2 bg-background/30" style={{ borderRadius: '8px' }}>
-              <div className="text-xs text-muted-foreground">Most Added</div>
+            <div className="p-2.5 bg-background/30" style={{ borderRadius: '8px' }}>
+              <div className="text-xs text-muted-foreground mb-1">Most Added</div>
               <div className="text-sm font-bold">NVDA <span className="text-emerald-400">+5.2%</span></div>
             </div>
-            <div className="p-2 bg-background/30" style={{ borderRadius: '8px' }}>
-              <div className="text-xs text-muted-foreground">Sector Leader</div>
-              <div className="text-xs">Tech <span className="text-emerald-400">+2.4%</span></div>
+            <div className="p-2.5 bg-background/30" style={{ borderRadius: '8px' }}>
+              <div className="text-xs text-muted-foreground mb-1">Sector Leader</div>
+              <div className="text-xs font-bold">Tech <span className="text-emerald-400">+2.4%</span></div>
             </div>
           </div>
         </div>
@@ -74,14 +71,14 @@ const PostSubscriptionScreen = () => {
         </div>
 
         {/* Recent Allocation Shifts */}
-        <div className="bg-card/50 border border-border backdrop-blur-sm mb-4" style={{ borderRadius: '12px' }}>
-          <div className="p-4 pb-2">
+        <div className="bg-card/40 border border-border/30 backdrop-blur-sm mb-4" style={{ borderRadius: '10px' }}>
+          <div className="p-3 pb-2">
             <h2 className="font-bold text-sm mb-3 flex items-center gap-2">
               🔁 Recent Allocation Shifts
               <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 font-medium" style={{ borderRadius: '8px' }}>1h</span>
             </h2>
           </div>
-          <div className="px-4 pb-4 space-y-2">
+          <div className="px-3 pb-3 space-y-2">
             {[
               { ticker: 'NVDA', change: '+1.3% avg allocation increase', type: 'add' },
               { ticker: 'AAPL', change: '-0.8% avg allocation decrease', type: 'sell' },
@@ -105,18 +102,18 @@ const PostSubscriptionScreen = () => {
         </div>
 
         {/* Deep Insights */}
-        <div className="bg-card/30 border border-border backdrop-blur-sm" style={{ borderRadius: '12px' }}>
-          <div className="p-4 pb-2">
+        <div className="bg-card/30 border border-border/30 backdrop-blur-sm" style={{ borderRadius: '10px' }}>
+          <div className="p-3 pb-2">
             <h2 className="font-bold text-sm mb-3 flex items-center gap-2">
               🧠 Deep Insights
             </h2>
           </div>
-          <div className="px-4 pb-4 space-y-2">
-            <div className="p-3 bg-background/30" style={{ borderRadius: '8px' }}>
+          <div className="px-3 pb-3 space-y-2">
+            <div className="p-2.5 bg-background/30" style={{ borderRadius: '8px' }}>
               <h4 className="font-medium text-xs mb-1">📊 Allocation Trends</h4>
               <p className="text-xs text-muted-foreground">Tech average allocation up 0.8% this week, with NVDA leading at 12.3% avg</p>
             </div>
-            <div className="p-3 bg-background/30" style={{ borderRadius: '8px' }}>
+            <div className="p-2.5 bg-background/30" style={{ borderRadius: '8px' }}>
               <h4 className="font-medium text-xs mb-1">⚡ Portfolio Penetration</h4>
               <p className="text-xs text-muted-foreground">78.4% of portfolios now hold NVDA, highest penetration in 6 months</p>
             </div>
