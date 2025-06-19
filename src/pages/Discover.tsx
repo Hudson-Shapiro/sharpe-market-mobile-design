@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -11,8 +12,17 @@ import PreSubscriptionScreen from '@/components/sharpe-plus/PreSubscriptionScree
 import PostSubscriptionScreen from '@/components/sharpe-plus/PostSubscriptionScreen';
 
 const Discover = () => {
+  const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState("leaderboard");
   const [isSharpePlusSubscribed, setIsSharpePlusSubscribed] = useState(false);
+
+  // Check for tab parameter in URL
+  useEffect(() => {
+    const tabParam = searchParams.get('tab');
+    if (tabParam === 'sharpe-plus') {
+      setActiveTab('sharpe-plus');
+    }
+  }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -57,7 +67,7 @@ const Discover = () => {
 
             <TabsContent value="sharpe-plus" className="animate-fade-in">
               <div className="relative -mx-4 -mb-4">
-                {/* Floating Toggle Button - Better positioning and styling */}
+                {/* Floating Toggle Button */}
                 <div className="absolute top-4 right-4 z-50">
                   <Button
                     onClick={() => setIsSharpePlusSubscribed(!isSharpePlusSubscribed)}
@@ -76,8 +86,8 @@ const Discover = () => {
                   </Button>
                 </div>
 
-                {/* Screen Content - Remove conflicting background */}
-                <div className="min-h-[80vh]">
+                {/* Screen Content */}
+                <div className="min-h-[70vh]">
                   {isSharpePlusSubscribed ? <PostSubscriptionScreen /> : <PreSubscriptionScreen />}
                 </div>
               </div>

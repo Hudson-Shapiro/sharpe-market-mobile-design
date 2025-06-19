@@ -9,6 +9,7 @@ const SettingsMenu = () => {
     { to: "/billing", icon: CreditCard, text: "Billing" },
     { to: "/stripe-connect", icon: Landmark, text: "Stripe Connect" },
     { to: "/notification-settings", icon: Bell, text: "Notification Settings" },
+    { to: "/discover?tab=sharpe-plus", icon: TrendingUp, text: "Subscribe to Sharpe+" },
     { to: "/settings", icon: Settings, text: "More Settings" },
   ];
 
