@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -48,17 +49,19 @@ const Discover = () => {
               </TabsTrigger>
               <TabsTrigger 
                 value="sharpe-plus" 
-                className="text-sm font-medium transition-all duration-300 data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-lg flex items-center gap-2 text-muted-foreground data-[state=active]:font-bold"
-                style={{ borderRadius: '12px' }}
+                className="text-sm font-medium transition-all duration-300 data-[state=active]:shadow-lg flex items-center gap-2 data-[state=active]:font-bold"
+                style={{ 
+                  borderRadius: '12px',
+                  backgroundColor: activeTab === 'sharpe-plus' ? '#10b981' : 'transparent',
+                }}
               >
                 <span 
                   style={{
-                    WebkitTextStroke: activeTab === 'sharpe-plus' ? '0.5px rgba(0, 0, 0, 0.7)' : 'none',
+                    color: activeTab === 'sharpe-plus' ? 'black' : '#10b981',
                     textShadow: activeTab === 'sharpe-plus' 
-                      ? 'none'
-                      : '0 0 8px rgba(16, 185, 129, 0.6), 0 0 16px rgba(16, 185, 129, 0.3), 0 0 24px rgba(16, 185, 129, 0.2)'
+                      ? '0 0 4px rgba(0, 0, 0, 0.3)'
+                      : '0 0 8px rgba(16, 185, 129, 0.6), 0 0 16px rgba(16, 185, 129, 0.3)'
                   }}
-                  className="text-emerald-400"
                 >
                   Sharpe+
                 </span>
