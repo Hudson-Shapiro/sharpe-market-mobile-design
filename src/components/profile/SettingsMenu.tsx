@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TrendingUp, CreditCard, Settings, ChevronRight, Landmark, Bell, Users } from 'lucide-react';
@@ -10,7 +9,6 @@ const SettingsMenu = () => {
     { to: "/stripe-connect", icon: Landmark, text: "Stripe Connect" },
     { to: "/notification-settings", icon: Bell, text: "Notification Settings" },
     { to: "/referrals", icon: Users, text: "Refer Friends" },
-    { to: "/discover?tab=sharpe-plus", icon: TrendingUp, text: "Subscribe to Sharpe+" },
     { to: "/settings", icon: Settings, text: "More Settings" },
   ];
 
