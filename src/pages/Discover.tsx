@@ -53,7 +53,13 @@ const Discover = () => {
                 style={{ borderRadius: '12px' }}
               >
                 <DollarSign size={18} />
-                Sharpe+
+                <span 
+                  style={{
+                    textShadow: activeTab === 'sharpe-plus' ? '0 0 6px rgba(16, 185, 129, 0.5), 0 0 12px rgba(16, 185, 129, 0.2)' : 'none'
+                  }}
+                >
+                  Sharpe+
+                </span>
               </TabsTrigger>
             </TabsList>
 
