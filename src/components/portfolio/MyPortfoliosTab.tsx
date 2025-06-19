@@ -32,6 +32,37 @@ const MyPortfoliosTab = ({ myPortfolios, timeRange, setTimeRange, performanceDat
   // Get top 3 portfolios sorted by return
   const topPortfolios = [...myPortfolios].sort((a, b) => b.return - a.return).slice(0, 3);
 
+  // Generate performance data for the top 3 portfolios
+  const generatePerformanceData = (portfolios: typeof topPortfolios) => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+    
+    return months.map((month, monthIndex) => {
+      const dataPoint: any = { name: month };
+      
+      portfolios.forEach((portfolio) => {
+        // Generate realistic progressive data that shows growth over time
+        const baseGrowth = (monthIndex + 1) * (portfolio.return / 6); // Distribute return across months
+        const variation = (Math.random() - 0.5) * 5; // Add some variation
+        const value = Math.max(0, baseGrowth + variation);
+        dataPoint[portfolio.name] = Number(value.toFixed(2));
+      });
+      
+      return dataPoint;
+    });
+  };
+
+  const dynamicPerformanceData = generatePerformanceData(topPortfolios);
+
+  // Create chart config for the top portfolios
+  const dynamicChartConfig = topPortfolios.reduce((config, portfolio, index) => {
+    const colors = ['#10b981', '#3b82f6', '#f59e0b']; // emerald, blue, amber
+    config[portfolio.name] = {
+      label: portfolio.name,
+      color: colors[index] || '#6b7280'
+    };
+    return config;
+  }, {} as any);
+
   return (
     <div className="space-y-4">
       {/* Performance Overview */}
@@ -39,8 +70,8 @@ const MyPortfoliosTab = ({ myPortfolios, timeRange, setTimeRange, performanceDat
         <PerformanceOverview 
           timeRange={timeRange}
           setTimeRange={setTimeRange}
-          performanceData={performanceData}
-          chartConfig={chartConfig}
+          performanceData={dynamicPerformanceData}
+          chartConfig={dynamicChartConfig}
           topPortfolios={topPortfolios}
         />
       )}

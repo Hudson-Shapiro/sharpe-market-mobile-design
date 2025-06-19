@@ -22,14 +22,15 @@ const Home = () => {
   const generatePerformanceData = (portfolios: typeof topPortfolios) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
     
-    return months.map(month => {
+    return months.map((month, monthIndex) => {
       const dataPoint: any = { name: month };
       
-      portfolios.forEach((portfolio, index) => {
-        // Generate sample data based on portfolio performance
-        const baseReturn = portfolio.return;
-        const variation = (Math.random() - 0.5) * 10;
-        dataPoint[portfolio.name] = Math.max(0, baseReturn + variation);
+      portfolios.forEach((portfolio) => {
+        // Generate realistic progressive data that shows growth over time
+        const baseGrowth = (monthIndex + 1) * (portfolio.return / 6); // Distribute return across months
+        const variation = (Math.random() - 0.5) * 5; // Add some variation
+        const value = Math.max(0, baseGrowth + variation);
+        dataPoint[portfolio.name] = Number(value.toFixed(2));
       });
       
       return dataPoint;
