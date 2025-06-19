@@ -40,7 +40,17 @@ const Referrals = () => {
             <div className="w-16 h-16 rounded-full bg-gradient-to-r from-emerald-500/20 to-purple-500/20 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
               <Users size={24} className="text-emerald-400" />
             </div>
-            <h2 className="text-2xl font-bold mb-2">Invite Friends</h2>
+            <h2 className="text-2xl font-bold mb-2">
+              Refer friends and{' '}
+              <span 
+                className="text-emerald-400" 
+                style={{
+                  textShadow: '0 0 8px rgba(52, 211, 153, 0.6), 0 0 16px rgba(52, 211, 153, 0.3)'
+                }}
+              >
+                earn
+              </span>
+            </h2>
             <p className="text-muted-foreground text-sm">
               Share Sharpe with friends and earn rewards when they join
             </p>
