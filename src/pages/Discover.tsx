@@ -56,23 +56,28 @@ const Discover = () => {
             </TabsContent>
 
             <TabsContent value="sharpe-plus" className="animate-fade-in">
-              <div className="relative">
-                {/* Floating Toggle Button */}
-                <div className="fixed top-6 right-4 z-50">
+              <div className="relative -mx-4 -mb-4">
+                {/* Floating Toggle Button - Better positioning and styling */}
+                <div className="absolute top-4 right-4 z-50">
                   <Button
                     onClick={() => setIsSharpePlusSubscribed(!isSharpePlusSubscribed)}
                     variant="outline"
                     size="sm"
-                    className="bg-background/90 backdrop-blur-sm border-border/50 hover:bg-background px-4 py-2 flex items-center gap-2 shadow-lg"
-                    style={{ borderRadius: '999px' }}
+                    className="bg-background/95 backdrop-blur-sm border-border/50 hover:bg-background/80 px-3 py-1.5 flex items-center gap-2 shadow-md text-xs"
+                    style={{ borderRadius: '20px' }}
                   >
-                    {isSharpePlusSubscribed ? <ToggleRight size={16} className="text-emerald-400" /> : <ToggleLeft size={16} />}
-                    <span className="text-xs font-medium">Preview Mode</span>
+                    {isSharpePlusSubscribed ? 
+                      <ToggleRight size={14} className="text-emerald-400" /> : 
+                      <ToggleLeft size={14} className="text-muted-foreground" />
+                    }
+                    <span className="font-medium">
+                      {isSharpePlusSubscribed ? 'Live' : 'Preview'}
+                    </span>
                   </Button>
                 </div>
 
-                {/* Screen Content */}
-                <div className="pt-4">
+                {/* Screen Content - Remove conflicting background */}
+                <div className="min-h-[80vh]">
                   {isSharpePlusSubscribed ? <PostSubscriptionScreen /> : <PreSubscriptionScreen />}
                 </div>
               </div>

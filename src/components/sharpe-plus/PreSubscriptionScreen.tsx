@@ -145,39 +145,39 @@ const PreSubscriptionScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900/30 via-emerald-800/20 to-emerald-700/30 relative overflow-hidden">
+    <div className="min-h-full bg-gradient-to-br from-emerald-900/20 via-background to-purple-900/20 relative overflow-hidden">
       {/* 
-        Background Glow Effects
+        Background Glow Effects - Subtler integration
         Creates visual depth and premium feel
         RN Conversion: Use multiple absolutely positioned Views with blur
       */}
-      <div className="absolute top-20 left-4 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-4 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl" />
+      <div className="absolute top-20 left-4 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 right-4 w-32 h-32 bg-purple-500/5 rounded-full blur-3xl" />
       
       {/* 
         Main Content Container
         Scrollable content with proper spacing for mobile
         RN Conversion: ScrollView with contentContainerStyle
       */}
-      <div className="relative z-10 p-4 max-w-md mx-auto pb-28">
+      <div className="relative z-10 p-6 max-w-md mx-auto pb-24">
         {/* 
           Hero Section
           Clear value proposition and branding
           RN Conversion: View with centered content
         */}
-        <div className="text-center mb-6 pt-16">
+        <div className="text-center mb-8 pt-8">
           {/* Brand icon with gradient background */}
-          <div className="w-16 h-16 rounded-xl bg-gradient-to-r from-emerald-500/20 to-purple-500/20 border border-emerald-500/30 flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 rounded-xl bg-gradient-to-r from-emerald-500/15 to-purple-500/15 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4">
             <div className="text-2xl">📊</div>
           </div>
           
           {/* Main headline with gradient text */}
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent mb-2">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent mb-3">
             Unlock Sharpe+
           </h1>
           
           {/* Value proposition subtitle */}
-          <p className="text-muted-foreground mb-6">
+          <p className="text-muted-foreground text-sm leading-relaxed mb-6">
             See how investors are allocating capital — with detailed metrics.
           </p>
         </div>
@@ -188,17 +188,17 @@ const PreSubscriptionScreen: React.FC = () => {
           RN Conversion: Grid layout with styled containers
         */}
         <div className="mb-6">
-          <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
+          <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
             📊 Get These Key Metrics
           </h2>
           
           {/* Metrics grid with responsive layout */}
-          <div className="grid grid-cols-3 gap-2 mb-4">
+          <div className="grid grid-cols-3 gap-3 mb-6">
             {KEY_METRICS.map((metric, i) => (
               <div 
                 key={i} 
-                className="p-2 bg-card/30 border border-border/20" 
-                style={{ borderRadius: '8px' }}
+                className="p-3 bg-card/40 border border-border/30 backdrop-blur-sm" 
+                style={{ borderRadius: '10px' }}
               >
                 <div className={`text-xs font-bold ${metric.color} mb-1`}>
                   {metric.label}
@@ -217,28 +217,28 @@ const PreSubscriptionScreen: React.FC = () => {
           RN Conversion: Absolutely positioned overlay on data
         */}
         <div className="mb-6">
-          <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
+          <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
             🔥 What You're Missing
           </h2>
           
           {/* Top Holdings Preview with lock overlay */}
-          <div className="bg-card/50 border border-border backdrop-blur-sm relative overflow-hidden mb-3" style={{ borderRadius: '12px' }}>
+          <div className="bg-card/50 border border-border/30 backdrop-blur-sm relative overflow-hidden mb-4" style={{ borderRadius: '12px' }}>
             {/* Lock overlay */}
-            <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-10" style={{ borderRadius: '12px' }}>
+            <div className="absolute inset-0 bg-background/80 backdrop-blur-[2px] flex items-center justify-center z-10" style={{ borderRadius: '12px' }}>
               <div className="text-center">
-                <Lock size={20} className="text-emerald-400 animate-pulse mx-auto mb-2" />
+                <Lock size={18} className="text-emerald-400 animate-pulse mx-auto mb-2" />
                 <p className="text-xs text-emerald-400 font-medium">Live Data</p>
               </div>
             </div>
             
             {/* Blurred content underneath */}
-            <div className="p-3 blur-[2px]">
-              <h3 className="font-medium text-sm mb-2 flex items-center gap-2">
+            <div className="p-4">
+              <h3 className="font-medium text-sm mb-3 flex items-center gap-2">
                 📈 Top Holdings Analysis
               </h3>
               
               {/* Data table header */}
-              <div className="grid grid-cols-4 gap-2 text-xs text-muted-foreground font-medium mb-2 px-1">
+              <div className="grid grid-cols-4 gap-2 text-xs text-muted-foreground font-medium mb-3 px-1">
                 <div>Stock</div>
                 <div className="text-center">% Portfolios</div>
                 <div className="text-center">Avg Alloc %</div>
@@ -246,9 +246,9 @@ const PreSubscriptionScreen: React.FC = () => {
               </div>
               
               {/* Data rows */}
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 {TEASER_HOLDINGS.map((holding, i) => (
-                  <div key={i} className="grid grid-cols-4 gap-2 items-center text-xs bg-background/20 p-2 rounded-lg">
+                  <div key={i} className="grid grid-cols-4 gap-2 items-center text-xs bg-background/20 p-2.5 rounded-lg">
                     <span className="font-bold">{holding.ticker}</span>
                     <span className="text-center font-medium">{holding.portfolios}</span>
                     <span className="text-center text-blue-400 font-medium">{holding.avg}</span>
@@ -262,21 +262,21 @@ const PreSubscriptionScreen: React.FC = () => {
           </div>
 
           {/* Top Sectors Preview with lock overlay */}
-          <div className="bg-card/50 border border-border backdrop-blur-sm relative overflow-hidden mb-3" style={{ borderRadius: '12px' }}>
+          <div className="bg-card/50 border border-border/30 backdrop-blur-sm relative overflow-hidden mb-4" style={{ borderRadius: '12px' }}>
             {/* Lock overlay */}
-            <div className="absolute inset-0 bg-black/70 flex items-center justify-center z-10" style={{ borderRadius: '12px' }}>
+            <div className="absolute inset-0 bg-background/80 backdrop-blur-[2px] flex items-center justify-center z-10" style={{ borderRadius: '12px' }}>
               <div className="text-center">
-                <Lock size={20} className="text-emerald-400 animate-pulse mx-auto mb-2" />
+                <Lock size={18} className="text-emerald-400 animate-pulse mx-auto mb-2" />
                 <p className="text-xs text-emerald-400 font-medium">Live Data</p>
               </div>
             </div>
             
             {/* Blurred content underneath */}
-            <div className="p-3 blur-[2px]">
-              <h3 className="font-medium text-sm mb-2">🔄 Sector Allocation Trends</h3>
+            <div className="p-4">
+              <h3 className="font-medium text-sm mb-3">🔄 Sector Allocation Trends</h3>
               
               {/* Data table header */}
-              <div className="grid grid-cols-4 gap-2 text-xs text-muted-foreground font-medium mb-2 px-1">
+              <div className="grid grid-cols-4 gap-2 text-xs text-muted-foreground font-medium mb-3 px-1">
                 <div>Sector</div>
                 <div className="text-center">% Portfolios</div>
                 <div className="text-center">Avg Alloc %</div>
@@ -284,9 +284,9 @@ const PreSubscriptionScreen: React.FC = () => {
               </div>
               
               {/* Data rows */}
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 {TEASER_SECTORS.map((sector, i) => (
-                  <div key={i} className="grid grid-cols-4 gap-2 items-center text-xs bg-background/20 p-2 rounded-lg">
+                  <div key={i} className="grid grid-cols-4 gap-2 items-center text-xs bg-background/20 p-2.5 rounded-lg">
                     <span className="font-medium truncate">{sector.name}</span>
                     <span className="text-center font-medium">{sector.portfolios}</span>
                     <span className="text-center text-blue-400 font-medium">{sector.avg}</span>
@@ -313,9 +313,9 @@ const PreSubscriptionScreen: React.FC = () => {
           Grid of key features users will get
           RN Conversion: Grid layout with icons and text
         */}
-        <div className="mb-6">
+        <div className="mb-8">
           <h2 className="text-lg font-bold text-center mb-4">What You Get</h2>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-3">
             {FEATURE_BENEFITS.map((feature, i) => (
               <div 
                 key={i} 
@@ -323,7 +323,7 @@ const PreSubscriptionScreen: React.FC = () => {
                 style={{ borderRadius: '12px' }}
               >
                 <div className="text-center">
-                  <div className="text-lg mb-1">{feature.icon}</div>
+                  <div className="text-lg mb-2">{feature.icon}</div>
                   <span className="text-xs font-medium">{feature.text}</span>
                 </div>
               </div>
@@ -336,13 +336,13 @@ const PreSubscriptionScreen: React.FC = () => {
           Reinforces premium positioning
           RN Conversion: Styled container with gradient background
         */}
-        <div className="bg-gradient-to-r from-purple-500/20 to-emerald-500/20 border border-purple-500/30 p-3 mb-6 relative overflow-hidden" style={{ borderRadius: '12px' }}>
+        <div className="bg-gradient-to-r from-purple-500/15 to-emerald-500/15 border border-purple-500/25 p-4 mb-6 relative overflow-hidden" style={{ borderRadius: '12px' }}>
           {/* Sparkle animation */}
-          <div className="absolute top-2 right-2">
+          <div className="absolute top-3 right-3">
             <Sparkles size={14} className="text-amber-400 animate-pulse" />
           </div>
           
-          <h3 className="font-bold text-sm mb-1 flex items-center gap-2">
+          <h3 className="font-bold text-sm mb-2 flex items-center gap-2">
             🧠 Sharpe+ Analytics
           </h3>
           <p className="text-xs text-muted-foreground">
@@ -356,12 +356,12 @@ const PreSubscriptionScreen: React.FC = () => {
         Improved sticky subscription button that blends with the UI
         RN Conversion: Absolutely positioned View at bottom
       */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-background via-background/95 to-transparent backdrop-blur-sm">
+      <div className="absolute bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-background via-background/95 to-transparent backdrop-blur-sm">
         <div className="p-4 max-w-md mx-auto">
           <Button 
             size="lg" 
             onClick={handleSubscribe}
-            className="w-full bg-gradient-to-r from-emerald-600 to-purple-600 hover:from-emerald-500 hover:to-purple-500 text-white py-4 text-lg font-bold shadow-xl border-0 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
+            className="w-full bg-gradient-to-r from-emerald-600 to-purple-600 hover:from-emerald-500 hover:to-purple-500 text-white py-3 text-base font-bold shadow-xl border-0 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
             style={{ borderRadius: '12px' }}
           >
             🔓 Subscribe Now — $9.99/month
