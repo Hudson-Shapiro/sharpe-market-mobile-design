@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -77,7 +78,7 @@ const Discover = () => {
             </TabsContent>
 
             <TabsContent value="sharpe-plus" className="animate-fade-in">
-              <div className="relative -mx-4 -mb-4">
+              <div className="relative">
                 {/* Floating Toggle Button */}
                 <div className="absolute top-4 right-4 z-50">
                   <Button
@@ -111,3 +112,4 @@ const Discover = () => {
 };
 
 export default Discover;
+
