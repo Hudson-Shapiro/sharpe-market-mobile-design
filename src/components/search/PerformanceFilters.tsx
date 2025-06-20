@@ -16,14 +16,14 @@ const PerformanceFilters = () => {
   const [sectorConcentrationValue, setSectorConcentrationValue] = useState('');
 
   return (
-    <div className="space-y-4 p-3 bg-card/30 border border-border backdrop-blur-sm rounded-xl">
-      <div className="flex items-center gap-2 mb-3">
+    <div className="space-y-3 p-3 bg-card/30 border border-border backdrop-blur-sm rounded-xl">
+      <div className="flex items-center gap-2 mb-2">
         <TrendingUp size={16} className="text-emerald-400" />
         <h3 className="font-bold text-base">Performance</h3>
       </div>
 
       {/* Annual Return Section */}
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <Label className="text-xs font-medium">Annual Return</Label>
         
         <div className="flex items-center gap-2">
@@ -48,7 +48,7 @@ const PerformanceFilters = () => {
       </div>
 
       {/* Sharpe Ratio Section */}
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         <Label className="text-xs font-medium">Sharpe Ratio</Label>
         
         <div className="flex items-center gap-2">
@@ -71,14 +71,14 @@ const PerformanceFilters = () => {
       </div>
 
       {/* Concentration Section */}
-      <div className="space-y-3 pt-1 border-t border-border/50">
+      <div className="space-y-2 pt-2 border-t border-border/50">
         <div className="flex items-center gap-2">
           <Percent size={14} className="text-emerald-400" />
           <h4 className="font-bold text-sm">Concentration</h4>
         </div>
 
         {/* Security Concentration */}
-        <div className="space-y-1.5">
+        <div className="space-y-1">
           <Label className="text-xs font-medium">Security Concentration</Label>
           <div className="flex items-center gap-2">
             <Select value={securityConcentrationOperator} onValueChange={setSecurityConcentrationOperator}>
@@ -103,7 +103,7 @@ const PerformanceFilters = () => {
         </div>
 
         {/* Sector Concentration */}
-        <div className="space-y-1.5">
+        <div className="space-y-1">
           <Label className="text-xs font-medium">Sector Concentration</Label>
           <div className="flex items-center gap-2">
             <Select value={sectorConcentrationOperator} onValueChange={setSectorConcentrationOperator}>
