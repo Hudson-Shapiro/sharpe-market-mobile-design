@@ -68,9 +68,9 @@ const PreSubscriptionScreen: React.FC = () => {
   return (
     <div className="min-h-full bg-transparent relative overflow-hidden">
       {/* 
-        Main Content Container - More compact spacing
+        Main Content Container - More compact spacing with proper bottom padding
       */}
-      <div className="relative z-10 p-4 max-w-md mx-auto pb-20">
+      <div className="relative z-10 p-4 max-w-md mx-auto pb-32">
         {/* 
           Hero Section - Reduced padding and spacing
         */}
@@ -205,12 +205,12 @@ const PreSubscriptionScreen: React.FC = () => {
       </div>
 
       {/* 
-        Fixed Footer CTA - Floating subscribe button
-        Robinhood Gold style with gradient fade
+        Fixed Footer CTA - Lower z-index to not interfere with bottom navigation
+        Positioned above bottom navigation but below it in z-index hierarchy
       */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none">
+      <div className="fixed bottom-16 left-0 right-0 z-30 pointer-events-none">
         {/* Gradient fade to eliminate harsh line */}
-        <div className="h-16 bg-gradient-to-t from-background via-background/95 to-transparent" />
+        <div className="h-8 bg-gradient-to-t from-background via-background/95 to-transparent" />
         
         {/* CTA Button Container */}
         <div className="bg-background/95 backdrop-blur-sm p-4 pointer-events-auto">
