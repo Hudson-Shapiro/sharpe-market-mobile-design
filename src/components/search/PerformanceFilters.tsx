@@ -16,22 +16,22 @@ const PerformanceFilters = () => {
   const [sectorConcentrationValue, setSectorConcentrationValue] = useState('');
 
   return (
-    <div className="space-y-3 p-3 bg-card/30 border border-border backdrop-blur-sm rounded-xl">
-      <div className="flex items-center gap-2 mb-2">
-        <TrendingUp size={16} className="text-emerald-400" />
-        <h3 className="font-bold text-base">Performance</h3>
+    <div className="space-y-2 p-2 bg-card/30 border border-border backdrop-blur-sm rounded-xl">
+      <div className="flex items-center gap-2 mb-1">
+        <TrendingUp size={14} className="text-emerald-400" />
+        <h3 className="font-semibold text-sm">Performance</h3>
       </div>
 
       {/* Annual Return Section */}
-      <div className="space-y-1.5">
+      <div className="space-y-1">
         <Label className="text-xs font-medium">Annual Return</Label>
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <Input
             type="text"
             value={annualReturnMin}
             onChange={(e) => setAnnualReturnMin(e.target.value)}
-            className="w-16 h-7 text-xs rounded-lg"
+            className="w-14 h-6 text-xs rounded-md px-2"
             placeholder="Min"
           />
           <span className="text-xs text-muted-foreground">%</span>
@@ -40,7 +40,7 @@ const PerformanceFilters = () => {
             type="text"
             value={annualReturnMax}
             onChange={(e) => setAnnualReturnMax(e.target.value)}
-            className="w-16 h-7 text-xs rounded-lg"
+            className="w-14 h-6 text-xs rounded-md px-2"
             placeholder="Max"
           />
           <span className="text-xs text-muted-foreground">%</span>
@@ -48,15 +48,15 @@ const PerformanceFilters = () => {
       </div>
 
       {/* Sharpe Ratio Section */}
-      <div className="space-y-1.5">
+      <div className="space-y-1">
         <Label className="text-xs font-medium">Sharpe Ratio</Label>
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <Input
             type="text"
             value={sharpeRatioMin}
             onChange={(e) => setSharpeRatioMin(e.target.value)}
-            className="w-16 h-7 text-xs rounded-lg"
+            className="w-14 h-6 text-xs rounded-md px-2"
             placeholder="Min"
           />
           <span className="text-xs text-muted-foreground">to</span>
@@ -64,28 +64,28 @@ const PerformanceFilters = () => {
             type="text"
             value={sharpeRatioMax}
             onChange={(e) => setSharpeRatioMax(e.target.value)}
-            className="w-16 h-7 text-xs rounded-lg"
+            className="w-14 h-6 text-xs rounded-md px-2"
             placeholder="Max"
           />
         </div>
       </div>
 
       {/* Concentration Section */}
-      <div className="space-y-2 pt-2 border-t border-border/50">
+      <div className="space-y-1.5 pt-1.5 border-t border-border/50">
         <div className="flex items-center gap-2">
-          <Percent size={14} className="text-emerald-400" />
-          <h4 className="font-bold text-sm">Concentration</h4>
+          <Percent size={12} className="text-emerald-400" />
+          <h4 className="font-semibold text-xs">Concentration</h4>
         </div>
 
         {/* Security Concentration */}
-        <div className="space-y-1">
+        <div className="space-y-0.5">
           <Label className="text-xs font-medium">Security Concentration</Label>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <Select value={securityConcentrationOperator} onValueChange={setSecurityConcentrationOperator}>
-              <SelectTrigger className="w-24 h-7 text-xs rounded-lg">
+              <SelectTrigger className="w-20 h-6 text-xs rounded-md">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="rounded-lg">
+              <SelectContent className="rounded-md">
                 <SelectItem value="greater">Greater than</SelectItem>
                 <SelectItem value="less">Less than</SelectItem>
                 <SelectItem value="equal">Equal to</SelectItem>
@@ -95,7 +95,7 @@ const PerformanceFilters = () => {
               type="text"
               value={securityConcentrationValue}
               onChange={(e) => setSecurityConcentrationValue(e.target.value)}
-              className="w-20 h-7 text-xs rounded-lg"
+              className="w-16 h-6 text-xs rounded-md px-2"
               placeholder="Value %"
             />
           </div>
@@ -103,14 +103,14 @@ const PerformanceFilters = () => {
         </div>
 
         {/* Sector Concentration */}
-        <div className="space-y-1">
+        <div className="space-y-0.5">
           <Label className="text-xs font-medium">Sector Concentration</Label>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <Select value={sectorConcentrationOperator} onValueChange={setSectorConcentrationOperator}>
-              <SelectTrigger className="w-24 h-7 text-xs rounded-lg">
+              <SelectTrigger className="w-20 h-6 text-xs rounded-md">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="rounded-lg">
+              <SelectContent className="rounded-md">
                 <SelectItem value="greater">Greater than</SelectItem>
                 <SelectItem value="less">Less than</SelectItem>
                 <SelectItem value="equal">Equal to</SelectItem>
@@ -120,7 +120,7 @@ const PerformanceFilters = () => {
               type="text"
               value={sectorConcentrationValue}
               onChange={(e) => setSectorConcentrationValue(e.target.value)}
-              className="w-20 h-7 text-xs rounded-lg"
+              className="w-16 h-6 text-xs rounded-md px-2"
               placeholder="Value %"
             />
           </div>
