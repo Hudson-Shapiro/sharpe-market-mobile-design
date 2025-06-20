@@ -68,9 +68,9 @@ const PreSubscriptionScreen: React.FC = () => {
   return (
     <div className="min-h-full bg-transparent relative overflow-hidden">
       {/* 
-        Main Content Container - More compact spacing with proper bottom padding
+        Main Content Container - Reduced bottom padding to prevent excessive scroll
       */}
-      <div className="relative z-10 p-4 max-w-md mx-auto pb-32">
+      <div className="relative z-10 p-4 max-w-md mx-auto pb-24">
         {/* 
           Hero Section - Reduced padding and spacing
         */}
@@ -188,9 +188,9 @@ const PreSubscriptionScreen: React.FC = () => {
         </div>
 
         {/* 
-          Premium Badge Section - More compact
+          Premium Badge Section - More compact, final section
         */}
-        <div className="bg-gradient-to-r from-purple-500/15 to-emerald-500/15 border border-purple-500/25 p-3 mb-4 relative overflow-hidden" style={{ borderRadius: '10px' }}>
+        <div className="bg-gradient-to-r from-purple-500/15 to-emerald-500/15 border border-purple-500/25 p-3 relative overflow-hidden" style={{ borderRadius: '10px' }}>
           <div className="absolute top-2 right-2">
             <Sparkles size={12} className="text-amber-400 animate-pulse" />
           </div>
@@ -205,12 +205,11 @@ const PreSubscriptionScreen: React.FC = () => {
       </div>
 
       {/* 
-        Fixed Footer CTA - Lower z-index to not interfere with bottom navigation
-        Positioned above bottom navigation but below it in z-index hierarchy
+        Fixed Footer CTA - Positioned above bottom navigation
       */}
       <div className="fixed bottom-16 left-0 right-0 z-30 pointer-events-none">
-        {/* Gradient fade to eliminate harsh line */}
-        <div className="h-8 bg-gradient-to-t from-background via-background/95 to-transparent" />
+        {/* Minimal gradient fade */}
+        <div className="h-4 bg-gradient-to-t from-background to-transparent" />
         
         {/* CTA Button Container */}
         <div className="bg-background/95 backdrop-blur-sm p-4 pointer-events-auto">
