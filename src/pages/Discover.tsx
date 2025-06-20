@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -29,7 +28,7 @@ const Discover = () => {
     <div className="min-h-screen bg-background text-foreground">
       <ScrollArea className="h-[calc(100vh-72px)]">
         <DiscoverHeader />
-        <div className="p-4 pb-20">
+        <div className="p-4 pb-24">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-3 bg-secondary/30 backdrop-blur-sm border-0 mb-6 shadow-lg p-1" style={{ borderRadius: '12px' }}>
               <TabsTrigger 
@@ -78,7 +77,7 @@ const Discover = () => {
             </TabsContent>
 
             <TabsContent value="sharpe-plus" className="animate-fade-in">
-              <div className="relative">
+              <div className="relative max-h-[calc(100vh-220px)] overflow-y-auto">
                 {/* Floating Toggle Button */}
                 <div className="absolute top-4 right-4 z-50">
                   <Button
@@ -99,7 +98,7 @@ const Discover = () => {
                 </div>
 
                 {/* Screen Content */}
-                <div className="min-h-[60vh]">
+                <div>
                   {isSharpePlusSubscribed ? <PostSubscriptionScreen /> : <PreSubscriptionScreen />}
                 </div>
               </div>
@@ -112,4 +111,3 @@ const Discover = () => {
 };
 
 export default Discover;
-
