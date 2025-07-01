@@ -12,17 +12,6 @@ const Portfolios = () => {
   const myPortfolios = [
     { 
       id: '124358', 
-      name: 'Dividend Portfolio', 
-      return: 26, 
-      isOwned: true, 
-      sharpeRatio: 1.8, 
-      sortinioRatio: 2.1,
-      createdDate: 'May 10',
-      lastEditedDate: '2 days ago',
-      benchmark: 'SPY'
-    },
-    { 
-      id: '267943', 
       name: 'Tech Growth Portfolio', 
       return: 32.5, 
       isOwned: true, 
@@ -30,8 +19,65 @@ const Portfolios = () => {
       sortinioRatio: 2.4,
       createdDate: 'Mar 15',
       lastEditedDate: '1 day ago',
-      benchmark: 'QQQ'
+      benchmark: 'QQQ',
+      totalValue: 45750,
+      numHoldings: 12,
+      topHolding: 'AAPL (18.5%)',
+      volatility: 15.2,
+      beta: 1.34,
+      maxDrawdown: -8.7
     },
+    { 
+      id: '267943', 
+      name: 'Dividend Portfolio', 
+      return: 26.0, 
+      isOwned: true, 
+      sharpeRatio: 1.8, 
+      sortinioRatio: 2.1,
+      createdDate: 'May 10',
+      lastEditedDate: '2 days ago',
+      benchmark: 'SPY',
+      totalValue: 32100,
+      numHoldings: 8,
+      topHolding: 'JNJ (12.3%)',
+      volatility: 11.4,
+      beta: 0.87,
+      maxDrawdown: -5.2
+    },
+    { 
+      id: '389472', 
+      name: 'ESG Focus Portfolio', 
+      return: 18.7, 
+      isOwned: true, 
+      sharpeRatio: 1.6, 
+      sortinioRatio: 1.9,
+      createdDate: 'Apr 8',
+      lastEditedDate: '3 days ago',
+      benchmark: 'ESGV',
+      totalValue: 28950,
+      numHoldings: 15,
+      topHolding: 'MSFT (14.2%)',
+      volatility: 13.8,
+      beta: 1.12,
+      maxDrawdown: -7.1
+    },
+    { 
+      id: '456783', 
+      name: 'Value Investing Portfolio', 
+      return: 15.3, 
+      isOwned: true, 
+      sharpeRatio: 1.4, 
+      sortinioRatio: 1.7,
+      createdDate: 'Feb 22',
+      lastEditedDate: '4 days ago',
+      benchmark: 'VTV',
+      totalValue: 19800,
+      numHoldings: 10,
+      topHolding: 'BRK.B (16.7%)',
+      volatility: 12.6,
+      beta: 0.92,
+      maxDrawdown: -6.8
+    }
   ];
 
   const subscribedPortfolios = [

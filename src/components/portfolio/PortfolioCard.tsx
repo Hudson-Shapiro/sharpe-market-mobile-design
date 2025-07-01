@@ -19,6 +19,12 @@ interface PortfolioCardProps {
   createdDate?: string;
   lastEditedDate?: string;
   benchmark?: string;
+  totalValue?: number;
+  numHoldings?: number;
+  topHolding?: string;
+  volatility?: number;
+  beta?: number;
+  maxDrawdown?: number;
 }
 
 // Generate sample chart data based on performance
@@ -48,7 +54,13 @@ const PortfolioCard = ({
   rank,
   createdDate = "May 10",
   lastEditedDate = "2 days ago",
-  benchmark = "SPY"
+  benchmark = "SPY",
+  totalValue,
+  numHoldings,
+  topHolding,
+  volatility,
+  beta,
+  maxDrawdown
 }: PortfolioCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isPositive = portfolioReturn >= 0;
@@ -90,6 +102,12 @@ const PortfolioCard = ({
             sortinioRatio={sortinioRatio}
             benchmark={benchmark}
             createdDate={createdDate}
+            totalValue={totalValue}
+            numHoldings={numHoldings}
+            topHolding={topHolding}
+            volatility={volatility}
+            beta={beta}
+            maxDrawdown={maxDrawdown}
           />
         </CollapsibleContent>
       </div>
