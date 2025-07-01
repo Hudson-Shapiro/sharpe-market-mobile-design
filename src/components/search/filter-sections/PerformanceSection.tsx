@@ -28,7 +28,7 @@ const PerformanceSection = ({
               value={returnMin}
               onChange={(e) => onReturnMinChange(e.target.value)}
               placeholder="Min"
-              className="rounded-xl border-border/40 h-7 bg-secondary/60 text-xs"
+              className="rounded-xl border-border/40 h-9 bg-secondary/60 text-xs"
             />
             <span className="text-xs text-muted-foreground">%</span>
             <span className="text-xs text-muted-foreground">to</span>
@@ -37,7 +37,7 @@ const PerformanceSection = ({
               value={returnMax}
               onChange={(e) => onReturnMaxChange(e.target.value)}
               placeholder="Max"
-              className="rounded-xl border-border/40 h-7 bg-secondary/60 text-xs"
+              className="rounded-xl border-border/40 h-9 bg-secondary/60 text-xs"
             />
             <span className="text-xs text-muted-foreground">%</span>
           </div>

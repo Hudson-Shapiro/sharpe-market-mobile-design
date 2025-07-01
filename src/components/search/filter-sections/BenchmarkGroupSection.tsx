@@ -26,7 +26,7 @@ const BenchmarkGroupSection = ({
           Benchmark
         </h3>
         <Select value={benchmark} onValueChange={onBenchmarkChange}>
-          <SelectTrigger className="w-full rounded-xl border-border/40 h-7 bg-secondary/60 text-xs">
+          <SelectTrigger className="w-full rounded-xl border-border/40 h-9 bg-secondary/60 text-xs">
             <SelectValue placeholder="Select" />
           </SelectTrigger>
           <SelectContent>
@@ -45,7 +45,7 @@ const BenchmarkGroupSection = ({
           value={groupId}
           onChange={(e) => onGroupIdChange(e.target.value)}
           placeholder="Enter Code"
-          className="rounded-xl border-border/40 h-7 bg-secondary/60 text-xs"
+          className="rounded-xl border-border/40 h-9 bg-secondary/60 text-xs"
         />
       </div>
     </div>

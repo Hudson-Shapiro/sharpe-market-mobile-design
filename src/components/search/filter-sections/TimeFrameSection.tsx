@@ -30,7 +30,7 @@ const TimeFrameSection = ({ timeFrame, onTimeFrameChange }: TimeFrameSectionProp
             <ToggleGroupItem 
               key={frame.id} 
               value={frame.id} 
-              className="px-1.5 py-1 h-auto rounded-full border border-border/40 data-[state=on]:bg-orange-500/15 data-[state=on]:border-orange-500/60 data-[state=on]:text-orange-400 text-xs font-medium bg-secondary/60"
+              className="px-1.5 py-2 h-9 rounded-full border border-border/40 data-[state=on]:bg-orange-500/15 data-[state=on]:border-orange-500/60 data-[state=on]:text-orange-400 text-xs font-medium bg-secondary/60"
             >
               {frame.label}
             </ToggleGroupItem>
