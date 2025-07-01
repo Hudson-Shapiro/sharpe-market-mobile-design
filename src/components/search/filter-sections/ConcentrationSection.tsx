@@ -19,7 +19,9 @@ const ConcentrationSection = ({
       </h3>
       <div className="space-y-1.5">
         <div>
-          <label className="block text-xs font-medium text-foreground mb-1">Security Concentration</label>
+          <label className="block text-xs font-medium text-foreground mb-1">
+            Security Concentration - <span className="text-muted-foreground font-normal">Top 5 holdings</span>
+          </label>
           <div className="flex gap-1.5">
             <Select 
               value={secConc.operator} 
@@ -41,11 +43,12 @@ const ConcentrationSection = ({
               className="rounded-xl border-border/40 h-7 bg-secondary/60 flex-1 text-xs"
             />
           </div>
-          <p className="text-xs text-muted-foreground mt-0.5">Top 5 holdings</p>
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-foreground mb-1">Sector Concentration</label>
+          <label className="block text-xs font-medium text-foreground mb-1">
+            Sector Concentration - <span className="text-muted-foreground font-normal">Max sector exposure</span>
+          </label>
           <div className="flex gap-1.5">
             <Select 
               value={sectConc.operator} 
@@ -67,7 +70,6 @@ const ConcentrationSection = ({
               className="rounded-xl border-border/40 h-7 bg-secondary/60 flex-1 text-xs"
             />
           </div>
-          <p className="text-xs text-muted-foreground mt-0.5">Max sector exposure</p>
         </div>
       </div>
     </div>
