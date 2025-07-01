@@ -75,7 +75,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md w-[95vw] h-[80vh] bg-background/95 backdrop-blur-md border border-border/40 rounded-3xl p-0 overflow-hidden flex flex-col shadow-2xl">
+      <DialogContent className="max-w-md w-[95vw] max-h-[85vh] bg-background/95 backdrop-blur-md border border-border/40 rounded-3xl p-0 overflow-hidden flex flex-col shadow-2xl">
         <DialogHeader className="px-4 pt-4 pb-2 border-b border-border/20 flex-shrink-0">
           <DialogTitle className="flex items-center gap-2 text-foreground text-lg font-semibold">
             <div className="w-6 h-6 bg-gradient-to-br from-emerald-500/20 to-emerald-400/10 rounded-full flex items-center justify-center">
