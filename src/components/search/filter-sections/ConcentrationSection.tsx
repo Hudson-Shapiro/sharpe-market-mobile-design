@@ -27,7 +27,7 @@ const ConcentrationSection = ({
               value={secConc.operator} 
               onValueChange={(val) => onSecConcChange({ ...secConc, operator: val as 'gt' | 'lt' })}
             >
-              <SelectTrigger className="rounded-xl border-border/40 h-7 bg-secondary/60 flex-1 text-xs">
+              <SelectTrigger className="rounded-xl border-border/40 h-9 bg-secondary/60 flex-1 text-xs">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -40,7 +40,7 @@ const ConcentrationSection = ({
               value={secConc.value}
               onChange={(e) => onSecConcChange({ ...secConc, value: e.target.value })}
               placeholder="Value %"
-              className="rounded-xl border-border/40 h-7 bg-secondary/60 flex-1 text-xs"
+              className="rounded-xl border-border/40 h-9 bg-secondary/60 flex-1 text-xs"
             />
           </div>
         </div>
@@ -54,7 +54,7 @@ const ConcentrationSection = ({
               value={sectConc.operator} 
               onValueChange={(val) => onSectConcChange({ ...sectConc, operator: val as 'gt' | 'lt' })}
             >
-              <SelectTrigger className="rounded-xl border-border/40 h-7 bg-secondary/60 flex-1 text-xs">
+              <SelectTrigger className="rounded-xl border-border/40 h-9 bg-secondary/60 flex-1 text-xs">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -67,7 +67,7 @@ const ConcentrationSection = ({
               value={sectConc.value}
               onChange={(e) => onSectConcChange({ ...sectConc, value: e.target.value })}
               placeholder="Value %"
-              className="rounded-xl border-border/40 h-7 bg-secondary/60 flex-1 text-xs"
+              className="rounded-xl border-border/40 h-9 bg-secondary/60 flex-1 text-xs"
             />
           </div>
         </div>
