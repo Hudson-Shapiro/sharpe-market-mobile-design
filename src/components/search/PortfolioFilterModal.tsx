@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
 
 interface PortfolioFilterModalProps {
   isOpen: boolean;
@@ -17,8 +18,7 @@ interface PortfolioFilterModalProps {
 const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilterModalProps) => {
   const [returnMin, setReturnMin] = useState('0');
   const [returnMax, setReturnMax] = useState('100');
-  const [sharpeMin, setSharpeMin] = useState('0.0');
-  const [sharpeMax, setSharpeMax] = useState('5.0');
+  const [sharpeMin, setSharpeMin] = useState([0.0]);
   const [benchmark, setBenchmark] = useState("spy");
   const [groupId, setGroupId] = useState("");
   const [timeFrame, setTimeFrame] = useState("1M");
@@ -32,8 +32,8 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
     if (returnMin !== '0' || returnMax !== '100') {
       filters.push(`Return: ${returnMin}%-${returnMax}%`);
     }
-    if (sharpeMin !== '0.0' || sharpeMax !== '5.0') {
-      filters.push(`Sharpe: ${sharpeMin}-${sharpeMax}`);
+    if (sharpeMin[0] > 0.0) {
+      filters.push(`Sharpe: ${sharpeMin[0]}+`);
     }
     
     if (benchmark !== "spy") {
@@ -63,8 +63,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
   const handleClearAll = () => {
     setReturnMin('0');
     setReturnMax('100');
-    setSharpeMin('0.0');
-    setSharpeMax('5.0');
+    setSharpeMin([0.0]);
     setBenchmark("spy");
     setGroupId("");
     setTimeFrame("1M");
@@ -90,7 +89,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md w-[95vw] h-[90vh] bg-background/95 backdrop-blur-md border border-border/40 rounded-3xl p-0 overflow-hidden flex flex-col shadow-2xl">
+      <DialogContent className="max-w-md w-[95vw] h-[85vh] bg-background/95 backdrop-blur-md border border-border/40 rounded-3xl p-0 overflow-hidden flex flex-col shadow-2xl">
         <DialogHeader className="px-4 pt-4 pb-2 border-b border-border/20 flex-shrink-0">
           <DialogTitle className="flex items-center gap-2 text-foreground text-lg font-semibold">
             <div className="w-6 h-6 bg-gradient-to-br from-emerald-500/20 to-emerald-400/10 rounded-full flex items-center justify-center">
@@ -100,7 +99,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
           </DialogTitle>
         </DialogHeader>
         
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 space-y-3">
           
           {/* Performance Section */}
           <div className="bg-card/50 p-3 rounded-xl border border-border/20">
@@ -108,7 +107,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                   <TrendingUp className="text-emerald-500" size={16} />
                   Performance
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-3">
                   <div>
                       <label className="block text-xs font-medium text-foreground mb-2">Annual Return</label>
                       <div className="flex items-center gap-2">
@@ -117,7 +116,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                               value={returnMin}
                               onChange={(e) => setReturnMin(e.target.value)}
                               placeholder="Min"
-                              className="rounded-lg border-border/40 h-9 bg-secondary/60 text-xs"
+                              className="rounded-xl border-border/40 h-8 bg-secondary/60 text-xs"
                           />
                           <span className="text-xs text-muted-foreground">%</span>
                           <span className="text-xs text-muted-foreground">to</span>
@@ -126,49 +125,40 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                               value={returnMax}
                               onChange={(e) => setReturnMax(e.target.value)}
                               placeholder="Max"
-                              className="rounded-lg border-border/40 h-9 bg-secondary/60 text-xs"
+                              className="rounded-xl border-border/40 h-8 bg-secondary/60 text-xs"
                           />
                           <span className="text-xs text-muted-foreground">%</span>
                       </div>
                   </div>
                   <div>
-                      <label className="block text-xs font-medium text-foreground mb-2">Sharpe Ratio</label>
-                      <div className="flex items-center gap-2">
-                          <Input
-                              type="number"
-                              step="0.1"
-                              value={sharpeMin}
-                              onChange={(e) => setSharpeMin(e.target.value)}
-                              placeholder="Min"
-                              className="rounded-lg border-border/40 h-9 bg-secondary/60 text-xs"
-                          />
-                          <span className="text-xs text-muted-foreground">to</span>
-                          <Input
-                              type="number"
-                              step="0.1"
-                              value={sharpeMax}
-                              onChange={(e) => setSharpeMax(e.target.value)}
-                              placeholder="Max"
-                              className="rounded-lg border-border/40 h-9 bg-secondary/60 text-xs"
-                          />
-                      </div>
+                      <label className="block text-xs font-medium text-foreground mb-2">
+                          Minimum Sharpe Ratio: {sharpeMin[0].toFixed(1)}+
+                      </label>
+                      <Slider
+                          value={sharpeMin}
+                          onValueChange={setSharpeMin}
+                          max={5}
+                          min={0}
+                          step={0.1}
+                          className="w-full"
+                      />
                   </div>
               </div>
           </div>
 
           {/* Concentration Section */}
           <div className="bg-card/50 p-3 rounded-xl border border-border/20">
-                <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
+                <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
                   <Percent className="text-cyan-500" size={16} />
                   Concentration
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2">
                   {/* Security Concentration */}
                   <div>
-                      <label className="block text-xs font-medium text-foreground mb-2">Security Concentration</label>
-                      <div className="grid grid-cols-2 gap-2">
+                      <label className="block text-xs font-medium text-foreground mb-1">Security Concentration</label>
+                      <div className="flex gap-2">
                           <Select value={secConc.operator} onValueChange={(val) => setSecConc(prev => ({ ...prev, operator: val}))}>
-                              <SelectTrigger className="rounded-lg border-border/40 h-9 bg-secondary/60">
+                              <SelectTrigger className="rounded-xl border-border/40 h-8 bg-secondary/60 flex-1">
                                   <SelectValue />
                               </SelectTrigger>
                               <SelectContent>
@@ -181,18 +171,18 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                               value={secConc.value}
                               onChange={(e) => setSecConc(prev => ({ ...prev, value: e.target.value}))}
                               placeholder="Value %"
-                              className="rounded-lg border-border/40 h-9 bg-secondary/60"
+                              className="rounded-xl border-border/40 h-8 bg-secondary/60 flex-1"
                           />
                       </div>
-                      <p className="text-xs text-muted-foreground mt-1 pl-1">Top 5 holdings</p>
+                      <p className="text-xs text-muted-foreground mt-1">Top 5 holdings</p>
                   </div>
 
                   {/* Sector Concentration */}
                   <div>
-                      <label className="block text-xs font-medium text-foreground mb-2">Sector Concentration</label>
-                      <div className="grid grid-cols-2 gap-2">
+                      <label className="block text-xs font-medium text-foreground mb-1">Sector Concentration</label>
+                      <div className="flex gap-2">
                           <Select value={sectConc.operator} onValueChange={(val) => setSectConc(prev => ({ ...prev, operator: val}))}>
-                              <SelectTrigger className="rounded-lg border-border/40 h-9 bg-secondary/60">
+                              <SelectTrigger className="rounded-xl border-border/40 h-8 bg-secondary/60 flex-1">
                                   <SelectValue />
                               </SelectTrigger>
                               <SelectContent>
@@ -205,10 +195,10 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                               value={sectConc.value}
                               onChange={(e) => setSectConc(prev => ({ ...prev, value: e.target.value}))}
                               placeholder="Value %"
-                              className="rounded-lg border-border/40 h-9 bg-secondary/60"
+                              className="rounded-xl border-border/40 h-8 bg-secondary/60 flex-1"
                           />
                       </div>
-                      <p className="text-xs text-muted-foreground mt-1 pl-1">Max sector exposure</p>
+                      <p className="text-xs text-muted-foreground mt-1">Max sector exposure</p>
                   </div>
               </div>
           </div>
@@ -217,14 +207,14 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
           <div className="space-y-3">
               {/* Time Frame */}
               <div className="bg-card/50 p-3 rounded-xl border border-border/20">
-                  <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
+                  <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
                       <Clock className="text-orange-500" size={16} />
                       Time Frame
                   </h3>
                   <ToggleGroup type="single" value={timeFrame} onValueChange={(v) => v && setTimeFrame(v)} className="w-full">
                       <div className="grid grid-cols-5 gap-1 w-full">
                           {timeFrameOptions.map((frame) => (
-                              <ToggleGroupItem key={frame.id} value={frame.id} className="px-2 py-1.5 h-auto rounded-full border border-border/40 data-[state=on]:bg-orange-500/15 data-[state=on]:border-orange-500/60 data-[state=on]:text-orange-400 text-xs font-medium bg-secondary/60">
+                              <ToggleGroupItem key={frame.id} value={frame.id} className="px-2 py-1 h-auto rounded-full border border-border/40 data-[state=on]:bg-orange-500/15 data-[state=on]:border-orange-500/60 data-[state=on]:text-orange-400 text-xs font-medium bg-secondary/60">
                                   {frame.label}
                               </ToggleGroupItem>
                           ))}
@@ -235,12 +225,12 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
               {/* Benchmark & Group */}
               <div className="grid grid-cols-2 gap-3">
                     <div className="bg-card/50 p-3 rounded-xl border border-border/20">
-                      <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
+                      <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
                           <ShieldCheck className="text-indigo-500" size={16} />
                           Benchmark
                       </h3>
                       <Select value={benchmark} onValueChange={setBenchmark}>
-                          <SelectTrigger className="w-full rounded-xl border-border/40 h-9 bg-secondary/60">
+                          <SelectTrigger className="w-full rounded-xl border-border/40 h-8 bg-secondary/60">
                               <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent>
@@ -251,7 +241,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                       </Select>
                   </div>
                     <div className="bg-card/50 p-3 rounded-xl border border-border/20">
-                      <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
+                      <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
                           <Hash className="text-gray-500" size={16} />
                           Group ID
                       </h3>
@@ -259,7 +249,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                           value={groupId}
                           onChange={(e) => setGroupId(e.target.value)}
                           placeholder="Enter Code"
-                          className="rounded-xl border-border/40 h-9 bg-secondary/60"
+                          className="rounded-xl border-border/40 h-8 bg-secondary/60"
                       />
                   </div>
               </div>
