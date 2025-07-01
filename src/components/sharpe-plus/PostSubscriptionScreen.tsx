@@ -21,7 +21,7 @@ const PostSubscriptionScreen = () => {
       <div className="relative z-10 p-3 max-w-md mx-auto pb-16">
         {/* Header - More compact */}
         <div className="text-center mb-3 pt-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-emerald-500/15 to-purple-500/15 border border-emerald-500/20 flex items-center justify-center mx-auto mb-1.5">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-r from-emerald-500/15 to-purple-500/15 border border-emerald-500/20 flex items-center justify-center mx-auto mb-1.5">
             <Brain size={14} className="text-emerald-400" />
           </div>
           <h1 className="text-base font-bold bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent mb-0.5">
@@ -31,7 +31,7 @@ const PostSubscriptionScreen = () => {
         </div>
 
         {/* Platform Summary - Compact */}
-        <div className="bg-card/50 border border-border/40 backdrop-blur-sm p-2.5 mb-2.5 rounded-lg">
+        <div className="bg-card/50 border border-border/40 backdrop-blur-sm p-2.5 mb-2.5 rounded-xl">
           <div className="flex items-center justify-between mb-1.5">
             <h2 className="font-bold text-xs flex items-center gap-1.5">
               📊 Platform Summary
@@ -71,7 +71,7 @@ const PostSubscriptionScreen = () => {
         </div>
 
         {/* Recent Allocation Shifts - Compact */}
-        <div className="bg-card/50 border border-border/40 backdrop-blur-sm mb-2.5 rounded-lg">
+        <div className="bg-card/50 border border-border/40 backdrop-blur-sm mb-2.5 rounded-xl">
           <div className="p-2.5 pb-1">
             <h2 className="font-bold text-xs mb-1.5 flex items-center gap-1.5">
               🔁 Recent Allocation Shifts
@@ -102,7 +102,7 @@ const PostSubscriptionScreen = () => {
         </div>
 
         {/* Deep Insights - Compact */}
-        <div className="bg-card/40 border border-border/40 backdrop-blur-sm rounded-lg">
+        <div className="bg-card/40 border border-border/40 backdrop-blur-sm rounded-xl">
           <div className="p-2.5 pb-1">
             <h2 className="font-bold text-xs mb-1.5 flex items-center gap-1.5">
               🧠 Deep Insights

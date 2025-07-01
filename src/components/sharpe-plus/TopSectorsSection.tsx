@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ChevronDown, ChevronUp, TrendingUp, TrendingDown } from 'lucide-react';
 import MiniChart from '@/components/discover/MiniChart';
@@ -23,21 +22,21 @@ const TopSectorsSection = ({ isExpanded, onToggle }: TopSectorsSectionProps) => 
   };
 
   return (
-    <div className="bg-card/50 border border-border backdrop-blur-sm overflow-hidden" style={{ borderRadius: '10px' }}>
+    <div className="bg-card/50 border border-border backdrop-blur-sm overflow-hidden rounded-xl">
       <button 
         onClick={onToggle}
         className="w-full p-4 flex items-center justify-between hover:bg-background/30 transition-colors"
       >
         <h2 className="text-lg font-bold flex items-center gap-2">
           📍 Top Sectors
-          <span className="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 font-medium" style={{ borderRadius: '10px' }}>Updated</span>
+          <span className="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 font-medium rounded-xl">Updated</span>
         </h2>
         {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
       </button>
       {isExpanded && (
         <div className="px-4 pb-4 space-y-2">
           {/* Headers */}
-          <div className="grid grid-cols-4 gap-2 text-xs text-muted-foreground font-medium px-3 py-2 bg-background/20" style={{ borderRadius: '8px' }}>
+          <div className="grid grid-cols-4 gap-2 text-xs text-muted-foreground font-medium px-3 py-2 bg-background/20 rounded-xl">
             <div>Sector</div>
             <div className="text-center">% of Portfolios</div>
             <div className="text-center">Avg Allocation %</div>
@@ -45,7 +44,7 @@ const TopSectorsSection = ({ isExpanded, onToggle }: TopSectorsSectionProps) => 
           </div>
           
           {topSectors.map((sector, i) => (
-            <div key={i} className="grid grid-cols-4 gap-2 items-center p-3 bg-background/30" style={{ borderRadius: '10px' }}>
+            <div key={i} className="grid grid-cols-4 gap-2 items-center p-3 bg-background/30 rounded-xl">
               <div className="flex items-center gap-2">
                 <span className="text-lg">{sector.icon}</span>
                 <div>

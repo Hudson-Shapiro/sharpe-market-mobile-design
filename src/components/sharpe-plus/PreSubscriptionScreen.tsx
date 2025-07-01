@@ -75,7 +75,7 @@ const PreSubscriptionScreen: React.FC = () => {
           Hero Section - More compact
         */}
         <div className="text-center mb-3 pt-3">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-emerald-500/15 to-purple-500/15 border border-emerald-500/20 flex items-center justify-center mx-auto mb-2">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-emerald-500/15 to-purple-500/15 border border-emerald-500/20 flex items-center justify-center mx-auto mb-2">
             <div className="text-base">📊</div>
           </div>
           
@@ -100,7 +100,7 @@ const PreSubscriptionScreen: React.FC = () => {
             {KEY_METRICS.map((metric, i) => (
               <div 
                 key={i} 
-                className="p-2.5 bg-card/60 border border-border/40 backdrop-blur-sm rounded-lg"
+                className="p-2.5 bg-card/60 border border-border/40 backdrop-blur-sm rounded-xl"
               >
                 <div className={`text-xs font-bold ${metric.color} mb-0.5`}>
                   {metric.label}
@@ -122,8 +122,8 @@ const PreSubscriptionScreen: React.FC = () => {
           </h2>
           
           {/* Top Holdings Preview - Compact */}
-          <div className="bg-card/60 border border-border/40 backdrop-blur-sm relative overflow-hidden mb-2 rounded-lg">
-            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-10 rounded-lg">
+          <div className="bg-card/60 border border-border/40 backdrop-blur-sm relative overflow-hidden mb-2 rounded-xl">
+            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-10 rounded-xl">
               <div className="text-center">
                 <Lock size={14} className="text-emerald-400 animate-pulse mx-auto mb-1" />
                 <p className="text-xs text-emerald-400 font-medium">Live Data</p>
@@ -174,7 +174,7 @@ const PreSubscriptionScreen: React.FC = () => {
             {FEATURE_BENEFITS.map((feature, i) => (
               <div 
                 key={i} 
-                className="p-2.5 bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/15 transition-colors rounded-lg"
+                className="p-2.5 bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/15 transition-colors rounded-xl"
               >
                 <div className="text-center">
                   <div className="text-sm mb-0.5">{feature.icon}</div>
@@ -188,7 +188,7 @@ const PreSubscriptionScreen: React.FC = () => {
         {/* 
           Premium Badge Section - Compact
         */}
-        <div className="bg-gradient-to-r from-purple-500/15 to-emerald-500/15 border border-purple-500/25 p-2.5 relative overflow-hidden rounded-lg">
+        <div className="bg-gradient-to-r from-purple-500/15 to-emerald-500/15 border border-purple-500/25 p-2.5 relative overflow-hidden rounded-xl">
           <div className="absolute top-1.5 right-1.5">
             <Sparkles size={12} className="text-amber-400 animate-pulse" />
           </div>
@@ -213,7 +213,7 @@ const PreSubscriptionScreen: React.FC = () => {
             <Button 
               size="lg" 
               onClick={handleSubscribe}
-              className="w-full bg-gradient-to-r from-emerald-600 to-purple-600 hover:from-emerald-500 hover:to-purple-500 text-white py-2.5 text-sm font-bold shadow-xl border-0 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl rounded-lg"
+              className="w-full bg-gradient-to-r from-emerald-600 to-purple-600 hover:from-emerald-500 hover:to-purple-500 text-white py-2.5 text-sm font-bold shadow-xl border-0 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl rounded-xl"
             >
               🔓 Subscribe to Sharpe+ — $9.99/month
             </Button>
