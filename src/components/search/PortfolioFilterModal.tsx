@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { BarChart3, Percent, Clock, Hash, ShieldCheck, TrendingUp } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Slider } from '@/components/ui/slider';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -16,8 +15,10 @@ interface PortfolioFilterModalProps {
 }
 
 const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilterModalProps) => {
-  const [returnRange, setReturnRange] = useState([0, 100]);
-  const [sharpeRatio, setSharpeRatio] = useState([0, 5]);
+  const [returnMin, setReturnMin] = useState('0');
+  const [returnMax, setReturnMax] = useState('100');
+  const [sharpeMin, setSharpeMin] = useState('0.0');
+  const [sharpeMax, setSharpeMax] = useState('5.0');
   const [benchmark, setBenchmark] = useState("spy");
   const [groupId, setGroupId] = useState("");
   const [timeFrame, setTimeFrame] = useState("1M");
@@ -28,11 +29,11 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
   const handleApplyFilters = () => {
     const filters: string[] = [];
     
-    if (returnRange[0] > 0 || returnRange[1] < 100) {
-      filters.push(`Return: ${returnRange[0]}%-${returnRange[1]}%`);
+    if (returnMin !== '0' || returnMax !== '100') {
+      filters.push(`Return: ${returnMin}%-${returnMax}%`);
     }
-    if (sharpeRatio[0] > 0 || sharpeRatio[1] < 5) {
-      filters.push(`Sharpe: ${sharpeRatio[0]}-${sharpeRatio[1]}`);
+    if (sharpeMin !== '0.0' || sharpeMax !== '5.0') {
+      filters.push(`Sharpe: ${sharpeMin}-${sharpeMax}`);
     }
     
     if (benchmark !== "spy") {
@@ -60,8 +61,10 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
   };
 
   const handleClearAll = () => {
-    setReturnRange([0, 100]);
-    setSharpeRatio([0, 5]);
+    setReturnMin('0');
+    setReturnMax('100');
+    setSharpeMin('0.0');
+    setSharpeMax('5.0');
     setBenchmark("spy");
     setGroupId("");
     setTimeFrame("1M");
@@ -108,18 +111,46 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
               <div className="space-y-4">
                   <div>
                       <label className="block text-xs font-medium text-foreground mb-2">Annual Return</label>
-                      <Slider value={returnRange} onValueChange={setReturnRange} max={100} min={0} step={5} />
-                      <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                          <span>{returnRange[0]}%</span>
-                          <span>{returnRange[1]}%</span>
+                      <div className="flex items-center gap-2">
+                          <Input
+                              type="number"
+                              value={returnMin}
+                              onChange={(e) => setReturnMin(e.target.value)}
+                              placeholder="Min"
+                              className="rounded-lg border-border/40 h-9 bg-secondary/60 text-xs"
+                          />
+                          <span className="text-xs text-muted-foreground">%</span>
+                          <span className="text-xs text-muted-foreground">to</span>
+                          <Input
+                              type="number"
+                              value={returnMax}
+                              onChange={(e) => setReturnMax(e.target.value)}
+                              placeholder="Max"
+                              className="rounded-lg border-border/40 h-9 bg-secondary/60 text-xs"
+                          />
+                          <span className="text-xs text-muted-foreground">%</span>
                       </div>
                   </div>
                   <div>
                       <label className="block text-xs font-medium text-foreground mb-2">Sharpe Ratio</label>
-                      <Slider value={sharpeRatio} onValueChange={setSharpeRatio} max={5} min={0} step={0.1} />
-                      <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                          <span>{sharpeRatio[0].toFixed(1)}</span>
-                          <span>{sharpeRatio[1].toFixed(1)}</span>
+                      <div className="flex items-center gap-2">
+                          <Input
+                              type="number"
+                              step="0.1"
+                              value={sharpeMin}
+                              onChange={(e) => setSharpeMin(e.target.value)}
+                              placeholder="Min"
+                              className="rounded-lg border-border/40 h-9 bg-secondary/60 text-xs"
+                          />
+                          <span className="text-xs text-muted-foreground">to</span>
+                          <Input
+                              type="number"
+                              step="0.1"
+                              value={sharpeMax}
+                              onChange={(e) => setSharpeMax(e.target.value)}
+                              placeholder="Max"
+                              className="rounded-lg border-border/40 h-9 bg-secondary/60 text-xs"
+                          />
                       </div>
                   </div>
               </div>
@@ -209,7 +240,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                           Benchmark
                       </h3>
                       <Select value={benchmark} onValueChange={setBenchmark}>
-                          <SelectTrigger className="w-full rounded-lg border-border/40 h-9 bg-secondary/60">
+                          <SelectTrigger className="w-full rounded-xl border-border/40 h-9 bg-secondary/60">
                               <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent>
@@ -228,7 +259,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                           value={groupId}
                           onChange={(e) => setGroupId(e.target.value)}
                           placeholder="Enter Code"
-                          className="rounded-lg border-border/40 h-9 bg-secondary/60"
+                          className="rounded-xl border-border/40 h-9 bg-secondary/60"
                       />
                   </div>
               </div>
