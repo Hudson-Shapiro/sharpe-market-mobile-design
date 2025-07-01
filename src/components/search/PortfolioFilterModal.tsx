@@ -1,12 +1,13 @@
 
 import React, { useState } from 'react';
-import { BarChart3, Percent, Clock, Hash, ShieldCheck, TrendingUp } from 'lucide-react';
+import { BarChart3 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Slider } from '@/components/ui/slider';
+import PerformanceSection from './filter-sections/PerformanceSection';
+import ConcentrationSection from './filter-sections/ConcentrationSection';
+import TimeFrameSection from './filter-sections/TimeFrameSection';
+import BenchmarkGroupSection from './filter-sections/BenchmarkGroupSection';
+import { ConcentrationFilter } from './filter-sections/types';
 
 interface PortfolioFilterModalProps {
   isOpen: boolean;
@@ -23,8 +24,8 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
   const [groupId, setGroupId] = useState("");
   const [timeFrame, setTimeFrame] = useState("1M");
 
-  const [secConc, setSecConc] = useState({ operator: 'gt', value: '' });
-  const [sectConc, setSectConc] = useState({ operator: 'gt', value: '' });
+  const [secConc, setSecConc] = useState<ConcentrationFilter>({ operator: 'gt', value: '' });
+  const [sectConc, setSectConc] = useState<ConcentrationFilter>({ operator: 'gt', value: '' });
 
   const handleApplyFilters = () => {
     const filters: string[] = [];
@@ -72,24 +73,9 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
     onApplyFilters([]);
   };
 
-  const benchmarkOptions = [
-    { id: 'spy', label: 'SPY' },
-    { id: 'qqq', label: 'QQQ' },
-    { id: 'vti', label: 'VTI' },
-    { id: 'custom', label: 'Custom' }
-  ];
-
-  const timeFrameOptions = [
-    { id: '1D', label: '1D' },
-    { id: '1W', label: '1W' },
-    { id: '1M', label: '1M' },
-    { id: '1Y', label: '1Y' },
-    { id: 'Lifetime', label: 'All' }
-  ];
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md w-[95vw] h-[85vh] bg-background/95 backdrop-blur-md border border-border/40 rounded-3xl p-0 overflow-hidden flex flex-col shadow-2xl">
+      <DialogContent className="max-w-md w-[95vw] h-[80vh] bg-background/95 backdrop-blur-md border border-border/40 rounded-3xl p-0 overflow-hidden flex flex-col shadow-2xl">
         <DialogHeader className="px-4 pt-4 pb-2 border-b border-border/20 flex-shrink-0">
           <DialogTitle className="flex items-center gap-2 text-foreground text-lg font-semibold">
             <div className="w-6 h-6 bg-gradient-to-br from-emerald-500/20 to-emerald-400/10 rounded-full flex items-center justify-center">
@@ -99,164 +85,36 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
           </DialogTitle>
         </DialogHeader>
         
-        <div className="flex-1 overflow-y-auto p-4 space-y-3">
-          
-          {/* Performance Section */}
-          <div className="bg-card/50 p-3 rounded-xl border border-border/20">
-              <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
-                  <TrendingUp className="text-emerald-500" size={16} />
-                  Performance
-              </h3>
-              <div className="space-y-3">
-                  <div>
-                      <label className="block text-xs font-medium text-foreground mb-2">Annual Return</label>
-                      <div className="flex items-center gap-2">
-                          <Input
-                              type="number"
-                              value={returnMin}
-                              onChange={(e) => setReturnMin(e.target.value)}
-                              placeholder="Min"
-                              className="rounded-xl border-border/40 h-8 bg-secondary/60 text-xs"
-                          />
-                          <span className="text-xs text-muted-foreground">%</span>
-                          <span className="text-xs text-muted-foreground">to</span>
-                          <Input
-                              type="number"
-                              value={returnMax}
-                              onChange={(e) => setReturnMax(e.target.value)}
-                              placeholder="Max"
-                              className="rounded-xl border-border/40 h-8 bg-secondary/60 text-xs"
-                          />
-                          <span className="text-xs text-muted-foreground">%</span>
-                      </div>
-                  </div>
-                  <div>
-                      <label className="block text-xs font-medium text-foreground mb-2">
-                          Minimum Sharpe Ratio: {sharpeMin[0].toFixed(1)}+
-                      </label>
-                      <Slider
-                          value={sharpeMin}
-                          onValueChange={setSharpeMin}
-                          max={5}
-                          min={0}
-                          step={0.1}
-                          className="w-full"
-                      />
-                  </div>
-              </div>
-          </div>
+        <div className="flex-1 overflow-y-auto p-4 space-y-2.5">
+          <PerformanceSection
+            returnMin={returnMin}
+            returnMax={returnMax}
+            sharpeMin={sharpeMin}
+            onReturnMinChange={setReturnMin}
+            onReturnMaxChange={setReturnMax}
+            onSharpeMinChange={setSharpeMin}
+          />
 
-          {/* Concentration Section */}
-          <div className="bg-card/50 p-3 rounded-xl border border-border/20">
-                <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
-                  <Percent className="text-cyan-500" size={16} />
-                  Concentration
-              </h3>
-              <div className="space-y-2">
-                  {/* Security Concentration */}
-                  <div>
-                      <label className="block text-xs font-medium text-foreground mb-1">Security Concentration</label>
-                      <div className="flex gap-2">
-                          <Select value={secConc.operator} onValueChange={(val) => setSecConc(prev => ({ ...prev, operator: val}))}>
-                              <SelectTrigger className="rounded-xl border-border/40 h-8 bg-secondary/60 flex-1">
-                                  <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent>
-                                  <SelectItem value="gt">Greater than</SelectItem>
-                                  <SelectItem value="lt">Less than</SelectItem>
-                              </SelectContent>
-                          </Select>
-                          <Input
-                              type="number"
-                              value={secConc.value}
-                              onChange={(e) => setSecConc(prev => ({ ...prev, value: e.target.value}))}
-                              placeholder="Value %"
-                              className="rounded-xl border-border/40 h-8 bg-secondary/60 flex-1"
-                          />
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-1">Top 5 holdings</p>
-                  </div>
+          <ConcentrationSection
+            secConc={secConc}
+            sectConc={sectConc}
+            onSecConcChange={setSecConc}
+            onSectConcChange={setSectConc}
+          />
 
-                  {/* Sector Concentration */}
-                  <div>
-                      <label className="block text-xs font-medium text-foreground mb-1">Sector Concentration</label>
-                      <div className="flex gap-2">
-                          <Select value={sectConc.operator} onValueChange={(val) => setSectConc(prev => ({ ...prev, operator: val}))}>
-                              <SelectTrigger className="rounded-xl border-border/40 h-8 bg-secondary/60 flex-1">
-                                  <SelectValue />
-                              </SelectTrigger>
-                              <SelectContent>
-                                  <SelectItem value="gt">Greater than</SelectItem>
-                                  <SelectItem value="lt">Less than</SelectItem>
-                              </SelectContent>
-                          </Select>
-                          <Input
-                              type="number"
-                              value={sectConc.value}
-                              onChange={(e) => setSectConc(prev => ({ ...prev, value: e.target.value}))}
-                              placeholder="Value %"
-                              className="rounded-xl border-border/40 h-8 bg-secondary/60 flex-1"
-                          />
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-1">Max sector exposure</p>
-                  </div>
-              </div>
-          </div>
+          <TimeFrameSection
+            timeFrame={timeFrame}
+            onTimeFrameChange={setTimeFrame}
+          />
 
-          {/* Time Frame & Benchmark */}
-          <div className="space-y-3">
-              {/* Time Frame */}
-              <div className="bg-card/50 p-3 rounded-xl border border-border/20">
-                  <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
-                      <Clock className="text-orange-500" size={16} />
-                      Time Frame
-                  </h3>
-                  <ToggleGroup type="single" value={timeFrame} onValueChange={(v) => v && setTimeFrame(v)} className="w-full">
-                      <div className="grid grid-cols-5 gap-1 w-full">
-                          {timeFrameOptions.map((frame) => (
-                              <ToggleGroupItem key={frame.id} value={frame.id} className="px-2 py-1 h-auto rounded-full border border-border/40 data-[state=on]:bg-orange-500/15 data-[state=on]:border-orange-500/60 data-[state=on]:text-orange-400 text-xs font-medium bg-secondary/60">
-                                  {frame.label}
-                              </ToggleGroupItem>
-                          ))}
-                      </div>
-                  </ToggleGroup>
-              </div>
-
-              {/* Benchmark & Group */}
-              <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-card/50 p-3 rounded-xl border border-border/20">
-                      <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
-                          <ShieldCheck className="text-indigo-500" size={16} />
-                          Benchmark
-                      </h3>
-                      <Select value={benchmark} onValueChange={setBenchmark}>
-                          <SelectTrigger className="w-full rounded-xl border-border/40 h-8 bg-secondary/60">
-                              <SelectValue placeholder="Select" />
-                          </SelectTrigger>
-                          <SelectContent>
-                              {benchmarkOptions.map((bench) => (
-                              <SelectItem key={bench.id} value={bench.id}>{bench.label}</SelectItem>
-                              ))}
-                          </SelectContent>
-                      </Select>
-                  </div>
-                    <div className="bg-card/50 p-3 rounded-xl border border-border/20">
-                      <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
-                          <Hash className="text-gray-500" size={16} />
-                          Group ID
-                      </h3>
-                      <Input
-                          value={groupId}
-                          onChange={(e) => setGroupId(e.target.value)}
-                          placeholder="Enter Code"
-                          className="rounded-xl border-border/40 h-8 bg-secondary/60"
-                      />
-                  </div>
-              </div>
-          </div>
+          <BenchmarkGroupSection
+            benchmark={benchmark}
+            groupId={groupId}
+            onBenchmarkChange={setBenchmark}
+            onGroupIdChange={setGroupId}
+          />
         </div>
 
-        {/* Fixed Footer */}
         <div className="border-t border-border/20 bg-background/90 backdrop-blur-sm px-4 py-3 flex-shrink-0">
           <div className="flex gap-2">
             <Button 
