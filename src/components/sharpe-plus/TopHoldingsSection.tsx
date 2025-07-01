@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ChevronDown, ChevronUp, TrendingUp, TrendingDown } from 'lucide-react';
 import MiniChart from '@/components/discover/MiniChart';
@@ -29,7 +30,6 @@ const TopHoldingsSection = ({ isExpanded, onToggle }: TopHoldingsSectionProps) =
       >
         <h2 className="text-lg font-bold flex items-center gap-2">
           📍 Top Holdings
-          <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 font-medium rounded-xl">Live</span>
         </h2>
         {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
       </button>

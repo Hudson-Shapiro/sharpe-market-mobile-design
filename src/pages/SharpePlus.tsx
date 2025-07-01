@@ -34,7 +34,7 @@ const SharpePlus = () => {
           style={{ borderRadius: '999px' }}
         >
           {isSubscribed ? <ToggleRight size={16} className="text-emerald-400" /> : <ToggleLeft size={16} />}
-          <span className="text-xs font-medium">Preview Mode</span>
+          <span className="text-xs font-medium">{isSubscribed ? 'Subscribed' : 'Not Subscribed'}</span>
         </Button>
       </div>
 
