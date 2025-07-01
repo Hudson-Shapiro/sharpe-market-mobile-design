@@ -92,7 +92,7 @@ const Discover = () => {
                       <ToggleLeft size={14} className="text-muted-foreground" />
                     }
                     <span className="font-medium">
-                      {isSharpePlusSubscribed ? 'Live' : 'Preview'}
+                      {isSharpePlusSubscribed ? 'Subscribed' : 'Not Subscribed'}
                     </span>
                   </Button>
                 </div>
