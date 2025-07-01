@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { BarChart3, Percent, PieChart, Clock, Hash, ShieldCheck, TrendingUp } from 'lucide-react';
+import { BarChart3, Percent, Clock, Hash, ShieldCheck, TrendingUp } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
@@ -18,7 +19,6 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
   const [returnRange, setReturnRange] = useState([0, 100]);
   const [sharpeRatio, setSharpeRatio] = useState([0, 5]);
   const [benchmark, setBenchmark] = useState("spy");
-  const [sectors, setSectors] = useState<string[]>([]);
   const [groupId, setGroupId] = useState("");
   const [timeFrame, setTimeFrame] = useState("1M");
 
@@ -50,10 +50,6 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
     if (sectConc.value) {
       filters.push(`Max Sector Exp. ${sectConc.operator === 'gt' ? '>' : '<'} ${sectConc.value}%`);
     }
-    
-    if (sectors.length > 0) {
-      filters.push(`Sectors: ${sectors.join(', ')}`);
-    }
 
     if (groupId.trim()) {
       filters.push(`Group: ${groupId}`);
@@ -67,17 +63,12 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
     setReturnRange([0, 100]);
     setSharpeRatio([0, 5]);
     setBenchmark("spy");
-    setSectors([]);
     setGroupId("");
     setTimeFrame("1M");
     setSecConc({ operator: 'gt', value: '' });
     setSectConc({ operator: 'gt', value: '' });
     onApplyFilters([]);
   };
-
-  const sectorOptions = [
-    'Technology', 'Healthcare', 'Finance', 'Energy', 'Consumer', 'Industrial'
-  ];
 
   const benchmarkOptions = [
     { id: 'spy', label: 'SPY' },
@@ -96,7 +87,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md w-[95vw] h-[95vh] bg-background/95 backdrop-blur-md border border-border/40 rounded-3xl p-0 overflow-hidden flex flex-col shadow-2xl">
+      <DialogContent className="max-w-md w-[95vw] h-[90vh] bg-background/95 backdrop-blur-md border border-border/40 rounded-3xl p-0 overflow-hidden flex flex-col shadow-2xl">
         <DialogHeader className="px-4 pt-4 pb-2 border-b border-border/20 flex-shrink-0">
           <DialogTitle className="flex items-center gap-2 text-foreground text-lg font-semibold">
             <div className="w-6 h-6 bg-gradient-to-br from-emerald-500/20 to-emerald-400/10 rounded-full flex items-center justify-center">
@@ -109,12 +100,12 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           
           {/* Performance Section */}
-          <div className="bg-card/50 p-4 rounded-xl border border-border/20">
-              <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-4">
+          <div className="bg-card/50 p-3 rounded-xl border border-border/20">
+              <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
                   <TrendingUp className="text-emerald-500" size={16} />
                   Performance
               </h3>
-              <div className="space-y-6">
+              <div className="space-y-4">
                   <div>
                       <label className="block text-xs font-medium text-foreground mb-2">Annual Return</label>
                       <Slider value={returnRange} onValueChange={setReturnRange} max={100} min={0} step={5} />
@@ -135,18 +126,18 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
           </div>
 
           {/* Concentration Section */}
-          <div className="bg-card/50 p-4 rounded-xl border border-border/20">
-                <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-4">
+          <div className="bg-card/50 p-3 rounded-xl border border-border/20">
+                <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
                   <Percent className="text-cyan-500" size={16} />
                   Concentration
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-3">
                   {/* Security Concentration */}
                   <div>
                       <label className="block text-xs font-medium text-foreground mb-2">Security Concentration</label>
                       <div className="grid grid-cols-2 gap-2">
                           <Select value={secConc.operator} onValueChange={(val) => setSecConc(prev => ({ ...prev, operator: val}))}>
-                              <SelectTrigger className="rounded-lg border-border/40 h-10 bg-secondary/60">
+                              <SelectTrigger className="rounded-lg border-border/40 h-9 bg-secondary/60">
                                   <SelectValue />
                               </SelectTrigger>
                               <SelectContent>
@@ -159,10 +150,10 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                               value={secConc.value}
                               onChange={(e) => setSecConc(prev => ({ ...prev, value: e.target.value}))}
                               placeholder="Value %"
-                              className="rounded-lg border-border/40 h-10 bg-secondary/60"
+                              className="rounded-lg border-border/40 h-9 bg-secondary/60"
                           />
                       </div>
-                      <p className="text-xs text-muted-foreground mt-1.5 pl-1">Top 5 holdings</p>
+                      <p className="text-xs text-muted-foreground mt-1 pl-1">Top 5 holdings</p>
                   </div>
 
                   {/* Sector Concentration */}
@@ -170,7 +161,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                       <label className="block text-xs font-medium text-foreground mb-2">Sector Concentration</label>
                       <div className="grid grid-cols-2 gap-2">
                           <Select value={sectConc.operator} onValueChange={(val) => setSectConc(prev => ({ ...prev, operator: val}))}>
-                              <SelectTrigger className="rounded-lg border-border/40 h-10 bg-secondary/60">
+                              <SelectTrigger className="rounded-lg border-border/40 h-9 bg-secondary/60">
                                   <SelectValue />
                               </SelectTrigger>
                               <SelectContent>
@@ -183,18 +174,18 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                               value={sectConc.value}
                               onChange={(e) => setSectConc(prev => ({ ...prev, value: e.target.value}))}
                               placeholder="Value %"
-                              className="rounded-lg border-border/40 h-10 bg-secondary/60"
+                              className="rounded-lg border-border/40 h-9 bg-secondary/60"
                           />
                       </div>
-                      <p className="text-xs text-muted-foreground mt-1.5 pl-1">Max sector exposure</p>
+                      <p className="text-xs text-muted-foreground mt-1 pl-1">Max sector exposure</p>
                   </div>
               </div>
           </div>
 
-          {/* Other Filters Section */}
-          <div className="space-y-4">
+          {/* Time Frame & Benchmark */}
+          <div className="space-y-3">
               {/* Time Frame */}
-              <div className="bg-card/50 p-4 rounded-xl border border-border/20">
+              <div className="bg-card/50 p-3 rounded-xl border border-border/20">
                   <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
                       <Clock className="text-orange-500" size={16} />
                       Time Frame
@@ -210,32 +201,15 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                   </ToggleGroup>
               </div>
 
-              {/* Sector Focus */}
-              <div className="bg-card/50 p-4 rounded-xl border border-border/20">
-                  <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
-                      <PieChart className="text-blue-500" size={16} />
-                      Sector Focus
-                  </h3>
-                  <ToggleGroup type="multiple" value={sectors} onValueChange={setSectors} className="w-full">
-                      <div className="grid grid-cols-3 gap-2 w-full">
-                          {sectorOptions.map((sector) => (
-                              <ToggleGroupItem key={sector} value={sector} className="px-2 py-1.5 h-auto rounded-full border border-border/40 data-[state=on]:bg-blue-500/15 data-[state=on]:border-blue-500/60 data-[state=on]:text-blue-400 text-xs font-medium bg-secondary/60">
-                                  {sector}
-                              </ToggleGroupItem>
-                          ))}
-                      </div>
-                  </ToggleGroup>
-              </div>
-              
               {/* Benchmark & Group */}
-              <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-card/50 p-4 rounded-xl border border-border/20">
+              <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-card/50 p-3 rounded-xl border border-border/20">
                       <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
                           <ShieldCheck className="text-indigo-500" size={16} />
                           Benchmark
                       </h3>
                       <Select value={benchmark} onValueChange={setBenchmark}>
-                          <SelectTrigger className="w-full rounded-lg border-border/40 h-10 bg-secondary/60">
+                          <SelectTrigger className="w-full rounded-lg border-border/40 h-9 bg-secondary/60">
                               <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent>
@@ -245,7 +219,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                           </SelectContent>
                       </Select>
                   </div>
-                    <div className="bg-card/50 p-4 rounded-xl border border-border/20">
+                    <div className="bg-card/50 p-3 rounded-xl border border-border/20">
                       <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
                           <Hash className="text-gray-500" size={16} />
                           Group ID
@@ -254,7 +228,7 @@ const PortfolioFilterModal = ({ isOpen, onClose, onApplyFilters }: PortfolioFilt
                           value={groupId}
                           onChange={(e) => setGroupId(e.target.value)}
                           placeholder="Enter Code"
-                          className="rounded-lg border-border/40 h-10 bg-secondary/60"
+                          className="rounded-lg border-border/40 h-9 bg-secondary/60"
                       />
                   </div>
               </div>
