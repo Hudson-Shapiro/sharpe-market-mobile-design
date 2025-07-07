@@ -53,8 +53,16 @@ const SearchResults = ({
   const applyFilters = () => {
     const newActiveFilters = [];
     
-    if (filterTimeOption) {
-      newActiveFilters.push(`${filterTimeOption} return`);
+    // Don't include timeframe since it's handled separately
+    if (createdByMe) newActiveFilters.push("Created by me");
+    if (subscribedByMe) newActiveFilters.push("Subscribed by me");
+    if (benchmark) newActiveFilters.push("Benchmark");
+    if (securitySearch.trim()) newActiveFilters.push(`Security: ${securitySearch}`);
+    if (securityConcentration && securityConcentrationValue) {
+      newActiveFilters.push(`Security Conc. ${securityConcentrationType === 'greater' ? '>' : '<'} ${securityConcentrationValue}%`);
+    }
+    if (sectorConcentration && sectorConcentrationValue) {
+      newActiveFilters.push(`Sector Conc. ${sectorConcentrationType === 'greater' ? '>' : '<'} ${sectorConcentrationValue}%`);
     }
     
     setActiveFilters?.(newActiveFilters);

@@ -13,16 +13,17 @@ const ActiveFilters = ({ activeFilters, onRemoveFilter }: ActiveFiltersProps) =>
   }
 
   return (
-    <div className="flex flex-wrap gap-2 mb-4">
+    <div className="flex flex-wrap gap-1.5 mb-3">
       {activeFilters.map((filter) => (
         <Button 
           key={filter} 
           variant="outline" 
-          className="flex items-center gap-1.5 bg-secondary border-border hover:bg-secondary/80" 
+          size="sm"
+          className="flex items-center gap-1 bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 text-xs h-7 px-2 rounded-full font-medium" 
           onClick={() => onRemoveFilter(filter)}
         >
           {filter}
-          <X size={14} />
+          <X size={12} />
         </Button>
       ))}
     </div>
