@@ -89,6 +89,7 @@ const SearchResults = ({
       <ActiveFilters 
         activeFilters={activeFilters}
         onRemoveFilter={removeFilter}
+        onEditFilters={() => setFilterVisible(true)}
       />
 
       {/* Results based on selected filter */}
