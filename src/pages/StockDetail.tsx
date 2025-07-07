@@ -11,7 +11,7 @@ import StockStatsGrid from '@/components/stock-detail/StockStatsGrid';
 import StockAboutCard from '@/components/stock-detail/StockAboutCard';
 import StockNotFound from '@/components/stock-detail/StockNotFound';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Star } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 const StockDetail = () => {
   const { symbol } = useParams<{ symbol: string }>();
@@ -48,16 +48,6 @@ const StockDetail = () => {
           className="rounded-full w-10 h-10 bg-background/50 hover:bg-background/80 backdrop-blur-sm"
         >
           <ArrowLeft size={20} />
-        </Button>
-      </div>
-      <div className="absolute top-4 right-4 z-10">
-        <Button 
-            size="icon" 
-            variant="ghost"
-            onClick={() => setIsWatchlisted(!isWatchlisted)}
-            className="rounded-full w-10 h-10 bg-background/50 hover:bg-background/80 backdrop-blur-sm"
-        >
-            <Star size={20} className={`transition-colors duration-300 ${isWatchlisted ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`} />
         </Button>
       </div>
 
