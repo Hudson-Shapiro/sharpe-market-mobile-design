@@ -28,7 +28,7 @@ const Search = () => {
 
   const handleSearchQueryChange = (query: string) => {
     setSearchQuery(query);
-    setIsSearching(query.length > 0);
+    setIsSearching(query.length > 0 || activeFilters.length > 0);
   };
 
   const handleAdvancedFilter = () => {
@@ -41,7 +41,13 @@ const Search = () => {
     if (scope !== "portfolios") {
       setActiveFilters([]);
       setFilterVisible(false);
+      setIsSearching(false);
     }
+  };
+
+  const handleFiltersChange = (filters: string[]) => {
+    setActiveFilters(filters);
+    setIsSearching(filters.length > 0 || searchQuery.length > 0);
   };
 
   const showBasicFilter = isSearching && searchScope === "portfolios";
@@ -85,7 +91,7 @@ const Search = () => {
                   <AdvancedFilters 
                     onAdvancedFilter={handleAdvancedFilter}
                     activeFilters={activeFilters}
-                    setActiveFilters={setActiveFilters}
+                    setActiveFilters={handleFiltersChange}
                     filterVisible={filterVisible}
                     setFilterVisible={setFilterVisible}
                   />
@@ -106,6 +112,8 @@ const Search = () => {
                 searchFilter={searchScope}
                 filterVisible={filterVisible}
                 setFilterVisible={setFilterVisible}
+                activeFilters={activeFilters}
+                setActiveFilters={handleFiltersChange}
               />
             </div>
           )}

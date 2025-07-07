@@ -18,11 +18,19 @@ interface SearchResultsProps {
   searchFilter: string;
   filterVisible: boolean;
   setFilterVisible: (visible: boolean) => void;
+  activeFilters?: string[];
+  setActiveFilters?: (filters: string[]) => void;
 }
 
-const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisible }: SearchResultsProps) => {
+const SearchResults = ({ 
+  searchQuery, 
+  searchFilter, 
+  filterVisible, 
+  setFilterVisible, 
+  activeFilters = [], 
+  setActiveFilters 
+}: SearchResultsProps) => {
   const navigate = useNavigate();
-  const [activeFilters, setActiveFilters] = useState<string[]>([]);
 
   // Filter state
   const [filterTimeOption, setFilterTimeOption] = useState("daily");
@@ -50,7 +58,7 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
     setSectorConcentration(false);
     setSectorConcentrationType("");
     setSectorConcentrationValue("");
-    setActiveFilters([]);
+    setActiveFilters?.([]);
   };
 
   // Apply filters
@@ -61,13 +69,13 @@ const SearchResults = ({ searchQuery, searchFilter, filterVisible, setFilterVisi
       newActiveFilters.push(`${filterTimeOption} return`);
     }
     
-    setActiveFilters(newActiveFilters);
+    setActiveFilters?.(newActiveFilters);
     setFilterVisible(false);
   };
   
   // Remove a specific filter
   const removeFilter = (filter: string) => {
-    setActiveFilters(activeFilters.filter(f => f !== filter));
+    setActiveFilters?.(activeFilters.filter(f => f !== filter));
   };
 
   // Handle user click navigation
