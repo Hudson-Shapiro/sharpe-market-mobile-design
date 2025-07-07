@@ -52,6 +52,22 @@ const Search = () => {
 
   const showBasicFilter = isSearching && searchScope === "portfolios";
 
+  // Extract timeframe from active filters if it exists
+  const getTimeframeFromFilters = () => {
+    const timeframeFilter = activeFilters.find(filter => 
+      filter.includes('1W') || filter.includes('1M') || filter.includes('1Y') || filter.includes('All')
+    );
+    if (timeframeFilter) {
+      if (timeframeFilter.includes('1W')) return '1W';
+      if (timeframeFilter.includes('1M')) return '1M'; 
+      if (timeframeFilter.includes('1Y')) return '1Y';
+      if (timeframeFilter.includes('All')) return 'Lifetime';
+    }
+    return basicTimeFrame;
+  };
+
+  const effectiveTimeFrame = getTimeframeFromFilters();
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Search Header - Sticky */}
@@ -71,7 +87,7 @@ const Search = () => {
       {/* Basic Filter Bar - Shows when searching portfolios */}
       {showBasicFilter && (
         <BasicFilterBar
-          timeFrame={basicTimeFrame}
+          timeFrame={effectiveTimeFrame}
           setTimeFrame={setBasicTimeFrame}
           sortBy={basicSortBy}
           setSortBy={setBasicSortBy}

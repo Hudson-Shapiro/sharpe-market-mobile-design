@@ -53,7 +53,16 @@ const SearchResults = ({
   const applyFilters = () => {
     const newActiveFilters = [];
     
-    // Don't include timeframe since it's handled separately
+    // Include timeframe in active filters
+    if (filterTimeOption && filterTimeOption !== "daily") {
+      const timeMap: { [key: string]: string } = {
+        "weekly": "1W",
+        "monthly": "1M", 
+        "yearly": "1Y"
+      };
+      newActiveFilters.push(`Timeframe: ${timeMap[filterTimeOption] || filterTimeOption}`);
+    }
+    
     if (createdByMe) newActiveFilters.push("Created by me");
     if (subscribedByMe) newActiveFilters.push("Subscribed by me");
     if (benchmark) newActiveFilters.push("Benchmark");
