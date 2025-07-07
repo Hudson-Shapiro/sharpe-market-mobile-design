@@ -20,12 +20,12 @@ const StatCard = ({ icon, title, value, subtitle, variant = 'default' }: StatCar
           <span className="text-xs text-muted-foreground font-medium">{title}</span>
         </div>
       </div>
-      <div className="flex items-baseline gap-1">
-        <span className={`text-xl font-bold ${isPerformance ? 'text-emerald-400' : 'text-foreground'}`}>
+      <div>
+        <div className={`text-xl font-bold ${isPerformance ? 'text-emerald-400' : 'text-foreground'}`}>
           {value}
-        </span>
+        </div>
         {subtitle && (
-          <span className="text-xs text-muted-foreground ml-1">{subtitle}</span>
+          <div className="text-xs text-muted-foreground mt-0.5">{subtitle}</div>
         )}
       </div>
     </div>
