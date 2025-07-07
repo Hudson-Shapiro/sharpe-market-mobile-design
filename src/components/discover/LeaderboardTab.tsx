@@ -6,6 +6,7 @@ import MiniChart from './MiniChart';
 
 const LeaderboardTab = () => {
   const [timeRange, setTimeRange] = useState("1M");
+  const [showFullLeaderboard, setShowFullLeaderboard] = useState(false);
 
   // Reduced time ranges for better mobile display
   const timeRanges = ["1D", "1M", "YTD", "1Y"];
@@ -67,6 +68,61 @@ const LeaderboardTab = () => {
         vsSpReturn: 0.3,
         chartData: [28, 29, 30, 29, 31, 30, 32],
         isFeatured: false
+      },
+      {
+        rank: 6,
+        username: "Emma Wilson",
+        author: "by Emma W.",
+        topPercent: "25%",
+        sharpe: 5.8,
+        return: 0.7,
+        vsSpReturn: 0.1,
+        chartData: [25, 26, 27, 26, 28, 27, 29],
+        isFeatured: false
+      },
+      {
+        rank: 7,
+        username: "David Chen",
+        author: "by David C.",
+        topPercent: "50%",
+        sharpe: 5.2,
+        return: 0.5,
+        vsSpReturn: -0.1,
+        chartData: [22, 23, 24, 23, 25, 24, 26],
+        isFeatured: false
+      },
+      {
+        rank: 8,
+        username: "Lisa Park",
+        author: "by Lisa P.",
+        topPercent: "50%",
+        sharpe: 4.9,
+        return: 0.3,
+        vsSpReturn: -0.3,
+        chartData: [20, 21, 22, 21, 23, 22, 24],
+        isFeatured: false
+      },
+      {
+        rank: 9,
+        username: "Tom Rodriguez",
+        author: "by Tom R.",
+        topPercent: "75%",
+        sharpe: 4.5,
+        return: 0.1,
+        vsSpReturn: -0.5,
+        chartData: [18, 19, 20, 19, 21, 20, 22],
+        isFeatured: false
+      },
+      {
+        rank: 10,
+        username: "Julia Kim",
+        author: "by Julia K.",
+        topPercent: "75%",
+        sharpe: 4.2,
+        return: -0.1,
+        vsSpReturn: -0.7,
+        chartData: [16, 17, 18, 17, 19, 18, 20],
+        isFeatured: false
       }
     ],
     "1M": [
@@ -123,6 +179,61 @@ const LeaderboardTab = () => {
         return: 28.9,
         vsSpReturn: 21.4,
         chartData: [18, 22, 25, 27, 29, 28, 29],
+        isFeatured: false
+      },
+      {
+        rank: 6,
+        username: "Emma Wilson",
+        author: "by Emma W.",
+        topPercent: "25%",
+        sharpe: 5.8,
+        return: 25.7,
+        vsSpReturn: 18.2,
+        chartData: [15, 19, 22, 24, 26, 25, 26],
+        isFeatured: false
+      },
+      {
+        rank: 7,
+        username: "David Chen",
+        author: "by David C.",
+        topPercent: "50%",
+        sharpe: 5.2,
+        return: 22.4,
+        vsSpReturn: 15.0,
+        chartData: [12, 16, 19, 21, 23, 22, 22],
+        isFeatured: false
+      },
+      {
+        rank: 8,
+        username: "Lisa Park",
+        author: "by Lisa P.",
+        topPercent: "50%",
+        sharpe: 4.9,
+        return: 19.8,
+        vsSpReturn: 12.3,
+        chartData: [10, 14, 17, 19, 20, 19, 20],
+        isFeatured: false
+      },
+      {
+        rank: 9,
+        username: "Tom Rodriguez",
+        author: "by Tom R.",
+        topPercent: "75%",
+        sharpe: 4.5,
+        return: 17.2,
+        vsSpReturn: 9.7,
+        chartData: [8, 12, 15, 17, 18, 17, 17],
+        isFeatured: false
+      },
+      {
+        rank: 10,
+        username: "Julia Kim",
+        author: "by Julia K.",
+        topPercent: "75%",
+        sharpe: 4.2,
+        return: 14.9,
+        vsSpReturn: 7.4,
+        chartData: [6, 10, 13, 15, 16, 15, 15],
         isFeatured: false
       }
     ],
@@ -243,6 +354,16 @@ const LeaderboardTab = () => {
   };
 
   const topPerformers = performersData[timeRange] || performersData["1M"];
+  const displayedPerformers = showFullLeaderboard ? topPerformers : topPerformers.slice(0, 5);
+
+  const getTopPercentBadgeColor = (percent: string) => {
+    if (percent === "1%") return "bg-gradient-to-r from-yellow-400 to-amber-500 text-white shadow-lg";
+    if (percent === "10%") return "bg-gradient-to-r from-emerald-400 to-green-500 text-white";
+    if (percent === "25%") return "bg-gradient-to-r from-blue-400 to-blue-500 text-white";
+    if (percent === "50%") return "bg-gradient-to-r from-purple-400 to-purple-500 text-white";
+    if (percent === "75%") return "bg-gradient-to-r from-red-400 to-red-500 text-white";
+    return "bg-gradient-to-r from-gray-400 to-gray-500 text-white";
+  };
 
   const getRankBadgeColor = (rank: number) => {
     if (rank === 1) return "bg-gradient-to-r from-yellow-400 to-yellow-600 text-white shadow-lg shadow-yellow-400/30";
@@ -251,12 +372,6 @@ const LeaderboardTab = () => {
     return "bg-secondary text-secondary-foreground";
   };
 
-  const getTopPercentBadgeColor = (percent: string) => {
-    if (percent === "1%") return "bg-gradient-to-r from-yellow-400 to-amber-500 text-white shadow-lg";
-    if (percent === "10%") return "bg-gradient-to-r from-emerald-400 to-green-500 text-white";
-    if (percent === "25%") return "bg-gradient-to-r from-blue-400 to-blue-500 text-white";
-    return "bg-gradient-to-r from-gray-400 to-gray-500 text-white";
-  };
 
   return (
     <div className="space-y-2">
@@ -280,7 +395,7 @@ const LeaderboardTab = () => {
         </div>
       </div>
 
-      {topPerformers.map((performer) => (
+      {displayedPerformers.map((performer) => (
         <div 
           key={performer.rank}
           className="bg-card border border-border rounded-2xl p-3 hover:bg-card/80 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
@@ -334,8 +449,11 @@ const LeaderboardTab = () => {
         </div>
       ))}
 
-      <button className="w-full mt-6 py-3 text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors border border-emerald-400/30 rounded-2xl hover:bg-emerald-400/10">
-        View Full Leaderboard
+      <button 
+        onClick={() => setShowFullLeaderboard(!showFullLeaderboard)}
+        className="w-full mt-6 py-3 text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors border border-emerald-400/30 rounded-2xl hover:bg-emerald-400/10"
+      >
+        {showFullLeaderboard ? 'Show Top 5' : 'View Full Leaderboard'}
       </button>
     </div>
   );
